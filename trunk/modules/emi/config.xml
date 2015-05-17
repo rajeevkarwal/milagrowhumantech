@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
         <module>
             <name>emi</name>
-            <displayName><![CDATA[EMI]]></displayName>
+            <displayName><![CDATA[Citibank EMI]]></displayName>
             <version><![CDATA[1.0]]></version>
             <description><![CDATA[Accept EMI payments developed by GAPS]]></description>
             <author><![CDATA[GAPS]]></author>
