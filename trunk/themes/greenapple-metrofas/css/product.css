@@ -1,0 +1,357 @@
+
+
+
+
+
+#thumbs_list ul#thumbs_list_frame {
+	list-style-type:none;
+	padding-left:0;
+}
+
+
+
+
+
+
+
+.resetimg {
+	padding:10px 0 0;
+}
+
+/* link list */
+
+
+#usefull_link_block li {
+	padding:2px 0;
+}
+
+#usefull_link_block li.sendtofriend {
+	padding-left:20px;
+	background:url(../img/icon/send_friend.gif) no-repeat 0 0;
+}
+
+
+/* pb-left-column ****************************************************************************** */
+
+
+
+
+#pb-left-column #short_description_block {
+	color:#666;
+}
+
+#pb-left-column #short_description_block .buttons_bottom_block {
+	display:none;
+}
+
+/* form */
+
+
+
+
+
+/* short description pack */
+.short_description_pack {
+	display:none;
+}
+
+/* color_picker */
+#pb-left-column #color_picker p {
+	font-weight:700;
+}
+
+#attributes fieldset {
+	padding-bottom:10px;
+        clear: both;
+}
+
+#attributes fieldset label {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 4px;
+    vertical-align: top;
+}
+
+
+#attributes fieldset label.required em {
+    color: #EB340A;
+}
+
+#attributes .attribute_list {
+	display:inline-block;
+}
+
+#attributes .attribute_list input.attribute_radio{float: left;margin-left: 3px;}
+#attributes .attribute_list span{float: left;margin-bottom: 5px;margin-left: 3px;}
+
+.attribute_list #color_to_pick_list {
+	list-style-type:none;
+}
+
+.attribute_list #color_to_pick_list li {
+	float:left;
+	margin:0 8px 8px 0;
+	padding:1px;
+}
+
+.attribute_list #color_to_pick_list li.selected {
+	border:1px solid #000;
+}
+
+.attribute_list #color_to_pick_list a.color_pick {
+	display:block;
+	height:20px;
+	width:20px;
+}
+
+.product_attributes {
+
+}
+
+/* attributes */
+#attributes select {
+	width:120px;
+	border:1px solid #cdcdcd;
+}
+
+/* quantity_wanted */
+
+
+#availability_statut #availability_value{
+ font-weight: 800;
+}
+
+
+
+
+#availability_statut #availability_value.warning_inline {
+
+}
+
+/* prices */
+
+
+#buy_block p.price {
+	padding:0;
+}
+
+.discount {
+	display:none;
+}
+
+#buy_block p#old_price {
+	padding-bottom:15px;
+	font-size:14px;
+	text-decoration:line-through;
+}
+
+
+#reduction_percent,#reduction_amount {
+	display:block;
+	float:left;
+	padding:0 0 0 0px;
+	font-weight:700;
+	font-size:12px;
+	  color: red;
+
+}
+
+#reduction_percent span,#reduction_amount span {
+	  display: block;
+    margin-left: 1px;
+    padding: 1px 5px 1px 0;
+
+}
+
+/* online_only */
+#buy_block p.online_only {
+	font-weight:700;
+	font-size:11px;
+	color:#FFAA31;
+	text-align:left;
+	text-transform:uppercase;
+        
+}
+
+/* add_to_cart */
+.content_prices #add_to_cart {
+	position:relative;
+	float:left;
+	padding:0;
+}
+
+
+
+
+/* */
+.buttons_bottom_block {
+	clear:both;
+}
+
+.buttons_bottom_block #wishlist_button {
+	font-weight:700;
+}
+
+/* SEND TO FRIEND (pop-in) ##################################################################### */
+#send_friend_form {
+}
+
+#send_friend_form h2 {
+	padding:8px 11px;
+	font-size:12px;
+	color:#fff;
+	text-shadow:0 1px 0 #000;
+	text-transform:uppercase;
+	background:#383838;
+}
+
+#send_friend_form .product {
+	margin:20px 10px;
+}
+
+#send_friend_form .product img {
+	float:left;
+	margin:0 10px 0 0;
+	border:1px solid #ccc;
+}
+
+#send_friend_form .product .product_desc {
+	float:left;
+	width:380px;
+}
+
+#send_friend_form .product .product_desc p {
+	padding:0 10px 0 0;
+	color:#333;
+}
+
+#send_friend_form .product .product_desc p.product_name {
+	font-size:12px;
+	color:#000;
+}
+
+#send_friend_form .send_friend_form_content {
+	margin:0 10px 20px;
+}
+
+#send_friend_form .form_container {
+	padding:10px 15px;
+	border:1px solid #ccc;
+	background:#eee;
+}
+
+#send_friend_form .form_container p.intro_form {
+	padding-bottom:14px;
+	font-weight:700;
+	font-size:13px;
+	color:#333;
+}
+
+#send_friend_form .form_container p.txt_required {
+	padding-bottom:0;
+	color:/* SEND TO FRIEND (pop-in) ##################################################################### */
+#666;
+}
+
+#send_friend_form .form_container .text {
+	padding-bottom:10px;
+}
+
+#send_friend_form .form_container .text label {
+	display:inline-block;
+	padding:6px 15px;
+	width:180px;
+/* 210 */
+	font-size:12px;
+	text-align:right;
+}
+
+#send_friend_form .form_container .text input {
+	padding:0 5px;
+	height:22px;
+	width:260px;
+	border:1px solid #ccc;
+	font-size:12px;
+	color:#666;
+}
+
+#send_friend_form .submit {
+	margin-top:20px;
+	padding-bottom:0;
+	text-align:right;
+}
+
+/* PACK ##################################################################### */
+#blockpack {
+	margin-top:20px;
+	padding-top:20px;
+	border-top:1px dotted #999;
+}
+
+/* PERSONNALISATION ##################################################################### */
+.customization_block {
+}
+
+.customization_block p.infoCustomizable {
+	margin:10px 0 20px;
+	padding:0 0 0 20px;
+	background:url(../img/icon/infos.gif) no-repeat 0 0 transparent;
+}
+
+ul#uploadable_files,ul#text_fields {
+	list-style-type:none;
+}
+
+.customizableProductsFile,.customizableProductsText {
+	margin-bottom:20px;
+	padding-bottom:10px;
+	border-bottom:1px dotted #ccc;
+}
+
+.customizationUploadLine {
+	padding-bottom:10px;
+}
+.customizationUploadBrowse img + a {
+	position: relative;
+	top: -51px;
+}
+.customizationUploadLine label {
+	display:inline-block;
+	width:150px;
+	vertical-align:top;
+}
+
+.customizationUploadLine textarea {
+	height:50px;
+	width:300px;
+	border:1px solid #ccc;
+}
+
+#customizedDatas {
+	float:right;
+}
+
+.accessories_block div ul li a {
+	display:inline-block;
+}
+
+.accessories_block div ul li .s_title_block a, .accessories_block div ul li .s_title_block span  {
+	font-weight:bold;
+}
+
+
+.attribute_list #color_to_pick_list li {
+    border: 1px solid #CCCCCC;
+    float: left;
+    margin: 0 8px 8px 0;
+    padding: 1px;
+}
+
+.attribute_list #color_to_pick_list li.selected {
+    border: 1px solid #000000;
+}
+.attribute_list #color_to_pick_list a.color_pick {
+    display: block;
+    height: 20px;
+    width: 20px;
+}

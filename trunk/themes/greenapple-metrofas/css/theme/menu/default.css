@@ -1,0 +1,23 @@
+
+  .default ul.mega-menu li .sub-container { position: absolute; z-index: 999999!important;  background:none repeat scroll 0 0 #FFFFFF; top:52px !important; }
+
+.default ul.mega-menu li .sub-container ul{
+    padding-left: 20px;
+}
+
+
+
+.default ul.mega-menu li .sub {background: url(images/bg_sub.png) no-repeat 100% 100%; padding: 20px 20px 20px 10px;}
+.default ul.mega-menu li .sub-container.mega .sub {padding:0px 20px 10px 0;}
+.default ul.mega-menu li .sub .row {width: 100%; overflow: hidden; clear: both;}
+.default ul.mega-menu li .sub li {list-style: none; float: none; width: 170px; font-size: 1em; font-weight: normal;}
+.default ul.mega-menu li .sub li.mega-hdr {margin: 0 10px 10px 0; float: left;}
+.default ul.mega-menu li .sub li.mega-hdr.last {margin-right: 0;}
+.default ul.mega-menu li .sub a {background: none; border: none; text-shadow: none; color: #111; padding: 7px 10px; display: block; float: none; text-decoration: none; }
+
+.default ul.mega-menu li .sub li.mega-hdr a.mega-hdr-a:hover {color: #a32403; text-shadow: none;}
+.default ul.mega-menu .sub ul li {padding-right: 0;}
+.default ul.mega-menu li .sub-container.non-mega .sub { padding: 0 20px 10px 0;}
+.default ul.mega-menu li .sub-container.non-mega li {padding: 0; width: 172px; margin: 0; border-bottom:dotted 1px #fff;}
+.default ul.mega-menu li .sub-container.non-mega li a { padding: 10px 5px 2px 6px; }
+.default ul.mega-menu li .sub-container.non-mega li a:hover { color:#544f4b; text-decoration:none; border-bottom:1px dotted #873b7a;}

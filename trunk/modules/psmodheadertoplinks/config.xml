@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>psmodheadertoplinks</name>
+            <displayName><![CDATA[Any-Themes Header Top Links]]></displayName>
+            <version><![CDATA[1.1.0]]></version>
+            <description><![CDATA[Show headertoplinks on header of the page.]]></description>
+            <author><![CDATA[Any-Themes]]></author>
+            <tab><![CDATA[front_office_features]]></tab>
+            <is_configurable>0</is_configurable>
+            <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+        </module>

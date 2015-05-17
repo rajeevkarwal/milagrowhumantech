@@ -1,0 +1,20 @@
+ul li.sl_admin_tab {
+    padding-top: 13px;
+    border: 1px solid #CCCCCC;
+    display: block;
+    float: left;
+    height: 29px;
+    list-style: none outside none;
+    margin: 0 1px 0 0;
+}
+
+ul li.sl_admin_tab_active {
+    padding-top: 13px;
+    border: 1px solid #CCCCCC;
+    display: block;
+    float: left;
+    height: 29px;
+    list-style: none outside none;
+    margin: 0 1px 0 0;
+    background-color: #49B2FF;
+}

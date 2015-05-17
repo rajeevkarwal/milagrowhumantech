@@ -1,0 +1,150 @@
+/* login popup style */
+#LoginPopup {
+    min-width: 290px;
+    width: 325px;
+    height: auto;
+}
+
+#LoginPopup form.std fieldset {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#LoginPopup form.std p {
+    overflow: hidden;
+}
+
+/*#LoginPopup form.std p.text1{*/
+/*height:10px;*/
+/*}*/
+#LoginPopup form.std label {
+    display: block;
+    width: 100px;
+    line-height: 18px;
+    float: left;
+    text-align: left;
+}
+
+#LoginPopup form.std input.text {
+    display: block;
+    width: 175px;
+    float: left;
+}
+
+#LoginPopup form.std span.text {
+    width: auto;
+    padding-left: 2px;
+    margin-left: 0.7em;
+}
+
+#LoginPopup form.std span.text a {
+    text-decoration: none;
+}
+
+#LoginPopupRegistrationRedirect {
+    width: auto;
+    cursor: pointer;
+}
+
+#LoginPopup form.std p.submit {
+    margin-top: 1.5em;
+    padding: 0 !important;
+}
+
+#SubmitLoginPopup {
+    margin: 0 auto;
+}
+
+#LoginPopupError {
+    margin-bottom: 1em;
+    padding: 0 1em;
+    color: #DA0F00;
+}
+
+/* contact popup style */
+#ContactPopup {
+    min-width: 450px;
+}
+
+#ContactPopup div.success {
+    background-color: #E4E5E9;
+    padding: 15px 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+#ContactPopup form.std fieldset {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#ContactPopup form.std p {
+    overflow: hidden;
+}
+
+#ContactPopup form.std label {
+    display: block;
+    width: 100px;
+    float: left;
+    line-height: 18px;
+    text-align: right;
+}
+
+#ContactPopup form.std input.text {
+    display: block;
+    width: 300px;
+    float: left;
+}
+
+#ContactPopup form.std select {
+    display: block;
+    width: 306px;
+    float: left;
+}
+
+#ContactPopup form.std textarea {
+    display: block;
+    min-width: 304px;
+    max-width: 304px;
+    min-height: 150px;
+    max-height: 150px;
+    float: left;
+}
+
+#ContactPopup form.std span.text {
+    width: auto;
+    padding-left: 2px;
+    margin-left: 0.7em;
+}
+
+#ContactPopup form.std span.send_copy {
+    display: block;
+    width: 300px;
+    float: left;
+    text-align: left;
+    font-size: 10px;
+}
+
+#ContactPopup form.std input.checkbox {
+    margin-right: 5px;
+    float: left;
+}
+
+#ContactPopup form.std p.submit {
+    margin-top: 1.5em;
+    padding: 0 !important;
+}
+
+#SubmitContactPopup {
+    margin: 0 auto;
+}
+
+#ContactPopupError {
+    margin-bottom: 1em;
+    padding: 0 1em;
+    color: #DA0F00;
+}
+
+
+
+

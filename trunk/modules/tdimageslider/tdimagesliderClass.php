@@ -1,0 +1,6 @@
+<?php 
+define('TD_IMAGESSLIDER_MODULE_DIR', _PS_MODULE_DIR_ . 'tdimageslider/');
+define('TD_IMAGESSLIDER_MODULE_IMAGE_DIR', TD_IMAGESSLIDER_MODULE_DIR.'images/');
+
+define('TD_IMAGESSLIDER_MODULE_URL', 'modules/tdimageslider/');
+define('TD_IMAGESSLIDER_IMAGE_URL', TD_IMAGESSLIDER_MODULE_URL . 'images/');

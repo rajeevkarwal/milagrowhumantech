@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>multifeatures</name>
+            <displayName><![CDATA[MultiFeatures]]></displayName>
+            <version><![CDATA[0.2]]></version>
+            <description><![CDATA[Allows you to use multiple features for products instead of just one]]></description>
+            <author><![CDATA[Silbersaiten]]></author>
+            <tab><![CDATA[front_office_features]]></tab>
+            <is_configurable>0</is_configurable>
+            <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+        </module>

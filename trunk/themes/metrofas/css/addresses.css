@@ -1,0 +1,97 @@
+div.addresses {
+      border: 2px solid #F5F5F5;
+    margin: 0 auto 10px;
+    padding: 15px;
+     width: 100%;
+}
+
+ul.address {
+   list-style-type:none;
+   float:left;
+   position:relative;
+   width:45% !important
+}
+#address_delivery {margin-right:35px;}
+#address_invoice {margin-right:0}
+#delivery_address {margin-right:65px;}
+
+ul.address li {
+	padding:0 15px;
+	line-height:18px;
+	text-transform:uppercase
+}
+
+ul.address li.address_title {
+   height: 29px;
+   font-weight: bold;
+   line-height:29px;
+    background: #f5f5f5;
+}
+ul.address .address_alias {
+	font-weight: normal;
+	text-transform: none;
+}
+ul.address li.address_firstname,
+ul.address li.address_company {
+	margin-top:8px
+}
+
+ul.address  li.address_update {
+	margin-top:20px
+}
+ul.address  li.address_update,
+ul.address li.address_delete {
+	font-size:11px;
+   text-transform:none
+}
+.address_add {
+   padding:20px 0
+}
+.address_select {
+	border:1px solid #ccc;
+	width: 200px;
+	margin-left: 10px;
+}
+label[for=id_address_delivery], label[for=id_address_invoice] {
+	float: left;
+	width: 225px;
+}
+.addressesAreEquals label {
+	margin-left: 5px;
+}
+.addressesAreEquals input {
+	float: left;
+}
+p.address_delivery, p.addressesAreEquals {
+	padding-bottom: 14px
+}
+/* PAGE ADRESSES ******************************************************************************* */
+.addresses ul.address {
+   list-style-type:none;
+   float:left;
+   position:relative;
+	margin:30px 30px 0 0;
+   width:45% !important
+}
+.addresses ul.address.alternate_item,
+.addresses ul.address.last_item {margin-right:0}
+.addresses ul.address li {
+	padding:0 15px;
+	line-height:18px;
+	text-transform:uppercase
+}
+.addresses ul.address .address_title {
+	margin-bottom:5px;
+	height: 29px;
+   font-weight: bold;
+   line-height:29px;
+   background: #f5f5f5;
+
+}
+.addresses ul.address .address_update {margin-top:20px}
+.addresses ul.address .address_update,
+.addresses ul.address .address_delete {
+	font-size:11px;
+   text-transform:none
+}
+

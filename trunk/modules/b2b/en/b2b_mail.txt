@@ -1,0 +1,14 @@
+Hi {name},
+
+Thank you for filling your details for bulk purchase.Your details are as follows-:
+
+Customer Name:{name}
+Company Name:{name}
+Customer e-mail address:{email}
+Customer Mobile:{mobile}
+PinCode:{pincode}
+Country:{country}
+City:{city}
+State:{state}
+Product Name:{product}
+Product Quantity:{quantity}

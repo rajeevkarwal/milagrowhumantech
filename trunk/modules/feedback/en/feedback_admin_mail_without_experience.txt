@@ -1,0 +1,12 @@
+Hi Admin,
+
+New Feedback entry at {shop_name}.
+
+Customer Name:{name}
+Customer e-mail address:{email}
+Customer Mobile:{mobile}
+Feedback Category:{category}
+Page Url:{currentUrl}
+
+
+{shop_url} powered by PrestaShop™

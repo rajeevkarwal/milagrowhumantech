@@ -1,0 +1,134 @@
+.slide-out-div {
+    padding: 10px;
+    width: 409px;
+    background: #ffffff;
+    border: 1px solid #29216d;
+    z-index: 16776274;
+    color: #555;
+    font-size: 13px;
+    height: auto !important;
+}
+
+.handle {
+    background: url("../img/feedback.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    background-color: rgb(0, 83, 135);
+    z-index: 16776275;
+    height: 122px;
+    width: 40px;
+    background-position: 42% 10px;
+
+}
+
+.header-message-disc {
+    padding: 5px;
+    background-color: #ffebb2;
+    border: 3px dotted #ffe391;
+}
+
+.top-spacer {
+    padding: 7px;
+}
+
+.header-message-disc a {
+    float: right;
+    margin-top: 8px;
+}
+
+.hr-break {
+    border: none;
+    padding-bottom: 5px;
+    border: 0;
+    border-top: 1px solid #AAA;
+    border-bottom: 1px solid white;
+}
+
+.header-message-disc a button {
+    padding: 8px;
+    background-color: #2b78e4;
+    color: #f5f5fb;
+    border: 1px solid #333;
+    -moz-box-shadow: 2px 2px 0px 0px #333;
+    -webkit-box-shadow: 2px 2px 0px 0px #333;
+    box-shadow: 2px 2px 0px 0px #333;
+    cursor: pointer;
+    font: bold 12px Arial, sans-serif;
+}
+
+.clearer {
+    clear: both;
+    height: 0px;
+}
+
+.open {
+    top: 95px !important;
+}
+
+.horizontalRadio {
+    margin-right: 20px;
+}
+
+.feedback-error {
+    padding: 2px;
+    margin: 0 0 10px 0;
+    border: 1px solid #990000;
+    font-size: 13px;
+    background: #ffcccc;
+    color: #df280a;
+    font-weight: bold;
+}
+
+.li-feedback{
+    /*margin-bottom: 4px !important;*/
+    margin-bottom: 0px !important
+}
+
+.li-feedback .input-box select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{
+    margin-bottom: 3px !important;
+}
+
+.li-feedback .input-box .form-list textarea {
+    height: 2em;
+}
+
+.feedback-success {
+    margin: 0 0 10px 0;
+    padding: 2px;
+    border: 1px solid #5cff74;
+    font-size: 13px;
+    background: #d3ffab;
+    color: #3d6611;
+    font-weight: bold;
+}
+/*div.submit-button button {*/
+/*background-color:#009e0f;*/
+/*color:#f5f5fb;*/
+/*border:1px solid #333;*/
+/*-moz-box-shadow:    2px 2px 0px 0px #333;*/
+/*-webkit-box-shadow: 2px 2px 0px 0px #333;*/
+/*box-shadow:         2px 2px 0px 0px #333;*/
+/*background-image: none;*/
+/*text-shadow: none;*/
+/*font : normal 12px Arial,sans-serif;*/
+/*-webkit-border-radius: 0px;*/
+/*-moz-border-radius: 0px;*/
+/*-ms-border-radius: 0px;*/
+/*-o-border-radius: 0px;*/
+/*border-radius: 0px;*/
+/*}*/
+/*div.submit-button button:hover {*/
+/*background-color:#009e0f;*/
+/*color:#f5f5fb;*/
+/*border:1px solid #333;*/
+/*-moz-box-shadow:    2px 2px 0px 0px #333;*/
+/*-webkit-box-shadow: 2px 2px 0px 0px #333;*/
+/*box-shadow:         2px 2px 0px 0px #333;*/
+/*background-image: none;*/
+/*text-shadow: none;*/
+/*font : normal 12px Arial,sans-serif;*/
+/*-webkit-border-radius: 0px;*/
+/*-moz-border-radius: 0px;*/
+/*-ms-border-radius: 0px;*/
+/*-o-border-radius: 0px;*/
+/*border-radius: 0px;*/
+/*}*/

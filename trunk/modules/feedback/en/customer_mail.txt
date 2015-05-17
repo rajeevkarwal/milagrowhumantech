@@ -1,0 +1,6 @@
+Hi User,
+
+Thank you for
+Coupon Code:{couponCode}
+
+{shop_url} powered by PrestaShop™

@@ -1,0 +1,31 @@
+ul.product-details,ol.product-details{
+    list-style: disc;
+}
+ul.product-details,ol.product-details {
+    padding-left: 15px;
+    line-height: 23px;
+}
+
+#pb-left-column #short_description_block {
+color: #B2B2B9;
+}
+/*discount percentage*/
+#reduction_percent span{
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+/*product page*/
+.product-spec-table{
+    width: 100%;
+}
+
+.product-spec-table td{
+padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+    padding-top: 5px;
+}
+.product-spec-td1{
+width: 25%;
+font-weight: bold;
+}

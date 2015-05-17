@@ -1,0 +1,105 @@
+/**
+ * @author PresTeamShop.com
+ * @copyright PresTeamShop.com - 2013
+ */
+
+#pet_content label{
+    width: auto!important;
+    text-align: left!important;
+}
+
+#pet_content .table{
+    width: 100%;
+}
+
+#pet_content {
+    border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+    display: block;
+    padding: 20px 0;
+    width: 100%;
+}
+
+#pet_content #pet_left_column fieldset{
+    margin: 0;
+    padding: 0;
+}
+
+#pet_content #pet_left_column #pet_main{
+    float: left;
+    clear: both;    
+}
+
+#pet_content #pet_register_product legend{
+    margin-left: 5px;
+}
+
+#pet_content #pet_register_product{
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+#pet_content #pet_register_product fieldset{
+    padding: 8px;
+    font-size: 11px;
+}
+
+#pet_content #pet_register_product p{
+    margin: 0!important;
+    padding: 0!important;
+}
+
+#pet_content #pet_register_product sup{
+    color: red;
+}
+
+#pet_content #responde_server{
+    width: 100%;
+}
+
+#pet_right_column{
+    float: left;
+    margin: 15px 0;
+    width: 100%;
+}
+#display_form_register{
+    float: left;
+    margin-right: 15px;
+}
+#frm_register_product{
+    float: left;
+    margin-bottom: 15px;
+    width: 630px;
+    display: none;
+}
+#frm_register_product label{
+    width: auto!important;
+    font-weight: normal!important;
+}
+
+.pet .ui-tabs .ui-tabs-panel{
+    padding: 1em 5px!important;
+}
+
+.text_center{
+    text-align: center!important;
+}
+
+.valign_top{
+    vertical-align: top;
+}
+
+td.accions{
+    text-align: center;
+}
+
+td.accions img{
+    cursor: pointer;
+}
+
+#tr_content_tab {
+    display: none;
+}
+#tr_contact_tab {
+    display: none;
+}

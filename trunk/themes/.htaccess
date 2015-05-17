@@ -1,0 +1,5 @@
+<FilesMatch "\.tpl$">
+Deny from all
+</FilesMatch>
+
+Redirect 301 /content/category/8-media-coverage http://test.milagrowhumantech.com/content/45-media-coverage

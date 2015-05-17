@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<partners>
+<partner>
+	<name><![CDATA[MoneyBookers by Skrill]]></name>
+	<module>moneybookers</module>
+	<checkconfiguration>
+		<key>MB_SECRET_WORD</key>
+	</checkconfiguration>
+	<logo><![CDATA[https://api.prestashop.com/partner/premium/images/moneybookers.png]]></logo>
+	<labels>
+		<label iso="en"><![CDATA[Accept your customers local payment methods anywhere]]></label>
+		<label iso="fr"><![CDATA[Acceptez les méthodes de paiement locales de vos clients dans le monde entier]]></label>
+		<label iso="es"><![CDATA[Acepta, en el mundo entero, los medios de pago locales de tus clientes]]></label>
+		<label iso="de"><![CDATA[Flexible, landestypische Zahlungsmethoden für Ihre Kunden]]></label>
+		<label iso="nl"><![CDATA[Accepteer de lokale betalingsmethoden van uw klanten overal]]></label>
+	</labels>
+	<optionals>
+	</optionals>
+	<descriptions>
+	</descriptions>
+</partner>
+<partner>
+	<name><![CDATA[Shopgate]]></name>
+	<module>shopgate</module>
+	<checkconfiguration>
+		<key>NO_KEY_REQUIRED</key>
+	</checkconfiguration>
+	<logo><![CDATA[https://api.prestashop.com/partner/premium/images/shopgate.png]]></logo>
+	<labels>
+		<label iso="en"><![CDATA[Go mobile and boost your sales]]></label>
+		<label iso="fr"><![CDATA[Devenez mobile et augmentez vos ventes]]></label>
+		<label iso="nl"><![CDATA[Ga mobiel en verhoog uw omzet]]></label>
+	</labels>
+	<optionals>
+	</optionals>
+	<descriptions>
+	</descriptions>
+</partner>
+</partners>

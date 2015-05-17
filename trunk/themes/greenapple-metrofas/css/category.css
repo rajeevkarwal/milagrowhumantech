@@ -1,0 +1,54 @@
+h1{margin-bottom:10px;}
+
+.resumecat {
+	padding:8px 7px;
+	color:#000;
+	background:#f0f0f0;
+}
+
+
+
+.cat_desc {
+	   line-height: 18px;
+    padding: 15px 0 15px 0;
+
+}
+.cat_desc p {padding:0 10px 5px 0}
+.cat_desc .lnk_more {
+   padding:0 10px 0 0;
+   color:#0088CC;
+	background:url(../img/arrow_right_1.png) no-repeat 100% 4px transparent;
+}
+
+
+/* ************************************************************************************************
+      SUB CATEGORIES
+************************************************************************************************ */
+#subcategories {margin-top:15px}
+#subcategories h3 {
+	background-color: #F9F9F9;
+    font-size: 13px;
+    padding: 14px 12px;
+    text-transform: uppercase;
+
+}
+
+.inline_list {
+	list-style-type:none;
+	margin-top:10px;
+}
+.inline_list  li {
+	padding:10px 0;
+	border-bottom:1px dotted #ccc
+}
+.inline_list  li .img {
+	float:left;
+	margin-right:15px
+}
+.inline_list  li img {
+	border:1px solid #ccc
+}
+.inline_list  li .cat_name {
+	font-weight:bold;
+	font-size:13px
+}

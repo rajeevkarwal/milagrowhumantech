@@ -1,0 +1,30 @@
+
+#my-account #center_column h1 {margin-bottom:20px}
+
+#my-account #center_column .title_block  {
+	font-weight:normal;
+	font-size:12px;
+	color:#666
+}
+
+#my-account .myaccount_lnk_list {list-style-type:none}
+#my-account .myaccount_lnk_list li {
+	font-size:13px;
+	line-height:48px
+}
+
+#my-account .my-account-area{
+     border: 5px solid #F5F5F5;
+    margin: 0 auto 20px;
+    padding: 20px;
+     background: none repeat scroll 0 0 #FFFFFF;
+}
+
+
+
+#my-account .myaccount_lnk_list img.icon,
+#my-account p img.icon {
+	position:relative;
+	top:9px;
+	left:0
+}

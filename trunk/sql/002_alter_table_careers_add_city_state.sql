@@ -1,0 +1,2 @@
+ALTER TABLE ps_careers ADD COLUMN city VARCHAR(1000) Default NULL;
+ALTER TABLE ps_careers ADD COLUMN state VARCHAR(1000) Default NULL;

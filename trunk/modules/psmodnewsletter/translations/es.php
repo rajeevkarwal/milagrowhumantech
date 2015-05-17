@@ -1,0 +1,30 @@
+<?php
+
+global $_MODULE;
+$_MODULE = array();
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_ffb7e666a70151215b4c55c6268d7d72'] = 'Newsletter';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_ba457fab18d697d978befb95e827eb91'] = 'Agrega un bloque para la suscripción al boletín.';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_179bbcbd2e1104cdf9dcecd91264a961'] = '¿Está seguro que desea eliminar todos los contactos? ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_f0e9c1e3969d351170373b5cec2131c2'] = 'Código de cupón es válido ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_ff0a3b7f3daef040faf89a88fdac01b7'] = 'Actualizado ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_f4f70727dc34561dfde1a3c529b6205c'] = 'Configuración ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_a3399c10bd24eba0b78fbd595c51f81a'] = 'Pantalla de configuración en una nueva página? ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_a6105c0a611b41b08f1209506350279e'] = 'sí ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_7fa3b767c460b54a2be4d49030b349c7'] = 'no';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_4437dee7020b48ab33333611ab16a7d9'] = 'Enviar correo electrónico de comprobación después de la suscripción?';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_b68ae6efae2fca059754c27ff94494cd'] = 'Enviar correo electrónico de confirmación después de la suscripción? ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_506e58042922bff5bd753dc612e84f5b'] = 'Bienvenido código de descuento ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_de3bd7faad12c79178b1b22bf6119e35'] = 'Dejar en blanco para desactivar ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_06933067aafd48425d67bcb01bba5cb6'] = 'Actualizar ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_6e659c47c94d1e1dc7121859f43fb2b0'] = 'Invalid dirección e-mail';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_9e6df6e72be5be5b8ff962ee3406907e'] = 'Dirección de correo electrónico no registrada';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_29003419c075963848f1907174bdc224'] = 'Error durante la desuscripción';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_f7dc297e2a139ab4f5a771825b46df43'] = 'Retirada de un exitoso ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_8dc3b88902df97bb96930282e56ed381'] = 'Dirección de correo electrónico ya está registrada ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_b7d9eb38dd2e375648ab08e224e22e43'] = 'Error durante la suscripción';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_b2485e09e6a72c45d35286d3fc63e128'] = 'n correo electrónico de verificación ha sido enviada. Por favor, compruebe su correo electrónico';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_ed3cd7b3cc134222fa70602921ec27e1'] = 'Suscripción éxito ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_9e1f0c4c3f90d775eafbb0854ec63808'] = 'E-mail ya registrada o no válido ';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_4e1c51e233f1ed368c58db9ef09010ba'] = 'Gracias por suscribirse a nuestro boletín de noticias.';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_b05f4d1ea3375653d88d667564b4a1f8'] = 'Suscríbase a nuestro Newsletter';
+$_MODULE['<{sccnewsletter}prestashop>sccnewsletter_40aeaaf38e5ce4f0bc888e9189e43f6a'] = 'Ingrese su dirección de correo electrónico';

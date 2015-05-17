@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>xml_feeds</name>
+	<displayName><![CDATA[Xml feeds]]></displayName>
+	<version><![CDATA[1.5]]></version>
+	<description><![CDATA[Export data from DB to xml]]></description>
+	<author><![CDATA[Bl Modules]]></author>
+	<tab><![CDATA[export]]></tab>
+	<confirmUninstall><![CDATA[Are you sure you want to delete a module?]]></confirmUninstall>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

@@ -1,0 +1,10 @@
+.category-image img {
+        width: 100%;
+    }
+
+.fish_menu a {
+        padding: 15px 7px;
+    }
+.ma-upsellslider-container .product-name, .ma-newproductslider-container .product-name, .products-grid .product-name {
+        min-height: 45px;
+    }

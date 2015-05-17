@@ -1,0 +1,32 @@
+<?php
+
+global $_MODULE;
+$_MODULE = array();
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_6c245f95ee0009f89febe44abe0c9bc8'] = 'Smart Newsletter Block';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_ba457fab18d697d978befb95e827eb91'] = 'Fügt einen Block für Newsletter-Abonnement.';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_179bbcbd2e1104cdf9dcecd91264a961'] = 'Sind Sie sicher, dass Sie alle Ihre Kontakte löschen?';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_f0e9c1e3969d351170373b5cec2131c2'] = 'Der Gutschein-Code ist ungültig';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_ff0a3b7f3daef040faf89a88fdac01b7'] = 'Aktualisiert';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_f4f70727dc34561dfde1a3c529b6205c'] = 'Einstellungen';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_a3399c10bd24eba0b78fbd595c51f81a'] = 'Anzeige-Konfiguration in einer neuen Seite?';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_a6105c0a611b41b08f1209506350279e'] = 'ja';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_7fa3b767c460b54a2be4d49030b349c7'] = 'MAL';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_4437dee7020b48ab33333611ab16a7d9'] = 'Senden Sie Bestätigungs-E-Mail nach Abonnement?';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_b68ae6efae2fca059754c27ff94494cd'] = 'Senden Sie eine E-Mail-Bestätigung nach dem Abonnement?';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_506e58042922bff5bd753dc612e84f5b'] = 'Willkommen Gutschein-Code';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_de3bd7faad12c79178b1b22bf6119e35'] = 'Lassen Sie zum Deaktivieren blank';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_06933067aafd48425d67bcb01bba5cb6'] = 'Aktualisieren';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_6e659c47c94d1e1dc7121859f43fb2b0'] = 'Ungültige E-Mail-Adresse';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_9e6df6e72be5be5b8ff962ee3406907e'] = 'E-Mail-Adresse nicht registriert';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_29003419c075963848f1907174bdc224'] = 'Fehler bei der Abmeldung';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_f7dc297e2a139ab4f5a771825b46df43'] = 'Abmeldung erfolgreich';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_8dc3b88902df97bb96930282e56ed381'] = 'E-Mail-Adresse ist bereits registriert';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_b7d9eb38dd2e375648ab08e224e22e43'] = 'Fehler beim Abo';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_b2485e09e6a72c45d35286d3fc63e128'] = 'Eine Bestätigungs-E wurde gesendet. Bitte überprüfen Sie Ihre E-Mail.';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_ed3cd7b3cc134222fa70602921ec27e1'] = 'Anmeldung erfolgreich';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_9e1f0c4c3f90d775eafbb0854ec63808'] = 'E-Mail bereits registrierten oder ungültig';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_4e1c51e233f1ed368c58db9ef09010ba'] = 'Danke für die Anmeldung zu unserem Newsletter.';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_ffb7e666a70151215b4c55c6268d7d72'] = 'Mitteilungsblatt';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_b26917587d98330d93f87808fc9d7267'] = 'Zeichnen';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_416f61a2ce16586f8289d41117a2554e'] = 'Ihre E-Mail-Adresse';
+$_MODULE['<{smartblocknewsletter}prestashop>smartblocknewsletter_0489a3f8be18fa4bbf15c7ce26518640'] = 'Anmeldung für unseren Newsletter:';

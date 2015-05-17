@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>partners</name>
+            <displayName><![CDATA[Partners With Us Section]]></displayName>
+            <version><![CDATA[0.9]]></version>
+            <description><![CDATA[Partners with us module developed by gaps]]></description>
+            <author><![CDATA[GAPS]]></author>
+            <tab><![CDATA[front_office_features]]></tab>
+            <is_configurable>1</is_configurable>
+            <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+        </module>
