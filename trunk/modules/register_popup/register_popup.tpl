@@ -1,8 +1,5 @@
 {if !$logged}
- {if $page_name == 'index'}   
- home page only  
- 
- 
+ {if $page_name == 'index'}
 <script type="text/javascript">
 var fb_param = {};
 fb_param.pixel_id = '6009242971684';
@@ -18,7 +15,7 @@ fb_param.currency = 'USD';
 </script>
 <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6009242971684&value=10.00&currency=USD" /></noscript>
  
-<div class="splash" id="CoverPop-cover">
+<div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
