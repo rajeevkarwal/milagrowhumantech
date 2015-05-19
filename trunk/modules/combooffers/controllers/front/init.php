@@ -20,29 +20,19 @@ class ComboOffersInitModuleFrontController extends ModuleFrontController {
         $finalProducts=array();
         foreach($products as $key=>$productRow)
         {
-            //foreach product get product details
 
             $product=new Product($productRow['id_product'], true, $this->context->language->id, $this->context->shop->id);
 
-//            echo "<pre>";
-//            print_r($product);
-//            exit;
             $images = $product->getImages((int)$this->context->cookie->id_lang);
-   //         $product_images = array();
 
-//            if(isset($images[0]))
-//                $this->context->smarty->assign('mainImage', $images[0]);
             foreach ($images as $k => $image)
             {
                 if ($image['cover'])
                 {
-                    $mainImage=$image;
-//                    $this->context->smarty->assign('mainImage', $image);
                     $cover = $image;
                     $cover['id_image'] = (Configuration::get('PS_LEGACY_IMAGES') ? ($product->id.'-'.$image['id_image']) : $image['id_image']);
                     $cover['id_image_only'] = (int)$image['id_image'];
                 }
- //               $product_images[(int)$image['id_image']] = $image;
             }
 
             if (!isset($cover))
@@ -60,16 +50,12 @@ class ComboOffersInitModuleFrontController extends ModuleFrontController {
                         'title' => 'No picture'
                     );
             }
-            $size = Image::getSize(ImageType::getFormatedName('large'));
-            //$product->cover=$cover;
             $productPrice=$product->getPrice(true, null, 2);
             $reductionPrice=$product->getPriceWithoutReduct(false, null);
             $finalProducts[]=array('name'=>$product->name,'product_link'=>'/index.php?controller=product&id_product='.$product->id,'link_rewrite'=>$product->link_rewrite,'productPrice'=>$productPrice,
                 'reductionPrice'=>$reductionPrice,'cover'=>array('id_image'=>$cover['id_image']));
         }
-
-        //echo "<pre>";
-        print_r($finalProducts);
+        
         $this->context->smarty->assign(array('products'=>$finalProducts));
         $this->setTemplate('combooffers.tpl');
     }
