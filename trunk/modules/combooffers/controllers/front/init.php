@@ -55,7 +55,7 @@ class ComboOffersInitModuleFrontController extends ModuleFrontController {
             $finalProducts[]=array('name'=>$product->name,'product_link'=>'/index.php?controller=product&id_product='.$product->id,'link_rewrite'=>$product->link_rewrite,'productPrice'=>$productPrice,
                 'reductionPrice'=>$reductionPrice,'cover'=>array('id_image'=>$cover['id_image']));
         }
-        
+
         $this->context->smarty->assign(array('products'=>$finalProducts));
         $this->setTemplate('combooffers.tpl');
     }
