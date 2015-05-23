@@ -42,7 +42,7 @@
                                                         <div class="offerTag DISCOUNT">
                                                             <div class="offerDesc row-fluid">
                                                                 <div class="offerText">
-                                                                    <div style="font-size: 16px;" title="">Save {($product['reductionPrice']-$product['productPrice'])}<br><br></div>
+                                                                    <div style="font-size: 16px;" title="">Save {($product['reductionPrice']-$product['productPrice'])|round}<br><br></div>
                                                                 </div>
                                                                 <div class="offerTag DISCOUNT">
                                                                     <div class="offerDesc row-fluid"><a class="viewMore"
