@@ -52,7 +52,12 @@ class ComboOffersInitModuleFrontController extends ModuleFrontController {
             }
             $productPrice=$product->getPrice(true, null, 2);
             $reductionPrice=$product->getPriceWithoutReduct(false, null);
-            $finalProducts[]=array('name'=>$product->name,'product_link'=>'/index.php?controller=product&id_product='.$product->id,'link_rewrite'=>$product->link_rewrite,'productPrice'=>$productPrice,
+            $productName=$product->name;
+            if(strlen($product->name)>17)
+            {
+                $productName=substr($productName,0,15).'..';
+            }
+            $finalProducts[]=array('name'=>$productName,'product_link'=>'/index.php?controller=product&id_product='.$product->id,'link_rewrite'=>$product->link_rewrite,'productPrice'=>$productPrice,
                 'reductionPrice'=>$reductionPrice,'cover'=>array('id_image'=>$cover['id_image']));
         }
 
