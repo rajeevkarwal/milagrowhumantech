@@ -57,8 +57,9 @@ class ComboOffersInitModuleFrontController extends ModuleFrontController {
             {
                 $productName=substr($productName,0,18).'..';
             }
+            $savePrice=round($reductionPrice-$productPrice);
             $finalProducts[]=array('name'=>$productName,'product_link'=>'/index.php?controller=product&id_product='.$product->id,'link_rewrite'=>$product->link_rewrite,'productPrice'=>$productPrice,
-                'reductionPrice'=>$reductionPrice,'cover'=>array('id_image'=>$cover['id_image']));
+                'reductionPrice'=>$reductionPrice,'savePrice'=>$savePrice,'cover'=>array('id_image'=>$cover['id_image']));
         }
 
         $this->context->smarty->assign(array('products'=>$finalProducts));
