@@ -77,6 +77,7 @@
                                             href="{$base_dir}">{l s='Home'}</a></li>
                             </ul>
                         {else}
+                            <h5 style="color:red">"Student discount is not on offer for this week due to special promotion running on our TabTops"</h5>
                             <h5>Discount is only available to Indian students.</h5>
                             <p class="text">
                                 <label for="name"><strong>Name<span class="required-asterisk">*</span></strong></label>
