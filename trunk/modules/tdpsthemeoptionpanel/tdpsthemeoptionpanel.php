@@ -598,6 +598,16 @@ class TDpsThemeOptionPanel extends Module {
                     </div>',
             "type" => "textarea");
 			
+			$td_options[] = array("name" => 'Popup Block for Offers Page',
+            "desc" => 'Custom HTML design to Popup & content offers page.',
+            "id" => $this->tdthemename . "_left_ofr_customhtml",
+            "lang" => true,
+            "std" => '
+                 <div class="row-fluid">
+                    <div class="block1 span6"><img alt="" src="'.$themesimagepath.'static-block.png"></div>
+                    <div class="block2 span6"><img alt="" src="'.$themesimagepath.'static-block.png"></div>
+                    </div>',
+            "type" => "textarea");
 			
 			$td_options[] = array("name" => 'Popup Block for RS GOSF',
             "desc" => 'Custom HTML design to Popup & GOSF content RS page.',
