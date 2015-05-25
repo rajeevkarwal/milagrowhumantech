@@ -831,6 +831,13 @@
     });
     {/if}
 
+    {*{if $product->id}*}
+
+    {*alert('product page id'+{$product->id});*}
+    {*{elseif $category->id}*}
+    {*alert('category page id'+{$category->id});*}
+    {*{/if}*}
+
 </script>
 
 
