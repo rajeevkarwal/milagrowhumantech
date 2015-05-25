@@ -260,7 +260,8 @@
 				<option value="new" {if $product->condition == 'new'}selected="selected"{/if} >{l s='New'}</option>
 				<option value="used" {if $product->condition == 'used'}selected="selected"{/if} >{l s='Used'}</option>
 				<option value="refurbished" {if $product->condition == 'refurbished'}selected="selected"{/if}>{l s='Refurbished'}</option>
-			</select>
+                <option value="combo" {if $product->condition == 'combo'}selected="selected"{/if}>{l s='combo'}</option>
+            </select>
 		</td>
 	</tr>
 </table>
