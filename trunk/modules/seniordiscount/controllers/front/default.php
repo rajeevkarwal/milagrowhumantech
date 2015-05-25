@@ -124,7 +124,7 @@ class SeniorDiscountDefaultModuleFrontController extends ModuleFrontController
         $email = Tools::safeOutput(Tools::getValue('from',
             ((isset($this->context->cookie) && isset($this->context->cookie->email) && Validate::isEmail($this->context->cookie->email)) ? $this->context->cookie->email : '')));
 
-        $productSql = 'SELECT pd.id_product,p.reference as name ,cd.id_category,cd.name AS category_name ,sa.quantity FROM ps_product as p left join ps_product_lang as pd on p.id_product = pd.id_product left join ps_stock_available as sa on sa.id_product =  p.id_product left join ps_category_product as cp on p.id_product = cp.id_product left join ps_category_lang as cd on cd.id_category = cp.id_category where sa.quantity > 0 and p.active = 1 and cd.id_category in (85,105) group by sa.id_product';
+        $productSql = 'SELECT pd.id_product,pd.name ,cd.id_category,cd.name AS category_name ,sa.quantity FROM ps_product as p left join ps_product_lang as pd on p.id_product = pd.id_product left join ps_stock_available as sa on sa.id_product =  p.id_product left join ps_category_product as cp on p.id_product = cp.id_product left join ps_category_lang as cd on cd.id_category = cp.id_category where sa.quantity > 0 and p.active = 1 and cd.id_category in (85) group by sa.id_product';
         $products = Db::getInstance()->executeS($productSql);
 
         $categorywiseProduct = array();
