@@ -1465,6 +1465,15 @@ li#menu-item-4 ul li:first-child ul li:last-child a:hover, li#menu-item-33 ul li
     font-size: 15px !important;
 }
 
+li#menu-item-4 ul li:first-child ul li:nth-last-child(2) a{
+    color: #ec5d5d !important;
+    font-size: 13px !important;
+}
+
+li#menu-item-4 ul li:first-child ul li:nth-last-child(2) a:hover{
+    color: #000 !important;
+    font-size: 13px !important;
+}
 
 /*css for hide loading icon in flexslider on home page, and display firt image as static*/
 .ma-banner7-container .flexslider .slides > li:first-child {display: block !important; -webkit-backface-visibility: visible;} 

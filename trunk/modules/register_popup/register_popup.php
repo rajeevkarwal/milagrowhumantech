@@ -214,7 +214,18 @@ class Register_Popup extends Module
             $gender = Tools::getValue('id_gender');
             $f_name = Tools::getValue('f_name');
             $l_name = Tools::getValue('l_name');
+
             $email = Tools::getValue('email');
+            $emailExp=explode("@", $email);
+
+            if(empty($f_name))
+            {
+                $f_name=$emailExp[0];
+            }
+            if(empty($l_name))
+            {
+                $l_name=$emailExp[0];
+            }
             $pwd1 = Tools::getValue('pwd');
             $pwd = Tools::encrypt($pwd1);
             $bday = (empty($_POST['years']) ? '' : (int)$_POST['years'] . '-' . (int)$_POST['months'] . '-' . (int)$_POST['days']);
@@ -242,7 +253,7 @@ class Register_Popup extends Module
             $header = "From:deepanshu.sharma@milagrow.in \r\n";
             $fromName = Configuration::get('PS_SHOP_NAME'); //Sender's name
 
-            echo $host = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+            $host = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
             if (Customer::customerExists($email)) {
                 $emailexist = '<font color="red" size="2" class="red">You have already registered. Please login to enjoy shopping or just close the popup.</font>';
                 $smarty->assign('email_exist', $emailexist);
@@ -259,8 +270,8 @@ class Register_Popup extends Module
                 $query = "INSERT into $tbl (`id_customer`,`id_group`) values ('" . $insert_id . "','3') ";
                 Db::getInstance()->Execute($query);
 
-                $gosf_coupon_sql = "SELECT code FROM " . _DB_PREFIX_ . "cart_rule where id_cart_rule='286'";
-                $gosf_coupon_code = Db::getInstance()->executeS($sql);
+                //$gosf_coupon_sql = "SELECT code FROM " . _DB_PREFIX_ . "cart_rule where id_cart_rule='286'";
+                //$gosf_coupon_code = Db::getInstance()->executeS($sql);
 
 
                 if ($result2) {
@@ -281,25 +292,57 @@ class Register_Popup extends Module
                         '{page_url}' => $url
                     );
                     $id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
-                    $smarty->assign('gosf_coupon_code', $gosf_coupon_code);
+//                    $smarty->assign('gosf_coupon_code', '');
                     //$send = Mail::Send($id_lang, 'gosf',$sub, $vars, $email);
                     if ($host == 'milagrowhumantech.com' || $host == 'milagrowhumantech.com/') {
                         $send = Mail::Send($id_lang, 'gosf', $sub, $vars, $email);
-                    } elseif ($host == 'milagrowhumantech.com/87-body-robots' || $host == 'milagrowhumantech.com/body-robots/23-robotic-body-massager.html' || $host == 'milagrowhumantech.com/body-robots/90-robotic-body-massager-blue.html') {
+                    } elseif ($host == 'milagrowhumantech.com/87-body-robots' || $host == 'milagrowhumantech.com/137-body-robot-models' || $host == 'milagrowhumantech.com/body-robots/23-robotic-body-massager.html' || $host == 'milagrowhumantech.com/body-robots/90-robotic-body-massager-blue.html') {
                         $send = Mail::Send($id_lang, 'gosf_br', $sub, $vars, $email);
-                    } elseif ($host == 'milagrowhumantech.com/85-floor-robots' || $host == 'milagrowhumantech.com/85-floor-robots/' || $host == 'milagrowhumantech.com/85-floor-robots/#') {
+                    } elseif ($host == 'milagrowhumantech.com/85-floor-robots' || $host == 'milagrowhumantech.com/85-floor-robots/' || $host == 'milagrowhumantech.com/85-floor-robots/#' || $host == 'milagrowhumantech.com/67-floor-robot-accessories') {
                         $send = Mail::Send($id_lang, 'gosf_fr', $sub, $vars, $email);
-                    } elseif ($host == 'milagrowhumantech.com/105-lawn-robots' || $host == 'milagrowhumantech.com/lawn-robots/229-robonicklaus-20.html' || $host == 'milagrowhumantech.com/lawn-robots/231-robotiger-20.html' || $host == 'milagrowhumantech.com/lawn-robots/232-robotiger-10.html' || $host == 'milagrowhumantech.com/123-lawn-robot-accessories' || $host === 'milagrowhumantech.com/lawn-robot-accessories/302-virtual-wire.html' || $host == 'milagrowhumantech.com/lawn-robot-accessories/303-peges.html' || $host =='milagrowhumantech.com/lawn-robot-accessories/305-docking-station.html' || $host == 'milagrowhumantech.com/remote/344-robo-nicklaus-20.html' || $host =='milagrowhumantech.com/batteries/392-nicklaus-20-battery.html' || $host == 'milagrowhumantech.com/blades/412-lawn-robots-blades-for-nicklaus20.html' || $host == 'milagrowhumantech.com/charger/416-lawn-robots-charger-for-robo-nicklaus20-tiger-20.html' || $host == 'milagrowhumantech.com/batteries/413-robo-nicklaus-20-battery.html' || $host == 'milagrowhumantech.com/docking-station/415-robo-tiger-20-tiger-10-docking-station.html' || $host == 'milagrowhumantech.com/batteries/392-nicklaus-20-battery.html' || $host == 'milagrowhumantech.com/batteries/413-robo-nicklaus-20-battery.html') {
+                    } elseif ($host == 'milagrowhumantech.com/floor-robots/285-milagrow-redhawk-india-s-number-1-floor-robots.html') {
+                        $send = Mail::Send($id_lang, 'gosf_fr_rd_hwk_1', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/floor-robots/109-milagrow-redhawk-india-s-number-1-floor-robots.html' || $host == 'milagrowhumantech.com/floor-robots/442-milagrow-redhawk10-refurbished-.html' || $host == 'milagrowhumantech.com/107-drywet-cleaning') {
+                        $send = Mail::Send($id_lang, 'gosf_fr_rd_hwk_2', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/floor-robots/110-blackcat1.html' || $host == 'milagrowhumantech.com/floor-robots/217-blackcat2.html' || $host == 'milagrowhumantech.com/108-healthcare-cleaning'){
+                        $send = Mail::Send($id_lang, 'gosf_fr_blck_cat', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/floor-robots/224-milagrow-robocop-20-india-s-number-1-floor-robot.html' || $host == 'milagrowhumantech.com/106-only-dry-cleaning'){
+                        $send = Mail::Send($id_lang, 'gosf_fr_robo_cop', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/105-lawn-robots' || $host == 'milagrowhumantech.com/lawn-robots/231-robotiger-20.html' || $host == 'milagrowhumantech.com/115-lawn-robot-models' || $host == 'milagrowhumantech.com/lawn-robots/232-robotiger-10.html' || $host == 'milagrowhumantech.com/123-lawn-robot-accessories' || $host === 'milagrowhumantech.com/lawn-robot-accessories/302-virtual-wire.html' || $host == 'milagrowhumantech.com/lawn-robot-accessories/303-peges.html' || $host =='milagrowhumantech.com/lawn-robot-accessories/305-docking-station.html' || $host == 'milagrowhumantech.com/remote/344-robo-nicklaus-20.html' || $host =='milagrowhumantech.com/batteries/392-nicklaus-20-battery.html' || $host == 'milagrowhumantech.com/blades/412-lawn-robots-blades-for-nicklaus20.html' || $host == 'milagrowhumantech.com/charger/416-lawn-robots-charger-for-robo-nicklaus20-tiger-20.html' || $host == 'milagrowhumantech.com/batteries/413-robo-nicklaus-20-battery.html' || $host == 'milagrowhumantech.com/docking-station/415-robo-tiger-20-tiger-10-docking-station.html' || $host == 'milagrowhumantech.com/batteries/392-nicklaus-20-battery.html' || $host == 'milagrowhumantech.com/batteries/413-robo-nicklaus-20-battery.html') {
                         $send = Mail::Send($id_lang, 'gosf_ln', $sub, $vars, $email);
-                    } elseif ($host == 'milagrowhumantech.com/113-pool-robots' || $host == 'milagrowhumantech.com/pool-robots/233-robophelps-true-blue.html' || $host == 'milagrowhumantech.com/pool-robots/419-milagrow-robophelps20.html' || $host == 'milagrowhumantech.com/pool-robots/420-milagrow-robophelps25.html' || $host == 'milagrowhumantech.com/pool-robots/421-milagrow-robophelps30.html' || $host == 'milagrowhumantech.com/122-pool-robot-accessories' || $host == 'milagrowhumantech.com/pool-robot-accessories/299-caddy.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/300-dustbin.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/298-charger-cable.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/322-remote.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/323-charger-.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/298-charger-cable.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/323-charger-.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/299-caddy.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/300-dustbin.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/322-remote.html') {
+                    } elseif ($host == 'milagrowhumantech.com/lawn-robots/229-robonicklaus-20.html'){
+                        $send = Mail::Send($id_lang, 'gosf_ln_rb_nick', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/113-pool-robots' || $host == 'milagrowhumantech.com/114-pool-robot-models' || $host == 'milagrowhumantech.com/122-pool-robot-accessories' || $host == 'milagrowhumantech.com/pool-robot-accessories/299-caddy.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/300-dustbin.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/298-charger-cable.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/322-remote.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/323-charger-.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/298-charger-cable.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/323-charger-.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/299-caddy.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/300-dustbin.html' || $host == 'milagrowhumantech.com/pool-robot-accessories/322-remote.html') {
                         $send = Mail::Send($id_lang, 'gosf_pr', $sub, $vars, $email);
-                    } elseif ($host == 'milagrowhumantech.com/6-tabtop-pcs' || $host == 'milagrowhumantech.com/quad-core/75-104-pro-3g-sim-quad-core-16gb.html' || $host == 'milagrowhumantech.com/quad-core/226-m2-pro-3g-32gb-84-quad-core.html' || $host == 'milagrowhumantech.com/quad-core/227-m2-pro-3g-16gb-84-quad-core.html' || $host == 'milagrowhumantech.com/dual-core/228-m2-pro-3g-8gb-74-dual-core.html') {
+                   // } elseif ($host == 'milagrowhumantech.com/114-pool-robot-models'){
+                       // $send = Mail::Send($id_lang, 'gosf_pr_model', $sub, $vars, $email);
+                   // } elseif ($host == 'milagrowhumantech.com/122-pool-robot-accessories'){
+                     //   $send = Mail::Send($id_lang, 'gosf_pr_access', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/pool-robots/233-robophelps-true-blue.html') {
+                        $send = Mail::Send($id_lang, 'gosf_pr_15', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/pool-robots/419-milagrow-robophelps20.html') {
+                        $send = Mail::Send($id_lang, 'gosf_pr_20', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/pool-robots/420-milagrow-robophelps25.html') {
+                        $send = Mail::Send($id_lang, 'gosf_pr_25', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/pool-robots/421-milagrow-robophelps30.html') {
+                        $send = Mail::Send($id_lang, 'gosf_pr_30', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/6-tabtop-pcs' || $host == 'milagrowhumantech.com/11-android-models' || $host == 'milagrowhumantech.com/27-tabtop-accessories') {
                         $send = Mail::Send($id_lang, 'gosf_tab_pc', $sub, $vars, $email);
-                    } elseif ($host == 'milagrowhumantech.com/10-mounts' || $host == 'milagrowhumantech.com/ceiling-mount-models/24-ceiling-mount-300a.html' || $host == 'milagrowhumantech.com/wall-rack-models/25-accessories-wall-rack-001.html' || $host == 'milagrowhumantech.com/wall-mount-models/30-single-arm-articulating-wall-mount-222.html' || $host == 'milagrowhumantech.com/wall-mount-models/33-double-arm-articulating-wall-mount-723.html' || $host == 'milagrowhumantech.com/wall-mount-models/34-quad-arm-fulcrum-wall-mount-4011.html' || $host == 'milagrowhumantech.com/wall-mount-models/170-double-arm-articulating-wall-mount-704.html') {
+                    } elseif ($host == 'milagrowhumantech.com/quad-core/75-104-pro-3g-sim-quad-core-16gb.html') {
+                        $send = Mail::Send($id_lang, 'gosf_tab_m8_16', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/quad-core/226-m2-pro-3g-32gb-84-quad-core.html') {
+                        $send = Mail::Send($id_lang, 'gosf_tab_m2_32', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/quad-core/227-m2-pro-3g-16gb-84-quad-core.html') {
+                        $send = Mail::Send($id_lang, 'gosf_tab_m2_16', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/dual-core/228-m2-pro-3g-8gb-74-dual-core.html') {
+                        $send = Mail::Send($id_lang, 'gosf_tab_m2_8', $sub, $vars, $email);
+                    } elseif ($host == 'milagrowhumantech.com/10-mounts' || $host == 'milagrowhumantech.com/15-ceiling-mount-models' || $host == 'milagrowhumantech.com/16-wall-rack-models' || $host == 'milagrowhumantech.com/17-wall-mount-models' || $host == 'milagrowhumantech.com/ceiling-mount-models/24-ceiling-mount-300a.html' || $host == 'milagrowhumantech.com/wall-rack-models/25-accessories-wall-rack-001.html' || $host == 'milagrowhumantech.com/wall-mount-models/30-single-arm-articulating-wall-mount-222.html' || $host == 'milagrowhumantech.com/wall-mount-models/33-double-arm-articulating-wall-mount-723.html' || $host == 'milagrowhumantech.com/wall-mount-models/34-quad-arm-fulcrum-wall-mount-4011.html' || $host == 'milagrowhumantech.com/wall-mount-models/170-double-arm-articulating-wall-mount-704.html') {
                         $send = Mail::Send($id_lang, 'gosf_mount', $sub, $vars, $email);
                     } elseif ($host == 'milagrowhumantech.com/86-window-robots' || $host == 'milagrowhumantech.com/135-window-robot-models' || $host == 'milagrowhumantech.com/93-winbot' || $host == 'milagrowhumantech.com/81-chargers-cables' || $host == 'milagrowhumantech.com/83-detergent' || $host == 'milagrowhumantech.com/79-cleaning-pads-cupule' || $host == 'milagrowhumantech.com/80-remotes' || $host == 'milagrowhumantech.com/accessories/191-winbot-7-safety-pod.html' || $host == 'milagrowhumantech.com/chargers-cables/185-winbot-7-charger.html' || $host == 'milagrowhumantech.com/chargers-cables/186-winbot-7-extension-cable.html' || $host == 'milagrowhumantech.com/detergent/74-robot-detergent.html' || $host == 'milagrowhumantech.com/detergent/187-winbot-7-detergent-100ml-35-oz.html' || $host == 'milagrowhumantech.com/cleaning-pads-cupule/173-windoro-cleaning-pads-40pcs.html' || $host == 'milagrowhumantech.com/cleaning-pads-cupule/175-winbot-7-cleaning-pads-set-of-3.html' || $host == 'milagrowhumantech.com/cleaning-pads-cupule/176-windoro-edge-cleaners-set-of-20.html' || $host == 'milagrowhumantech.com/cleaning-pads-cupule/181-winbot-7-cupule-gasket-set-of-2.html' || $host == 'milagrowhumantech.com/remotes/183-winbot-7-remote.html') {
                         $send = Mail::Send($id_lang, 'gosf_wr', $sub, $vars, $email);
-                    } else {
+                    } elseif ($host == 'milagrowhumantech.com/content/27-offers-zone-') {
+                        $send = Mail::Send($id_lang, 'gosf_ofr', $sub, $vars, $email);
+                    }else {
                         $send = Mail::Send($id_lang, 'gosf_fr', $sub, $vars, $email);
                     }
                     $send2 = Mail::Send($id_lang, 'gosf_admin', $sub_admin, $vars, $email_admin);

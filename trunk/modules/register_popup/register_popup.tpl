@@ -1,20 +1,5 @@
 {if !$logged}
  {if $page_name == 'index'}
-<script type="text/javascript">
-var fb_param = {};
-fb_param.pixel_id = '6009242971684';
-fb_param.value = '10.00';
-fb_param.currency = 'USD';
-(function(){
-  var fpw = document.createElement('script');
-  fpw.async = true;
-  fpw.src = '//connect.facebook.net/en_US/fbds.js';
-  var ref = document.getElementsByTagName('script')[0];
-  ref.parentNode.insertBefore(fpw, ref);
-})();
-</script>
-<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6009242971684&value=10.00&currency=USD" /></noscript>
- 
 <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
@@ -49,9 +34,9 @@ fb_param.currency = 'USD';
 </div>
 
 </div>
- {elseif $smarty.get.id_cms==88 || $smarty.server.REQUEST_URI == '/6-tabtop-pcs'} 
+ {elseif $smarty.get.id_cms==88 || $smarty.server.REQUEST_URI == '/6-tabtop-pcs' || $category->id == 11 || $category->id == 27 || $category->id == 75 || $category->id == 226 || $category->id == 227 || $category->id == 228} 
 
- <div class="splash" id="CoverPop-cover">
+ <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
@@ -85,9 +70,9 @@ fb_param.currency = 'USD';
 </div>
 
 </div>
-  {elseif $smarty.get.id_cms==89 || $category->id == 87} 
-
-  <div class="splash" id="CoverPop-cover">
+  {elseif $smarty.get.id_cms==89 || $category->id == 87 || $category->id == 137 } 
+  
+  <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
@@ -120,9 +105,9 @@ fb_param.currency = 'USD';
 
 </div>
 
-{elseif $category->id == 105} 
+{elseif $category->id == 105 || $category->id == 115 || $category->id == 123 || $category->id == 229 || $category->id == 231 || $category->id == 232} 
 
-  <div class="splash" id="CoverPop-cover">
+  <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
@@ -155,7 +140,7 @@ fb_param.currency = 'USD';
 
 </div>
     {elseif $smarty.get.id_cms==90 ||  $category->id == 10 || $category->id == 15 ||  $category->id == 16 || $category->id == 17} 
- <div class="splash" id="CoverPop-cover">
+ <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
@@ -188,8 +173,8 @@ fb_param.currency = 'USD';
 
 </div>
 	     
-     {elseif $smarty.get.id_cms==91 || $category->id == 85 || $category->id == 67 || $category->id == 68 || $category->id == 69 || $category->id == 70 || $category->id == 71 || $category->id == 72 || $category->id == 73 || $category->id == 74 || $category->id == 75 || $category->id == 106 || $category->id == 107 || $category->id == 108 || $category->id == 109 || $category->id == 110 || $category->id == 134} 
-   <div class="splash" id="CoverPop-cover">
+     {elseif $smarty.get.id_cms==91 || $category->id == 85 || $category->id == 67 || $category->id == 68 || $category->id == 69 || $category->id == 70 || $category->id == 71 || $category->id == 72 || $category->id == 73 || $category->id == 74 || $category->id == 75 || $category->id == 106 || $category->id == 107 || $category->id == 108 || $category->id == 109 || $category->id == 110 || $category->id == 134 || $category->id == 224 || $category->id == 217 || $category->id == 442 || $category->id == 285} 
+   <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
@@ -225,7 +210,7 @@ fb_param.currency = 'USD';
 </div>
 
  {elseif $category->id == 113 || $category->id == 114 || $category->id == 122 || $category->id == 138 || $category->id == 139 || $category->id == 140 || $category->id == 152 || $category->id == 233} 
-   <div class="splash" id="CoverPop-cover">
+   <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
@@ -261,7 +246,7 @@ fb_param.currency = 'USD';
 </div>
 
 {elseif $category->id == 86 || $category->id == 93 || $category->id == 95 || $category->id == 135 || $category->id == 77 || $category->id == 79 || $category->id == 80 || $category->id == 81 || $category->id == 83} 
-   <div class="splash" id="CoverPop-cover">
+   <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
@@ -295,10 +280,48 @@ fb_param.currency = 'USD';
 </div>
 
 </div>
+ 
+ {elseif $smarty.get.id_cms==94 || $smarty.server.REQUEST_URI == '/content/27-offers-zone-'} 
+   <div class="splash hidden-phone" id="CoverPop-cover">
+
+<div class="CoverPop-content splash-center">
+ <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
+	{if $inserted} {$inserted}{*{$mail}*}
+    {else}
+ 
+<div id="RegisterPopup">
+<fieldset>
+	
+	 <form  id="formID" method="post" action="#" onsubmit="return Validate(this);">
+		 <div class="reg_left">
+       {* {$themesdev.td_left_pop_customhtml|html_entity_decode}*}
+         {$themesdev.td_left_ofr_customhtml|html_entity_decode}
+        {$email_exist} 
+        	
+            <div class="row-fluid show-grid">
+           <div class="span4"> E-mail: <input id="email" name="email" type="email" /></div>
+           <div class="span4"> Password: <input id="pwd" name="pwd" type="password" /></div>
+           <div class="span4">&nbsp; <input type="submit" name="submit_reg2" value="Register & Win"  class="reg" onclick="return validatereg();" /></div>
+           </div>
+             
+              
+        </div>
+        
+	</form>
+</fieldset>
+
+</div>
+
+ {/if}
+</div>
+
+</div>
+ 
+ 
      
       {elseif $smarty.get.id_cms==92} 
     
-      <div class="splash" id="CoverPop-cover">
+      <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
  <p class="close-splash"><a href="javascript:void(0)" class="CoverPop-close"><img src="http://milagrowhumantech.com/img/close.png"></a></p>
@@ -390,7 +413,6 @@ function AddErrorLabel(element, msg) {
 .popup_banner{ width:100%; border:1px solid #ccc;}
 .popup_img{ width:98%; border:1px solid #ccc;}
 .close-splash{ float:right;}
-a.CoverPop-close{}
 .CoverPop-close > img{ margin:-20px 0 0 -10px; position:absolute; height:22px;}
 .CoverPop-open, .CoverPop-open body { height: 100%; overflow: hidden;}
 #CoverPop-cover { bottom: 0;display: none;left: 0;position: fixed;right: 0;top: 0; z-index: 1000;}
