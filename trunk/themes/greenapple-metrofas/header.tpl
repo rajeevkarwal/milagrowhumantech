@@ -17,6 +17,9 @@
 {if isset($meta_keywords) AND $meta_keywords}
     <meta name="keywords" content="{$meta_keywords|escape:html:'UTF-8'}"/>
 {/if}
+    {if $base_uri=='http://milagrowhumantech.com/'}
+    <meta name="p:domain_verify" content="73c4080908b3ed59b1b2605545bfc4f1"/>
+    {/if}
 <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"/>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
 <meta http-equiv="content-language" content="{$meta_language}"/>
