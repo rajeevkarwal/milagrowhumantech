@@ -34,7 +34,7 @@
 </div>
 
 </div>
- {elseif $smarty.get.id_cms==88 || $smarty.server.REQUEST_URI == '/6-tabtop-pcs' || $category->id == 11 || $category->id == 27 || $category->id == 75 || $category->id == 226 || $category->id == 227 || $category->id == 228} 
+ {elseif $smarty.get.id_cms==88 || $smarty.server.REQUEST_URI == '/6-tabtop-pcs' || $category->id == 11 || $category->id == 27 || $category->id == 226 || $category->id == 227 || $category->id == 228 || $smarty.server.REQUEST_URI == '/quad-core/75-104-pro-3g-sim-quad-core-16gb.html' || $category->id == 89 || $category->id == 30 || $category->id == 34 || $category->id == 35 || $category->id == 41 || $category->id == 45 || $category->id == 148} 
 
  <div class="splash hidden-phone" id="CoverPop-cover">
 
@@ -105,7 +105,7 @@
 
 </div>
 
-{elseif $category->id == 105 || $category->id == 115 || $category->id == 123 || $category->id == 229 || $category->id == 231 || $category->id == 232} 
+{elseif $category->id == 105 || $category->id == 115 || $category->id == 123 || $category->id == 229 || $category->id == 231 || $category->id == 232 || $category->id == 141 || $category->id == 146 || $category->id == 145 || $category->id == 144 || $category->id == 143 || $category->id == 142 || $category->id == 151} 
 
   <div class="splash hidden-phone" id="CoverPop-cover">
 
