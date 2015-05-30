@@ -63,7 +63,20 @@
                         <a href="{$product.link}" title="{$product.name|escape:html:'UTF-8'}" class="product_img_link product-image">
                             {if isset($product.condition) && $product.condition eq 'refurbished'}
                             <div class="label-pro-refurbished">{l s='Refurbished'}</div>
-                            {elseif isset($product.new) && $product.new == 1}<div class="label-pro-new">{l s='New' mod='homefeatured'}</div>{/if}
+                            {elseif isset($product.new) && $product.new == 1}<div class="label-pro-new">{l s='New' mod='homefeatured'}</div>
+                           
+                            {/if}
+                            {if isset($product.condition) && $product.condition eq 'used'}
+                            <div class="label-pro-refurbished">{l s='Used'}</div>
+                            {elseif isset($product.new) && $product.new == 1}<div class="label-pro-new">{l s='New' mod='homefeatured'}</div>
+                            
+                            {/if}
+                            {if isset($product.condition) && $product.condition eq 'combo'}
+                            <div class="label-pro-refurbished">{l s='Combo'}</div>
+                            {elseif isset($product.new) && $product.new == 1}<div class="label-pro-new">{l s='New' mod='homefeatured'}</div>
+                            
+                            {/if}
+                            
                             {if isset($product.on_sale) && $product.on_sale && isset($product.show_price) && $product.show_price && !$PS_CATALOG_MODE} <div class="label-pro-sale">{l s='Offer' mod='homefeatured'}</div>{/if}
                             <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home_default')}"  alt="{$product.name|escape:html:'UTF-8'}" />
                         </a>
@@ -171,13 +184,18 @@
 {if $new_products !== false}
         <ul class="slides">
         {foreach from=$new_products item=newproduct name=myLoop} 
-            <li class="newproductslider-item" id="{$newproduct.id_product}" style="width: 280px !important;margin-bottom: 21px;margin-right: 4px;">
+            <li class="newproductslider-item {$newproduct.condition|escape:html:'UTF-8'}" id="{$newproduct.id_product}" style="width: 280px !important;margin-bottom: 21px;margin-right: 4px;">
                  <div class="item-inner">
                     
                     <a href="{$newproduct.link}" title="{$newproduct.name|escape:html:'UTF-8'}" class="product_img_link product-image">
                         {if isset($newproduct.condition) && $newproduct.condition eq 'refurbished'}
                         <div class="label-pro-refurbished">{l s='Refurbished'}</div>
                         {elseif isset($newproduct.new) && $newproduct.new == 1}<div class="label-pro-new">{l s='New' mod='tdnewproducts'}</div>{/if}
+						
+						{if isset($newproduct.condition) && $newproduct.condition eq 'used'}
+                        <div class="label-pro-refurbished">{l s='Used'}</div>
+                        {elseif isset($newproduct.new) && $newproduct.new == 1}<div class="label-pro-new">{l s='New' mod='tdnewproducts'}</div>{/if}
+						
                        {if isset($newproduct.on_sale) && $newproduct.on_sale && isset($newproduct.show_price) && $newproduct.show_price && !$PS_CATALOG_MODE} <div class="label-pro-sale">{l s='Offer' mod='tdnewproducts'}</div>{/if}
                         <img src="{$link->getImageLink($newproduct.link_rewrite, $newproduct.id_image, 'home_default')}"  alt="{$newproduct.name|escape:html:'UTF-8'}" />
                     </a>
