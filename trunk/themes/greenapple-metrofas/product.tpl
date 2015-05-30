@@ -239,14 +239,13 @@
             {if $have_image}
                 {if $product->condition eq 'refurbished'}
                     <div class="label-pro-refurbished-product">{l s='Refurbished'}</div>
-                {elseif $product->new}
-                    <div class="label-pro-new">{l s='New'}</div>
-                {/if}
-				{if $product->condition eq 'used'}
+			     {elseif $product->condition eq 'used'}
                     <div class="label-pro-refurbished-product">{l s='Used'}</div>
+                		
                 {elseif $product->new}
                     <div class="label-pro-new">{l s='New'}</div>
                 {/if}
+				
                 {if $product->on_sale}
                     <div class="label-pro-sale">{l s='Offer'}</div>{/if}
                 <span id="view_full_size">
