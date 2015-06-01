@@ -86,7 +86,6 @@
                                                                                                   class="iframe videoPopout"></a></span>
                             </div>
 
-
                             <!-- end rating block-->
                             <div class="price-box">
 

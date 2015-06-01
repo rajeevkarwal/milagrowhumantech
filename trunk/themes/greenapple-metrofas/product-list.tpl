@@ -210,9 +210,6 @@
                              alt="{$product.name|escape:html:'UTF-8'}"/>
                     </a>
 
-
-
-
                     <div class="product-details">
                         <h2 class="product-name"><a href="{$product.link}"
                                                     title="{$product.name|truncate:50:'...'|escape:'htmlall':'UTF-8'}">{$product.name|truncate:20:'...'|escape:'htmlall':'UTF-8'}</a>

@@ -276,7 +276,7 @@
                                          alt="{$product->name|escape:'htmlall':'UTF-8'}"
                                          title="{$product->name|escape:'htmlall':'UTF-8'}">
                                 </a>
-                               
+                   
                             </span>
             {/if}
         </div>
