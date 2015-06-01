@@ -183,12 +183,13 @@
                     <a href="{$newproduct.link}" title="{$newproduct.name|escape:html:'UTF-8'}" class="product_img_link product-image">
                         {if isset($newproduct.condition) && $newproduct.condition eq 'refurbished'}
                         <div class="label-pro-refurbished">{l s='Refurbished'}</div>
-                        {elseif isset($newproduct.new) && $newproduct.new == 1}<div class="label-pro-new">{l s='New' mod='tdnewproducts'}</div>{/if}
-						
-						{if isset($newproduct.condition) && $newproduct.condition eq 'used'}
+						{elseif isset($newproduct.condition) && $newproduct.condition eq 'used'}
                         <div class="label-pro-refurbished">{l s='Used'}</div>
-                        {elseif isset($newproduct.new) && $newproduct.new == 1}<div class="label-pro-new">{l s='New' mod='tdnewproducts'}</div>{/if}
-						
+						{elseif isset($newproduct.condition) && $newproduct.condition eq 'combo'}
+                        <div class="label-pro-refurbished">{l s='Combo'}</div>
+                        {elseif isset($newproduct.new) && $newproduct.new == 1}
+						<div class="label-pro-new">{l s='New' mod='tdnewproducts'}</div>{/if}
+
                        {if isset($newproduct.on_sale) && $newproduct.on_sale && isset($newproduct.show_price) && $newproduct.show_price && !$PS_CATALOG_MODE} <div class="label-pro-sale">{l s='Offer' mod='tdnewproducts'}</div>{/if}
                         <img src="{$link->getImageLink($newproduct.link_rewrite, $newproduct.id_image, 'home_default')}"  alt="{$newproduct.name|escape:html:'UTF-8'}" />
                     </a>
