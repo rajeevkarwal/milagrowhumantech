@@ -241,7 +241,8 @@
                     <div class="label-pro-refurbished-product">{l s='Refurbished'}</div>
 			     {elseif $product->condition eq 'used'}
                     <div class="label-pro-refurbished-product">{l s='Used'}</div>
-                		
+                {elseif $product->condition eq 'combo'}
+                    <div class="label-pro-refurbished-product">{l s='Combo'}</div>		
                 {elseif $product->new}
                     <div class="label-pro-new">{l s='New'}</div>
                 {/if}
@@ -275,7 +276,7 @@
                                          alt="{$product->name|escape:'htmlall':'UTF-8'}"
                                          title="{$product->name|escape:'htmlall':'UTF-8'}">
                                 </a>
-                               
+                   
                             </span>
             {/if}
         </div>

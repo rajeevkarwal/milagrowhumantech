@@ -196,13 +196,12 @@
 
                         {if isset($product.condition) && $product.condition eq 'refurbished'}
                         <div class="label-pro-refurbished">{l s='Refurbished'}</div>
+						{elseif isset($product.condition) && $product.condition eq 'used'}
+                            <div class="label-pro-refurbished">{l s='Used'}</div>
+						{elseif isset($product.condition) && $product.condition eq 'combo'}
+                            <div class="label-pro-refurbished">{l s='Combo'}</div>
                         {elseif isset($product.new) && $product.new == 1}
-                            <div class="label-pro-new">{l s='New'}</div>{/if}
-							
-						{if isset($product.condition) && $product.condition eq 'used'}
-                        <div class="label-pro-refurbished">{l s='Used'}</div>
-                        {elseif isset($product.new) && $product.new == 1}
-                            <div class="label-pro-new">{l s='New'}</div>{/if}
+                            <div class="label-pro-new">{l s='New'}</div>{/if}	
 							
                         {if isset($product.on_sale) && $product.on_sale && isset($product.show_price) && $product.show_price && !$PS_CATALOG_MODE}
                             <div class="label-pro-sale">{l s='Offer' }</div>{/if}
@@ -210,9 +209,6 @@
                         <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home_default')}"
                              alt="{$product.name|escape:html:'UTF-8'}"/>
                     </a>
-
-
-
 
                     <div class="product-details">
                         <h2 class="product-name"><a href="{$product.link}"
