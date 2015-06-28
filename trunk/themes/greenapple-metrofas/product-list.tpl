@@ -192,7 +192,7 @@
                     {*</div>*}
 
                     <a href="{$product.link}" title="{$product.name|escape:html:'UTF-8'}"
-                       class="product_img_link product-image {$product.condition|escape:html:'UTF-8'}">
+                       class="product_img_link product-image">
 
                         {if isset($product.condition) && $product.condition eq 'refurbished'}
                         <div class="label-pro-refurbished">{l s='Refurbished'}</div>
@@ -314,9 +314,14 @@
                 <a href="{$product.link}" title="{$product.name|escape:html:'UTF-8'}"
                    class="product_img_link product-image ">
                     {if isset($product.condition) && $product.condition eq 'refurbished'}
-                    <div class="label-pro-refurbished-list">{l s='Refurbished'}</div>
+                        <div class="label-pro-refurbished">{l s='Refurbished'}</div>
+                    {elseif isset($product.condition) && $product.condition eq 'used'}
+                        <div class="label-pro-refurbished">{l s='Used'}</div>
+                    {elseif isset($product.condition) && $product.condition eq 'combo'}
+                        <div class="label-pro-refurbished">{l s='Combo'}</div>
                     {elseif isset($product.new) && $product.new == 1}
                         <div class="label-pro-new">{l s='New'}</div>{/if}
+                    
                     {if isset($product.on_sale) && $product.on_sale && isset($product.show_price) && $product.show_price && !$PS_CATALOG_MODE}
                         <div class="label-pro-sale">{l s='Sale' }</div>{/if}
 
