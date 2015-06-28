@@ -1204,4 +1204,6 @@ li#menu-item-135 ul.sub li.mega-hdr a.mega-hdr-a{ height:30px; }
 
 /*li#menu-item-135 ul.sub{ display:block !important;}*/
 
-
+.used .label-pro-new {
+  display: none;
+}
