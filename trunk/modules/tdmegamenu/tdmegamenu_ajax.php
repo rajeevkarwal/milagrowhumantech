@@ -28,7 +28,7 @@ include_once('../../init.php');
 //}
 
 $postmenudata = $_POST['sorted_menulink'];
-print_r($postmenudata);
+//print_r($postmenudata);
 $menulinkele = 0;
 foreach ($postmenudata as $k => $childrens) :
     $parentmenulinks = str_replace("ele_", "", $childrens['id']);

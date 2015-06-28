@@ -321,7 +321,7 @@
                         <div class="label-pro-refurbished">{l s='Combo'}</div>
                     {elseif isset($product.new) && $product.new == 1}
                         <div class="label-pro-new">{l s='New'}</div>{/if}
-                    
+
                     {if isset($product.on_sale) && $product.on_sale && isset($product.show_price) && $product.show_price && !$PS_CATALOG_MODE}
                         <div class="label-pro-sale">{l s='Sale' }</div>{/if}
 

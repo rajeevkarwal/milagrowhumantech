@@ -234,7 +234,7 @@
     <div class="product-view">
     <div class="product-essential row-fluid">
     <div class="product-img-box {if $themesdev.td_pro_sidebar=="enable"}span6{else}span5{/if}">
-        <div class="main-image product-image {if $product->condition eq 'used'}used{/if}" id="image-block">
+        <div class="main-image product-image" id="image-block">
 
             {if $have_image}
                 {if $product->condition eq 'refurbished'}
