@@ -29,7 +29,7 @@
     </div>
     <div class="payment-button-block">
         <button class="exclusive_large"
-                onclick="location.href='{$link->getModuleLink('bankwire', 'payment')}'">Confirm Payment
+                onclick="location.href='{$link->getModuleLink('bankwire', 'payment',array(),true)}'">Confirm Payment
         </button>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <?php
-/*
-* 2007-2013 PrestaShop
+/**
+* 2007-2015 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,16 +18,15 @@
 * versions in the future. If you wish to customize PrestaShop for your
 * needs please refer to http://www.prestashop.com for more information.
 *
-*  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2013 PrestaShop SA
-*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  @author    PrestaShop SA <contact@prestashop.com>
+*  @copyright 2007-2015 PrestaShop SA
+*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
 class PayPalConnect
 {
 	private	$_logs = array();
-	
 	private $paypal = null;
 	
 	public function __construct()
@@ -35,12 +34,12 @@ class PayPalConnect
 		$this->paypal = new PayPal();
 	}
 
-	public function makeConnection($host, $script, $body, $simple_mode = false)
+	public function makeConnection($host, $script, $body, $simple_mode = false, $http_header = false, $identify = false)
 	{
 		$this->_logs[] = $this->paypal->l('Making new connection to').' \''.$host.$script.'\'';
 
 		if (function_exists('curl_exec'))
-			$return = $this->_connectByCURL($host.$script, $body);
+			$return = $this->_connectByCURL($host.$script, $body, $http_header, $identify);
 
 		if (isset($return) && $return)
 			return $return;
@@ -50,7 +49,7 @@ class PayPalConnect
 		if (!$simple_mode || !preg_match('/[A-Z]+=/', $tmp, $result))
 			return $tmp;
 
-		return substr($tmp, strpos($tmp, $result[0]));
+		return Tools::substr($tmp, strpos($tmp, $result[0]));
 	}
 
 	public function getLogs()
@@ -61,7 +60,7 @@ class PayPalConnect
 	/************************************************************/
 	/********************** CONNECT METHODS *********************/
 	/************************************************************/
-	private function _connectByCURL($url, $body)
+	private function _connectByCURL($url, $body, $http_header = false, $identify = false)
 	{
 		$ch = @curl_init();
 
@@ -74,15 +73,22 @@ class PayPalConnect
 			$this->_logs[] = $body;
 
 			@curl_setopt($ch, CURLOPT_URL, 'https://'.$url);
+
+			if ($identify)
+				@curl_setopt($ch, CURLOPT_USERPWD, Configuration::get('PAYPAL_LOGIN_CLIENT_ID').':'.Configuration::get('PAYPAL_LOGIN_SECRET'));
+
 			@curl_setopt($ch, CURLOPT_POST, true);
-			@curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+			if ($body)
+				@curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
 			@curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			@curl_setopt($ch, CURLOPT_HEADER, false);
 			@curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 			@curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			@curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			@curl_setopt($ch, CURLOPT_SSLVERSION, 3);
-			@curl_setopt($ch, CURLOPT_VERBOSE, true);
+			@curl_setopt($ch, CURLOPT_SSLVERSION, defined('CURL_SSLVERSION_TLSv1') ? CURL_SSLVERSION_TLSv1 : 1);
+			@curl_setopt($ch, CURLOPT_VERBOSE, false);
+			if ($http_header)
+				@curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
 
 			$result = @curl_exec($ch);
 
@@ -98,14 +104,13 @@ class PayPalConnect
 
 	private function _connectByFSOCK($host, $script, $body)
 	{
-		$fp = @fsockopen('sslv3://'.$host, 443, $errno, $errstr, 4);
+		$fp = @fsockopen('tls://'.$host, 443, $errno, $errstr, 4);
 
 		if (!$fp)
 			$this->_logs[] = $this->paypal->l('Connect failed with fsockopen method');
 		else
 		{
-			$header = $this->_makeHeader($host, $script, strlen($body));
-			$this->_logs[] = $this->paypal->l('Connect with fsockopen method successful');
+			$header = $this->_makeHeader($host, $script, Tools::strlen($body));
 			$this->_logs[] = $this->paypal->l('Sending this params:').' '.$header.$body;
 
 			@fputs($fp, $header.$body);
@@ -116,17 +121,17 @@ class PayPalConnect
 
 			fclose($fp);
 
-			if (!isset($result) || $result == false)
+			if (!isset($tmp) || $tmp == false)
 				$this->_logs[] = $this->paypal->l('Send with fsockopen method failed !');
 			else
 				$this->_logs[] = $this->paypal->l('Send with fsockopen method successful');
 		}
-		return $tmp ? $tmp : false;
+		return isset($tmp) ? $tmp : false;
 	}
 
 	private function _makeHeader($host, $script, $lenght)
 	{
-		return 'POST '.(string)$script.' HTTP/1.0'."\r\n".
+		return 'POST '.(string)$script.' HTTP/1.1'."\r\n".
 			'Host: '.(string)$host."\r\n".
 			'Content-Type: application/x-www-form-urlencoded'."\r\n".
 			'Content-Length: '.(int)$lenght."\r\n".
