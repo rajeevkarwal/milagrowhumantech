@@ -1,6 +1,6 @@
 <?php
-/*
- * 2007-2013 PrestaShop
+/**
+ * 2007-2015 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -18,10 +18,10 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
- *  @author PrestaShop SA <contact@prestashop.com>
- *  @copyright  2007-2013 PrestaShop SA
+ *  @author    PrestaShop SA <contact@prestashop.com>
+ *  @copyright 2007-2015 PrestaShop SA
  *  @version  Release: $Revision: 14390 $
- *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
 
@@ -61,6 +61,36 @@ class PayPalInstall
 			PRIMARY KEY (`id_paypal_customer`)
 		) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8 AUTO_INCREMENT=1'))
 			return false;
+
+		if (!Db::getInstance()->Execute('
+			CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'paypal_login_user`  (
+				`id_paypal_login_user` INT(11) AUTO_INCREMENT,
+				`id_customer` INT(11) NOT NULL,
+				`token_type` VARCHAR(255) NOT NULL,
+				`expires_in` VARCHAR(255) NOT NULL,
+				`refresh_token` VARCHAR(255) NOT NULL,
+				`id_token` VARCHAR(255) NOT NULL,
+				`access_token` VARCHAR(255) NOT NULL,
+				`account_type` VARCHAR(255) NOT NULL,
+				`user_id` VARCHAR(255) NOT NULL,
+				`verified_account` VARCHAR(255) NOT NULL,
+				`zoneinfo` VARCHAR(255) NOT NULL,
+				`age_range` VARCHAR(255) NOT NULL,
+				PRIMARY KEY (`id_paypal_login_user`)
+			) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8'))
+			return false;
+		if (!Db::getInstance()->Execute('
+			CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'paypal_capture` (
+				  `id_paypal_capture` int(11) NOT NULL AUTO_INCREMENT,
+				  `id_order` int(11) NOT NULL,
+				  `capture_amount` float NOT NULL,
+				  `result` text NOT NULL,
+				  `date_add` datetime NOT NULL,
+				  `date_upd` datetime NOT NULL,
+				  PRIMARY KEY (`id_paypal_capture`)
+				) ENGINE='._MYSQL_ENGINE_.'  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;'))
+			return false;
+
 	}
 	
 	/**
@@ -106,6 +136,14 @@ class PayPalInstall
 		Configuration::deleteByName('PAYPAL_CAPTURE');
 		Configuration::deleteByName('PAYPAL_DEBUG_MODE');
 		Configuration::deleteByName('PAYPAL_COUNTRY_DEFAULT');
+		Configuration::deleteByName('PAYPAL_VERSION');
+		
+		/* USE PAYPAL LOGIN */
+		Configuration::deleteByName('PAYPAL_LOGIN');
+		Configuration::deleteByName('PAYPAL_LOGIN_CLIENT_ID');
+		Configuration::deleteByName('PAYPAL_LOGIN_SECRET');
+		Configuration::deleteByName('PAYPAL_LOGIN_TPL');
+		/* /USE PAYPAL LOGIN */
 
 		// PayPal v3 configuration
 		Configuration::deleteByName('PAYPAL_EXPRESS_CHECKOUT_SHORTCUT');
@@ -118,31 +156,31 @@ class PayPalInstall
 	{
 		if (!Configuration::get('PAYPAL_OS_AUTHORIZATION'))
 		{
-			$orderState = new OrderState();
-			$orderState->name = array();
+			$order_state = new OrderState();
+			$order_state->name = array();
 
 			foreach (Language::getLanguages() as $language)
 			{
-				if (strtolower($language['iso_code']) == 'fr')
-					$orderState->name[$language['id_lang']] = 'Autorisation acceptée par PayPal';
+				if (Tools::strtolower($language['iso_code']) == 'fr')
+					$order_state->name[$language['id_lang']] = 'Autorisation acceptée par PayPal';
 				else
-					$orderState->name[$language['id_lang']] = 'Authorization accepted from PayPal';
+					$order_state->name[$language['id_lang']] = 'Authorization accepted from PayPal';
 			}
 
-			$orderState->send_email = false;
-			$orderState->color = '#DDEEFF';
-			$orderState->hidden = false;
-			$orderState->delivery = false;
-			$orderState->logable = true;
-			$orderState->invoice = true;
+			$order_state->send_email = false;
+			$order_state->color = '#DDEEFF';
+			$order_state->hidden = false;
+			$order_state->delivery = false;
+			$order_state->logable = true;
+			$order_state->invoice = true;
 
-			if ($orderState->add())
+			if ($order_state->add())
 			{
 				$source = dirname(__FILE__).'/../../img/os/'.Configuration::get('PS_OS_PAYPAL').'.gif';
-				$destination = dirname(__FILE__).'/../../img/os/'.(int)$orderState->id.'.gif';
+				$destination = dirname(__FILE__).'/../../img/os/'.(int)$order_state->id.'.gif';
 				copy($source, $destination);
 			}
-			Configuration::updateValue('PAYPAL_OS_AUTHORIZATION', (int)$orderState->id);
+			Configuration::updateValue('PAYPAL_OS_AUTHORIZATION', (int)$order_state->id);
 		}
 	}
 }

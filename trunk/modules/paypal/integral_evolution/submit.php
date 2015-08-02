@@ -1,6 +1,6 @@
 <?php
-/*
-* 2007-2013 PrestaShop
+/**
+* 2007-2015 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,16 +18,16 @@
 * versions in the future. If you wish to customize PrestaShop for your
 * needs please refer to http://www.prestashop.com for more information.
 *
-*  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2013 PrestaShop SA
-*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  @author    PrestaShop SA <contact@prestashop.com>
+*  @copyright 2007-2015 PrestaShop SA
+*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
 include_once(dirname(__FILE__).'/../../../config/config.inc.php');
 include_once(dirname(__FILE__).'/../../../init.php');
 
-if (_PS_VERSION_ < '1.5')
+if (version_compare(_PS_VERSION_, '1.5', '<'))
 	require_once(_PS_ROOT_DIR_.'/controllers/OrderConfirmationController.php');
 
 class PayPalIntegralEvolutionSubmit extends OrderConfirmationControllerCore
@@ -37,7 +37,7 @@ class PayPalIntegralEvolutionSubmit extends OrderConfirmationControllerCore
 	public function __construct()
 	{
 		/** Backward compatibility */
-		include_once(_PS_MODULE_DIR_.'/paypal/backward_compatibility/backward.php');
+		include_once(_PS_MODULE_DIR_.'paypal/backward_compatibility/backward.php');
 		$this->context = Context::getContext();
 		parent::__construct();
 	}
@@ -53,10 +53,16 @@ class PayPalIntegralEvolutionSubmit extends OrderConfirmationControllerCore
 		
 		$this->context->smarty->assign(array(
 			'order' => $order,
-			'price' => $price
+			'price' => $price,
 		));
+		if (version_compare(_PS_VERSION_, '1.5', '>'))
+		{
+			$this->context->smarty->assign(array(
+				'reference_order' => Order::getUniqReferenceOf($id_order)
+			));
+		}
 
-		echo $this->context->smarty->fetch(_PS_MODULE_DIR_.'/paypal/views/templates/front/order-confirmation.tpl');
+		echo $this->context->smarty->fetch(_PS_MODULE_DIR_.'paypal/views/templates/front/order-confirmation.tpl');
 	}
 }
 
@@ -67,7 +73,7 @@ $key = Tools::getValue('key');
 
 if ($id_module && $id_order && $id_cart && $key)
 {
-	if (_PS_VERSION_ < '1.5')
+	if (version_compare(_PS_VERSION_, '1.5', '<'))
 	{
 		$integral_evolution_submit = new PayPalIntegralEvolutionSubmit();
 		$integral_evolution_submit->run();
@@ -82,11 +88,9 @@ elseif ($id_cart)
 		'id_order' => (int)Order::getOrderByCartId((int)$id_cart),
 	);
 
-	if (_PS_VERSION_ < '1.5')
+	if (version_compare(_PS_VERSION_, '1.5', '<'))
 	{
-		global $cookie;
-		
-		$customer = new Customer($cookie->id_customer);
+		$customer = new Customer(Context::getContext()->cookie->id_customer);
 		$values['key'] = $customer->secure_key;
 		$url = _MODULE_DIR_.'/paypal/integral_evolution/submit.php';
 		Tools::redirectLink($url.'?'.http_build_query($values, '', '&'));
@@ -100,5 +104,4 @@ elseif ($id_cart)
 }
 else
 	Tools::redirectLink(__PS_BASE_URI__);
-	
 exit(0);
