@@ -692,11 +692,11 @@
 
 
             {if $themesdev.td_fb_page_url}
-                <iframe src="http://www.facebook.com/plugins/likebox.php?href={$themesdev.td_fb_page_url|html_entity_decode}&amp;width=292&amp;height=375&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false"
+                <iframe src="https://www.facebook.com/plugins/likebox.php?href={$themesdev.td_fb_page_url|html_entity_decode}&amp;width=292&amp;height=375&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false"
                         scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:385px;"
                         allowTransparency="true"></iframe>
             {else}
-                <iframe src="http://www.facebook.com/plugins/likebox.php?id={$themesdev.td_fb_page_id|html_entity_decode}&amp;width=292&amp;colorscheme=light&amp;border_color&amp;show_faces=true&amp;connections=6&amp;stream=false&amp;header=375&amp;height=false"
+                <iframe src="https://www.facebook.com/plugins/likebox.php?id={$themesdev.td_fb_page_id|html_entity_decode}&amp;width=292&amp;colorscheme=light&amp;border_color&amp;show_faces=true&amp;connections=6&amp;stream=false&amp;header=375&amp;height=false"
                         scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:385px;"
                         allowTransparency="true"></iframe>
             {/if}

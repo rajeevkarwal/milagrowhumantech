@@ -41,7 +41,7 @@
         <link href="{$css_uri}" rel="stylesheet" type="text/css" media="{$media}"/>
     {/foreach}
 {/if}
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/jquery.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/ma.jq.slide.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/ma.flexslider.js"></script>
@@ -85,7 +85,7 @@
 <script type="text/javascript" src="/js/jquery/plugins/fancybox/jquery.fancybox.js"></script>
 <link href="//fonts.googleapis.com/css?family={$themesdev.td_shop_heading_font_face}" rel="stylesheet" type="text/css"
       media="all"/>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 
 {*<link rel="stylesheet" type="text/css" href="{$css_dir}theme/fish_menu.css" media="screen"/>*}
 <link id="test" href="{$css_dir}/theme/menu/default.css" rel="stylesheet" type="text/css" />
