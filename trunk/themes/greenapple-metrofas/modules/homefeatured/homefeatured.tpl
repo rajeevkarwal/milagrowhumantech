@@ -72,7 +72,7 @@
                             {/if}
 
                             {if isset($product.on_sale) && $product.on_sale && isset($product.show_price) && $product.show_price && !$PS_CATALOG_MODE} <div class="label-pro-sale">{l s='Offer' mod='homefeatured'}</div>{/if}
-                            <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home_default')}"  alt="{$product.name|escape:html:'UTF-8'}" />
+                            <img class="lazy" data-original="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home_default')}"  alt="{$product.name|escape:html:'UTF-8'}" />
                         </a>
                         <div class="product-details">	
                             <h2 class="product-name"> <a href="{$product.link}" title="{$product.name|truncate:50:'...'|escape:'htmlall':'UTF-8'}">{$product.name|truncate:20:'...'|escape:'htmlall':'UTF-8'}</a></h2>
@@ -105,7 +105,7 @@
 
             </div>
             <div class="actions">
-                              <a href="{$product.link}" title="{$product.name|escape:html:'UTF-8'}" class="product-image product_img_link hidden"><img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home_default')}"  alt="{$product.name|escape:html:'UTF-8'}" /></a>
+                              <a href="{$product.link}" title="{$product.name|escape:html:'UTF-8'}" class="product-image product_img_link hidden"><img class="lazy" data-original="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home_default')}"  alt="{$product.name|escape:html:'UTF-8'}" /></a>
                                                                                     
                                               {if ($product.id_product_attribute == 0 OR (isset($add_prod_display) AND ($add_prod_display == 1))) AND $product.available_for_order AND !isset($restricted_country_mode) AND $product.minimal_quantity == 1 AND $product.customizable != 2 AND !$PS_CATALOG_MODE}
                                                         {if ($product.quantity > 0 OR $product.allow_oosp)}
@@ -191,7 +191,7 @@
 						<div class="label-pro-new">{l s='New' mod='tdnewproducts'}</div>{/if}
 
                        {if isset($newproduct.on_sale) && $newproduct.on_sale && isset($newproduct.show_price) && $newproduct.show_price && !$PS_CATALOG_MODE} <div class="label-pro-sale">{l s='Offer' mod='tdnewproducts'}</div>{/if}
-                        <img src="{$link->getImageLink($newproduct.link_rewrite, $newproduct.id_image, 'home_default')}"  alt="{$newproduct.name|escape:html:'UTF-8'}" />
+                        <img class="lazy" data-original="{$link->getImageLink($newproduct.link_rewrite, $newproduct.id_image, 'home_default')}"  alt="{$newproduct.name|escape:html:'UTF-8'}" />
                     </a>
                     <h2 class="product-name"> <a href="{$newproduct.link}" title="{$newproduct.name|truncate:50:'...'|escape:'htmlall':'UTF-8'}">{$newproduct.name|truncate:20:'...'|escape:'htmlall':'UTF-8'}</a></h2>
                      <div class="product-highlight-feature">

@@ -73,6 +73,7 @@
 
 <script type="text/javascript" src="{$js_dir}theme/backtotop.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/js.js"></script>
+<script type="text/javascript" src="{$js_dir}lazyload.js"></script>
 
 
 <!--<script type="text/javascript" src="{$js_dir}theme/jquery.selectbox.js"></script>-->
@@ -204,6 +205,11 @@
         });
     }
     jQuery(document).ready(function ($) {
+        $("img.lazy").lazyload({
+            effect : "fadeIn",
+            failurelimit : 25
+        });
+
         $('.link-compare').live('click', function () {
             var idProduct = $(this).attr('id').replace('comparator_item_', '');
             $.ajax({
