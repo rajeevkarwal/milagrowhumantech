@@ -336,6 +336,15 @@ class AMC extends Module
         if (!empty($orderInfo)) {
             $demoTotalPrice = $orderInfo['amount'];
             $demoTax = 12.36;
+            #$demoTax = 12.36;
+            if($orderInfo['created_at']>='2015-10-02 00:00:00')
+            {
+                $demoTax=14;
+            }
+            if($orderInfo['created_at']>='2015-11-17 16:49:00')
+            {
+                $demoTax=14.5;
+            }
             $demoPrice = round(($demoTotalPrice * 100) / (100 + $demoTax), 2);
             $receiptNo = sprintf('%06d', $orderInfo['demos_id']);
             $content = array(
@@ -379,6 +388,14 @@ class AMC extends Module
                 if (!empty($amc)) {
                     $amcTotalPrice = $amc['amount'];
                     $amcTax = 12.36;
+                    if($amc['created_at']>='2015-10-02 00:00:00')
+                    {
+                    $amcTax=14;
+                    }
+		    if($amc['created_at']>='2015-10-17 16:49:00')
+            	    {
+                      $demoTax=14.5;
+            	    }	
                     $amcPrice = round(($$amcTotalPrice * 100) / (100 + $amcTax), 2);
                     $receiptNo = sprintf('%06d', $amc['demos_id']);
                     $content = array(

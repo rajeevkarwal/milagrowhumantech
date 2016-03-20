@@ -46,6 +46,19 @@ class PricesDropControllerCore extends FrontController
 		parent::initContent();
 
 		$this->productSort();
+		
+		$orderBy=Tools::getValue('orderby');
+		$orderWay=Tools::getValue('orderway');
+		if(empty($orderby) && empty($orderWay))
+		{
+		$this->orderBy = 'price';
+		$this->orderWay = 'desc';
+		$this->context->smarty->assign(array(
+			'orderby' => $this->orderBy,
+			'orderway' => $this->orderWay,
+			));	
+		}
+		
 		$nbProducts = Product::getPricesDrop($this->context->language->id, null, null, true);
 		$this->pagination($nbProducts);
 

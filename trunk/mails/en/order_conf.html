@@ -22,6 +22,7 @@
     <tr>
         <td>&nbsp;</td>
     </tr>
+    {ship2myidtext}
     <tr>
         <td style="background-color: {color}; color: #fff; font-size: 12px; font-weight: bold; padding: 0.5em 1em;"
             align="left">Order details
@@ -32,7 +33,9 @@
     </tr>
     <tr>
         <td align="left">Order: <strong><span style="color: {color};">{order_name}</span> placed on {date}</strong>
-            <br/>Payment: <strong>{payment}</strong></td>
+            <br/>Payment: <strong>{payment}</strong>
+            {TXNTYPE}
+        </td>
     </tr>
     <tr>
         <td>&nbsp;</td>
@@ -123,7 +126,8 @@
         <td align="left">
             It takes atleast 24 hrs for the payment (part payment in case of COD) to reflect in our
             account, if paid by credit or debit card. For EMI, Cheque and BankWire transfer we await realization of money in
-            our bank.The order processing will start thereafter.<br/><br/>
+            our bank.If you have selected the loan option then the entire order validation process will start post the approval of loan.
+            The order processing will start thereafter.<br/><br/>
         </td>
     </tr>
     <tr>

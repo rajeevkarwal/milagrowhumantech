@@ -23,6 +23,7 @@
     <tr>
         <td>&nbsp;</td>
     </tr>
+    {ship2myidtext}
     <tr>
         <td style="background-color: {color}; color: #fff; font-size: 12px; font-weight: bold; padding: 0.5em 1em;"
             align="left">Order details
@@ -33,7 +34,9 @@
     </tr>
     <tr>
         <td align="left">Order: <strong><span style="color: {color};">{order_name}</span> placed on {date}</strong>
-            <br/>Payment: <strong>{payment}</strong></td>
+            <br/>Payment: <strong>{payment}</strong>
+            {TXNTYPE}
+        </td>
     </tr>
     <tr>
         <td>&nbsp;</td>
