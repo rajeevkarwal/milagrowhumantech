@@ -61,7 +61,8 @@
                 <div class="page-title">
                     <h1>{l s='Special discount for students'}</h1>
                 </div>
-
+                  
+				 
                 {include file="$tpl_dir./errors.tpl"}
                 <form action="{$request_uri|escape:'htmlall':'UTF-8'}" method="post" class="std"
                       id="studentDiscountForm"
@@ -77,7 +78,6 @@
                                             href="{$base_dir}">{l s='Home'}</a></li>
                             </ul>
                         {else}
-                            <h5 style="color:red">"Student discount is not on offer for this week due to special promotion running on our TabTops"</h5>
                             <h5>Discount is only available to Indian students.</h5>
                             <p class="text">
                                 <label for="name"><strong>Name<span class="required-asterisk">*</span></strong></label>
@@ -87,26 +87,15 @@
                             <p class="text select">
                                 <label for="interest"><strong>Interested In<span
                                                 class="required-asterisk">*</span></strong></label>
-                                <select name="interest" id="interest">
-                                    <option value=""
-                                            {if $interest eq ''}selected="selected"{/if}>{l s='-- Choose Product --'}</option>
-                                    {*<option value="TabTop 7.16- 4GB"*}
-                                            {*{if $interest eq 'TabTop 7.16- 4GB'}selected="selected"{/if}>{l s='TabTop 7.16- 4GB'}</option>*}
-                                    {*<option value="TabTop 7.16- 8GB Pro"*}
-                                            {*{if $interest eq 'TabTop 7.16- 8GB Pro'}selected="selected"{/if}>{l s='TabTop 7.16- 8GB Pro'}</option>*}
-                                    {*<option value="TabTop 8.4- 16GB"*}
-                                            {*{if $interest eq 'TabTop 8.4- 16GB'}selected="selected"{/if}>{l s='TabTop 8.4- 16GB'}</option>*}
-                                    {*<option value="TabTop 10.4- 16GB"*}
-                                            {*{if $interest eq 'TabTop 10.4- 16GB'}selected="selected"{/if}>{l s='TabTop 10.4- 16GB'}</option>*}
-                                    {*<option value="TabTop M8 Pro 3G- 16 GB"*}
-                                            {*{if $interest eq 'TabTop M8 Pro 3G- 16 GB'}selected="selected"{/if}>{l s='TabTop M8 Pro 3G- 16 GB'}</option>*}
-                                    {foreach $products as $product}
-                                        <option id="{$product.id_product}" value="{$product.id_product}">{$product.name}</option>
-                                    {/foreach}
-                                </select>
-
-
+                                      {$product}
                             </p>
+							<p class="text">
+                                     <label for="cost"> <strong>Discount<span class="required-asterisk">*</span></strong></label>
+
+                                        <div class="input-box">
+                                         <input type="text" id="cost" name="cost" readonly/>
+                                        </div>
+                               </p>
                             <p class="text">
                                 <label for="college"><strong>College<span
                                                 class="required-asterisk">*</span></strong></label>
@@ -149,7 +138,7 @@
                                 <input type="hidden" name="MAX_FILE_SIZE" value="2000000"/>
                                 <input type="file" name="fileUpload" id="fileUpload"/>
                             </p>
-                            <p class="text">
+                          <p class="text">
                                 <label for="Captcha"><strong>Are you a human{$captchaText}<span
                                                 class="required-asterisk">*</span></strong></label>
 
@@ -169,3 +158,13 @@
     </div>
 </div>
 
+<script>
+var pamt = {$prodwiseamt};
+function  getamt(){
+var prod_id = document.getElementById('interest');
+var Pid = prod_id.options[prod_id.selectedIndex].value;
+var prodamt =   pamt[Pid]; 
+$('#cost').val(prodamt);
+}
+
+</script>

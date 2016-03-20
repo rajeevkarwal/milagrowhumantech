@@ -20,6 +20,8 @@ class SeniorDiscountDefaultModuleFrontController extends ModuleFrontController
                 $this->errors[] = Tools::displayError('Interested in is Required');
             if (!($city = trim(Tools::getValue('city'))))
                 $this->errors[] = Tools::displayError('City is Required');
+            if (!($cost = trim(Tools::getValue('cost'))))
+                $this->errors[] = Tools::displayError('cost is Required');
             if (!($mobile = trim(Tools::getValue('mobile'))))
                 $this->errors[] = Tools::displayError('Mobile is Required');
             if (!($dob = trim(Tools::getValue('dob'))))
@@ -45,18 +47,21 @@ class SeniorDiscountDefaultModuleFrontController extends ModuleFrontController
                 if (isset($filename) && rename($_FILES['fileUpload']['tmp_name'], _PS_MODULE_DIR_ . '../upload/seniorcitizendiscount/' . $filename))
                     $file_name = $filename;
                 //updating entry to the database and sending mail to admin and customer
-                $insertData = array('name' => $name, 'interest' => $interest, 'dob' => $dob, 'city' => $city, 'mobile' => $mobile, 'email' => $from, 'id_proof_file' => $file_name, 'created_at' => $currentTime);
+                $insertData = array('name' => $name, 'interest' => $interest, 'dob' => $dob, 'city' => $city, 'discount' => $cost, 'mobile' => $mobile, 'email' => $from, 'id_proof_file' => $file_name, 'created_at' => $currentTime);
                 Db::getInstance()->insert('senior_discount', $insertData);
 
                 if (Db::getInstance()->Insert_ID()) {
                     //sending mail to user
+                    $productSql = "select name from " . _DB_PREFIX_ . "product_lang where id_product = " . $interest . "";
+                    $productData = Db::getInstance()->executeS($productSql);
+                    $productName = $productData[0]['name'];
 
                     $senior_citizen_discount_id = Db::getInstance()->Insert_ID();
-                    $userVarList = array('{name}' => $name, '{interest}' => $interest);
+                    $userVarList = array('{name}' => $name, '{interest}' => $productName);
                     Mail::Send(
                         $this->context->language->id,
                         'senior_discount_form_customer',
-                        Mail::l('Senior Citizen Discount Enquiry - #' . $senior_citizen_discount_id ." - ". $interest ." - ". $city ." - ". $name, (int)1),
+                        Mail::l('Senior Citizen Discount Enquiry - #' . $senior_citizen_discount_id . " - " . $productName . " - " . $city . " - " . $name, (int)1),
                         $userVarList,
                         $from,
                         $name,
@@ -70,19 +75,20 @@ class SeniorDiscountDefaultModuleFrontController extends ModuleFrontController
                     );
                     //sending mail to admin
                     $var_list = array('{name}' => $name,
-                        '{interest}' => $interest,
+                        '{interest}' => $productName,
                         '{dob}' => $dob,
                         '{city}' => $city,
                         '{mobile}' => $mobile,
                         '{email}' => $from,
                         '{id_proof_file}' => $file_name,
+                        '{discount}'=>$cost,
                         '{created_at}' => $currentTime);
 
                     if (isset($filename))
                         $var_list['{attached_file}'] = $_FILES['fileUpload']['name'];
 //                    if (_PS_ENVIRONMENTS) {
-                        $adminEmail = 'cs@milagrow.in';
-//                    $adminEmail = 'ptailor@greenapplesolutions.com';
+                    $adminEmail = 'cs@milagrow.in';
+//                    $adminEmail = 'hitanshumalhotra@gmail.com';
 
 //                    } else {
 //                        $adminEmail = Configuration::get('PS_SHOP_EMAIL');
@@ -90,7 +96,7 @@ class SeniorDiscountDefaultModuleFrontController extends ModuleFrontController
                     Mail::Send(
                         $this->context->language->id,
                         'senior_discount_form',
-                        Mail::l("Senior Citizen Discount Form - #" . $senior_citizen_discount_id ." - ". $interest ." - ". $city ." - ". $name , (int)1),
+                        Mail::l("Senior Citizen Discount Form - #" . $senior_citizen_discount_id . " - " . $productName . " - " . $city . " - " . $name, (int)1),
                         $var_list,
                         $adminEmail,
                         'Administrator',
@@ -124,34 +130,47 @@ class SeniorDiscountDefaultModuleFrontController extends ModuleFrontController
         $email = Tools::safeOutput(Tools::getValue('from',
             ((isset($this->context->cookie) && isset($this->context->cookie->email) && Validate::isEmail($this->context->cookie->email)) ? $this->context->cookie->email : '')));
 
-        $productSql = 'SELECT pd.id_product,pd.name ,cd.id_category,cd.name AS category_name ,sa.quantity FROM ps_product as p left join ps_product_lang as pd on p.id_product = pd.id_product left join ps_stock_available as sa on sa.id_product =  p.id_product left join ps_category_product as cp on p.id_product = cp.id_product left join ps_category_lang as cd on cd.id_category = cp.id_category where sa.quantity > 0 and p.active = 1 and cd.id_category in (85) group by sa.id_product';
-        $products = Db::getInstance()->executeS($productSql);
+        $sql = 'SELECT p.productID as productid,p.senioramt,p.is_senioramtper, pa.name AS category_name ,pc.price AS price , pd.name AS prod_name FROM ps_product_lang as pd join ps_damc_products as p on p.productID = pd.id_product join ps_product as pc on p.productID=pc.id_product join ps_category_lang as pa on p.categoryID = pa.id_category WHERE pc.active=1 and is_senior_active = 1 and is_del = 0 order by category_name';
+        $cat_name = '';
 
-        $categorywiseProduct = array();
-        foreach($products as $product){
-            $category ='';
-            $category = $product['category_name'];
-            if($category == $product['category_name']){
-                if(is_array($categorywiseProduct[$product['category_name']])){
-                    array_push($categorywiseProduct[$product['category_name']],$product['name']);
-                }else{
-                    $categorywiseProduct = $categorywiseProduct + array($product['category_name'] => array($product['name']));
-                }
-            }else{
-                $categorywiseProduct = $categorywiseProduct + array($product['category_name'] => array($product['name']));
-            }
-        }
-        $productshtml ='';
-        $productshtml .= '<select name="product" id="product">';
+        $productshtml = '';
+        $productshtml .= '<select name="product" id="product" onchange="getamt()">';
         $productshtml .= '<option value="select">Select Product</option>';
-        foreach($categorywiseProduct as $key1 => $cproduct){
-            $productshtml .= '<OPTGROUP LABEL="' . $key1 .'">';
-            for($i=0;$i<count($cproduct);$i++){
-                $productshtml .= '<option value="'. $cproduct[$i] .'">'. $cproduct[$i] .'</option>';
+        $productWiseAMT = array();
+        if ($query = Db::getInstance()->executeS($sql))
+            foreach ($query as $row) {
+//                print_r($row);
+                if ($cat_name != $row['category_name']) {
+                    if ($cat_name != '') {
+                        $productshtml .= '</optgroup>';
+                    }
+                    $productshtml .= '<OPTGROUP LABEL="' . $row['category_name'] . '">';
+                }
+                $productshtml .= '<option value="' . $row['productid'] . '">' . $row['prod_name'] . '</option>';
+                $cat_name = $row['category_name'];
+
+                $productId=$row['productid'];
+                if ($row['is_senioramtper'] == 1) {
+                    $productWiseAMT[$productId] = $row['senioramt'];
+
+                } elseif ($row['is_senioramtper'] == 2) {
+                    $productAMT=Product::getPriceStatic((int)$productId, true);
+                    $cal = ceil(($row['senioramt'] * $productAMT) / 100);
+                    $productWiseAMT[$productId] = $cal;
+                }
             }
+        if ($cat_name != '') {
             $productshtml .= '</OPTGROUP>';
         }
-        $productshtml .=  '</select>';
+
+        $productshtml .= '</select>';
+
+//        print_r($productWiseAMT);
+
+
+        //echo"<pre>";
+        //var_dump ($prodwiseamt);
+
 
         $this->context->smarty->assign(array(
             'errors' => $this->errors,
@@ -165,7 +184,8 @@ class SeniorDiscountDefaultModuleFrontController extends ModuleFrontController
             'city' => trim(Tools::getValue('city')),
             'dob' => trim(Tools::getValue('dob')),
             'mobile' => Tools::getValue('mobile'),
-            'products' => $productshtml
+            'products' => $productshtml,
+            'prodamt' => json_encode($productWiseAMT)
         ));
 
         $this->setTemplate('default.tpl');

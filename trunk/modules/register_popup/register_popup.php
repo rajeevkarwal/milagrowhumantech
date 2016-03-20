@@ -6,7 +6,7 @@
  * Time: 10:09 PM
  */
 //include('config/smarty.config.inc.php');
-include(dirname(__FILE__) . '/tools.php');
+//include(dirname(__FILE__) . '/tools.php');
 
 
 class Register_Popup extends Module
@@ -113,6 +113,9 @@ class Register_Popup extends Module
             'days' => $days,
             'sl_day' => (isset($selectedDays) ? $selectedDays : 0)
         ));
+
+        $smarty->assign('email_exist', '');
+        $smarty->assign('inserted', '');
 
 
         $days = Tools::dateDays();

@@ -18,6 +18,8 @@ class StudentDiscountDefaultModuleFrontController extends ModuleFrontController
                 $this->errors[] = Tools::displayError('Name is Required');
             if (!($interest = trim(Tools::getValue('interest'))))
                 $this->errors[] = Tools::displayError('Interested in is Required');
+            if (!($cost = trim(Tools::getValue('cost'))))
+                $this->errors[] = Tools::displayError('cost is Required');
             if (!($college = trim(Tools::getValue('college'))))
                 $this->errors[] = Tools::displayError('College is Required');
             if (!($dob = trim(Tools::getValue('dob'))))
@@ -47,13 +49,17 @@ class StudentDiscountDefaultModuleFrontController extends ModuleFrontController
                 if (isset($filename) && rename($_FILES['fileUpload']['tmp_name'], _PS_MODULE_DIR_ . '../upload/studentdiscount/' . $filename))
                     $file_name = $filename;
                 //updating entry to the database and sending mail to admin and customer
-                $insertData = array('name' => $name, 'interest' => $interest, 'college' => $college, 'dob' => $dob, 'city' => $city, 'mobile' => $mobile, 'email' => $from, 'college_id_proof_file' => $file_name, 'created_at' => $currentTime);
+                $insertData = array('name' => $name, 'interest' => $interest, 'discount' => $cost, 'college' => $college, 'dob' => $dob, 'city' => $city, 'mobile' => $mobile, 'email' => $from, 'college_id_proof_file' => $file_name, 'created_at' => $currentTime);
                 Db::getInstance()->insert('student_discount', $insertData
                 );
 
                 if (Db::getInstance()->Insert_ID()) {
                     //sending mail to user
-                    $userVarList = array('{name}' => $name, '{interest}' => $interest);
+                    $productSql = "select name from " . _DB_PREFIX_ . "product_lang where id_product = " . $interest . "";
+                    $productData = Db::getInstance()->executeS($productSql);
+                    $productName = $productData[0]['name'];
+
+                    $userVarList = array('{name}' => $name, '{interest}' => $productName);
                     Mail::Send(
                         $this->context->language->id,
                         'student_discount_form_customer',
@@ -71,27 +77,29 @@ class StudentDiscountDefaultModuleFrontController extends ModuleFrontController
                     );
                     //sending mail to admin
                     $var_list = array('{name}' => $name,
-                        '{interest}' => $interest,
+                        '{interest}' => $productName,
                         '{college}' => $college,
                         '{city}' => $city,
                         '{mobile}' => $mobile,
                         '{email}' => $from,
                         '{dob}' => $dob,
                         '{college_id_proof_file}' => $file_name,
+                        '{discount}' => $cost,
                         '{created_at}' => $currentTime);
 
                     if (isset($filename))
                         $var_list['{attached_file}'] = $_FILES['fileUpload']['name'];
 
 //                    if (_PS_ENVIRONMENTS) {
-                        $adminEmail = 'cs@milagrow.in';
+                    $adminEmail = 'cs@milagrow.in';
 //                    } else {
 //                        $adminEmail = Configuration::get('PS_SHOP_EMAIL');
 //                    }
+//                    $adminEmail = 'hitanshumalhotra@gmail.com';
                     Mail::Send(
                         $this->context->language->id,
                         'student_discount_form',
-                        Mail::l("$interest, $college, $name - Student Discount Form", (int)1),
+                        Mail::l("$productName, $college, $name - Student Discount Form", (int)1),
                         $var_list,
                         $adminEmail,
                         'Administrator',
@@ -125,9 +133,43 @@ class StudentDiscountDefaultModuleFrontController extends ModuleFrontController
         $email = Tools::safeOutput(Tools::getValue('from',
             ((isset($this->context->cookie) && isset($this->context->cookie->email) && Validate::isEmail($this->context->cookie->email)) ? $this->context->cookie->email : '')));
 
-        $productSql = 'SELECT pd.id_product,p.reference as name FROM ps_product as p left join ps_product_lang as pd on p.id_product = pd.id_product left join ps_stock_available as sa on sa.id_product =  p.id_product left join ps_category_product as cp on p.id_product = cp.id_product left join ps_category_lang as cd on cd.id_category = cp.id_category where sa.quantity > 0 and p.active = 1 and cd.id_category = 6 group by sa.id_product';
-        $products = Db::getInstance()->executeS($productSql);
-//        var_dump($products);exit;
+        $sql = 'SELECT p.productID as productid,p.studentamt,p.is_studentamtper, pa.name AS category_name ,pc.price AS price , pd.name AS prod_name FROM ps_product_lang as pd join ps_damc_products as p on p.productID = pd.id_product join ps_product as pc on p.productID=pc.id_product join ps_category_lang as pa on p.categoryID = pa.id_category WHERE pc.active=1 and is_student_active = 1 and is_del = 0 order by category_name';
+        $cat_name = '';
+
+        $productshtml = '';
+        $productshtml .= '<select name="interest" id="interest" onchange="getamt()">';
+        $productshtml .= '<option value="select">Select Product</option>';
+        $productWiseAMT = array();
+        if ($query = Db::getInstance()->executeS($sql))
+            foreach ($query as $row) {
+//                print_r($row);
+                if ($cat_name != $row['category_name']) {
+                    if ($cat_name != '') {
+                        $productshtml .= '</optgroup>';
+                    }
+                    $productshtml .= '<OPTGROUP LABEL="' . $row['category_name'] . '">';
+                }
+                $productshtml .= '<option value="' . $row['productid'] . '">' . $row['prod_name'] . '</option>';
+                $cat_name = $row['category_name'];
+
+                $productId=$row['productid'];
+                if ($row['is_studentamtper'] == 1) {
+                    $productWiseAMT[$productId] = $row['studentamt'];
+
+                } elseif ($row['is_studentamtper'] == 2) {
+                    $productAMT=Product::getPriceStatic((int)$productId, true);
+                    $cal = ceil(($row['studentamt'] * $productAMT) / 100);
+                    $productWiseAMT[$productId] = $cal;
+                }
+            }
+        if ($cat_name != '') {
+            $productshtml .= '</OPTGROUP>';
+        }
+
+        $productshtml .= '</select>';
+
+//        print_r($productWiseAMT);
+
 
         $this->context->smarty->assign(array(
             'errors' => $this->errors,
@@ -135,13 +177,14 @@ class StudentDiscountDefaultModuleFrontController extends ModuleFrontController
             'captchaText' => $captchas[$key]['key'],
             'action' => $this->context->link->getModuleLink('studentdiscount'),
             'jsSource' => $this->module->getPathUri(),
-            'captchaName' => $captchaVariable,
+             'captchaName' => $captchaVariable,
             'name' => trim(Tools::getValue('name')),
             'interest' => trim(Tools::getValue('interest')),
             'city' => trim(Tools::getValue('city')),
             'college' => trim(Tools::getValue('college')),
             'mobile' => Tools::getValue('mobile'),
-            'products' => $products
+            'product' => $productshtml,
+            'prodwiseamt' => json_encode($productWiseAMT)
         ));
 
         $this->setTemplate('default.tpl');

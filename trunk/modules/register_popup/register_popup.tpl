@@ -34,7 +34,7 @@
 </div>
 
 </div>
- {elseif $smarty.get.id_cms==88 || $smarty.server.REQUEST_URI == '/6-tabtop-pcs' || $category->id == 11 || $category->id == 27 || $category->id == 226 || $category->id == 227 || $category->id == 228 || $smarty.server.REQUEST_URI == '/quad-core/75-104-pro-3g-sim-quad-core-16gb.html' || $category->id == 89 || $category->id == 30 || $category->id == 34 || $category->id == 35 || $category->id == 41 || $category->id == 45 || $category->id == 148} 
+ {elseif (isset($smarty.get.id_cms) && $smarty.get.id_cms==88) || $smarty.server.REQUEST_URI == '/6-tabtop-pcs' || $category->id == 11 || $category->id == 27 || $category->id == 226 || $category->id == 227 || $category->id == 228 || $smarty.server.REQUEST_URI == '/quad-core/75-104-pro-3g-sim-quad-core-16gb.html' || $category->id == 89 || $category->id == 30 || $category->id == 34 || $category->id == 35 || $category->id == 41 || $category->id == 45 || $category->id == 148}
 
  <div class="splash hidden-phone" id="CoverPop-cover">
 
@@ -70,7 +70,7 @@
 </div>
 
 </div>
-  {elseif $smarty.get.id_cms==89 || $category->id == 87 || $category->id == 137 } 
+  {elseif (isset($smarty.get.id_cms) && $smarty.get.id_cms==89)  || $category->id == 87 || $category->id == 137 }
   
   <div class="splash hidden-phone" id="CoverPop-cover">
 
@@ -139,7 +139,7 @@
 </div>
 
 </div>
-    {elseif $smarty.get.id_cms==90 ||  $category->id == 10 || $category->id == 15 ||  $category->id == 16 || $category->id == 17} 
+    {elseif (isset($smarty.get.id_cms) && $smarty.get.id_cms==90) ||  $category->id == 10 || $category->id == 15 ||  $category->id == 16 || $category->id == 17}
  <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
@@ -173,7 +173,7 @@
 
 </div>
 	     
-     {elseif $smarty.get.id_cms==91 || $category->id == 85 || $category->id == 67 || $category->id == 68 || $category->id == 69 || $category->id == 70 || $category->id == 71 || $category->id == 72 || $category->id == 73 || $category->id == 74 || $category->id == 75 || $category->id == 106 || $category->id == 107 || $category->id == 108 || $category->id == 109 || $category->id == 110 || $category->id == 134 || $category->id == 224 || $category->id == 217 || $category->id == 442 || $category->id == 285} 
+     {elseif (isset($smarty.get.id_cms) && $smarty.get.id_cms==91) || $category->id == 85 || $category->id == 67 || $category->id == 68 || $category->id == 69 || $category->id == 70 || $category->id == 71 || $category->id == 72 || $category->id == 73 || $category->id == 74 || $category->id == 75 || $category->id == 106 || $category->id == 107 || $category->id == 108 || $category->id == 109 || $category->id == 110 || $category->id == 134 || $category->id == 224 || $category->id == 217 || $category->id == 442 || $category->id == 285}
    <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
@@ -281,7 +281,7 @@
 
 </div>
  
- {elseif $smarty.get.id_cms==94 || $smarty.server.REQUEST_URI == '/content/27-offers-zone-'} 
+ {elseif (isset($smarty.get.id_cms) && $smarty.get.id_cms==94) || $smarty.server.REQUEST_URI == '/content/27-offers-zone-'}
    <div class="splash hidden-phone" id="CoverPop-cover">
 
 <div class="CoverPop-content splash-center">
@@ -319,7 +319,7 @@
  
  
      
-      {elseif $smarty.get.id_cms==92} 
+      {elseif (isset($smarty.get.id_cms) && $smarty.get.id_cms==92)}
     
       <div class="splash hidden-phone" id="CoverPop-cover">
 
@@ -423,9 +423,9 @@ function AddErrorLabel(element, msg) {
     background-color: rgba(47, 99, 135, 0.9);
 }
 .splash-center {
-background:url(http://milagrowhumantech.com/img/cms/cms-banners/bgpopup_1.png);
+background:url(http://milagrowhumantech.com/img/cms/cms-banners/bgpopup_1.gif);
 margin-left: auto;
-padding: 10px;
+padding: 20px;
 text-align: center;
 width: 50%;
 margin-right: auto;

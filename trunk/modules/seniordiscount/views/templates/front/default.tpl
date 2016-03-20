@@ -22,6 +22,8 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
+
+
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.3/themes/base/jquery-ui.css"/>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.3/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{$jsSource}seniordiscount.js"></script>
@@ -46,6 +48,17 @@
 {capture name=path}{l s='Senior Citizen Discount'}{/capture}
 {include file="$tpl_dir./breadcrumb.tpl"}
 
+<script>
+var pamt = {$prodamt};
+function  getamt(){
+var prod_id = document.getElementById('product');
+var Pid = prod_id.options[prod_id.selectedIndex].value;
+var prodamt =   pamt[Pid]; 
+$('#cost').val(prodamt);
+}
+
+</script>
+
 <div class="main">
     <div class="main-inner">
         <div class="row-fluid show-grid">
@@ -59,7 +72,7 @@
 
             <div class="span9">
                 <div class="page-title">
-                    <h1>{l s='Special discount for Senior Citizens'}</h1>
+                    <h1>{l s='Special discount for Senior Citizens and Defence Personals'}</h1>
                 </div>
 
                     {include file="$tpl_dir./errors.tpl"}
@@ -77,8 +90,10 @@
                                             href="{$base_dir}">{l s='Home'}</a></li>
                             </ul>
                             {else}
-                            <h5>Discount is only available to Indian Senior Citizens</h5>
-
+                            <h5>Discount is only available to Indian Senior Citizens and Defence Personals</h5>
+                          				 
+                                       
+									
                             <p class="text">
                                 <label for="name"><strong>Name</strong><span class="required-asterisk">*</span></label>
                                 <input type="text" id="name" name="name"
@@ -88,33 +103,13 @@
                             <p class="text select">
                                 <label for="interest"><strong>Interested In<span
                                                 class="required-asterisk">*</span></strong></label>
-                                {*<select name="interest" id="interest">*}
-                                    {*<option value="" {if $interest eq ''}selected="selected"{/if}>{l s='-- Choose Product --'}</option>*}
-                                    {*<optgroup label="Window Robots">*}
-                                        {*<option value="WinBot" {if $interest eq 'WinBot'}selected="selected"{/if}>WinBot</option>*}
-                                    {*</optgroup>*}
-                                    {*<optgroup label="Floor Robots">*}
-                                        {*<option value="RedHawk" {if $interest eq 'RedHawk'}selected="selected"{/if}>RedHawk</option>*}
-                                        {*<option value="SuperBot" {if $interest eq 'SuperBot'}selected="selected"{/if}>SuperBot</option>*}
-                                        {*<option value="RoboCop" {if $interest eq 'RoboCop'}selected="selected"{/if}>RoboCop</option>*}
-                                        {*<option value="CoinSucker" {if $interest eq 'CoinSucker'}selected="selected"{/if}>CoinSucker</option>*}
-                                        {*<option value="CureBot" {if $interest eq 'CureBot'}selected="selected"{/if}>CureBot</option>*}
-                                        {*<option value="CloudSniper" {if $interest eq 'CloudSniper'}selected="selected"{/if}>CloudSniper</option>*}
-                                        {*<option value="D77" {if $interest eq 'D77'}selected="selected"{/if}>D77</option>*}
-                                        {*<option value="D68" {if $interest eq 'D68'}selected="selected"{/if}>D68</option>*}
-                                        {*<option value="D66" {if $interest eq 'D66'}selected="selected"{/if}>D66</option>*}
-                                        {*<option value="D63" {if $interest eq 'D63'}selected="selected"{/if}>D63</option>*}
-                                    {*</optgroup>*}
-                                    {*<optgroup label="Body Robots">*}
-                                        {*<option value="Wheeme" {if $interest eq 'Wheeme'}selected="selected"{/if}>Wheeme</option>*}
-                                    {*</optgroup>*}
-
-                                {*</select>*}
-
                                 {$products}
                             </p>
 
-
+                             <p class="text">
+                                     <label for="cost"> <strong>Discount<span class="required-asterisk">*</span></strong></label>
+                                     <input type="text" id="cost" name="cost" readonly/>
+                            </p>
                             <p class="text">
                                 <label for="city"><strong>City<span class="required-asterisk">*</span></strong></label>
                                 <input type="text" id="city" name="city"
@@ -122,7 +117,7 @@
                             </p>
 
                             <p class="text">
-                                <label for="mobile"><strong>Mobile<span
+                               <label for="mobile"><strong>Mobile<span
                                                 class="required-asterisk">*</span></strong></label>
                                 <input type="text" id="mobile" name="mobile"
                                        value="{if isset($mobile)}{$mobile|escape:'htmlall':'UTF-8'|stripslashes}{/if}"/>
@@ -175,3 +170,6 @@
     </div>
 </div>
 
+                                
+								
+                            
