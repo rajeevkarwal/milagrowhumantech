@@ -358,15 +358,22 @@ class AMCPaymentNotificationModuleFrontController extends ModuleFrontController
                             $amcTotalPrice = $amcData[0]['amount'];
                             $amc_amount = number_format($amcTotalPrice, 2, '.', '');
 
-                            $amcTax = 12.36;
+                            //$amcTax = 12.36;
+                            //$amcTax = 14;
+			    $amcTax = 14.5;
                             $amcPrice = round(($amcTotalPrice * 100) / (100 + $amcTax), 2);
                             $receiptNo = sprintf('%06d', $orderInfo['amc_id']);
+                            $quantity=1;
+                            if(!empty($amcData['period']))
+                                $quantity=$amcData['period'];
+
                             $content = array(
                                 'demoPriceTaxExcl' => $amcPrice,
                                 'demoPriceTaxIncl' => $amcTotalPrice,
                                 'demoPriceTotal' => $amcTotalPrice,
                                 'demoTax' => $amcTax,
                                 'receiptNo' => $receiptNo,
+                                'period'=>$quantity,
                                 'demoDate' => $orderInfo['created_at'],
                                 'demoAddress' => $this->getFormattedAddress($orderInfo['name'], $orderInfo['address'], $orderInfo['city'], $orderInfo['state'], $orderInfo['zip']),
                                 'category' => $categoryData[0]['name']
@@ -378,6 +385,7 @@ class AMCPaymentNotificationModuleFrontController extends ModuleFrontController
                             $fileAttachment['content'] = $content;
                             $fileAttachment['name'] = 'AMC_Receipt';
                             $fileAttachment['mime'] = 'application/pdf';
+
                             $products_list .=
                                 '<tr style="background-color:#EBECEE;">
                                     <td style="padding:0.6em 0.4em;">' . $nb_order_no. '</td>
@@ -386,8 +394,7 @@ class AMCPaymentNotificationModuleFrontController extends ModuleFrontController
                                 . $productData[0]['name'].
                                 '</strong>
                             </td>
-                            <td style="padding:0.6em 0.4em; text-align:right;">' . $amc_amount . '</td>
-                            <td style="padding:0.6em 0.4em; text-align:center;">1</td>
+                            <td style="padding:0.6em 0.4em; text-align:center;">'.$quantity.'</td>
                             <td style="padding:0.6em 0.4em; text-align:right;">' . $amc_amount . '</td>
 				        </tr>';
 
@@ -411,12 +418,12 @@ class AMCPaymentNotificationModuleFrontController extends ModuleFrontController
 
             } else if ($Checksum && $AuthDesc === "B") {
 //                echo "<br>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
-				 echo "<br>Testing-2";
+//				 echo "<br>Testing-2";
                 $this->setTemplate('error.tpl');
                 //Here you need to put in the routines/e-mail for a  "Batch Processing" order
                 //This is only if payment for this transaction has been made by an American Express Card or by any netbank and status is not known is real time  the authorisation status will be  available only after 5-6 hours  at the "View Pending Orders" or you may do an order status query to fetch the status . Refer inetegrtaion document for order status tracker documentation"
             } else if ($Checksum && $AuthDesc === "N") {
-				 echo "<br>Testing-3";
+//				 echo "<br>Testing-3";
                 $this->setTemplate('error.tpl');
 
                 //Here you need to put in the routines for a failed
@@ -426,7 +433,7 @@ class AMCPaymentNotificationModuleFrontController extends ModuleFrontController
 
 //    Tools::redirect('index.php?controller=my-account');
                 //Here you need to check for the checksum, the checksum did not match hence the error.
-				 echo "<br>Testing-4";
+//				 echo "<br>Testing-4";
                 $this->setTemplate('error.tpl');
             }
         }

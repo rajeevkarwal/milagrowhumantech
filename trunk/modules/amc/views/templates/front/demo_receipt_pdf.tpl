@@ -103,7 +103,7 @@
 
 
                     <tr style="line-height:6px;background-color:#DDD;">
-                        <td style="text-align: left; width: 50%">Annual Maintenance Contract for {$category}</td>
+                        <td style="text-align: left; width: 50%">{$period} Year Annual Maintenance Contract for {$category}</td>
                         <td style="text-align: right; width: 12%">
                             {displayPrice currency=1 price=$demoPriceTaxExcl}
                         </td>

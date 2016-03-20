@@ -83,14 +83,13 @@
                                 <strong>Current vacancies exist at various levels in the following functions</strong>
                             </p>
                             <ol type="1">
-                            <li>1. <b>Institutional Sales</b> - Health Care Industry, Sales Automation, Educational Industry, Real Estate Industry, Hospitality Industry </li>
+                            <li>1. <b>Institutional Sales</b> - Health Care Industry, Sales Automation, Educational Industry, Real Estate Industry, Hospitality Industry for Andhra. Delhi,  Gujarat, Kerala, Maharashtra, Punjab, Rajasthan UP, WB </li>
                             <li>2. <b>Channel Sales</b> - Delhi, UP, Maharashtra, Karnataka, Tamil Nadu, Kerala, Andhra.</li>
-                            <li>3. <b>Ecommerce Sales</b> - Gurgaon</li>
-                            <li>4. <b>PHP Developers </b> who can code extremely robust client facing web applications and manage an eCommerce storefront.- Gurgaon</li>
-                            <li>5. <b>Accounts</b> - Delhi, UP, Maharashtra, Karnataka, Tamil Nadu, Kerala, Andhra.</li>
-                            <li>6. <b>After Sales Service</b> - Delhi, UP, Maharashtra, Karnataka, Tamil Nadu, Kerala, Andhra.</li>
-                            <li>7. <b>HRD</b> - Gurgaon</li>
-                            <li>8. <b>R&D</b> - Android Evangelists, Robotics Engineers - Gurgaon</li>
+                            <li>3. <b>3rd party Ecommerce Sales</b> - Gurgaon</li>
+                            <li>4. <b>Social Media and Digital Marketing </b> - Gurgaon</li>
+                            <li>5. <b>After Sales Service</b> - Robotics Engineers for locations across India.</li>
+                            <li>6. <b>HRD</b> - Gurgaon</li>
+                            <li>7. <b>R&D</b> - Robotics Engineers - Gurgaon</li>
                             </ol>
                             <br/>
                             <p class="text">

@@ -22,7 +22,7 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-<div class="payment-main-block">
+<div class="payment-main-block" style="display: none;" id="cheque_payment">
     <div class="payment-text-block">
         <span>Pay by Cheque</span><br/>
         <span class="payment-description">Order Processing will take more time</span>

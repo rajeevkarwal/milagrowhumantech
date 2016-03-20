@@ -2291,10 +2291,36 @@ class BlockLayered extends Module
                             $sub_queries[$filter_value_array[0]] = array();
                         $sub_queries[$filter_value_array[0]][] = 'fp.`id_feature_value` = ' . (int)$filter_value_array[1];
                     }
+//                    foreach ($sub_queries as $sub_query) {
+//                        $query_filters_where .= ' AND p.id_product IN (SELECT `id_product` FROM `' . _DB_PREFIX_ . 'feature_product` fp WHERE ';
+//                        $query_filters_where .= implode(' OR ', $sub_query) . ') ';
+//                    }
+
+
+                    $filterProductsWhere='';
                     foreach ($sub_queries as $sub_query) {
-                        $query_filters_where .= ' AND p.id_product IN (SELECT `id_product` FROM `' . _DB_PREFIX_ . 'feature_product` fp WHERE ';
-                        $query_filters_where .= implode(' OR ', $sub_query) . ') ';
+                        $filterProductsWhere .= ' AND p.id_product IN (SELECT `id_product` FROM `' . _DB_PREFIX_ . 'feature_product` fp WHERE ';
+                        $filterProductsWhere .= implode(' OR ', $sub_query) . ') ';
                     }
+
+                    $productIds=array();
+                    if(!empty($filterProductsWhere))
+                    {
+                        $filterProductQuery='Select p.id_product from ps_product p where 1 '.$filterProductsWhere;
+                        $results=Db::getInstance()->executeS($filterProductQuery);
+                        foreach($results as $resultRow)
+                        {
+                            $productIds[$resultRow['id_product']]=1;
+                        }
+                    }
+
+                    if(!empty($productIds))
+                    {
+                        $query_filters_where .= ' AND p.id_product IN ('.implode(',',array_keys($productIds)).')';
+                    }
+
+                    unset($productIds);
+
                     break;
 
                 case 'id_attribute_group':
@@ -2401,12 +2427,27 @@ class BlockLayered extends Module
 		' . $query_filters_from . '
 		WHERE 1 ' . $query_filters_where . ' GROUP BY id_product');
 
+//        echo '
+//		SELECT p.`id_product` id_product
+//		FROM `' . _DB_PREFIX_ . 'product` p
+//		' . $price_filter_query_out . '
+//		' . $query_filters_from . '
+//		WHERE 1 ' . $query_filters_where . ' GROUP BY id_product';
+
         $all_products_in = self::query('
 		SELECT p.`id_product` id_product
 		FROM `' . _DB_PREFIX_ . 'product` p
 		' . $price_filter_query_in . '
 		' . $query_filters_from . '
 		WHERE 1 ' . $query_filters_where . ' GROUP BY id_product');
+
+//        echo '<br>';
+//        echo '
+//		SELECT p.`id_product` id_product
+//		FROM `' . _DB_PREFIX_ . 'product` p
+//		' . $price_filter_query_in . '
+//		' . $query_filters_from . '
+//		WHERE 1 ' . $query_filters_where . ' GROUP BY id_product';
 
         $product_id_list = array();
 
@@ -3279,6 +3320,7 @@ class BlockLayered extends Module
         return array();
     }
 
+    /*		
     private static function getId_featureFilterSubQuery($filter_value, $ignore_join)
     {
         if (empty($filter_value))
@@ -3290,6 +3332,43 @@ class BlockLayered extends Module
 
         return array('where' => $query_filters);
     }
+    
+    */
+
+    private static function getId_featureFilterSubQuery($filter_value, $ignore_join)
+    {
+
+        if (empty($filter_value))
+            return array();
+
+        $product_query_filters='SELECT id_product FROM ' . _DB_PREFIX_ . 'feature_product fp WHERE ';
+        foreach ($filter_value as $filter_val)
+            $product_query_filters .= 'fp.`id_feature_value` = ' . (int)$filter_val . ' OR ';
+        $product_query_filters = rtrim($product_query_filters, 'OR ');
+	//echo $product_query_filters;
+        $productIds=array();
+        if($result=Db::getInstance()->executeS($product_query_filters))
+        {
+            foreach($result as $row)
+            {
+                $productIds[$row['id_product']]=1;
+            }
+        }
+
+        if(!empty($productIds))
+        {
+            $query_filters = ' AND p.id_product IN ('.implode(',',array_keys($productIds)).')';
+            unset($productIds);
+           // echo $query_filters;		
+            return array('where' => $query_filters);
+        }
+
+        return array();
+
+
+
+    }
+	
 
     private static function getId_attribute_groupFilterSubQuery($filter_value, $ignore_join)
     {

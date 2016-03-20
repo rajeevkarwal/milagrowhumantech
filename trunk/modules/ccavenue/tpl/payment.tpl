@@ -1,9 +1,10 @@
-<div class="payment-main-block">
+<div class="payment-main-block" style="display: none;" id="ccavenue_payment">
     <div class="payment-text-block">
-        <span>Credit Cards / Debit Cards / Net Banking / Cash Cards / Mobile Payments / <span style="color: #d32618; font-weight: bold;"> EMI </span> </span><br><span
-                class="payment-description">
-        You may use any of the above options to make a payment.
-        </span>
+        {*<span>Credit Cards / Debit Cards / Net Banking / Cash Cards / Mobile Payments / <span style="color: #d32618; font-weight: bold;"> EMI </span> </span><br><span*}
+                {*class="payment-description">*}
+        {*You may use any of the above options to make a payment.*}
+        {*</span>*}
+        <span> Pay Using CCAVENUE </span>
     </div>
     <div class="payment-button-block">
         <form action="https://www.ccavenue.com/shopzone/cc_details.jsp" method="post" id="ccAvenue_payment_form"
