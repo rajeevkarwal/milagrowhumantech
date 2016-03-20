@@ -111,6 +111,12 @@ class COD extends PaymentModule
         if (!$this->active)
             return;
 
+        $address = new Address(intval($params['cart']->id_address_delivery));
+        $address_alies = $address->alias;
+        if(stripos($address_alies, 'SHIP2MYID-') !== false || stripos($address_alies, 'shiptomyid-') !== false ){
+            return;
+        }
+        
         global $smarty;
 
         // Check if cart has product download
@@ -582,6 +588,44 @@ class COD extends PaymentModule
             '{total_wrapping}' => Tools::displayPrice($order->total_wrapping, $this->context->currency, false),
             '{customer_message}' => $order_message
         );
+
+        /*
+                 * dated 5-9-2015 check if user has used ship 2 myid option
+                 */
+        $ship2cartQuery='Select receiver_email,receiver_firstname from ps_shiptomyid_cart where id_cart='.$order->id_cart.' order by id_shipto_cart desc limit 1;';
+        $ship2ReceiverDetail=Db::getInstance()->getRow($ship2cartQuery);
+
+        $data['{ship2myidtext}']='';
+        if(!empty($ship2ReceiverDetail))
+        {
+
+            $data['{ship2myidtext}']="<tr>
+                        <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to recipient will be shipped upon confirmation of the address by the recipient.</strong>
+                        </td>
+                        </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+
+            if(!empty($ship2ReceiverDetail['receiver_email']))
+            {
+                $data['{ship2myidtext}']="<tr>
+                            <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to {$ship2ReceiverDetail['receiver_email']} will be shipped upon confirmation of the address by the recipient.</strong>
+                            </td>
+                                </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+            }
+            else if(!empty($ship2ReceiverDetail['receiver_firstname']))
+            {
+                $data['{ship2myidtext}']="<tr>
+                            <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to {$ship2ReceiverDetail['receiver_firstname']} will be shipped upon confirmation of the address by the recipient.</strong>
+                            </td>
+                                </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+            }
+
+        }
 
         // Join PDF invoice
         if ((int)Configuration::get('PS_INVOICE') && $order->invoice_number) {

@@ -47,7 +47,12 @@ class EMIValidationModuleFrontController extends ModuleFrontController
         $sixmonthstaxperAnnum = Configuration::get('EMI_CCAVENUE_6_MONTHS_TAX');
 //        $sixMonthsTax = ($sixmonthstaxperAnnum / 12) * 6;
         $sixMonthsTax = $sixmonthstaxperAnnum; //using flat 4 % for EMI 6 Months
-        $serviceTax = 12.36;
+//        $serviceTax = 12.36;
+        /*
+         * dated 20-9-2015 service tax change to 14
+         */
+        //$serviceTax = 14;
+        $serviceTax = 14.5;
         $orderTotal = $this->context->cart->getOrderTotal(true, Cart::BOTH);
         $Redirect_Url = 'http://' . htmlspecialchars($_SERVER['HTTP_HOST'], ENT_COMPAT, 'UTF-8') . __PS_BASE_URI__ . 'modules/emi/validation.php'; //your redirect URL where your customer will be redirected after authorisation from CCAvenue
 

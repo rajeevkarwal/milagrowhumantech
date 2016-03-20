@@ -535,6 +535,44 @@ abstract class PaymentModule extends PaymentModuleCore
                         '{total_shipping}' => Tools::displayPrice($order->total_shipping, $this->context->currency, false),
                         '{total_wrapping}' => Tools::displayPrice($order->total_wrapping, $this->context->currency, false));
 
+                    /*
+                       * dated 5-9-2015 check if user has used ship 2 myid option
+                       */
+                    $ship2cartQuery='Select receiver_email,receiver_firstname from ps_shiptomyid_cart where id_cart='.$id_cart.' order by id_shipto_cart desc limit 1;';
+                    $ship2ReceiverDetail=Db::getInstance()->getRow($ship2cartQuery);
+
+                    $data['{ship2myidtext}']='';
+                    if(!empty($ship2ReceiverDetail))
+                    {
+
+                        $data['{ship2myidtext}']="<tr>
+                        <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to recipient will be shipped upon confirmation of the address by the recipient.</strong>
+                        </td>
+                        </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+
+                           if(!empty($ship2ReceiverDetail['receiver_email']))
+                           {
+                               $data['{ship2myidtext}']="<tr>
+                            <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to {$ship2ReceiverDetail['receiver_email']} will be shipped upon confirmation of the address by the recipient.</strong>
+                            </td>
+                                </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+                           }
+                           else if(!empty($ship2ReceiverDetail['receiver_firstname']))
+                           {
+                               $data['{ship2myidtext}']="<tr>
+                            <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to {$ship2ReceiverDetail['receiver_firstname']} will be shipped upon confirmation of the address by the recipient.</strong>
+                            </td>
+                                </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+                           }
+
+                    }
+
                     if (is_array($extra_vars))
                         $data = array_merge($data, $extra_vars);
 
@@ -563,7 +601,7 @@ abstract class PaymentModule extends PaymentModuleCore
                             if($current_order_status->paid)
                             {
                                 $admin_mail_template = 'order_conf_admin';
-                                $admin_mail_subject = sprintf(Mail::l('New Order - #%06d , %06s', $order->id_lang), $order->id,$payment_method);
+                                $admin_mail_subject = sprintf(Mail::l('New Order Full Payment Received - #%06d , %06s', $order->id_lang), $order->id,$payment_method);
                             }
 
                             else

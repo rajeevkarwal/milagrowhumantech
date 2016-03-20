@@ -98,7 +98,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Service Tax 12.36% of  <span id="amount_{$currencies.0.id_currency}"
+                <td>Service Tax 14% of  <span id="amount_{$currencies.0.id_currency}"
                                                  class="price">{convertPrice price=$processing_fee_3}</span>
                     </span></td>
                 <td><span id="amount_{$currencies.0.id_currency}"
@@ -177,7 +177,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Service Tax 12.36% of  <span id="amount_{$currencies.0.id_currency}"
+                <td>Service Tax 14% of  <span id="amount_{$currencies.0.id_currency}"
                                                  class="price">{convertPrice price=$processing_fee_6}</span>
                     </span></td>
                 <td><span id="amount_{$currencies.0.id_currency}"

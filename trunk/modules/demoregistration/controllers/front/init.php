@@ -226,7 +226,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 
         $productsarr = array();$productarr = array();
         foreach($products as $pr){
-            $productsdataSql = "Select city,amount,category_id from ". _DB_PREFIX_ ."demo_detail where product = '". $pr['product'] ."' ";
+            $productsdataSql = "Select city,amount,category_id from ". _DB_PREFIX_ ."demo_detail where product = '". $pr['product'] ."' and is_active=1 ";
             $productsdata = Db::getInstance()->executeS($productsdataSql);
 
             $cities = array();

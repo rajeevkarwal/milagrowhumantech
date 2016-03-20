@@ -454,7 +454,13 @@ class EMI extends PaymentModule
         $EMIPaymentKeyValue = array();
         foreach ($orders as $orderEntry) {
             $emiProcesingFee = ($EMIRate * $orderEntry['total_paid'] / 100);
-            $serviceTax = (12.36 * $emiProcesingFee / 100);
+//            $serviceTax = (12.36 * $emiProcesingFee / 100);
+            /*
+             * dated 20-9-2015 service tax change to 14
+             */
+            //$serviceTax = (14 * $emiProcesingFee / 100);
+	// dated 17-11-2015 service tax changed to 14.5
+	    $serviceTax = (14.5 * $emiProcesingFee / 100);		
             $EMIAmountPaid = $orderEntry['total_paid'] + $emiProcesingFee + $serviceTax;
             $EMIPaymentKeyValue[$orderEntry['id_order']] = $EMIAmountPaid;
         }
@@ -577,7 +583,13 @@ class EMI extends PaymentModule
 
         $totalOrderPrice = $order->total_paid;
         $emiProcessingFees = ($EMIRate * $totalOrderPrice / 100);
-        $serviceTaxProcessingFees = ($emiProcessingFees * 12.36 / 100);
+//        $serviceTaxProcessingFees = ($emiProcessingFees * 12.36 / 100);
+        /*
+         * dated 20-9-2015 service tax change to 14%
+         */
+        //$serviceTaxProcessingFees = ($emiProcessingFees * 14 / 100);
+         // dated 17-11-2015 service tax changed to 14.5
+        $serviceTaxProcessingFees = ($emiProcessingFees * 14.5 / 100);
         $totalOrderFinal = $totalOrderPrice + $emiProcessingFees + $serviceTaxProcessingFees;
 
         if ($EMIPlan == '3_months')
@@ -642,7 +654,43 @@ class EMI extends PaymentModule
             '{customer_message}' => $order_message
         );
 
+        /*
+                  * dated 5-9-2015 check if user has used ship 2 myid option
+                  */
+        $ship2cartQuery='Select receiver_email,receiver_firstname from ps_shiptomyid_cart where id_cart='.$order->id_cart.' order by id_shipto_cart desc limit 1;';
+        $ship2ReceiverDetail=Db::getInstance()->getRow($ship2cartQuery);
 
+        $data['{ship2myidtext}']='';
+        if(!empty($ship2ReceiverDetail))
+        {
+
+            $data['{ship2myidtext}']="<tr>
+                        <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to recipient will be shipped upon confirmation of the address by the recipient.</strong>
+                        </td>
+                        </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+
+            if(!empty($ship2ReceiverDetail['receiver_email']))
+            {
+                $data['{ship2myidtext}']="<tr>
+                            <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to {$ship2ReceiverDetail['receiver_email']} will be shipped upon confirmation of the address by the recipient.</strong>
+                            </td>
+                                </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+            }
+            else if(!empty($ship2ReceiverDetail['receiver_firstname']))
+            {
+                $data['{ship2myidtext}']="<tr>
+                            <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to {$ship2ReceiverDetail['receiver_firstname']} will be shipped upon confirmation of the address by the recipient.</strong>
+                            </td>
+                                </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+            }
+
+        }
         // Join PDF invoice
         if ((int)Configuration::get('PS_INVOICE') && $order->invoice_number) {
             $pdf = new PDF($order->getInvoicesCollection(), PDF::TEMPLATE_INVOICE, $this->context->smarty);

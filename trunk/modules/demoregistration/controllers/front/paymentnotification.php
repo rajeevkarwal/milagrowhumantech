@@ -81,7 +81,10 @@ class DemoRegistrationPaymentNotificationModuleFrontController extends ModuleFro
 
                             $demoTotalPrice = $orderData[0]['amount'];
 
-                            $demoTax = 12.36;
+//                            $demoTax = 12.36;
+                            //$demoTax = 14;
+			    $demoTax = 14.5;
+
                             $demoPrice = round(($demoTotalPrice * 100) / (100 + $demoTax), 2);
                             $receiptNo = sprintf('%06d', $orderInfo['demos_id']);
                             $content = array(

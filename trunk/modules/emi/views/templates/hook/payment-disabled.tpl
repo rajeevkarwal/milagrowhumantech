@@ -34,10 +34,10 @@
     })
 </script>
 
-<div class="payment-main-block">
+<div class="payment-main-block" style="display: none;" id="city_payment">
     <div class="payment-text-block">
         <span>Citibank EMI (only applicable for Citibank credit card(Master/Visa Card)holders)
-            <span style="color: #d32618; font-weight: bold;">Other EMI options are given in the above option</span>
+            {*<span style="color: #d32618; font-weight: bold;">Other EMI options are given in the above option</span>*}
         </span><br>
         <span class="payment-description">
             Extra 12% per annum will be charged by citibank as interest. <span style="color:red">(For EMI, order value must be above Rs 5000)</span>

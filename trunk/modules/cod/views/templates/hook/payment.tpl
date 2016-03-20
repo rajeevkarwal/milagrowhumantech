@@ -34,9 +34,9 @@
     })
 </script>
 {if $cod_available==1}
-    <div class="payment-main-block">
+    <div class="payment-main-block" style="display: none;" id="cod_payment">
         <div class="payment-text-block">
-            <span>Cash on Delivery (COD) <a href="content/35-cash-on-delivery?content_only=1" class="iframe"><img
+            <span>Cash on Delivery (COD) <a href="http://milagrowhumantech.com/content/35-cash-on-delivery?content_only=1" class="iframe"><img
                             src="{$module_dir}img/question_icon.gif"/></a><br/>
         <span class="payment-description">Pay some advance and rest at time of delivery</span>
         </div>
@@ -47,9 +47,9 @@
         </div>
     </div>
 {else}
-    <div class="payment-main-block">
+    <div class="payment-main-block" style="display: none;" id="cod_payment">
         <div class="payment-text-block">
-            <span>Cash on Delivery (COD) <a href="content/35-cash-on-delivery?content_only=1" class="iframe"><img
+            <span>Cash on Delivery (COD) <a href="http://milagrowhumantech.com/content/35-cash-on-delivery?content_only=1" class="iframe"><img
                             src="{$module_dir}img/question_icon.gif"/></a><br/>
         <span class="payment-description">Pay some advance and rest at time of delivery</span>
         </div>

@@ -305,6 +305,14 @@ class DemoRegistration extends Module
         if (!empty($orderInfo)) {
             $demoTotalPrice = $orderInfo['amount'];
             $demoTax = 12.36;
+            if($orderInfo['created_at']>='2015-09-20 00:00:00')
+                {
+                    $demoTax=14;
+                }
+	    if($orderInfo['created_at']>='2015-11-17 16:49:00')
+                {
+                    $demoTax=14.5;
+                }
             $demoPrice = round(($demoTotalPrice * 100) / (100 + $demoTax), 2);
             $receiptNo = sprintf('%06d', $orderInfo['demos_id']);
             $content = array(
@@ -346,6 +354,14 @@ class DemoRegistration extends Module
             if (!empty($demo)) {
                 $demoTotalPrice = $demo['amount'];
                 $demoTax = 12.36;
+		if($demo['created_at']>='2015-09-20 00:00:00')
+                {
+                    $demoTax=14;
+                }
+		if($demo['created_at']>='2015-11-17 16:49:00')
+                {
+                    $demoTax=14.5;
+                }
                 $demoPrice = round(($demoTotalPrice * 100) / (100 + $demoTax), 2);
                 $receiptNo = sprintf('%06d', $demo['demos_id']);
                 $content = array(
