@@ -1,0 +1,63 @@
+ul li.sd_admin_tab {
+    padding-top: 13px;
+    border: 1px solid #CCCCCC;
+    display: block;
+    float: left;
+    height: 29px;
+    list-style: none outside none;
+    margin: 0 1px 0 0;
+}
+
+ul li.sd_admin_tab_active {
+    padding-top: 13px;
+    border: 1px solid #CCCCCC;
+    display: block;
+    float: left;
+    height: 29px;
+    list-style: none outside none;
+    margin: 0 1px 0 0;
+    background-color: #49B2FF;
+}
+
+
+
+.Category {
+margin-top: 10%;
+}
+
+.ProductCategory{
+margin-top: 2%;
+}
+
+.period{
+margin-top: 2%;
+}
+
+.amcpercent{
+margin-top: 2%;
+}
+.submit{
+
+}
+.senioramt{
+margin-top: 2%;
+}
+.senioramtper{
+margin-top: 2%;
+}
+
+.studentamt{
+margin-top: 2%;
+}
+.studentamtper{
+margin-top: 2%;
+}
+
+.radioall {
+
+margin-top: 2%;
+}
+.submit{
+margin-top: 4%;
+
+}
