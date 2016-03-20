@@ -861,11 +861,11 @@
                
                  
                  
-                  {if $product->description}
-                
-                   <li class="spec"><a href="#idTabFeatures" id="more_info_tab_features_by_category">{l s='Specifications'}</a></li>
-                   
-                    <li><a id="more_info_tab_more_info" href="#idTab1">{l s='Features'}</a></li>{/if}
+                  {*{if $product->description}*}
+                {**}
+                   {*<li class="spec"><a href="#idTabFeatures" id="more_info_tab_features_by_category">{l s='Specifications'}</a></li>*}
+                   {**}
+                    {*<li><a id="more_info_tab_more_info" href="#idTab1">{l s='Features'}</a></li>{/if}*}
                     
                       {$HOOK_PRODUCT_TAB}
                
@@ -880,7 +880,7 @@
                     <li class="hidden-phone hidden-tablet"><a id="more_info_tab_attachments"
                                                               href="#idTab9">{l s='Downloads'}</a></li>{/if}
                 {if isset($accessories) AND $accessories}
-                    <li class="hidden-phone hidden-tablet"><a href="#idTab4">{l s='Also See'}</a></li>{/if}
+                    <li class="hidden-phone hidden-tablet"><a href="#idTab4">{l s='Accessories'}</a></li>{/if}
                     
                     
                    

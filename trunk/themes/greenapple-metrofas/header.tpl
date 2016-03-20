@@ -9,6 +9,29 @@
 <html class="no-js ie9" lang="{$lang_iso}"> <![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang_iso}">
 <head>
+
+    <link rel="dns-prefetch" href="//sg12.zopim.com" />	
+    <link rel="dns-prefetch" href="//v2.zopim.com" />	
+    <link rel="dns-prefetch" href="//connect.facebook.net" />
+    <link rel="dns-prefetch" href="//facebook.com" />
+    <link rel="dns-prefetch" href="//google.co.in" />
+    <link rel="dns-prefetch" href="//google.com" />
+    <link rel="dns-prefetch" href="//google.com" />
+    <link rel="dns-prefetch" href="//googleads.g.doubleclick.net" />
+    <link rel="dns-prefetch" href="//googleadservices.com" />
+    <link rel="dns-prefetch" href="//google-analytics.com" />
+    <link rel="dns-prefetch" href="//gstatic.com" />
+    <link rel="dns-prefetch" href="//apis.google.com" />
+    <link rel="dns-prefetch" href="//ajax.googleapis.com" />
+    <link rel="dns-prefetch" href="//hub.loginradius.com" />
+    <link rel="dns-prefetch" href="//share.loginradius.com" />
+    <link rel="dns-prefetch" href="//cdn.loginradius.com" />
+    <link rel="dns-prefetch" href="//assets.pinterest.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//partner.googleadservices.com" />
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
+    <link rel="dns-prefetch" href="//tpc.googlesyndication.com" />
+
 <meta name="google-site-verification" content="eSfGY8v6gYYwG0uEf9q4A7YB4qlOOm29tsG1N78f-TY" />
 <title>{$meta_title|escape:'htmlall':'UTF-8'}</title>
 {if isset($meta_description) AND $meta_description}
@@ -23,7 +46,7 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"/>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
 <meta http-equiv="content-language" content="{$meta_language}"/>
-<meta name="generator" content="PrestaShop"/>
+<meta name="generator" content="Milagrowhumantech.com"/>
 <meta name="robots" content="{if isset($nobots)}no{/if}index,{if isset($nofollow) && $nofollow}no{/if}follow"/>
 <link rel="icon" type="image/vnd.microsoft.icon" href="{$favicon_url}?{$img_update_time}"/>
 <link rel="shortcut icon" type="image/x-icon" href="{$favicon_url}?{$img_update_time}"/>

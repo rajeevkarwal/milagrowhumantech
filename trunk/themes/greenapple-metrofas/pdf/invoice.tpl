@@ -360,12 +360,31 @@
             {assign var=EMI_PROCESSING_FEES value=(($order_invoice->total_paid_tax_incl*$EMI_TAX_RATE)/100)}
             <td style="width: 15%; text-align: right;">{displayPrice currency=$order->id_currency price=$EMI_PROCESSING_FEES}</td>
         </tr>
-        <tr style="line-height:5px;">
-            <td style="text-align: right; font-weight: bold">(Add) Service Tax 12.36%
-                of {displayPrice currency=$order->id_currency price=$EMI_PROCESSING_FEES}</td>
-            {assign var=EMI_SERVICE_CHARGE_FEES value=(($EMI_PROCESSING_FEES*12.36)/100)}
-            <td style="width: 15%; text-align: right;">{displayPrice currency=$order->id_currency price=$EMI_SERVICE_CHARGE_FEES}</td>
-        </tr>
+        {assign var=NOV_TAX_CHANGE_DATE value='18-11-2015'}
+	{assign var=OCT_TAX_CHANGE_DATE value='20-09-2015'}
+        {if $date|strtotime gte $NOV_TAX_CHANGE_DATE|strtotime}
+            <tr style="line-height:5px;">
+                <td style="text-align: right; font-weight: bold">(Add) Service Tax 14.5%
+                    of {displayPrice currency=$order->id_currency price=$EMI_PROCESSING_FEES}</td>
+                {assign var=EMI_SERVICE_CHARGE_FEES value=(($EMI_PROCESSING_FEES*14.5)/100)}
+                <td style="width: 15%; text-align: right;">{displayPrice currency=$order->id_currency price=$EMI_SERVICE_CHARGE_FEES}</td>
+            </tr>
+	{elseif $date|strtotime gte $OCT_TAX_CHANGE_DATE|strtotime}
+		<tr style="line-height:5px;">
+                <td style="text-align: right; font-weight: bold">(Add) Service Tax 14%
+                    of {displayPrice currency=$order->id_currency price=$EMI_PROCESSING_FEES}</td>
+                {assign var=EMI_SERVICE_CHARGE_FEES value=(($EMI_PROCESSING_FEES*14)/100)}
+                <td style="width: 15%; text-align: right;">{displayPrice currency=$order->id_currency price=$EMI_SERVICE_CHARGE_FEES}</td>
+            </tr>	
+            {else}
+            <tr style="line-height:5px;">
+                <td style="text-align: right; font-weight: bold">(Add) Service Tax 12.36%
+                    of {displayPrice currency=$order->id_currency price=$EMI_PROCESSING_FEES}</td>
+                {assign var=EMI_SERVICE_CHARGE_FEES value=(($EMI_PROCESSING_FEES*12.36)/100)}
+                <td style="width: 15%; text-align: right;">{displayPrice currency=$order->id_currency price=$EMI_SERVICE_CHARGE_FEES}</td>
+            </tr>
+        {/if}
+
         <tr style="line-height:5px;">
             <td style="text-align: right; font-weight: bold">{l s='Total Invoice Value' pdf='true'}</td>
             <td style="width: 15%; text-align: right;">{displayPrice currency=$order->id_currency price=($order_invoice->total_paid_tax_incl+$EMI_PROCESSING_FEES+$EMI_SERVICE_CHARGE_FEES)}</td>

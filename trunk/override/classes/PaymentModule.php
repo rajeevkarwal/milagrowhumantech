@@ -42,6 +42,25 @@ abstract class PaymentModule extends PaymentModuleCore
                                   $message = null, $extra_vars = array(), $currency_special = null, $dont_touch_amount = false,
                                   $secure_key = false, Shop $shop = null)
     {
+  
+        /*
+            take the value of parameter in the $extra_vars and search if ONEMITXNTYPE is there
+        */
+        $isONEMIType='';    
+        if(!empty($extra_vars['ONEMITXNTYPE']))
+        {
+            if($extra_vars['ONEMITXNTYPE']=='loan')
+            $isONEMIType='Loan';
+            elseif($extra_vars['ONEMITXNTYPE']=='emi')
+             $isONEMIType='EMI';
+            else
+             $isONEMIType='Credit/Debit';
+
+            unset($extra_vars['ONEMITXNTYPE']);
+        }
+
+
+
         $this->context->cart = new Cart($id_cart);
         $this->context->customer = new Customer($this->context->cart->id_customer);
         $this->context->language = new Language($this->context->cart->id_lang);
@@ -176,7 +195,8 @@ abstract class PaymentModule extends PaymentModuleCore
 
                     // Creating order
                     $result = $order->add();
-
+		    //echo 'reached here payment module';	
+	            //die;		
                     if (!$result)
                         throw new PrestaShopException('Can\'t save Order');
 
@@ -535,6 +555,50 @@ abstract class PaymentModule extends PaymentModuleCore
                         '{total_shipping}' => Tools::displayPrice($order->total_shipping, $this->context->currency, false),
                         '{total_wrapping}' => Tools::displayPrice($order->total_wrapping, $this->context->currency, false));
 
+                    /*
+                       * dated 5-9-2015 check if user has used ship 2 myid option
+                       */
+                    $ship2cartQuery='Select receiver_email,receiver_firstname from ps_shiptomyid_cart where id_cart='.$id_cart.' order by id_shipto_cart desc limit 1;';
+                    $ship2ReceiverDetail=Db::getInstance()->getRow($ship2cartQuery);
+
+                    $data['{ship2myidtext}']='';
+                    if(!empty($ship2ReceiverDetail))
+                    {
+
+                        $data['{ship2myidtext}']="<tr>
+                        <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to recipient will be shipped upon confirmation of the address by the recipient.</strong>
+                        </td>
+                        </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+
+                           if(!empty($ship2ReceiverDetail['receiver_email']))
+                           {
+                               $data['{ship2myidtext}']="<tr>
+                            <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to {$ship2ReceiverDetail['receiver_email']} will be shipped upon confirmation of the address by the recipient.</strong>
+                            </td>
+                                </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+                           }
+                           else if(!empty($ship2ReceiverDetail['receiver_firstname']))
+                           {
+                               $data['{ship2myidtext}']="<tr>
+                            <td align='left'><strong style='color: {color};'>You have used ship2myid option. Your gift to {$ship2ReceiverDetail['receiver_firstname']} will be shipped upon confirmation of the address by the recipient.</strong>
+                            </td>
+                                </tr><tr>
+        <td>&nbsp;</td>
+    </tr>";
+                           }
+
+                    }
+
+                    $data['{TXNTYPE}']='';
+                    if(!empty($isONEMIType))
+                    {
+                        $data['{TXNTYPE}']="<br/>Option Selected: <strong>".$isONEMIType."</strong>";
+                    }
+
                     if (is_array($extra_vars))
                         $data = array_merge($data, $extra_vars);
 
@@ -551,12 +615,12 @@ abstract class PaymentModule extends PaymentModuleCore
                     $send_email_to_user = false;
                     $receivableEmailId = 'receivables@milagrow.in';
                     $logisticEmailId = 'outboundlogistics@milagrow.in';
-//                    $receivableEmailId = 'ptailor@greenapplesolutions.com';
-//                    $logisticEmailId = 'ptailor@greenapplesolutions.com';
+                    //$receivableEmailId = 'hitanshu.malhotra@milagrow.in';
+                    //$logisticEmailId = 'hitanshu.malhotra@milagrow.in';
                     $configuration_name = Configuration::get('PS_SHOP_NAME');
                     // Send an e-mail to customer (one order = one email)
                     if ($payment_method != 'COD' && $payment_method != 'Citibank EMI') {
-                        if ($id_order_state != Configuration::get('PS_OS_ERROR') && $id_order_state != Configuration::get('PS_OS_CANCELED') && $this->context->customer->id) {
+                        if ($id_order_state != Configuration::get('PS_OS_ERROR') && $id_order_state != Configuration::get('Onemi_ID_ORDER_FAILED') && $id_order_state != Configuration::get('PS_OS_CANCELED') && $this->context->customer->id) {
                             $send_email_to_user = true;
                             //get order status to check whether amount is paid by the user or not
                             $current_order_status = new OrderState((int)$id_order_state, (int)$this->context->language->id);
@@ -564,24 +628,41 @@ abstract class PaymentModule extends PaymentModuleCore
                             {
                                 $admin_mail_template = 'order_conf_admin';
                                 $admin_mail_subject = sprintf(Mail::l('New Order Full Payment Received - #%06d , %06s', $order->id_lang), $order->id,$payment_method);
+                                
+
                             }
 
                             else
                             {
                                 $admin_mail_template = 'order_conf_admin_error';
                                 $admin_mail_subject = sprintf(Mail::l('New Order Payment Not Received - #%06d , %06s', $order->id_lang), $order->id,$payment_method);
+                                if(!empty($isONEMIType) && $isONEMIType=='Loan')
+                                {
+                                    $admin_mail_subject = sprintf(Mail::l('New Order Payment Not Received (loan approval first by Oneemi) - #%06d , %06s', $order->id_lang), $order->id,$payment_method);
+                                }
                             }
 
                         } else {
                             $admin_mail_template = 'order_conf_admin_error';
                             $admin_mail_subject = sprintf(Mail::l('New Order Payment Not Received - #%06d , %06s', $order->id_lang), $order->id,$payment_method);
+
+                            if(!empty($isONEMIType) && $isONEMIType=='Loan')
+                                {
+                                    $admin_mail_subject = sprintf(Mail::l('New Order Payment Not Received (loan approval first by Oneemi) - #%06d , %06s', $order->id_lang), $order->id,$payment_method);
+                                }
+                        }
+
+                        $customerEmailSubject=sprintf(Mail::l('Order confirmation - #%06d , %06s', $order->id_lang),$order->id,$payment_method);
+                        if(!empty($isONEMIType) && $isONEMIType=='Loan')
+                        {
+                            $customerEmailSubject=sprintf(Mail::l('Order confirmation (Loan under approval)- #%06d , %06s', $order->id_lang),$order->id,$payment_method);
                         }
 
                         if (Validate::isEmail($this->context->customer->email) && $send_email_to_user)
                             Mail::Send(
                                 (int)$order->id_lang,
                                 'order_conf',
-                                sprintf(Mail::l('Order confirmation - #%06d , %06s', (int)$order->id_lang),$order->id,$payment_method),
+                                $customerEmailSubject,
                                 $data,
                                 $this->context->customer->email,
                                 $this->context->customer->firstname . ' ' . $this->context->customer->lastname,

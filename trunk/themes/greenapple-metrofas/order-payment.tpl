@@ -22,6 +22,7 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
+<script src="/themes/greenapple-metrofas/js/payment-options.js">
 {if !$opc}
     <script type="text/javascript">
         // <![CDATA[
@@ -370,7 +371,62 @@
 </div>
 {/if}
 {if $opc}<div id="opc_payment_methods-content">{/if}
-                                <h2>{l s='Please choose your payment method'}</h2>
+    <div id="payment_option_selection_div" {if $cookie->id_currency !=1}style="display:none;"{/if}>
+
+        <h2>{l s='Please choose your payment method'}</h2>
+        <label class="radio inline">
+            <input name="payment_type" value="1" type="radio"> Full Payment
+        </label>
+        <label class="radio inline">
+            <input value="2" name="payment_type" type="radio"> COD
+        </label>
+        <label class="checkbox inline">
+            <input value="3" name="payment_type" type="radio"> EMI
+        </label>
+        <label class="checkbox inline">
+            <input value="4" name="payment_type" type="radio"> Buy On Loan
+        </label>
+
+
+        <div class="row" style="display: none;margin-top:10px;" id="full_payments_divs">
+            <div class="span6">
+                <select class="form-control" id="full_payment_card_select" onchange="showFullPaymentDropDown()">
+                    <option value="">Select Method</option>
+                    <option value="1">Credit</option>
+                    <option value="2">Debit</option>
+                    <option value="3">NetBanking</option>
+                    <option value="4">Cash Card</option>
+                    <option value="5">Mobile Payments</option>
+                    <option value="6">Wallet</option>
+                    <option value="7">Pay by Cheque</option>
+                    <option value="8">Pay by Bankwire</option>
+
+                </select>
+
+                <select class="form-control" id="full_payment_card_type_select" onchange="FULLShowPaymentDivs()" style="display: none;">
+                </select>
+            </div>
+        </div>
+
+
+        <div class="row" style="display: none;margin-top:10px;" id="emi_payments_divs">
+            <div class="span6">
+                <select class="form-control" id="emi_payment_card_select" onchange="showEMIDropDown()">
+                    <option value="">Select Method</option>
+                    <option value="1">Credit Card EMI</option>
+                    <option value="2">Debit Card EMI</option>
+                    <option value="3">NBFC EMI</option>
+                </select>
+                <select class="form-control" id="emi_payment_card_type_select" onchange="EMIShowPaymentDivs()" style="display: none;">
+                </select>
+            </div>
+
+            <div class="span6">
+
+            </div>
+        </div>
+
+    </div>
     <div id="HOOK_PAYMENT">{$HOOK_PAYMENT}</div>
 {if $opc}</div>{/if}
 {else}
@@ -378,7 +434,7 @@
 {/if}
 
 {if !$opc}
-    <p class="cart_navigation">
+    <p class="cart_navigation" style="margin-top:20px;">
         <button onclick="window.location='{$link->getPageLink('order', true, NULL, "step=2")}'"  title="{l s='Previous'}" class="button left" type="button"><span><span>&laquo; {l s='Previous'}</span></span></button>
     </p>
 {else}
