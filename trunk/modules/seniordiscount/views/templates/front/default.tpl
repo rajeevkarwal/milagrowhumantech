@@ -72,7 +72,7 @@ $('#cost').val(prodamt);
 
             <div class="span9">
                 <div class="page-title">
-                    <h1>{l s='Special discount for Senior Citizens and Defence Personals'}</h1>
+                    <h1>{l s='Special discount for Senior Citizens and Defence Personnel'}</h1>
                 </div>
 
                     {include file="$tpl_dir./errors.tpl"}
@@ -90,7 +90,7 @@ $('#cost').val(prodamt);
                                             href="{$base_dir}">{l s='Home'}</a></li>
                             </ul>
                             {else}
-                            <h5>Discount is only available to Indian Senior Citizens and Defence Personals</h5>
+                            <h5>Discount is only available to Indian Senior Citizens and Defence Personnel</h5>
                           				 
                                        
 									
