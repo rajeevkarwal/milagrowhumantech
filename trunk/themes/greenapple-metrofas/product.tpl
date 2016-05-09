@@ -733,18 +733,23 @@
                         <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12"
                                id="quantity_wanted" name="qty">
                         <input type="button" class="qty-increase quantity_box_button_up" onclick="qtyUp()">
-							<input id="pincode" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character" onblur="checkcod();"">
+							<input id="pincode" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
 
 				    </div>
                     <script>
+                                $('#pincode').focusour(function()
+                                {
+                                    var pincode=$('pincode').val();
+                                    $.ajax(
+                                            {
+                                                type:'GET',
+                                                url:ajaxurl+'pincode/ajax.php?pincode='+pincode;
+                                            }
+                                    )
+                                }
 
 
-
-                        function checkcod()
-                        {
-                            var pincode=document.getElementById('pincode').value;
-                            alert('pincode'+pincode);
-                        }
+                                )
 
                     </script>
                 </div>
