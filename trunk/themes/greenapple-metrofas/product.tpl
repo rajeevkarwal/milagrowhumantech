@@ -685,8 +685,7 @@
 
         <div class="content_prices clearfix">
             <div class="short-description">
-					<input type="text" class="" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character">
-                
+				
                 <!--<h2>Quick Overview</h2>-->
                 <div class="std">
                     {if $product->description_short OR $packItems|@count > 0}
@@ -734,6 +733,8 @@
                         <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12"
                                id="quantity_wanted" name="qty">
                         <input type="button" class="qty-increase quantity_box_button_up" onclick="qtyUp()">
+							<input type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character">
+                
 				    </div>
                 </div>
                 {if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
