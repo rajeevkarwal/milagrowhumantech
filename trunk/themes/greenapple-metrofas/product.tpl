@@ -734,16 +734,28 @@
                                id="quantity_wanted" name="qty">
                         <input type="button" class="qty-increase quantity_box_button_up" onclick="qtyUp()">
 							<input id="pincode" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
-
+                        <p id="msg" style="display:none;"></p>
 				    </div>
                     <script>
-                                $('#pincode').focusour(function()
+                                $('#pincode').focusout(function()
                                 {
-                                    var pincode=$('pincode').val();
+
+                                    var pincode=$('#pincode').val();
+                                    alert(pincode);
                                     $.ajax(
                                             {
                                                 type:'GET',
-                                                url:ajaxurl+'pincode/ajax.php?pincode='+pincode;
+                                                url:ajaxurl+'pincode/ajax.php?pincode='+pincode,
+                                                success:function(data){
+                                                    $data=jQuery.parseJSON($data);
+                                                    if(data.cod_avalaible){
+                                                        alert('COD Avalaible');
+                                                    }
+                                                    else
+                                                            {
+                                                                $('#msg').val('COD Not Avlaible');
+                                                            }
+                                                }
                                             }
                                     )
                                 }

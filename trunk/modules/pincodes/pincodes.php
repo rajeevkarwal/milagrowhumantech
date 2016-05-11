@@ -51,7 +51,7 @@ class PinCodes extends Module
         else
             return false;
     }
-	//function is use to check COD status
+	//function is use to checkCodStatus
 	public function checkCodStatus($pincode)
 	{
 		$sql='select cod_avalable from'._DB_PREFIX_.'pincode_cod where pincode=\''.$pincode.'\'';
