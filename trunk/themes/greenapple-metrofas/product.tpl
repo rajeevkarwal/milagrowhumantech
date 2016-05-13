@@ -733,28 +733,29 @@
                         <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12"
                                id="quantity_wanted" name="qty">
                         <input type="button" class="qty-increase quantity_box_button_up" onclick="qtyUp()">
-							<input id="pincode" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
+							<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
                         <p id="msg" style="display:none;"></p>
 				    </div>
                     <script>
-                                $('#pincode').focusout(function()
+                                $('#pincodes').focusout(function()
                                 {
-
-                                    var pincode=$('#pincode').val();
+                                    var pincode = $('#pincodes').val();
                                     alert(pincode);
                                     $.ajax(
                                             {
                                                 type:'GET',
-                                                url:ajaxurl+'pincode/ajax.php?pincode='+pincode,
-                                                success:function(data){
-                                                    $data=jQuery.parseJSON($data);
-                                                    if(data.cod_avalaible){
-                                                        alert('COD Avalaible');
+                                                url:'/modules/pincodes/ajax.php?pincode='+pincode,
+                                                success:function(data)
+                                                {
+                                                    $data=jQuery.parseJSON(data);
+                                                    if($data){
+														if($data.cod_avalaible)
+                                                       alert('CASH ON DELIVERY AVALAIBLE');
+													    alert('COD NOT AVALLABLE');
                                                     }
-                                                    else
-                                                            {
-                                                                $('#msg').val('COD Not Avlaible');
-                                                            }
+                                                  
+
+
                                                 }
                                             }
                                     )
