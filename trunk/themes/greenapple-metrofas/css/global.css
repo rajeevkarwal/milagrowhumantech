@@ -1543,7 +1543,7 @@ body#cms .main-inner .show-grid .span3{ position: absolute; top: 100%; }
 @media screen and (min-width: 361px) and (max-width: 480px) {
 	
 body#index .main-inner .show-grid, body#init .main-inner .show-grid,  body#cms .main-inner .show-grid{ position:relative;}	
-body#index .main-inner .show-grid .span3{ position: absolute; top: 100%; }
+body#index .main-inner .show-grid .span3{ position: absolute; top: 100%;display:none; }
 body#index .main-inner .show-grid .span9 .content-sample-block{ display:none;}
 body#index .col1-layout{ position:relative;}
 body#index .col1-layout .banner-static{ position:absolute; top:100%; z-index:9999;}
@@ -1567,7 +1567,7 @@ body#cms .main-inner .show-grid .span3{ position: absolute; top: 100%; }
 @media screen and (min-width: 481px) and (max-width: 568px) {
 	
 body#index .main-inner .show-grid{ position:relative;}	
-body#index .main-inner .show-grid .span3{ position: absolute; top: 107%; }
+body#index .main-inner .show-grid .span3{ position: absolute; top: 107%;display:none;}
 body#index .main-inner .show-grid .span9 .content-sample-block{ display:none;}
 body#index .col1-layout{ position:relative;}
 body#index .col1-layout .banner-static{ position:absolute; top:100%; z-index:9999;}
