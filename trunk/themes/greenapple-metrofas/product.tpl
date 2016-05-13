@@ -728,9 +728,18 @@
                 <div class="add-to-cart">
                     <label for="qty">{l s='Qty:'}</label>
 					<div class="pull-center" style="background:#E4E4E4;height:40px;">
-							<label>Check Availability At</label>
-						<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
-						<button id="check">Check</button>
+							<div class="row">
+								<div class="col-md-9"><label>Check Availability At</label>
+								<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
+								
+								</div>
+								<div class="col-md-3">
+								<button id="check" style="height:30px;width:60px;border"1px solid black;">Check</button>
+								</div>
+							</div>
+							
+						
+						
 					</div>
                     <div class="product-qty">
                         <input type="button" class="qty-decrease quantity_box_button_down" onclick="qtyDown()">
