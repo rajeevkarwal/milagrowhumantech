@@ -11,7 +11,7 @@ include_once(dirname(__FILE__).'/../../init.php');
 include_once(_PS_MODULE_DIR_ . 'pincodes/pincodes.php');
 $address = new PinCodes();
 $pincode = Tools::getValue('pincode');
-$status = $address->checkCodStatus($pincode);
+
 if (!empty($pincode)) {
     $stateandcity = $address->getCityAndStateFromThePinCode($pincode);
     if ($stateandcity)
