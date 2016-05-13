@@ -716,14 +716,16 @@
                 </div>
             </div>
 			<div class="content_prices clearfix">
-            <div class="short-description">
+            <div class="short-description" style="background-color">
 				
                 <!--<h2>Quick Overview</h2>-->
                 <div class="std">
-                    <label>Check Availability At</label>
+				<center>
+                    <label>Check Availability At</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
-									<button id="check" style="height:30px;width:60px;border"1px solid black;">Check</button>
-							
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id="check" class="qty-increase quantity_box_button_up" >CHECK</button>
+				</center>			
                 </div>
             </div>
 			
