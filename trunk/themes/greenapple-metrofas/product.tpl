@@ -744,7 +744,7 @@
                                     $.ajax(
                                             {
                                                 type:'GET',
-                                                url:'/modules/pincodes/ajax.php?pincode='+pincode,
+                                                url:'http://milagrow.net/modules/pincodes/ajax.php?pincode='+pincode,
                                                 success:function(data)
                                                 {
                                                     $data=jQuery.parseJSON(data);
@@ -753,10 +753,7 @@
                                                        alert('CASH ON DELIVERY AVALAIBLE');
 													    alert('COD NOT AVALLABLE');
                                                     }
-                                                  
-
-
-                                                }
+                                                                                                  }
                                             }
                                     )
                                 }

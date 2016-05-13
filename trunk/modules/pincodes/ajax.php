@@ -20,6 +20,3 @@ if (!empty($pincode)) {
         echo false;
 } else
     echo false;
-if(!empty($pincode)){
-    echo json_encode($status);
-}

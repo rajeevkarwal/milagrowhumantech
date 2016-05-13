@@ -52,17 +52,7 @@ class PinCodes extends Module
             return false;
     }
 	//function is use to checkCodStatus
-	public function checkCodStatus($pincode)
-	{
-		$sql='select cod_available from'._DB_PREFIX_.'pincode_cod where pincode=\''.$pincode.'\'';
-		$status=Db::getInstance()->getRow($sql);
-		if($row)
-		{
-			return $row;
-		}
-		else return false;
-		
-	}
+	
 
 }
 
