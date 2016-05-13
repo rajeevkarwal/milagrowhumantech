@@ -11,15 +11,15 @@ include_once(dirname(__FILE__).'/../../init.php');
 include_once(_PS_MODULE_DIR_ . 'pincodes/pincodes.php');
 $address = new PinCodes();
 $pincode = Tools::getValue('pincode');
-$cod_avalaible=$address->checkCodStatus($pincode);
+$status = $address->checkCodStatus($pincode);
 if (!empty($pincode)) {
     $stateandcity = $address->getCityAndStateFromThePinCode($pincode);
     if ($stateandcity)
         echo json_encode($stateandcity);
     else
         echo false;
-	if($cod_avalaible)
-		echo json_encode($cod_avalaible);
-	else echo false;
 } else
     echo false;
+if(!empty($pincode)){
+    echo json_encode($status);
+}
