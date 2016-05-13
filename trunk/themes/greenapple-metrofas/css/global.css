@@ -1516,7 +1516,7 @@ body#cms .main-inner .show-grid .span3{ position: absolute; top: 100%; }
 @media screen and (min-width: 360px) and (max-width: 360px) and (orientation : portrait) {
 	
 body#index .main-inner .show-grid, body#init .main-inner .show-grid,  body#cms .main-inner .show-grid{ position:relative;}
-body#index .main-inner .show-grid .span3{ position: absolute; top: 104.1%; }
+body#index .main-inner .show-grid .span3{ position: relative; top: 104.1%; }
 body#index .main-inner .show-grid .span9 .content-sample-block{ display:none;}
 body#index .col1-layout{ position:relative;}
 body#index .col1-layout .banner-static{ position:absolute; top:100%; z-index:9999;}
