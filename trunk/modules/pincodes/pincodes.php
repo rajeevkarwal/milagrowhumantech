@@ -51,7 +51,6 @@ class PinCodes extends Module
         else
             return false;
     }
-	//function is use to checkCodStatus
 	
 
 }
