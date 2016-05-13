@@ -727,17 +727,20 @@
                 {/if}
                 <div class="add-to-cart">
                     <label for="qty">{l s='Qty:'}</label>
-
+					<div class="pull-center" style="background:#E4E4E4;height:40px;">
+							<label>Check Availability At</label>
+						<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
+						<button id="check">Check</button>
+					</div>
                     <div class="product-qty">
                         <input type="button" class="qty-decrease quantity_box_button_down" onclick="qtyDown()">
                         <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12"
                                id="quantity_wanted" name="qty">
                         <input type="button" class="qty-increase quantity_box_button_up" onclick="qtyUp()">
-							<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
-                        <p id="msg" style="display:none;"></p>
+				        <p id="msg" style="display:none;"></p>
 				    </div>
                     <script>
-                                $('#pincodes').focusout(function()
+                                $('#check').click(function()
                                 {
                                     var pincode = $('#pincodes').val();
                                   
