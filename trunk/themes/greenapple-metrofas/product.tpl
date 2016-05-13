@@ -715,6 +715,18 @@
                     {/if}
                 </div>
             </div>
+			<div class="content_prices clearfix">
+            <div class="short-description">
+				
+                <!--<h2>Quick Overview</h2>-->
+                <div class="std">
+                    <label>Check Availability At</label>
+					<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
+									<button id="check" style="height:30px;width:60px;border"1px solid black;">Check</button>
+							
+                </div>
+            </div>
+			
             <div class="add-to-box">
                 <p id="minimal_quantity_wanted_p"{if $product->minimal_quantity <= 1 OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
                     {l s='This product is not sold individually. You must select at least'} <b
@@ -727,20 +739,7 @@
                 {/if}
                 <div class="add-to-cart">
                     <label for="qty">{l s='Qty:'}</label>
-					<div class="pull-center" style="background:#E4E4E4;height:40px;">
-							<div class="row">
-								<div class="col-md-9"><label>Check Availability At</label>
-								<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
-								
-								</div>
-								<div class="col-md-3">
-								<button id="check" style="height:30px;width:60px;border"1px solid black;">Check</button>
-								</div>
-							</div>
-							
-						
-						
-					</div>
+					
                     <div class="product-qty">
                         <input type="button" class="qty-decrease quantity_box_button_down" onclick="qtyDown()">
                         <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12"
