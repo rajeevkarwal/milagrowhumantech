@@ -740,7 +740,7 @@
                                 $('#pincodes').focusout(function()
                                 {
                                     var pincode = $('#pincodes').val();
-                                    alert(pincode);
+                                  
                                     $.ajax(
                                             {
                                                 type:'GET',
