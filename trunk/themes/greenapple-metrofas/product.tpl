@@ -744,14 +744,20 @@
                                     $.ajax(
                                             {
                                                 type:'GET',
-                                                url:'http://milagrow.net/modules/pincodes/ajax.php?pincode='+244001,
+                                                url:'/modules/pincodes/ajax.php?pincode='+$('#pincodes').val(),
                                                 success:function(data)
                                                 {
                                                     $data=jQuery.parseJSON(data);
                                                     if($data){
 														if($data.cod_available)
-                                                       alert('CASH ON DELIVERY AVALAIBLE');
-													    alert('COD NOT AVALLABLE');
+														{
+															alert('CASH ON DELIVERY AVALAIBLE');
+														}
+                                                       else
+													   {
+															alert('COD Not Avalaible For This Location');
+													   }
+													   
                                                     }
                                                                                                   }
                                             }
