@@ -753,13 +753,12 @@
 														{
 															alert('CASH ON DELIVERY AVALAIBLE');
 														}
-                                                       else
-													   {
-															alert('COD Not Avalaible For This Location');
-													   }
-													   
                                                     }
-                                                                                                  }
+													else
+													{
+														alert('COD Not Avalaible For This Location');
+													}
+                                                }
                                             }
                                     )
                                 }
