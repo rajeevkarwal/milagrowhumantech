@@ -44,7 +44,7 @@ class PinCodes extends Module
 
     public function getCityAndStateFromThePinCode($pincode)
     {
-        $sql = 'select id_state,city from ' . _DB_PREFIX_ . 'pincode_cod where pincode=\'' . $pincode . '\'';
+        $sql = 'select id_state,city,cod_available from ' . _DB_PREFIX_ . 'pincode_cod where pincode=\'' . $pincode . '\'';
         $row = Db::getInstance()->getRow($sql);
         if ($row)
             return $row;
