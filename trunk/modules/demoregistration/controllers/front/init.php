@@ -386,8 +386,8 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 //            if (_PS_ENVIRONMENTS) {
 
                 //sending email to receivable
-//                $cs_Email = BOOK_DEMO_BEFORE_PAYMENT_CS;
-                $cs_Email ='hitanshu.malhotra@milagrow.in';
+                $cs_Email = BOOK_DEMO_BEFORE_PAYMENT_CS;
+                //$cs_Email ='hitanshu.malhotra@milagrow.in';
                 if (!empty($cs_Email)) {
                     $res = Mail::Send(
                         (int)1,
@@ -407,7 +407,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
                 }
 
 //                $customerCareEmail = BOOK_DEMO_BEFORE_PAYMENT_CUSTOMER_CARE;
-            $customerCareEmail = 'hitanshu.malhotra@milagrow.in';
+            //$customerCareEmail = 'hitanshu.malhotra@milagrow.in';
                 // Sending mail to customer care
                 $res = Mail::Send(
                     (int)1,
