@@ -174,7 +174,7 @@
 
         <div class="margin-form">
             <label> <strong>Product :</strong></label>
-            <select name="product" id="product">
+            <select name="product" id="product" readonly>
                 <option value="">Select product</option>
             </select>
         </div>
