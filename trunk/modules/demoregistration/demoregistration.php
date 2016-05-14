@@ -430,8 +430,6 @@ class DemoRegistration extends Module
         if($_POST['submit']){
             $selectedProduct = Tools::getValue('product')?Tools::getValue('product'):0;
             $selectedCategory = Tools::getValue('category')?Tools::getValue('category'):0;
-            $demoType = Tools::getValue('demoType')?Tools::getValue('demoType'):0;
-            $demoText = Tools::getValue('demoText')?Tools::getValue('demoText'):'';
 
 
             if(empty($selectedProduct) || empty($selectedCategory))
@@ -451,12 +449,22 @@ class DemoRegistration extends Module
                     $insertedData=array();
                     $insertedData['productId']=$selectedProduct;
                     $insertedData['categoryId']=$selectedCategory;
-                    $insertedData['demoType']=$demoType;
-                    $insertedData['demoText']=$demoText;
                     $insertedData['created_at']=date('Y-m-d H:i:s');
                     Db::getInstance()->insert('demo_products',$insertedData);
-                    echo $url;
+                    $lastInsertedId=Db::getInstance()->Insert_ID();
+                    if($lastInsertedId)
+                    {
+                    
+                    $url.='&sl_tab=edit_demo_products&demoproduct_id='.$lastInsertedId;    
+                    header('location: '.$url);
                     exit;
+                    }
+                    else
+                    {
+                      $messageToShow='Error occured while inserting the product.';  
+                    }
+                    
+
                 }
                 else
                 {
