@@ -156,7 +156,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 							'{address}' => $insertData['address'], '{country}' => $insertData['country'],
 							'{state}' => $insertData['state'], '{city}' => $insertData['city'], '{zip}' => $insertData['zip'],
 							'{mobile}' => $insertData['mobile'], '{email}' => $insertData['email'],
-							'{category}' => $insertData['category'], '{specialComments}' => $insertData['special_comments'],'{demoText}'=>$demoText);
+							'{category}' => $insertData['category'], '{specialComments}' => $insertData['special_comments'],'{demomode}'=>$demoText);
 		
 						//$this->sendEmails($data);
 						 
@@ -218,7 +218,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 							'{address}' => $insertData['address'], '{country}' => $insertData['country'],
 							'{state}' => $insertData['state'], '{city}' => $insertData['city'], '{zip}' => $insertData['zip'],
 							'{mobile}' => $insertData['mobile'], '{email}' => $insertData['email'],
-							'{category}' => $insertData['category'], '{specialComments}' => $insertData['special_comments'],'{demoText}'=>$demoText);
+							'{category}' => $insertData['category'], '{specialComments}' => $insertData['special_comments'],'{demomode}'=>$demoText);
 		
 						//$this->sendEmails($data);
 						//echo json_encode(array('status' => true, 'url' => $url));

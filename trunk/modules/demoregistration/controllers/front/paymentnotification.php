@@ -108,7 +108,7 @@ class DemoRegistrationPaymentNotificationModuleFrontController extends ModuleFro
                                 '{nb_order_no}' => $nb_order_no, '{address}' => $orderInfo['address'], '{country}' => $orderInfo['country'],
                                 '{state}' => $orderInfo['state'], '{city}' => $orderInfo['city'], '{zip}' => $orderInfo['zip'],
                                 '{mobile}' => $orderInfo['mobile'], '{email}' => $orderInfo['email'], '{coupon}' => $orderInfo['coupon'],
-                                '{category}' => $orderInfo['category'], '{specialComments}' => $orderInfo['special_comments']);
+                                '{category}' => $orderInfo['category'], '{specialComments}' => $orderInfo['special_comments'],'{demomode}'=>$orderInfo['demoType']);
                             $this->sendEmails($data, $fileAttachment, $coupon);
                             $this->sendMessage($orderInfo['category'], $orderInfo['mobile']);
 
