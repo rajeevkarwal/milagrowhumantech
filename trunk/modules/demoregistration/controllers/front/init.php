@@ -61,7 +61,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 
             if($city=='other')
             {
-                $demoText='Other City Selected';
+                $demoText='Demo for other city';
                 $paidDemo=false;
             }
 
@@ -175,7 +175,8 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 								'{address}'=> $address,
 								'{zip}'=> $zip,
 								'{date}'=> $date,
-								'{comments}'=> $specialComment
+								'{comments}'=> $specialComment,
+                                '{demomode}'=>$demoText
 						);
          			 	$id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 						$send = Mail::Send($id_lang, 'booked',$sub, $vars, $email);
@@ -235,7 +236,8 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 								'{address}'=> $address,
 								'{zip}'=> $zip,
 								'{date}'=> $date,
-								'{comments}'=> $specialComment
+								'{comments}'=> $specialComment,
+                                '{demomode}'=>$demoText
 						);
          			 	$id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 						$send = Mail::Send($id_lang, 'booked',$sub, $vars, $email);
