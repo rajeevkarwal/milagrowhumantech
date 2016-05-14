@@ -68,6 +68,10 @@ $(document).ready(function () {
             alert('Product is Required');
             return;
         }
+        else if (!city) {
+            alert('City is Required');
+            return;
+        }
         else if (!address) {
             alert('Address is Required');
             return;
@@ -84,10 +88,7 @@ $(document).ready(function () {
             alert('Time is Required');
             return;
         }
-        else if (!city) {
-            alert('City is Required');
-            return;
-        }
+
 
         $('#ajax-loader').show();
         $.ajax({
