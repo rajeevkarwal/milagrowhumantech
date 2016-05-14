@@ -170,13 +170,15 @@
 
         <div class="margin-form">
             {$category}
+            <input type="hidden" name="category" value="{$productDetail['categoryId']}">
         </div>
 
         <div class="margin-form">
             <label> <strong>Product :</strong></label>
-            <select name="product" id="product" readonly>
+            <select name="product" id="product" disabled>
                 <option value="">Select product</option>
             </select>
+            <input type="hidden" name="product" value="{$productDetail['productId']}">
         </div>
 
 

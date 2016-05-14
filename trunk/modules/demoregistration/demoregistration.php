@@ -629,7 +629,7 @@ class DemoRegistration extends Module
         $sqlcat = 'SELECT p.id_category AS categoryid,p.name AS category_name FROM ps_category_lang as p left join ps_category as pd on p.id_category = pd.id_category where pd.active = 1 and pd.level_depth = 2';
         $category ='';
         $category .= '<label> <strong>Category :</strong></label>';
-        $category .= '<select name="category" id="category" onchange="getid(0)">';
+        $category .= '<select name="category" id="category" onchange="getid(0)" disabled>';
         $category .= '<option value="">Select Category</option>';
 
         $catid = array();
@@ -638,7 +638,7 @@ class DemoRegistration extends Module
             foreach ($results as $row)
             {
                 $selected='';
-                if($row['categoryid']==$productDetail['categoryID'])
+                if($row['categoryid']==$productDetail['categoryId'])
                     $selected='selected=selected';
                 $category .= '<option value="'.$row['categoryid'].'"'.$selected.' >'.$row['category_name'].'</option>';
                 $catid[] = $row['categoryid'];
