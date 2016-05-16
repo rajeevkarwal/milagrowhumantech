@@ -584,7 +584,7 @@ class DemoRegistration extends Module
                     if(!empty($cityId) && !in_array($cityId,$citiesArr))
                     {
                         //product already exist but incoming product having different period
-                        if($demoId && !empty($cityId) && !empty($stateId) && !empty($amount))
+                        if($id && !empty($cityId) && !empty($stateId) && !empty($amount))
                         {
                             $demoCityData=array('demo_id'=>$id,'cityname'=>$cityName,'statename'=>$stateName,
                                 'stateid'=>$stateId,'cityid'=>$cityId,'amount'=>$amount,'demoText'=>$demoText,'demoType'=>$demoType);
