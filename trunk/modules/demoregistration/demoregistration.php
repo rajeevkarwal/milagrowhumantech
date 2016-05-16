@@ -545,6 +545,7 @@ class DemoRegistration extends Module
 
         if($_POST['submit']){
             echo '<pre>';
+            echo $id;
             print_r($_REQUEST);
             //$selectedProduct = Tools::getValue('product')?Tools::getValue('product'):0;
             //$selectedCategory = Tools::getValue('category')?Tools::getValue('category'):0;
@@ -650,6 +651,7 @@ class DemoRegistration extends Module
         }
 
 //        print_r($catwiseproduct);
+        echo $messageToShow;
         $this->context->smarty->assign(array(
             'url' => $url,
             'category' => $category,
