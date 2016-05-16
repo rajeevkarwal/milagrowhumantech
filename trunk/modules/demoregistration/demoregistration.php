@@ -544,7 +544,8 @@ class DemoRegistration extends Module
 //        print_r($stateWiseCityKeyMap);
 
         if($_POST['submit']){
-//            print_r($_POST);
+            echo '<pre>';
+            print_r($_REQUEST);
             //$selectedProduct = Tools::getValue('product')?Tools::getValue('product'):0;
             //$selectedCategory = Tools::getValue('category')?Tools::getValue('category'):0;
             $demoType = Tools::getValue('demoType')?Tools::getValue('demoType'):0;
