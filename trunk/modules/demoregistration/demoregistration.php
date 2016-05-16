@@ -441,9 +441,9 @@ class DemoRegistration extends Module
             {
 
                 //firstly check if the product id already exist then fetch the same
-                $existingProductSQl = 'select count(*) as countProducts from ' . _DB_PREFIX_ . 'demo_products as dp where productId='.$selectedProduct;
+                $existingProductSQl = 'select count(*) as countProducts from ' . _DB_PREFIX_ . 'demo_products as dp where productId='.$selectedProduct.' and categoryId='.$selectedCategory;
                 $result=Db::getInstance()->getRow($existingProductSQl);
-                if($result['countProducts']==0)
+                if(empty($result['countProducts']))
                 {
                     //add product to DB
                     $insertedData=array();
@@ -463,8 +463,6 @@ class DemoRegistration extends Module
                     {
                       $messageToShow='Error occured while inserting the product.';  
                     }
-                    
-
                 }
                 else
                 {
@@ -547,8 +545,8 @@ class DemoRegistration extends Module
 
         if($_POST['submit']){
 //            print_r($_POST);
-            $selectedProduct = Tools::getValue('product')?Tools::getValue('product'):0;
-            $selectedCategory = Tools::getValue('category')?Tools::getValue('category'):0;
+            //$selectedProduct = Tools::getValue('product')?Tools::getValue('product'):0;
+            //$selectedCategory = Tools::getValue('category')?Tools::getValue('category'):0;
             $demoType = Tools::getValue('demoType')?Tools::getValue('demoType'):0;
             $demoText = Tools::getValue('demoText')?Tools::getValue('demoText'):'';
             $stateId = Tools::getValue('state')?Tools::getValue('state'):'';
@@ -557,22 +555,14 @@ class DemoRegistration extends Module
             $stateName=!empty($stateKeyMap[$stateId])?$stateKeyMap[$stateId]:'';
             $amount = Tools::getValue('demoAmount')?Tools::getValue('demoAmount'):0;
 
-            if(empty($selectedProduct) || empty($selectedCategory))
+            if(empty($demoType) || 
+                empty($demoText) || empty($stateId) || empty($cityId) || empty($cityName) || empty($stateName) || empty($amount))
             {
-                $messageToShow='Please select category and product';
+                $messageToShow='Please fill mandatory fields!!';
             }
 
             if(empty($messageToShow))
             {
-                //firstly check if the product id already exist then fetch the same
-                $existingProductSQl = 'select count(*) as productCount from ' . _DB_PREFIX_ . 'demo_products as dp where id!='.$id.' and productId='.$selectedProduct;
-//                echo $existingProductSQl;
-                $results = Db::getInstance()->getRow($existingProductSQl);
-                if ($results['productCount']==0) {
-                    $updateData=array();
-                    $updateData['productId']=$selectedProduct;
-                    $updateData['categoryId']=$selectedCategory;
-
                     $demoCitiesSql='select iddemocities,cityid from '._DB_PREFIX_.'demo_products_cities where demo_id='.$id;
 //                    echo $demoCitiesSql;
                     $periodResults=Db::getInstance()->executeS($demoCitiesSql);
@@ -592,7 +582,7 @@ class DemoRegistration extends Module
                     if(!empty($cityId) && !in_array($cityId,$citiesArr))
                     {
                         //product already exist but incoming product having different period
-                        if($id && !empty($cityId) && !empty($stateId) && !empty($amount))
+                        if($demoId && !empty($cityId) && !empty($stateId) && !empty($amount))
                         {
                             $demoCityData=array('demo_id'=>$id,'cityname'=>$cityName,'statename'=>$stateName,
                                 'stateid'=>$stateId,'cityid'=>$cityId,'amount'=>$amount,'demoText'=>$demoText,'demoType'=>$demoType);
@@ -600,14 +590,10 @@ class DemoRegistration extends Module
                             Db::getInstance()->insert('demo_products_cities',$demoCityData);
                         }
                     }
-                    Db::getInstance()->update('demo_products',$updateData,$id);
-//                    echo Db::getInstance()->getMsgError();
-                    $messageToShow='Updated SuccessFully!! and if you entered any city details also added successfully';
-                }
-                else
-                {
-                    $messageToShow='Product Already exist please edit that product';
-                }
+                    else
+                    {
+                        $messageToShow='city you are adding is already exist. delete it and add again!!';
+                    }
             }
         }
 
