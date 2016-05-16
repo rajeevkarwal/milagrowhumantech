@@ -566,7 +566,7 @@ class DemoRegistration extends Module
             if(empty($messageToShow))
             {
                     $demoCitiesSql='select iddemocities,cityid from '._DB_PREFIX_.'demo_products_cities where demo_id='.$id;
-//                    echo $demoCitiesSql;
+                    echo $demoCitiesSql;
                     $periodResults=Db::getInstance()->executeS($demoCitiesSql);
                     $demoCityProductKeyMap=array();
                     $citiesArr=array();
@@ -575,7 +575,7 @@ class DemoRegistration extends Module
                         $demoCityProductKeyMap[$row['cityid']]=$row['iddemocities'];
                     }
 
-//                    print_r($demoCityProductKeyMap);
+                    print_r($demoCityProductKeyMap);
                     if(!empty($demoCityProductKeyMap))
                     {
                         $citiesArr=array_keys($demoCityProductKeyMap);
