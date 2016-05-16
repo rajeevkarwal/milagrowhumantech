@@ -588,7 +588,7 @@ class DemoRegistration extends Module
                         {
                             $demoCityData=array('demo_id'=>$id,'cityname'=>$cityName,'statename'=>$stateName,
                                 'stateid'=>$stateId,'cityid'=>$cityId,'amount'=>$amount,'demoText'=>$demoText,'demoType'=>$demoType);
-//                            print_r($demoCityData);
+                            print_r($demoCityData);
                             Db::getInstance()->insert('demo_products_cities',$demoCityData);
                         }
                     }
