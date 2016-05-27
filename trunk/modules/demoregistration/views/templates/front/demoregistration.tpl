@@ -252,7 +252,7 @@
 
 
                         <li>
-                            <label for="comments">Special Comments</label>
+                            <label for="comments">Special Comment</label>
 
                             <div class="input-box">
                                 <textarea name="special_comments" style="width:36%"></textarea>
