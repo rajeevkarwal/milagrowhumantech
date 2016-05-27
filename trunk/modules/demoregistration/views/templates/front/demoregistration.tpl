@@ -72,18 +72,30 @@
         $('#demoMode').change(function(){
             $('#amount').html("");
             var selectedVal=$('#demoMode option:selected').val();
-            if(selectedVal=='1')
+            if(selectedVal==='')
+                    {
+                        $('#priceText').hide();
+                    }
+            else if(selectedVal=='1')
             {
-                alert('You have selected demo over skype option. ');
+                //alert('You have selected demo over skype option. ');
                 $('#demoText').html(demoText);
                 $('#demoTextLi').show();
+                $('#priceText').hide();
             }
             else
             {
-                $('#amount').html('You need to pay Rs '+ demoAmount +'/- for pre-sales, physical demo in cities where we offer this facility. Pressing Submit will take you to the payment page.<br/>For other cities we offer demo over Phone, Email and Skype, on a &#039;Free of Cost&#039; basis. Pressing Submit will confirm your demo request.');
-			    alert('Please note that physical demo is available only in limited cities, on a chargeable basis. At other places we offer demo over Phone, Email and Skype, on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, physical demo. Pressing Submit will take you to the payment page');
-                $('#demoText').html(demoText);
-                $('#demoTextLi').show();
+               // $('#amount').html('You need to pay Rs '+ demoAmount +'/- for pre-sales, physical demo in cities where we offer this facility. Pressing Submit will take you to the payment page.<br/>For other cities we offer demo over Phone, Email and Skype, on a &#039;Free of Cost&#039; basis. Pressing Submit will confirm your demo request.');
+			    var text='Please note that physical demo is available only in limited cities, on a ' +
+                        'chargeable basis. At other places we offer demo over Phone, Email and Skype,' +
+                        ' on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, ' +
+                        'physical demo. Pressing Submit will take you to the payment page';
+
+               // alert('Please note that physical demo is available only in limited cities, on a chargeable basis. At other places we offer demo over Phone, Email and Skype, on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, physical demo. Pressing Submit will take you to the payment page');
+                $('#priceNote').html(text);
+                $('#priceText').show();
+                $('#demoTextLi').hide();
+
             }
         });
 
@@ -158,27 +170,30 @@
                     <p>8. Please note that the demo shall last for 30 minutes to an hour only, as per the product being demonstrated.</p>
                    
                     <br/>
+
                     <ul class="form-list">
                         <li>
 
                             <label for="name" class="required"><em>*</em>Name</label>
 
                             <div class="input-box">
-                                <input type="text" id="name" name="name" />
+                                <input type="text" id="name" name="name" required/>
                             </div>
+
                         </li>
                         <li>
                             <label for="email" class="required"><em>*</em>Email</label>
 
                             <div class="input-box">
-                                <input type="email" id="email" name="email"/>
+                                <input type="email" id="email" name="email" required/>
                             </div>
+
                         </li>
                         <li>
                             <label for="mobile" class="required"><em>*</em>Mobile</label>
 
                             <div class="input-box">
-                                <input type="text" id="mobile" name="mobile"/>
+                                <input type="text" id="mobile" name="mobile" required/>
                             </div>
                         </li>
                         <li>
@@ -192,7 +207,7 @@
                             <label for="city" class="required"><em>*</em>Select City</label>
 
                             <div class="input-box">
-                                <select name="city" id="city">
+                                <select name="city" id="city" style="text-transform: capitalize;">
                                     <option value="">Select City</option>
                                  </select>
                             </div>
@@ -207,21 +222,25 @@
                             <div class="input-box">
                                 <select name="demoMode" id="demoMode">
                                     <option value="">Select Mode</option>
-                                    <option value="1">Skype</option>
-                                    <option value="2">Home</option>
+                                    <option value="1">Free Live Video</option>
+                                    <option value="2">Paid Home Demo</option>
                                 </select>
                             </div>
-                        </li>
 
+                        </li>
+                        <li style="display: none;" id="priceText">
+                            <p id="priceNote" style="color:red"> </p>
+                        </li>
                         <li style="display:none;" id="demoTextLi">
-                            <p id="demoText" style="color:red"></p>
+
+                            <p id="demoText" style="color:red;text-transform: capitalize;"></p>
                         </li>
 
                         <li>
                             <label for="address" class="required"><em>*</em>Address</label>
 
                             <div class="input-box">
-                                <textarea id="address" name="address" style="width:36%"></textarea>
+                                <textarea id="address" name="address" style="width:36%" required></textarea>
                             </div>
                         </li>
 
@@ -231,14 +250,14 @@
                             <label for="zip" class="required"><em>*</em>Zip Code</label>
 
                             <div class="input-box">
-                                <input id="zip" type="text" name="zip"/>
+                                <input id="zip" type="text" name="zip" required/>
                             </div>
                         </li>
                         <li>
                             <label for="date" class="required"><em>*</em>Preferred Date</label>
 
                             <div class="input-box">
-                                <input type="text" id="date" name="date"  placeholder="" readonly/>
+                                <input type="text" id="date" name="date"  placeholder="" />
                             </div>
                         </li>
 
@@ -246,7 +265,7 @@
                             <label for="time" class="required"><em>*</em>Preferred Time</label>
 
                             <div class="input-box">
-                                <input type="text" id="time" name="time"  placeholder="" readonly/>
+                                <input type="text" id="time" name="time"  placeholder="" />
                             </div>
                         </li>
 
@@ -289,7 +308,7 @@
                         </li>
 
                     </ul>
-                    
+                    <center><label style="color: red"><p id="Error"></p></label></center>
                     
                 </form>
 
