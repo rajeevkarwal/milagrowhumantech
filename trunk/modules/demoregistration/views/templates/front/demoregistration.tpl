@@ -102,7 +102,7 @@
 	  });
 	
 
-
+//some changes in css and code
     function getCities(){
         var selectedproduct = $.trim($('#product option:selected').val());
         console.log(selectedproduct);
@@ -271,7 +271,7 @@
 
 
                         <li>
-                            <label for="comments">Special Comments</label>
+                            <label for="comments">Special Comment</label>
 
                             <div class="input-box">
                                 <textarea name="special_comments" style="width:36%"></textarea>

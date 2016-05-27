@@ -29,7 +29,7 @@ $(document).ready(function () {
         return filter.test(data);
     }
 
-
+	//error show on the bottom calling function 
     $("#demo").submit(function (e) {
         e.preventDefault();
         var name = $.trim($('#name').val());
