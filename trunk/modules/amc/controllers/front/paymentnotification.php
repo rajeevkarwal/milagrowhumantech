@@ -360,7 +360,7 @@ class AMCPaymentNotificationModuleFrontController extends ModuleFrontController
 
                             //$amcTax = 12.36;
                             //$amcTax = 14;
-			    $amcTax = 14.5;
+							$amcTax = 15.00;
                             $amcPrice = round(($amcTotalPrice * 100) / (100 + $amcTax), 2);
                             $receiptNo = sprintf('%06d', $orderInfo['amc_id']);
                             $quantity=1;
