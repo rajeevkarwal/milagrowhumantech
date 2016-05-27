@@ -90,7 +90,7 @@
 	  });
 	
 
-
+//some changes in css and code
     function getCities(){
         var selectedproduct = $.trim($('#product option:selected').val());
         console.log(selectedproduct);
