@@ -32,6 +32,8 @@ $(document).ready(function () {
 	//error show on the bottom calling function 
     $("#demo").submit(function (e) {
         e.preventDefault();
+        $('#Error').html('');
+        $('#Error').hide();
         var name = $.trim($('#name').val());
         var email = $.trim($('#email').val());
         var mobile = $.trim($('#mobile').val());
@@ -42,11 +44,15 @@ $(document).ready(function () {
         var mode = $.trim($('#demoMode').val());
         var product = $.trim($("#product option:selected").val());
         var city = $.trim($("#city option:selected").val());
-
+        var demoType=$.trim($('#demo_type').val());
+        var otherCity=$.trim($('#other').val());
         if (!name) {
             var text='Name Required';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
 
@@ -55,18 +61,27 @@ $(document).ready(function () {
             var text='Email is Required';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!isValidEmailAddress(email)) {
             var text='Please enter valid email id';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!mobile) {
             var text='Mobile Number is Required';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
 
@@ -74,37 +89,72 @@ $(document).ready(function () {
             var text='Please enter 10 Digit Mobile No.';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!product) {
             var text='Please Select Product';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
-        else if(!mode)
-        {
-            var text='Demo Mode is Required';
-            $('#Error').html(text);
-            $('#Error').show();
-            return;
-        }
+
         else if (!city) {
             var text='City for Demo is Required';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
+        }
+        else if(city && city!='other')
+        {
+            if(demoType==3 && !mode)
+            {
+            var text='Demo Mode is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+                $('html, body').animate({
+                    scrollTop: ($('#Error').offset().top - 300)
+                }, 2000);
+            return;
+            }
+        }
+        else if(city && city=='other')
+        {
+            if(!otherCity)
+            {
+                var text='Enter other city';
+                $('#Error').html(text);
+                $('#Error').show();
+                $('html, body').animate({
+                    scrollTop: ($('#Error').offset().top - 300)
+                }, 2000);
+                return;
+            }
         }
         else if (!address) {
             var text='Address for Demo is Required';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!zip) {
             var text='Zip Code for Demo is Required';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!date) {
@@ -112,12 +162,18 @@ $(document).ready(function () {
             var text='Date is Required';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!time) {
             var text='Expected Time is Required';
             $('#Error').html(text);
             $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
 

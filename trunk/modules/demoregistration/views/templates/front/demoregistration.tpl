@@ -17,10 +17,12 @@
         console.log(productdata);
         $('#product').change(function(){
             $('#demoSelect').hide();
+            $('#demoMode').val("");
             $('#amount').html("");
             demoAmount=0;
             demoText='';
             $('#demoTextLi').hide();
+            $('#priceText').hide();
             var cities = '';
             cities +=  '<option value="">Select City</option>';
             cities +=  '<option value="other">Other Cities</option>';
@@ -33,8 +35,10 @@
 			$('#city').change(function(){
                 $('#other_city').remove();
                 $('#amount').html("");
+                $('#demoMode').val("");
                 $('#demoSelect').hide();
                 $('#demoTextLi').hide();
+                $('#priceText').hide();
                 demoAmount=0;
                 demoText='';
             var selectedCityOption=$('#city option:selected').val();
@@ -55,6 +59,22 @@
                         {
                             $('#demoSelect').show();
                         }
+                        else if(value.demoType=='1')
+                        {
+                            var text='You need to pay Rs ' + demoAmount + '/- for this pre-sales, ' +
+                                    'physical demo. Pressing Submit will take you to the payment page';
+
+                            // alert('Please note that physical demo is available only in limited cities, on a chargeable basis. At other places we offer demo over Phone, Email and Skype, on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, physical demo. Pressing Submit will take you to the payment page');
+                            $('#priceNote').html(text);
+                            $('#priceText').show();
+                            $('#demoText').html(demoText);
+                            $('#demoTextLi').show();
+                        }
+                        else
+                        {
+                            $('#demoText').html(demoText);
+                            $('#demoTextLi').show();
+                        }
                         $('#demo_type').val(value.demoType);
 
                     }
@@ -65,23 +85,25 @@
             else
             {
                 $('#targetOtherCity').append( "<div id='other_city'><label for='other' class='required'><em>*</em>Insert City Name</label><div class='input-box'><input id='other' type='text' name='other_city'/></div></div>" );
+                $('#demoText').html('');
+                $('#demoTextLi').show();
+                $('#priceNote').html('You have selected the Live skype/video demo which is free. Just submit the details.');
+                $('#priceText').show();
             }
 
 			});
 
         $('#demoMode').change(function(){
             $('#amount').html("");
+            $('#priceText').hide();
             var selectedVal=$('#demoMode option:selected').val();
-            if(selectedVal==='')
-                    {
-                        $('#priceText').hide();
-                    }
-            else if(selectedVal=='1')
+            if(selectedVal=='1')
             {
                 //alert('You have selected demo over skype option. ');
                 $('#demoText').html(demoText);
                 $('#demoTextLi').show();
-                $('#priceText').hide();
+                $('#priceNote').html('You have selected the Live skype/video demo which is free. Just submit the details.');
+                $('#priceText').show();
             }
             else
             {
@@ -94,7 +116,8 @@
                // alert('Please note that physical demo is available only in limited cities, on a chargeable basis. At other places we offer demo over Phone, Email and Skype, on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, physical demo. Pressing Submit will take you to the payment page');
                 $('#priceNote').html(text);
                 $('#priceText').show();
-                $('#demoTextLi').hide();
+                $('#demoText').html(demoText);
+                $('#demoTextLi').show();
 
             }
         });
@@ -172,6 +195,8 @@
                     <br/>
 
                     <ul class="form-list">
+                        <p id="Error" style="color: red; font-size:16px;font-weight: 500"></p>
+                        <br/>
                         <li>
 
                             <label for="name" class="required"><em>*</em>Name</label>
@@ -308,7 +333,7 @@
                         </li>
 
                     </ul>
-                    <center><label style="color: red"><p id="Error"></p></label></center>
+
                     
                 </form>
 

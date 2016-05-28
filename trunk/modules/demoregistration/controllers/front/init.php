@@ -97,7 +97,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
              * fetching the demo price and state from the demo products cities table
              */
 
-            $productsdataSql = "Select productId,categoryId,statename,amount,demoText from ". _DB_PREFIX_ ."demo_products dp join "._DB_PREFIX_."demo_products_cities dpc on dp.id=dpc.demo_id where id=$product and cityname='$city' and demoType=$demoType";
+            $productsdataSql = "Select productId,categoryId,statename,amount,demoText from ". _DB_PREFIX_ ."demo_products dp join "._DB_PREFIX_."demo_products_cities dpc on dp.id=dpc.demo_id where id=$product and cityname='$city'";
             //echo $productsdataSql;
             $productData = Db::getInstance()->executeS($productsdataSql);
 
@@ -134,7 +134,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
             if (!$paidDemo)
 			{	//echo json_encode(array('status' => false, 'message' => 'You have selected other city..'));
 			
-                     if(empty($city))
+                     if(empty($city) || $city=='other')
                      {
                         $city=$o_city;
                      }
