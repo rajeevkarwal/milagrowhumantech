@@ -82,11 +82,17 @@ class DemoRegistrationPaymentNotificationModuleFrontController extends ModuleFro
                             $demoTotalPrice = $orderData[0]['amount'];
 
 //                            $demoTax = 12.36;
-                            //$demoTax = 14;
-			    $demoTax = 14.5;
+                            $demoTax = 14.5;
+                            if(strtotime(date('Y-m-d'))>=strtotime(date('2016-06-01')))
+                                $demoTax=15;
 
                             $demoPrice = round(($demoTotalPrice * 100) / (100 + $demoTax), 2);
                             $receiptNo = sprintf('%06d', $orderInfo['demos_id']);
+
+                            //update coupon and tax at the table
+                            $data = array('coupon_code' => json_encode($coupon,true), 'tax_rate' => $demoTax);
+                            Db::getInstance()->update('demos', $data, 'order_id=\'' . $OrderId . '\'');
+
                             $content = array(
                                 'demoPriceTaxExcl' => $demoPrice,
                                 'demoPriceTaxIncl' => $demoTotalPrice,
@@ -109,7 +115,7 @@ class DemoRegistrationPaymentNotificationModuleFrontController extends ModuleFro
                                 '{nb_order_no}' => $nb_order_no, '{address}' => $orderInfo['address'], '{country}' => $orderInfo['country'],
                                 '{state}' => $orderInfo['state'], '{city}' => $orderInfo['city'], '{zip}' => $orderInfo['zip'],
                                 '{mobile}' => $orderInfo['mobile'], '{email}' => $orderInfo['email'], '{coupon}' => $orderInfo['coupon'],
-                                '{category}' => $orderInfo['category'], '{specialComments}' => $orderInfo['special_comments']);
+                                '{category}' => $orderInfo['category'], '{specialComments}' => $orderInfo['special_comments'],'{demomode}'=>$orderInfo['demoType']);
                             $this->sendEmails($data, $fileAttachment, $coupon);
                             $this->sendMessage($orderInfo['category'], $orderInfo['mobile']);
 

@@ -9,50 +9,141 @@
 
 <script type="text/javascript">
     var productdata = new Array();
+    var demoAmount=0;
+    var demoText='';
     $(document).ready(function(){
 		//$('#target').hide();
         productdata={$productdata};
+        console.log(productdata);
         $('#product').change(function(){
+            $('#demoSelect').hide();
+            $('#demoMode').val("");
+            $('#amount').html("");
+            demoAmount=0;
+            demoText='';
+            $('#demoTextLi').hide();
+            $('#priceText').hide();
+            var cities = '';
+            cities +=  '<option value="">Select City</option>';
+            cities +=  '<option value="other">Other Cities</option>';
+            $('#city').html(cities);
+            $('#other_city').remove();
             getCities();
          });
+
+        //		/*Add new text field for other city, if city name is not display in drop down list*/
+			$('#city').change(function(){
+                $('#other_city').remove();
+                $('#amount').html("");
+                $('#demoMode').val("");
+                $('#demoSelect').hide();
+                $('#demoTextLi').hide();
+                $('#priceText').hide();
+                demoAmount=0;
+                demoText='';
+            var selectedCityOption=$('#city option:selected').val();
+            if(selectedCityOption!='other')
+            {
+                var selectedproduct = $.trim($('#product option:selected').val());
+                var allCitiesObj=productdata[selectedproduct]['cities'];
+                var selectedCityObj=new Object();
+                $.each(allCitiesObj, function( key, value ) {
+                    if(value['cityname']==selectedCityOption)
+                    {
+                        console.log(value);
+                        selectedCityObj=value;
+                        demoAmount=value.amount;
+                        demoText=value.demoText;
+
+                        if(value.demoType=='3')
+                        {
+                            $('#demoSelect').show();
+                        }
+                        else if(value.demoType=='1')
+                        {
+                            var text='You need to pay Rs ' + demoAmount + '/- for this pre-sales, ' +
+                                    'physical demo. Pressing Submit will take you to the payment page';
+
+                            // alert('Please note that physical demo is available only in limited cities, on a chargeable basis. At other places we offer demo over Phone, Email and Skype, on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, physical demo. Pressing Submit will take you to the payment page');
+                            $('#priceNote').html(text);
+                            $('#priceText').show();
+                            $('#demoText').html(demoText);
+                            $('#demoTextLi').show();
+                        }
+                        else
+                        {
+                            $('#demoText').html(demoText);
+                            $('#demoTextLi').show();
+                        }
+                        $('#demo_type').val(value.demoType);
+
+                    }
+                });
+
+
+            }
+            else
+            {
+                $('#targetOtherCity').append( "<div id='other_city'><label for='other' class='required'><em>*</em>Insert City Name</label><div class='input-box'><input id='other' type='text' name='other_city'/></div></div>" );
+                $('#demoText').html('');
+                $('#demoTextLi').show();
+                $('#priceNote').html('You have selected the Live skype/video demo which is free. Just submit the details.');
+                $('#priceText').show();
+            }
+
+			});
+
+        $('#demoMode').change(function(){
+            $('#amount').html("");
+            $('#priceText').hide();
+            var selectedVal=$('#demoMode option:selected').val();
+            if(selectedVal=='1')
+            {
+                //alert('You have selected demo over skype option. ');
+                $('#demoText').html(demoText);
+                $('#demoTextLi').show();
+                $('#priceNote').html('You have selected the Live skype/video demo which is free. Just submit the details.');
+                $('#priceText').show();
+            }
+            else
+            {
+               // $('#amount').html('You need to pay Rs '+ demoAmount +'/- for pre-sales, physical demo in cities where we offer this facility. Pressing Submit will take you to the payment page.<br/>For other cities we offer demo over Phone, Email and Skype, on a &#039;Free of Cost&#039; basis. Pressing Submit will confirm your demo request.');
+			    var text='Please note that physical demo is available only in limited cities, on a ' +
+                        'chargeable basis. At other places we offer demo over Phone, Email and Skype,' +
+                        ' on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, ' +
+                        'physical demo. Pressing Submit will take you to the payment page';
+
+               // alert('Please note that physical demo is available only in limited cities, on a chargeable basis. At other places we offer demo over Phone, Email and Skype, on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, physical demo. Pressing Submit will take you to the payment page');
+                $('#priceNote').html(text);
+                $('#priceText').show();
+                $('#demoText').html(demoText);
+                $('#demoTextLi').show();
+
+            }
+        });
+
 	  });
 	
 
-
+//some changes in css and code
     function getCities(){
         var selectedproduct = $.trim($('#product option:selected').val());
+        console.log(selectedproduct);
 
         var cities = '';
         cities +=  '<option value="">Select City</option>';
-        for(key in productdata){
+        if(selectedproduct)
+        {
+            var citiesData=productdata[selectedproduct]['cities'];
+            console.log(citiesData);
+            $.each( citiesData, function( key, value ) {
+                cities +=  '<option value="' + value['cityname'] + '">' + value['cityname'] + '</option>';
+            });
 
-        for(var i=0;i< productdata[key]['city'].length;i++){
-                var city = productdata[key]['city'];
-                if(key == selectedproduct){
-                    var amount = productdata[key]['amount'];
-                    cities +=  '<option value="' + city[i] + '">' + city[i] + '</option>';
-                }
-            }
         }
-		cities +=  '<option value="other">Other Cities</option>';
+
+        cities +=  '<option value="other">Other Cities</option>';
         $('#city').html(cities);
-
-        if(selectedproduct != 'select'){
-			 var free = "'Free of Cost'";
-            $('#amount').html('You need to pay Rs '+ amount +'/- for pre-sales, physical demo in cities where we offer this facility. Pressing Submit will take you to the payment page.<br/>For other cities we offer demo over Phone, Email and Skype, on a &#039;Free of Cost&#039; basis. Pressing Submit will confirm your demo request.');
-			 alert('Please note that physical demo is available only in limited cities, on a chargeable basis. At other places we offer demo over Phone, Email and Skype, on a ' + free + ' basis.\nYou need to pay Rs ' + amount + '/- for this pre-sales, physical demo. Pressing Submit will take you to the payment page');
-        }else{
-            $('#amount').html("    ");
-        }
-		
-		/*Add new text field for other city, if city name is not display in drop down list*/
-			$('select').change(function(){
-			if($(this).val()=="other")
-    		$('#target').append( "<div id='other_city'><label for='other' class='required'><em>*</em>Insert City Name</label><div class='input-box'><input id='other' type='text' name='other_city'/></div></div>" );
-			else
-        	$('#other_city').remove();
-			});
-		/*end new text field*/
 
     }
 </script>
@@ -102,27 +193,32 @@
                     <p>8. Please note that the demo shall last for 30 minutes to an hour only, as per the product being demonstrated.</p>
                    
                     <br/>
+
                     <ul class="form-list">
+                        <p id="Error" style="color: red; font-size:16px;font-weight: 500"></p>
+                        <br/>
                         <li>
 
                             <label for="name" class="required"><em>*</em>Name</label>
 
                             <div class="input-box">
-                                <input type="text" id="name" name="name" />
+                                <input type="text" id="name" name="name" required/>
                             </div>
+
                         </li>
                         <li>
                             <label for="email" class="required"><em>*</em>Email</label>
 
                             <div class="input-box">
-                                <input type="email" id="email" name="email"/>
+                                <input type="email" id="email" name="email" required/>
                             </div>
+
                         </li>
                         <li>
                             <label for="mobile" class="required"><em>*</em>Mobile</label>
 
                             <div class="input-box">
-                                <input type="text" id="mobile" name="mobile"/>
+                                <input type="text" id="mobile" name="mobile" required/>
                             </div>
                         </li>
                         <li>
@@ -136,39 +232,57 @@
                             <label for="city" class="required"><em>*</em>Select City</label>
 
                             <div class="input-box">
-                                <select name="city" id="city">
+                                <select name="city" id="city" style="text-transform: capitalize;">
                                     <option value="">Select City</option>
                                  </select>
                             </div>
                         </li>
-                        <li id="target">
-                         <!-- <label for="other" class="required"><em>*</em>Insert City Name</label>
-                        	  <div class="input-box">
-                        	   <input id="other" type="text" name="other"/>
-                               </div>-->
-                               </li>
-                               
+                        <li id="targetOtherCity">
+
+                        </li>
+
+                        <input type="hidden" name="demo_type" value="0" id="demo_type">
+                        <li id="demoSelect" style="display:none">
+                            <label for="" class="required"><em>*</em>Demo Mode</label>
+                            <div class="input-box">
+                                <select name="demoMode" id="demoMode">
+                                    <option value="">Select Mode</option>
+                                    <option value="1">Free Live Video</option>
+                                    <option value="2">Paid Home Demo</option>
+                                </select>
+                            </div>
+
+                        </li>
+                        <li style="display: none;" id="priceText">
+                            <p id="priceNote" style="color:red"> </p>
+                        </li>
+                        <li style="display:none;" id="demoTextLi">
+
+                            <p id="demoText" style="color:red;text-transform: capitalize;"></p>
+                        </li>
 
                         <li>
                             <label for="address" class="required"><em>*</em>Address</label>
 
                             <div class="input-box">
-                                <textarea id="address" name="address" style="width:36%"></textarea>
+                                <textarea id="address" name="address" style="width:36%" required></textarea>
                             </div>
                         </li>
+
+
 
                         <li>
                             <label for="zip" class="required"><em>*</em>Zip Code</label>
 
                             <div class="input-box">
-                                <input id="zip" type="text" name="zip"/>
+                                <input id="zip" type="text" name="zip" required/>
                             </div>
                         </li>
                         <li>
                             <label for="date" class="required"><em>*</em>Preferred Date</label>
 
                             <div class="input-box">
-                                <input type="text" id="date" name="date"  placeholder="" readonly/>
+                                <input type="text" id="date" name="date"  placeholder="" />
                             </div>
                         </li>
 
@@ -176,13 +290,13 @@
                             <label for="time" class="required"><em>*</em>Preferred Time</label>
 
                             <div class="input-box">
-                                <input type="text" id="time" name="time"  placeholder="" readonly/>
+                                <input type="text" id="time" name="time"  placeholder="" />
                             </div>
                         </li>
 
 
                         <li>
-                            <label for="comments">Special Comments</label>
+                            <label for="comments">Special Comment</label>
 
                             <div class="input-box">
                                 <textarea name="special_comments" style="width:36%"></textarea>
@@ -219,7 +333,7 @@
                         </li>
 
                     </ul>
-                    
+
                     
                 </form>
 

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 define('BOOK_DEMO_BEFORE_PAYMENT_CUSTOMER_CARE', 'customercare@milagrow.in');
 define('BOOK_DEMO_BEFORE_PAYMENT_CS', 'cs@milagrow.in');
 //define('BOOK_DEMO_BEFORE_PAYMENT_CUSTOMER_CARE', 'ptailor@greenapplesolutions.com');
@@ -29,9 +29,55 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
             $time = Tools::getValue('time');
             $order_id = $this->GUID();
             $address = Tools::getValue('address');
+
+
+            /*
+             * New parameters added
+             */
+            $demoMode = Tools::getValue('demoMode');
+            $demoType = Tools::getValue('demo_type');
+
+
+            if($demoType==0 && $city!='other')
+            {
+                echo json_encode(array('status' => false, 'message' => 'Parameters mismatch!!'));
+                exit;
+            }
+
+            if($demoType=='3' && empty($demoMode))
+            {
+                echo json_encode(array('status' => false, 'message' => 'Parameters mismatch!!'));
+                exit;
+            }
+
+            $paidDemo=true;
+
+            $demoText='Home Demo';
+            if($demoType==2)
+            {
+                $demoText='Skype Demo';
+                $paidDemo=false;
+            }
+
+            if($city=='other')
+            {
+                $demoText='Demo for other city';
+                $paidDemo=false;
+            }
+
+            if($demoType==3 && $demoMode=='1')
+            {
+                $paidDemo=false;
+                $demoText='Skype Demo';
+            }
+
+
+
+
             $zip = Tools::getValue('zip');
             $specialComment = Tools::getValue('special_comments');
 			$o_city = Tools::getValue('other_city');
+            
             if (!($captchaName = trim(Tools::getValue('captchaName')))) {
                 echo json_encode(array('status' => false, 'message' => 'Invalid captcha name'));
                 exit;
@@ -42,17 +88,24 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
                 exit;
             }
 
-            if (trim(Tools::getValue('captcha')) && $this->context->cookie->{$captchaName} != trim(Tools::getValue('captcha'))) {
+            if (trim(Tools::getValue('captcha')) && $_SESSION[$captchaName] != trim(Tools::getValue('captcha'))) {
                 echo json_encode(array('status' => false, 'message' => 'Invalid Captcha'));
                 exit;
-
             }
 
-            $productDataSql = "Select amount,category_id,state from ". _DB_PREFIX_ ."demo_detail where product = '". $product ."' and city = '" . $city . "' ";
-            $productData = Db::getInstance()->executeS($productDataSql);
+            /*
+             * fetching the demo price and state from the demo products cities table
+             */
 
+            $productsdataSql = "Select productId,categoryId,statename,amount,demoText from ". _DB_PREFIX_ ."demo_products dp join "._DB_PREFIX_."demo_products_cities dpc on dp.id=dpc.demo_id where id=$product and cityname='$city'";
+            //echo $productsdataSql;
+            $productData = Db::getInstance()->executeS($productsdataSql);
+
+            //echo '<pre>';
+            //print_r($_REQUEST);
+            //print_r($productData);
             $price = $productData[0]['amount'];
-            $state = $productData[0]['state'];
+            $state = $productData[0]['statename'];
 
             /*if (empty($name) || empty($email) || empty($mobile) || empty($product) || empty($price) ||
                 empty($date) || empty($time) || empty($order_id) || empty($address) || empty($zip)
@@ -61,25 +114,34 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
                 exit;
             }*/
 
-            $categorySql = "Select name from ". _DB_PREFIX_ ."category_lang where id_category = '". $productData[0]['category_id'] ."' ";
+            $categorySql = "Select name from ". _DB_PREFIX_ ."category_lang where id_category = '". $productData[0]['categoryId'] ."' ";
             $category = Db::getInstance()->executeS($categorySql);
             $categoryName = $category[0]['name'];
+
+            $productSql = "Select name from ". _DB_PREFIX_ ."product_lang where id_product = '". $productData[0]['productId'] ."' ";
+            $productRes = Db::getInstance()->executeS($productSql);
+            $productName = $productRes[0]['name'];
 
             $country = "India";
             $currentDate = new DateTime('now', new DateTimeZone('UTC'));
             $currentTime = $currentDate->format("Y-m-d H:i:s");
             $insertData = array('date' => $date ." " . $time, 'amount' => $price, 'order_id' => $order_id, 'name' => $name,
-                'email' => $email, 'city' => $city, 'product' => $product, 'category' => $categoryName, 'mobile' => $mobile,
+                'email' => $email, 'city' => $city, 'product' => $productName, 'category' => $categoryName, 'mobile' => $mobile,
                 'country' => $country, 'state' => $state, 'address' => $address, 'zip' => $zip, 'special_comments' => $specialComment,
-                'created_at' => $currentTime, 'updated_at' => $currentTime,);
+                'created_at' => $currentTime, 'updated_at' => $currentTime,'demoType'=>$demoText);
 
-            if ( $city=="other") 
+
+            if (!$paidDemo)
 			{	//echo json_encode(array('status' => false, 'message' => 'You have selected other city..'));
 			
+                     if(empty($city) || $city=='other')
+                     {
+                        $city=$o_city;
+                     }
 					$insertData = array('date' => $date ." " . $time, 'amount' => $price, 'order_id' => $order_id, 'name' => $name,
-                'email' => $email, 'city' => $o_city, 'product' => $product, 'category' => $categoryName, 'mobile' => $mobile,
+                'email' => $email, 'city' => $city, 'product' => $productName, 'category' => $categoryName, 'mobile' => $mobile,
                 'country' => $country, 'state' => $state, 'address' => $address, 'zip' => $zip, 'special_comments' => $specialComment,
-                'created_at' => $currentTime, 'updated_at' => $currentTime,);
+                'created_at' => $currentTime, 'updated_at' => $currentTime,'demoType'=>$demoText);
 					 if (Db::getInstance()->insert('demos', $insertData)) {
 						$lastInsertedId=Db::getInstance()->Insert_ID();
 						//$url = DemoRegistration::getShopDomainSsl(true, true);
@@ -94,7 +156,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 							'{address}' => $insertData['address'], '{country}' => $insertData['country'],
 							'{state}' => $insertData['state'], '{city}' => $insertData['city'], '{zip}' => $insertData['zip'],
 							'{mobile}' => $insertData['mobile'], '{email}' => $insertData['email'],
-							'{category}' => $insertData['category'], '{specialComments}' => $insertData['special_comments']);
+							'{category}' => $insertData['category'], '{specialComments}' => $insertData['special_comments'],'{demomode}'=>$demoText);
 		
 						//$this->sendEmails($data);
 						 
@@ -107,13 +169,14 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 						$vars = array(
 								'{name}' => $name, 
 								'{email}' => $email,
-								'{city}'=> $o_city,
+								'{city}'=> $city,
 								'{phone}'=> $mobile,
-								'{product}'=> $product,
+								'{product}'=> $productName,
 								'{address}'=> $address,
 								'{zip}'=> $zip,
 								'{date}'=> $date,
-								'{comments}'=> $specialComment
+								'{comments}'=> $specialComment,
+                                '{demomode}'=>$demoText
 						);
          			 	$id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 						$send = Mail::Send($id_lang, 'booked',$sub, $vars, $email);
@@ -128,11 +191,9 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 						}
 						else
 						{
-							$smarty->assign('mail', 'Email not sent');
+							//$smarty->assign('mail', 'Email not sent');
+                            echo json_encode(array('status' => true, 'url' => $url));
 						}
-						
-	
-					
 						 //$this->context->smarty->assign(array('confirmation' => 1));
 						
 						  //$this->context->smarty->assign(array('confirmation' => 1, 'alertMessage' => $alertMessage));
@@ -158,7 +219,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 							'{address}' => $insertData['address'], '{country}' => $insertData['country'],
 							'{state}' => $insertData['state'], '{city}' => $insertData['city'], '{zip}' => $insertData['zip'],
 							'{mobile}' => $insertData['mobile'], '{email}' => $insertData['email'],
-							'{category}' => $insertData['category'], '{specialComments}' => $insertData['special_comments']);
+							'{category}' => $insertData['category'], '{specialComments}' => $insertData['special_comments'],'{demomode}'=>$demoText);
 		
 						//$this->sendEmails($data);
 						//echo json_encode(array('status' => true, 'url' => $url));
@@ -175,7 +236,8 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 								'{address}'=> $address,
 								'{zip}'=> $zip,
 								'{date}'=> $date,
-								'{comments}'=> $specialComment
+								'{comments}'=> $specialComment,
+                                '{demomode}'=>$demoText
 						);
          			 	$id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 						$send = Mail::Send($id_lang, 'booked',$sub, $vars, $email);
@@ -207,73 +269,62 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 
     public function initContent()
     {
-
         parent::initContent();
         $captchas = $this->getCaptcha();
         global $cookie;
         $captchaVariable = "demo_reg" . rand(1000000, PHP_INT_MAX);
-        $cookie->{$captchaVariable} = null;
-        $cookie->write(); // I think you'll need this as it doesn't automatically save
-        $key = array_rand($captchas, 1);
-        $cookie->{$captchaVariable} = $captchas[$key]['value'];
-        $cookie->write(); // I think you'll need this as it doesn't automatically save
+        $crkey = array_rand($captchas, 1);
+        
+        foreach($_SESSION as $sKey=>$sVal)
+        {
+            if (strpos($sKey, 'demo_reg') !== false) {
+              unset($_SESSION[$sKey]);
+            }
+        }
+        $_SESSION[$captchaVariable]=$captchas[$crkey]['value'];
 
-        $productsSql = 'Select DISTINCT product,name as category from ' . _DB_PREFIX_ . 'demo_detail
-        JOIN '. _DB_PREFIX_ .'category_lang  ON  '. _DB_PREFIX_ .'category_lang.id_category =  ' . _DB_PREFIX_ . 'demo_detail.category_id';
+
+        //$cookie->{$captchaVariable} = $captchas[$key]['value'];
+        //$cookie->write(); // I think you'll need this as it doesn't automatically save
+        
+        $productsSql = 'Select ps_demo_products.id,ps_product_lang.name as product,ps_category_lang.name as category from ps_demo_products JOIN ps_category_lang ON ps_category_lang.id_category = ps_demo_products.categoryId JOIN ps_product ON ps_product.id_product = ps_demo_products.productId JOIN ps_product_lang ON ps_product_lang.id_product = ps_product.id_product where ps_product.active=1 and ps_demo_products.is_active=1';
+//        echo $productsSql;
         $products = Db::getInstance()->executeS($productsSql);
 
         $categorywiseProduct = array();
-
-        $productsarr = array();$productarr = array();
-        foreach($products as $pr){
-            $productsdataSql = "Select city,amount,category_id from ". _DB_PREFIX_ ."demo_detail where product = '". $pr['product'] ."' and is_active=1 ";
-            $productsdata = Db::getInstance()->executeS($productsdataSql);
-
-            $cities = array();
-            $category ='';
-            foreach($productsdata as $product){
-                array_push($cities,$product['city']);
-                $amount = $product['amount'];
-            }
-
-            $category = $pr['category'];
-            if($category == $pr['category']){
-                if(is_array($categorywiseProduct[$pr['category']])){
-                    array_push($categorywiseProduct[$pr['category']],$pr['product']);
-                }else{
-                    $categorywiseProduct = $categorywiseProduct + array($pr['category'] => array($pr['product']));
-                }
-            }else{
-                $categorywiseProduct = $categorywiseProduct + array($pr['category'] => array($pr['product']));
-            }
-
-
-            $productsarr = array_merge($productsarr,array('city' => $cities,'amount' => $amount));
-            $productarr = array_merge($productarr,array($pr['product'] => $productsarr));
-            $productdataarr = json_encode($productarr);
-        }
-
         $productshtml ='';
         $productshtml .= '<select name="product" id="product">';
-        $productshtml .= '<option value="select">Select Product</option>';
+        $productshtml .= '<option value="">Select Product</option>';
+        $productdataarr=array();
+        foreach($products as $key=>$pr){
+            $productsdataSql = "Select cityname,amount,demoType,demoText from ". _DB_PREFIX_ ."demo_products_cities where demo_id =". $pr['id'];
+            $productsdata = Db::getInstance()->executeS($productsdataSql);
+//            echo $productsdataSql;
+            $categorywiseProduct[$pr['category']][]=$pr;
+            $products[$key]['cities']=$productsdata;
+            $productdataarr[$pr['id']]=$products[$key];
+        }
+
         foreach($categorywiseProduct as $key1 => $cproduct){
             $productshtml .= '<OPTGROUP LABEL="' . $key1 .'">';
-            for($i=0;$i<count($cproduct);$i++){
-                $productshtml .= '<option value="'. $cproduct[$i] .'">'. $cproduct[$i] .'</option>';
+            foreach($cproduct as $val){
+                $productshtml .= '<option value="'. $val['id'] .'">'. $val['product'] .'</option>';
             }
             $productshtml .= '</OPTGROUP>';
         }
+
         $productshtml .=  '</select>';
-//        echo "<pre>";print_r($categorywiseProduct);echo "</pre>";exit;
+//        echo "<pre>";print_r($categorywiseProduct);echo "</pre>";
+//        print_r($productdataarr);
 
         $this->context->smarty->assign(array(
             'form_action' => DemoRegistration::getShopDomainSsl(true, true) . '/index.php?fc=module&module=' . DemoRegistration::MODULE_NAME . '&controller=init',
             'jsSource' => $this->module->getPathUri(), 'price' => $this->price,
-            'productdata' => $productdataarr,
+            'productdata' => json_encode($productdataarr),
 //            'selectedProduct' => $selectedProduct,
             'products' => $productshtml,
             'captchaName' => $captchaVariable,
-            'captchaText' => $captchas[$key]['key'],
+            'captchaText' => $captchas[$crkey]['key'],
             'this_path' => $this->module->getPathUri()));
 
         $this->setTemplate('demoregistration.tpl');
@@ -336,7 +387,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
 
                 //sending email to receivable
                 $cs_Email = BOOK_DEMO_BEFORE_PAYMENT_CS;
-//                $cs_Email ='ptailor@greenapplesolutions.com';
+                //$cs_Email ='hitanshu.malhotra@milagrow.in';
                 if (!empty($cs_Email)) {
                     $res = Mail::Send(
                         (int)1,
@@ -355,8 +406,8 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
                     );
                 }
 
-                $customerCareEmail = BOOK_DEMO_BEFORE_PAYMENT_CUSTOMER_CARE;
-//            $customerCareEmail = 'ptailor@greenapplesolutions.com';
+//                $customerCareEmail = BOOK_DEMO_BEFORE_PAYMENT_CUSTOMER_CARE;
+            //$customerCareEmail = 'hitanshu.malhotra@milagrow.in';
                 // Sending mail to customer care
                 $res = Mail::Send(
                     (int)1,
