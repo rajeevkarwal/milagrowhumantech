@@ -53,6 +53,9 @@ class EMIValidationModuleFrontController extends ModuleFrontController
          */
         //$serviceTax = 14;
         $serviceTax = 14.5;
+        if(strtotime(date('Y-m-d'))>=strtotime(date('2016-06-01')))
+            $serviceTax=15;
+
         $orderTotal = $this->context->cart->getOrderTotal(true, Cart::BOTH);
         $Redirect_Url = 'http://' . htmlspecialchars($_SERVER['HTTP_HOST'], ENT_COMPAT, 'UTF-8') . __PS_BASE_URI__ . 'modules/emi/validation.php'; //your redirect URL where your customer will be redirected after authorisation from CCAvenue
 
