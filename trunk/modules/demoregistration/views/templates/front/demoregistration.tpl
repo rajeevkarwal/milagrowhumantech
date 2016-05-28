@@ -108,9 +108,7 @@
             else
             {
                // $('#amount').html('You need to pay Rs '+ demoAmount +'/- for pre-sales, physical demo in cities where we offer this facility. Pressing Submit will take you to the payment page.<br/>For other cities we offer demo over Phone, Email and Skype, on a &#039;Free of Cost&#039; basis. Pressing Submit will confirm your demo request.');
-			    var text='Please note that physical demo is available only in limited cities, on a ' +
-                        'chargeable basis. At other places we offer demo over Phone, Email and Skype,' +
-                        ' on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, ' +
+			    var text='You need to pay Rs ' + demoAmount + '/- for this pre-sales, ' +
                         'physical demo. Pressing Submit will take you to the payment page';
 
                // alert('Please note that physical demo is available only in limited cities, on a chargeable basis. At other places we offer demo over Phone, Email and Skype, on a free basis.\nYou need to pay Rs ' + demoAmount + '/- for this pre-sales, physical demo. Pressing Submit will take you to the payment page');
