@@ -360,7 +360,15 @@ class AMCPaymentNotificationModuleFrontController extends ModuleFrontController
 
                             //$amcTax = 12.36;
                             //$amcTax = 14;
-			    $amcTax = 14.5;
+			                $amcTax = 14.5;
+
+                            if(strtotime(date('Y-m-d'))>=strtotime(date('2016-06-01')))
+                                $amcTax=15;
+
+
+                            $updata = array('tax_rate' => $amcTax);
+                            Db::getInstance()->update('amc', $updata, 'order_id=\'' . $OrderId . '\'');
+
                             $amcPrice = round(($amcTotalPrice * 100) / (100 + $amcTax), 2);
                             $receiptNo = sprintf('%06d', $orderInfo['amc_id']);
                             $quantity=1;

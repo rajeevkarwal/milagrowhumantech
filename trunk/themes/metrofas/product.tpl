@@ -238,6 +238,7 @@
                             <div class="product-shop {if $themesdev.td_pro_sidebar=="enable"}span6{else}span7{/if}">
                                 <div class="product-name">
                                     <h1>{$product->name|escape:'htmlall':'UTF-8'} </h1>
+									<div><input type="text" name="pincode" pattern="[0-9]" maxlength="6" placeholder="6 Digit Pincode"></div>
                                 </div>
                                 <div class="rating-links">
                                    {$HOOK_PRODUCT_OOS}

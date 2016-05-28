@@ -29,9 +29,11 @@ $(document).ready(function () {
         return filter.test(data);
     }
 
-
+	//error show on the bottom calling function 
     $("#demo").submit(function (e) {
         e.preventDefault();
+        $('#Error').html('');
+        $('#Error').hide();
         var name = $.trim($('#name').val());
         var email = $.trim($('#email').val());
         var mobile = $.trim($('#mobile').val());
@@ -39,55 +41,142 @@ $(document).ready(function () {
         var address = $.trim($('#address').val());
         var date = $.trim($('#date').val());
         var time = $.trim($('#time').val());
+        var mode = $.trim($('#demoMode').val());
         var product = $.trim($("#product option:selected").val());
         var city = $.trim($("#city option:selected").val());
-
+        var demoType=$.trim($('#demo_type').val());
+        var otherCity=$.trim($('#other').val());
         if (!name) {
-            alert('Name is required');
+            var text='Name Required';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
 
         else if (!email) {
-            alert('Email is Required');
+
+            var text='Email is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!isValidEmailAddress(email)) {
-            alert('Please enter valid email id');
+            var text='Please enter valid email id';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!mobile) {
-            alert('Mobile is required');
+            var text='Mobile Number is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
 
         else if (!validatePhone(mobile)) {
-            alert('Please enter valid 10 digit mobile number.');
+            var text='Please enter 10 Digit Mobile No.';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!product) {
-            alert('Product is Required');
+            var text='Please Select Product';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
+
+        else if (!city) {
+            var text='City for Demo is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
+            return;
+        }
+        else if(city && city!='other')
+        {
+            if(demoType==3 && !mode)
+            {
+            var text='Demo Mode is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+                $('html, body').animate({
+                    scrollTop: ($('#Error').offset().top - 300)
+                }, 2000);
+            return;
+            }
+        }
+        else if(city && city=='other')
+        {
+            if(!otherCity)
+            {
+                var text='Enter other city';
+                $('#Error').html(text);
+                $('#Error').show();
+                $('html, body').animate({
+                    scrollTop: ($('#Error').offset().top - 300)
+                }, 2000);
+                return;
+            }
+        }
         else if (!address) {
-            alert('Address is Required');
+            var text='Address for Demo is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!zip) {
-            alert('Zip code is Required');
+            var text='Zip Code for Demo is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!date) {
-            alert('Date is Required');
+
+            var text='Date is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
         else if (!time) {
-            alert('Time is Required');
+            var text='Expected Time is Required';
+            $('#Error').html(text);
+            $('#Error').show();
+            $('html, body').animate({
+                scrollTop: ($('#Error').offset().top - 300)
+            }, 2000);
             return;
         }
-        else if (!city) {
-            alert('City is Required');
-            return;
-        }
+
 
         $('#ajax-loader').show();
         $.ajax({

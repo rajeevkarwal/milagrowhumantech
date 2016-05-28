@@ -35,7 +35,7 @@
                     <p class="cms-banner-img"><img src="/img/cms/cms-banners/demo-page.png" alt="milagrow-book-demo"></p>
                     
                    
-                     <h1 style="color:green;">{l s=' Your Demo hase been Booked'}</h1>
+                     <h1 style="color:green;">{l s=' Your Demo has been Booked'}</h1>
                   
                    
                    
