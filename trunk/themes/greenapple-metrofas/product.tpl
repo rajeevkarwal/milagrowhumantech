@@ -731,10 +731,10 @@
                         <input type="button" class="qty-decrease quantity_box_button_down" onclick="qtyDown()">
                         <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12"
                                id="quantity_wanted" name="qty">
-						<input type="text" class="input-text" title="Pincode" maxlength="6" pattern="[0-6]" placeholder="Your Pincode">	   
+						{*<input type="text" class="input-text" title="Pincode" maxlength="6" pattern="[0-6]" placeholder="Your Pincode">	   *}
                         <input type="button" class="qty-increase quantity_box_button_up" onclick="qtyUp()">
                     </div>
-					<div class="pincode"><input type="number" class="input-text" placeholder="Pincode" maxlength="6" pattern="[0-9]" onblur="this.form.submit();"></div>
+					{*<div class="pincode"><input type="number" class="input-text" placeholder="Pincode" maxlength="6" pattern="[0-9]" onblur="this.form.submit();"></div>*}
                 </div>
                 {if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
                     <button class="button btn-cart" type="button" name="Submit"
