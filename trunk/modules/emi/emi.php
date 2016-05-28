@@ -460,7 +460,11 @@ class EMI extends PaymentModule
              */
             //$serviceTax = (14 * $emiProcesingFee / 100);
 	// dated 17-11-2015 service tax changed to 14.5
-	    $serviceTax = (14.5 * $emiProcesingFee / 100);		
+	    $serviceTax = (14.5 * $emiProcesingFee / 100);
+
+            if(strtotime(date('Y-m-d'))>=strtotime(date('2016-06-01')))
+                $serviceTax = (15 * $emiProcesingFee / 100);
+
             $EMIAmountPaid = $orderEntry['total_paid'] + $emiProcesingFee + $serviceTax;
             $EMIPaymentKeyValue[$orderEntry['id_order']] = $EMIAmountPaid;
         }
@@ -590,6 +594,11 @@ class EMI extends PaymentModule
         //$serviceTaxProcessingFees = ($emiProcessingFees * 14 / 100);
          // dated 17-11-2015 service tax changed to 14.5
         $serviceTaxProcessingFees = ($emiProcessingFees * 14.5 / 100);
+
+        if(strtotime(date('Y-m-d'))>=strtotime(date('2016-06-01')))
+            $serviceTaxProcessingFees = ($emiProcessingFees * 15 / 100);
+
+
         $totalOrderFinal = $totalOrderPrice + $emiProcessingFees + $serviceTaxProcessingFees;
 
         if ($EMIPlan == '3_months')
