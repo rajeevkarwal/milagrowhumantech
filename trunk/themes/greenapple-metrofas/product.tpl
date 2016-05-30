@@ -732,11 +732,11 @@
                 			<label>COD Available</label> 
                 </div>
                 <div id="pincode_fail" class="msg_pincode" style="display:none">
-                			<label>Shipping Avalaible</label><br>
-                			<label>COD Available</label>
+                			<label>Shipping Not Avalaible</label><br>
+                			<label>COD Not Available</label>
                 </div>
                 <div id="common_change" style="display:none;">
-                	at <span id="pincodeNumber"></span><a  id='changePincode'>Change Pincode</a>
+                		<span id="pincodeNumber"></span><a  id='changePincode'>Change Pincode</a>
                 </div>
             </div>
 			<style>
@@ -779,7 +779,7 @@
                     	$('#pincode_success').hide();
 						$('#common_change').hide();
 						$('#pincode_fail').hide();
-						$('#pincodeFill').hide();
+						$('#pincodeFill').show();
                     		}
             		)
                                 $('#check').click(function()
