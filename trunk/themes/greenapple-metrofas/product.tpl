@@ -728,11 +728,12 @@
 				</center>			
                 </div>
                 <div id="pincode_success" class="msg_pincode" style="display:none;">
-                			<label>Shipping & COD Available </label>
-                			<label></label> 
+                			<span id="cod_true"></span>
+                			
+                			
                 </div>
                 <div id="pincode_fail" class="msg_pincode" style="display:none">
-                			<label>Shipping & COD Not Available</label>
+                			<span id="cod_false"></span>
                 			
                 </div>
                 <div id="common_change" style="display:none;">
@@ -796,6 +797,7 @@
 														if($data.cod_available)
 														{
 															$('#pincode_success').show();
+															document.getElementById('cod_true').innerHTML='COD & Shipping Available';
 															$('#common_change').show();
 															$('#pincode_fail').hide();
 															$('#pincodeFill').hide();
@@ -808,6 +810,7 @@
 														$('#pincode_success').hide();
 														$('#common_change').show();
 														$('#pincode_fail').show();
+														document.getElementById('cod_false').innerHTML='COD & Shipping Available';
 														$('#pincodeFill').hide();
 														
 													}
