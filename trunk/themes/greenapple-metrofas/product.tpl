@@ -724,11 +724,19 @@
                     <label>Check Availability At</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="check" class="qty-increase quantity_box_button_up" >CHECK</button>
+					<button id="check" class="qty-increase quantity_box_button_up cod_check" >CHECK</button>
 				</center>			
                 </div>
             </div>
-			
+			<style>
+				.cod_check{
+				width: 80px;
+    height: 31px;
+    color: white;
+    background-color: #FFA930;
+    border: none;
+				}
+			</style>
             <div class="add-to-box">
                 <p id="minimal_quantity_wanted_p"{if $product->minimal_quantity <= 1 OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
                     {l s='This product is not sold individually. You must select at least'} <b
@@ -753,7 +761,6 @@
                                 $('#check').click(function()
                                 {
                                     var pincode = $('#pincodes').val();
-                                  
                                     $.ajax(
                                             {
                                                 type:'GET',
@@ -775,10 +782,7 @@
                                             }
                                     )
                                 }
-
-
                                 )
-
                     </script>
                 </div>
                 {if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
