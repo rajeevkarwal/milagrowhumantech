@@ -17,27 +17,113 @@ require_once dirname(__FILE__).'/../../init.php';
 /** @var Shiptomyid $module */
 $module = Module::getInstanceByName('shiptomyid');
 $context = Context::getContext();
-
+$js_files = array();
+$js_uri =  Media::getJqueryPath();
+		if (is_array($js_uri))
+			foreach ($js_uri as $js_file)
+			{
+				$js_path = Media::getJSPath($js_file);
+				$key = is_array($js_path) ? key($js_path) : $js_path;
+				if ($js_path && !in_array($js_path, $js_files))
+					$js_files[] = $js_path;
+			}
+		else
+		{
+			$js_path = Media::getJSPath($js_uri);
+			if ($js_path && !in_array($js_path, $js_files))
+				$js_files[] = $js_path;
+		}
+if(!empty($js_files)){
+    foreach($js_files as $js_file){
+        if(!empty($js_file)){
+            echo "<script src='{$js_file}' type='text/javascript'></script>";
+        }
+    }
+}
 /*
  * Get shop data
  */
-$current_cart = new Cart((int)Tools::getValue('data'));
-if (!Validate::isLoadedObject($current_cart))
-	die('<script language="javascript" type="text/javascript">top.location.href = "'.$context->link->getPageLink('order').'?step=1" ;</script>');
+//$current_cart = new Cart((int)Tools::getValue('data'));
+//if (!Validate::isLoadedObject($current_cart) && (!Tools::getValue('giftnow', false) || Tools::getValue('giftnow') == '0') )
+//	die('<script language="javascript" type="text/javascript">top.location.href = "'.$context->link->getPageLink('order').'?step=1" ;</script>');
+if(isset($_REQUEST['data']) && !empty($_REQUEST['data']) ){
+$current_cart = new Cart((int) Tools::getValue('data'));
+if (!Validate::isLoadedObject($current_cart) && ( !Tools::getValue('giftnow', false) && Tools::getValue('giftnow') != '1' ) )
 
+        die('<script language="javascript" type="text/javascript">top.location.href = "' . $context->link->getPageLink('order') . '?step=1" ;</script>');
+
+}elseif(!isset($_REQUEST['giftnow']) || $_REQUEST['giftnow'] != '1' ){
+    
+    die('<script language="javascript" type="text/javascript">top.location.href = "' . $context->link->getPageLink('order') . '?step=1" ;</script>');
+}
 if (empty($_POST))
 	die('An error occurred...');
 
 /*
  * Check key
  */
-$check_key = md5($current_cart->id.'_'.$current_cart->secure_key);
-if (!Tools::getValue('key', false) || Tools::getValue('key') != $check_key)
+/*$check_key = md5($current_cart->id . '_' . $current_cart->secure_key);
+$check_key1 = md5(Configuration::get('SHIPTOMYID_USERNAME'));
+if (!Tools::getValue('key', false) && ( Tools::getValue('key') != $check_key || Tools::getValue('key') != $check_key1 ))
+    die('An error occurred...');*/
+
+if(isset($current_cart) && !empty($current_cart)){
+    $check_key = md5($current_cart->id . '_' . $current_cart->secure_key);
+    
+}else{
+    $check_key = '';
+}
+$check_key1 = md5(Configuration::get('SHIPTOMYID_USERNAME'));
+if (!Tools::getValue('key', false) && ( Tools::getValue('key') != $check_key || Tools::getValue('key') != $check_key1 ))
 	die('An error occurred...');
 
-/*
- * Get popup return data
- */
+if (Tools::getValue('giftnow', false) && Tools::getValue('giftnow') == '1') {
+    if (!isset($_SESSION)) {
+        @session_start();
+    }
+    $_SESSION['giftnow'] = $_POST; ?>
+    <script language="javascript" type="text/javascript">
+    //alert('hii');    
+    var sdata =  $( "#buy_block",window.parent.document ).serializeArray();
+    var data = {};
+    $(sdata ).each(function(index, obj){
+            data[obj.name] = obj.value;
+    });
+   		//var idCombination = $( "#idCombination",window.parent.document ).attr('value')
+	            $.ajax({    
+		        type: 'POST',
+		        headers: { "cache-control": "no-cache" },
+		        url: "<?php echo $context->link->getPageLink('index.php'); ?>" + '?rand=' + new Date().getTime(),
+		        async: true,
+		        cache: false,
+		        dataType : "json",
+		        data: 'controller=cart&add=1&ajax=true&qty=' + ((data['qty'] && data['qty'] != null) ? data['qty'] : '1') + '&id_product=' + data['id_product'] + '&token=' + data['token'] + ( (parseInt(data['id_product_attribute']) && data['id_product_attribute'] != null) ? '&ipa=' + parseInt(data['id_product_attribute']): ''),
+		        success: function(jsonData,textStatus,jqXHR)
+		        {
+		            console.log('success');
+		            $('<img src="<?php echo __PS_BASE_URI__; ?>modules/shiptomyid/views/img/loader.gif" align="center" alt="Loading..." />').appendTo("body");
+		            
+		            //
+		            if(confirm("Product successfully added to your shopping cart.\nClick 'Ok' for Proceed to checkout\nClick 'Cancel' for Continue Gifting")){
+			top.location.href = "<?php echo $context->link->getPageLink('index.php'); ?>?controller=order";
+		            }else{
+			parent.$.fancybox.close();
+			//$( ".fancybox-close",window.parent.document ).click();
+		            }
+		        },
+		        error: function(XMLHttpRequest, textStatus, errorThrown)
+		        {
+			alert("Please click on  'Add To Cart'.");
+			$( ".fancybox-close",window.parent.document ).click();
+		            //alert("Impossible to add the product to the cart.\n\ntextStatus: '" + textStatus + "'\nerrorThrown: '" + errorThrown + "'\nresponseText:\n" + XMLHttpRequest.responseText);
+		        }
+		});			
+		
+</script>
+<?php
+    die();
+    //die('<img src="' . __PS_BASE_URI__ . 'modules/shiptomyid/views/img/loader.gif" align="center" alt="Loading..." /><script language="javascript" type="text/javascript">top.location.href = "' . $context->link->getPageLink('cart') . '" ;</script>');
+}
 $receiver_type = Tools::getValue('receiver_type');
 $receiver_linkedin_id = Tools::getValue('receiver_linkedin_id');
 $receiver_facebook_id = Tools::getValue('receiver_facebook_id');
@@ -48,7 +134,7 @@ $rec_name = explode(' ', $rec_name, 2);
 if (is_array($rec_name) && !empty($rec_name))
 {
 $firstname = $rec_name[0];
-$lastname = isset($rec_name[1]) && !empty($rec_name[1]) ?$rec_name[1]:$rec_name[0];
+$lastname = isset($rec_name[1]) && !empty($rec_name[1]) ?$rec_name[1]:"--"; //$rec_name[0];
 }
 else
 {

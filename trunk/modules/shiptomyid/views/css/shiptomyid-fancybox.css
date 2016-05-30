@@ -1,4 +1,4 @@
-.fancybox-inner iframe{
+.fancybox-inner iframe, #fancybox-frame, #fancybox-content iframe{
 background:url("../img/backgroundlight.jpg");
 padding-top:5px;    
 }

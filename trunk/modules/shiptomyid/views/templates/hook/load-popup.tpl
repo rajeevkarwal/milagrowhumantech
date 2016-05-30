@@ -8,12 +8,20 @@
 *}
 
 <script type="text/javascript">
-	var popup_url = "{$popup_url|escape:'htmlall':'UTF-8'}&name={$marketplace_name|urlencode}&image={$marketplace_image|urlencode}&callback={$callback_url|urlencode}";
+	var popup_url = "{$popup_url|escape:'htmlall':'UTF-8'}&name={$marketplace_name|urlencode}&image={$marketplace_image|urlencode}&callback={$callback_url|urlencode}".replace(/&amp;/g, '&');
 	var video_url = "{$video_url|escape:'htmlall':'UTF-8'}";
-	var button_text = "{l s='Don\'t know the address? Use Ship2myid.' mod='shiptomyid'}";
+        
+        {if $giftnow eq '0'}
+            var button_text = "{l s='Don\'t know the address? Use Ship2myid.' mod='shiptomyid'}";
+        {else}
+            var button_text = "{l s='Click Here to Proceed with Gift Now' mod='shiptomyid'}"; 
+        {/if}   
+
+
 	var link_text = "{l s='What is Ship2MyId ?' mod='shiptomyid'}";
 	var button_class = "{$button_class|escape:'htmlall':'UTF-8'}";
-
+        var giftnow_link = "{$ship2myid_front|escape:'htmlall':'UTF-8'}";
+        
 	{literal}
 	$(document).ready(function(){
 
@@ -24,8 +32,17 @@
 				$.fancybox.close();
 			}
 		};
-
-		var shipto_button_code = '<a href="#" style="margin-left: 20px;" class="'+button_class+'" id="shiptomyidButton"><span>'+button_text+'</span></a>';
+              {/literal}
+                {if $giftnow eq '0'}
+                {literal}
+					var shipto_button_code = '<a href="#" style="margin-left: 20px;" class="'+button_class+'" id="shiptomyidButton"><span>'+button_text+'</span></a>';
+                {/literal}
+                {else}
+                {literal}    
+                        var shipto_button_code = '<a href="'+giftnow_link+'" style="margin-left: 20px;" class="'+button_class+'" id="giftnow"><span>'+button_text+'</span></a>';
+                {/literal}
+                {/if}
+                {literal}        
 
 		if (video_url.length) {
 
