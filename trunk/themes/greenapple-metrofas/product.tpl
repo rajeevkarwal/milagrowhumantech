@@ -728,15 +728,15 @@
 				</center>			
                 </div>
                 <div id="pincode_success" class="msg_pincode" style="display:none;">
-                			<label>Shipping Avalaible</label><br>
-                			<label>COD Available</label> 
+                			<label>Shipping & COD Available </label>&
+                			<label></label> 
                 </div>
                 <div id="pincode_fail" class="msg_pincode" style="display:none">
-                			<label>Shipping Not Avalaible</label><br>
-                			<label>COD Not Available</label>
+                			<label>Shipping & COD Not Available</label>
+                			
                 </div>
                 <div id="common_change" style="display:none;">
-                		<span id="pincodeNumber"></span><a  id='changePincode'>Change Pincode</a>
+                		&nbsp<a href="#"  id='changePincode'>Change Pincode</a>
                 </div>
             </div>
 			<style>
