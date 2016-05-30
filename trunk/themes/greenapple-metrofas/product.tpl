@@ -728,7 +728,7 @@
 				</center>			
                 </div>
                 <div id="pincode_success" class="msg_pincode" style="display:none;">
-                			<label>Shipping & COD Available </label>&
+                			<label>Shipping & COD Available </label>
                 			<label></label> 
                 </div>
                 <div id="pincode_fail" class="msg_pincode" style="display:none">
