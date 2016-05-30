@@ -733,10 +733,10 @@
                 </div>
                 <div id="pincode_fail" class="msg_pincode" style="display:none">
                 			<label>Shipping Avalaible</label><br>
-                			<label>COD Available</label>at <span id="pincodeNumber"></span><a href="void(0);">Change Pincode</a>
+                			<label>COD Available</label>
                 </div>
                 <div id="common_change" style="display:none;">
-                	at <span id="pincodeNumber"></span><a href="void(0);" id='changePincode'>Change Pincode</a>
+                	at <span id="pincodeNumber"></span><a  id='changePincode'>Change Pincode</a>
                 </div>
             </div>
 			<style>
@@ -746,6 +746,10 @@
     color: white;
     background-color: #FFA930;
     border: none;
+				}
+				#pincode_success,#pincode_fail,#common_change
+				{
+					text-align:center;
 				}
 			</style>
             <div class="add-to-box">
