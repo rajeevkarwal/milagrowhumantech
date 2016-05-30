@@ -719,13 +719,24 @@
             <div class="short-description" style="background-color">
 				
                 <!--<h2>Quick Overview</h2>-->
-                <div class="std">
+                <div id="pincodeFill" class="std">
 				<center>
                     <label>Check Availability At</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<button id="check" class="qty-increase quantity_box_button_up cod_check" >CHECK</button>
 				</center>			
+                </div>
+                <div id="pincode_success" class="msg_pincode" style="display:none;">
+                			<label>Shipping Avalaible</label><br>
+                			<label>COD Available</label> 
+                </div>
+                <div id="pincode_fail" class="msg_pincode" style="display:none">
+                			<label>Shipping Avalaible</label><br>
+                			<label>COD Available</label>at <span id="pincodeNumber"></span><a href="void(0);">Change Pincode</a>
+                </div>
+                <div id="common_change" style="display:none;">
+                	at <span id="pincodeNumber"></span><a href="void(0);" id='changePincode'>Change Pincode</a>
                 </div>
             </div>
 			<style>
@@ -758,6 +769,15 @@
 				        <p id="msg" style="display:none;"></p>
 				    </div>
                     <script>
+
+                    $('#changePincode').click(function ()
+                    		{
+                    	$('#pincode_success').hide();
+						$('#common_change').hide();
+						$('#pincode_fail').hide();
+						$('#pincodeFill').hide();
+                    		}
+            		)
                                 $('#check').click(function()
                                 {
                                     var pincode = $('#pincodes').val();
@@ -771,12 +791,21 @@
                                                     if($data){
 														if($data.cod_available)
 														{
-															alert('CASH ON DELIVERY AVALAIBLE');
+															$('#pincode_success').show();
+															$('#common_change').show();
+															$('#pincode_fail').hide();
+															$('#pincodeFill').hide();
+															
 														}
+														
                                                     }
 													else
 													{
-														alert('COD Not Avalaible For This Location');
+														$('#pincode_success').hide();
+														$('#common_change').show();
+														$('#pincode_fail').show();
+														$('#pincodeFill').hide();
+														
 													}
                                                 }
                                             }
