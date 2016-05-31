@@ -1,0 +1,128 @@
+
+#add_to_cart .btn-cart{
+    float: left !important;
+}
+.gift-now{
+    background-image: url("../img/gift_now.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: top;
+    width: 118px;
+    height: 31px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent !important;
+    float: right;
+    /* padding-left: 10px; */
+    margin-left: 10px;
+    /* left: -20px; */
+    position: absolute;
+    /* background-color: white !important; */
+    /* left: 59px; */
+    /* top: 57px !important; */
+    margin: 0px 0px 0 10px;    
+}
+.gift-now:hover{
+background-image: url("../img/gift_now.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: top;
+    width: 118px;
+    height: 31px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent !important;
+    float: right;
+    /* padding-left: 10px; */
+    margin-left: 10px;
+    /* left: -20px; */
+    position: absolute;
+    /* background-color: white !important; */
+    /* left: 59px; */
+    /* top: 57px !important; */
+    margin: 0px 0px 0 10px;    }
+
+
+.gift-now a{
+    
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0px;
+    padding-left: 11px;
+    font: 400 14px/20px "Arial",sans-serif;
+    font-family: "Arial",sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    -x-system-font: none;
+    font-feature-settings: normal;
+    font-language-override: normal;
+    font-kerning: auto;
+    font-synthesis: weight style;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+}
+.gift-now span{
+    width:143px;
+    height:40px;
+
+}
+
+.popup-conent{display: none; position: absolute;width:250px; background: #fff; padding: 10px;border: 1px solid #6CAF20;border-radius: 25px;    z-index: 9999;
+    text-align: justify;}
+.giftnow-box{    width: 104px;font-family: inherit;font-size: smaller;align-self: center; position: relative;/*left: 110px;*/padding-top: 5px;}
+.giftnow-link:hover + .popup-conent{display: block;}
+
+/*
+.btn-outline{float: left;}*/
+
+/*.giftnow-star-six {
+width: 0px;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 45px solid #f8643a;
+    position: relative;
+}
+.giftnow-star-six:before {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 45px solid #f8643a;
+    position: absolute;
+    display: box;
+    content: "";
+    top: 11px;
+    left: -30px;
+}
+.giftnow-star-six span{
+    z-index: 1000;
+    overflow: overlay;
+    position: absolute;
+    left: -15px;
+    top:10px;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+ }*/
+.gift-box{
+     position: relative;
+    float: left;
+    overflow: hidden;
+    top: 1px;
+    width: 66px;
+    height: 57px;
+    right: 0px;
+    background-image: url("../img/giftnow.png") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
