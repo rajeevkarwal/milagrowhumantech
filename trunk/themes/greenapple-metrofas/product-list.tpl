@@ -205,7 +205,13 @@
 							
                         {if isset($product.on_sale) && $product.on_sale && isset($product.show_price) && $product.show_price && !$PS_CATALOG_MODE}
                             <div class="label-pro-sale">{l s='Offer' }</div>{/if}
-
+                        {if isset($product.features)}
+                                {foreach from=$product.features item=feature}
+                                        {if $feature.name == 'Giftnow' && $feature.value == 'Yes'}
+                                            <div class="gift-box giftnow-link label-pro-sale">{l s='Gift Now' }</div>                   
+                                        {/if}
+                                {/foreach}
+                        {/if}
                         <img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home_default')}"
                              alt="{$product.name|escape:html:'UTF-8'}"/>
                     </a>
