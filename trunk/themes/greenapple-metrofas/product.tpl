@@ -24,7 +24,7 @@
 *}
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.zoom.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.upsellslider.css" media="all"/>
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
 {include file="$tpl_dir./errors.tpl"}
 {if $errors|@count == 0}
     <script type="text/javascript">
@@ -727,22 +727,13 @@
 					<button id="check" class="qty-increase quantity_box_button_up cod_check" >CHECK</button>
 				</center>			
                 </div>
-             
-                <div id="pincode_result" class="msg_pincode" style="display:none;">
-                		<table align="center">
-                              <tbody><tr>
-                                <th>Shipping</th><th>Cod</th>
-                              </tr>
-                              <tr>
-                                <td><label class="fa fa-ok"></label></td>
-                                <td><label class="fa fa-remove"></label></td>
-                              </tr>
- 							 </tbody>
- 						</table>
-						<style>
-  								table tr td,th{border:1px solid black;padding:10px;text-align:center}
-						</style>
-                </div>	
+                <div id="pincode_success" class="msg_pincode" style="display:none;">
+                			<span id="cod_true"></span>		
+                </div>
+                <div id="pincode_fail" class="msg_pincode" style="display:none">
+                			<span id="cod_false"></span>
+                			
+                </div>
                 <div id="common_change" style="display:none;">
                 		&nbsp<a href="#"  id='changePincode'>Change Pincode</a>
                 </div>
@@ -817,7 +808,7 @@
 														$('#pincode_success').hide();
 														$('#common_change').show();
 														$('#pincode_fail').show();
-														document.getElementById('cod_false').innerHTML='COD & Shipping Available';
+														document.getElementById('cod_false').innerHTML=' Shipping Available But COD Not Available';
 														$('#pincodeFill').hide();
 														
 													}
