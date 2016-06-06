@@ -17,7 +17,7 @@
 }
 </style>
 		  <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <div id="hangout-div" data-initial_apps="[{ app_id : '{$hangout_app_id}', start_data : 'dQw4w9WgXcQ', '{$hangout_app_type}' : 'ROOM_APP' }]">
+        <div id="hangout-div">
           
             <g:hangout render="createhangout" hangout_type="onair" widget_size=72
                        initial_apps="[{ app_id : '{$hangout_app_id}', start_data : 'dQw4w9WgXcQ', 'app_type': '{$hangout_app_type}' }]" invites="{$hangout_invite_block}">
