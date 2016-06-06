@@ -36,7 +36,7 @@ class BlockHangout extends Module
         $hangout_id = Configuration::get('BLOCK_HANGOUT_ID');
         $hangout_app_type = Configuration::get('BLOCK_HANGOUT_APP_TYPE');
         if(empty($hangout_app_type))
-            $hangout_app_type='ROOM_APP';
+            $hangout_app_type='LOCAL_APP';
         $hangout_emails = Configuration::get('BLOCK_HANGOUT_EMAIL');
 
         $hangoutEmailBlock="[
