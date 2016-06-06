@@ -40,7 +40,7 @@ class BlockHangout extends Module
         $hangout_emails = Configuration::get('BLOCK_HANGOUT_EMAIL');
 
         $hangoutEmailBlock="[
-                  { id : 'info@milagrow.in', invite_type : 'EMAIL' }]";
+                  { id : 'kishor.pant@milagrow.in', invite_type : 'EMAIL' }]";
         if(!empty($hangout_emails))
         {
             $hangoutEmailBlock="[";
