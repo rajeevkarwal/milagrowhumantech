@@ -24,54 +24,7 @@
 *}
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.zoom.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.upsellslider.css" media="all"/>
- <script>
-
-                    $('#changePincode').click(function ()
-                    		{
-                    	$('#pincode_success').hide();
-						$('#common_change').hide();
-						$('#pincode_fail').hide();
-						$('#pincodeFill').show();
-                    		}
-            		)
-                                $('#check').click(function()
-                                {
-                                    var pincode = $('#pincodes').val();
-                                    $.ajax(
-                                            {
-                                                type:'GET',
-                                                url:'/modules/pincodes/ajax.php?pincode='+$('#pincodes').val(),
-                                                success:function(data)
-                                                {
-                                                    $data=jQuery.parseJSON(data);
-                                                    if($data){
-														if($data.cod_available)
-														{
-															$('#pincode_success').show();
-															document.getElementById('cod_true').innerHTML='COD & Shipping Available';
-															$('#common_change').show();
-															$('#pincode_fail').hide();
-															$('#pincodeFill').hide();
-															
-														}
-														
-                                                    }
-													else
-													{
-														$('#pincode_success').hide();
-														$('#common_change').show();
-														$('#pincode_fail').show();
-														document.getElementById('cod_false').innerHTML=' Shipping Available But COD Not Available';
-														$('#pincodeFill').hide();
-														
-													}
-                                                }
-                                            }
-                                    )
-                                }
-                                )
-                    </script>
-					
+ 
 {include file="$tpl_dir./errors.tpl"}
 {if $errors|@count == 0}
     <script type="text/javascript">
@@ -791,6 +744,54 @@
 					text-align:center;
 				}
 			</style>
+			<script>
+
+                    $('#changePincode').click(function ()
+                    		{
+                    	$('#pincode_success').hide();
+						$('#common_change').hide();
+						$('#pincode_fail').hide();
+						$('#pincodeFill').show();
+                    		}
+            		)
+                                $('#check').click(function()
+                                {
+                                    var pincode = $('#pincodes').val();
+                                    $.ajax(
+                                            {
+                                                type:'GET',
+                                                url:'/modules/pincodes/ajax.php?pincode='+$('#pincodes').val(),
+                                                success:function(data)
+                                                {
+                                                    $data=jQuery.parseJSON(data);
+                                                    if($data){
+														if($data.cod_available)
+														{
+															$('#pincode_success').show();
+															document.getElementById('cod_true').innerHTML='COD & Shipping Available';
+															$('#common_change').show();
+															$('#pincode_fail').hide();
+															$('#pincodeFill').hide();
+															
+														}
+														
+                                                    }
+													else
+													{
+														$('#pincode_success').hide();
+														$('#common_change').show();
+														$('#pincode_fail').show();
+														document.getElementById('cod_false').innerHTML=' Shipping Available But COD Not Available';
+														$('#pincodeFill').hide();
+														
+													}
+                                                }
+                                            }
+                                    )
+                                }
+                                )
+                    </script>
+					
             <div class="add-to-box">
                 <p id="minimal_quantity_wanted_p"{if $product->minimal_quantity <= 1 OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
                     {l s='This product is not sold individually. You must select at least'} <b
