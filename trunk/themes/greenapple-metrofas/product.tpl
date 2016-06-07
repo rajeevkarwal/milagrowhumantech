@@ -24,7 +24,7 @@
 *}
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.zoom.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.upsellslider.css" media="all"/>
-
+ 
 {include file="$tpl_dir./errors.tpl"}
 {if $errors|@count == 0}
     <script type="text/javascript">
@@ -709,6 +709,89 @@
                     {/if}
                 </div>
             </div>
+             <div class="short-description" style="background-color">
+				
+                <!--<h2>Quick Overview</h2>-->
+                <div id="pincodeFill" class="std">
+				<center>
+                    <label>Check Availability At</label>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id="check" class="qty-increase quantity_box_button_up cod_check" >CHECK</button>
+				</center>			
+                </div>
+                <div id="pincode_success" class="msg_pincode" style="display:none;">
+                			<span id="cod_true"></span>		
+                </div>
+                <div id="pincode_fail" class="msg_pincode" style="display:none">
+                			<span id="cod_false"></span>
+                			
+                </div>
+                <div id="common_change" style="display:none;">
+                		&nbsp<a href="#"  id='changePincode'>Change Pincode</a>
+                </div>
+            </div>
+			<style>
+				.cod_check{
+				width: 80px;
+    height: 31px;
+    color: white;
+    background-color: #FFA930;
+    border: none;
+				}
+				#pincode_success,#pincode_fail,#common_change
+				{
+					text-align:center;
+				}
+			</style>
+			<script>
+
+                    $('#changePincode').click(function ()
+                    		{
+                    	$('#pincode_success').hide();
+						$('#common_change').hide();
+						$('#pincode_fail').hide();
+						$('#pincodeFill').show();
+                    		}
+            		)
+                                $('#check').click(function()
+                                {
+                                    var pincode = $('#pincodes').val();
+                                    $.ajax(
+                                            {
+                                                type:'GET',
+                                                url:'/modules/pincodes/ajax.php?pincode='+$('#pincodes').val(),
+                                                success:function(data)
+                                                {
+                                                    $data=jQuery.parseJSON(data);
+                                                    if($data){
+														if($data.cod_available)
+														{
+															$('#pincode_success').show();
+															document.getElementById('cod_true').innerHTML='COD & Shipping Available';
+															$('#common_change').show();
+															$('#pincode_fail').hide();
+															$('#pincodeFill').hide();
+															
+														}
+														
+                                                    }
+													else
+													{
+														$('#pincode_success').hide();
+														$('#common_change').show();
+														$('#pincode_fail').show();
+														document.getElementById('cod_false').innerHTML=' Shipping Available But COD Not Available';
+														$('#pincodeFill').hide();
+														
+													}
+                                                }
+                                            }
+                                    )
+                                }
+                                )
+                    </script>
+					
             <div class="add-to-box">
                 <p id="minimal_quantity_wanted_p"{if $product->minimal_quantity <= 1 OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
                     {l s='This product is not sold individually. You must select at least'} <b
