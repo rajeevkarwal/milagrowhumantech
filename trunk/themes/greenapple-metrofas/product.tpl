@@ -24,7 +24,54 @@
 *}
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.zoom.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.upsellslider.css" media="all"/>
+ <script>
 
+                    $('#changePincode').click(function ()
+                    		{
+                    	$('#pincode_success').hide();
+						$('#common_change').hide();
+						$('#pincode_fail').hide();
+						$('#pincodeFill').show();
+                    		}
+            		)
+                                $('#check').click(function()
+                                {
+                                    var pincode = $('#pincodes').val();
+                                    $.ajax(
+                                            {
+                                                type:'GET',
+                                                url:'/modules/pincodes/ajax.php?pincode='+$('#pincodes').val(),
+                                                success:function(data)
+                                                {
+                                                    $data=jQuery.parseJSON(data);
+                                                    if($data){
+														if($data.cod_available)
+														{
+															$('#pincode_success').show();
+															document.getElementById('cod_true').innerHTML='COD & Shipping Available';
+															$('#common_change').show();
+															$('#pincode_fail').hide();
+															$('#pincodeFill').hide();
+															
+														}
+														
+                                                    }
+													else
+													{
+														$('#pincode_success').hide();
+														$('#common_change').show();
+														$('#pincode_fail').show();
+														document.getElementById('cod_false').innerHTML=' Shipping Available But COD Not Available';
+														$('#pincodeFill').hide();
+														
+													}
+                                                }
+                                            }
+                                    )
+                                }
+                                )
+                    </script>
+					
 {include file="$tpl_dir./errors.tpl"}
 {if $errors|@count == 0}
     <script type="text/javascript">
@@ -239,14 +286,9 @@
             {if $have_image}
                 {if $product->condition eq 'refurbished'}
                     <div class="label-pro-refurbished-product">{l s='Refurbished'}</div>
-			     {elseif $product->condition eq 'used'}
-                    <div class="label-pro-refurbished-product">{l s='Used'}</div>
-                {elseif $product->condition eq 'combo'}
-                    <div class="label-pro-refurbished-product">{l s='Combo'}</div>		
                 {elseif $product->new}
                     <div class="label-pro-new">{l s='New'}</div>
                 {/if}
-				
                 {if $product->on_sale}
                     <div class="label-pro-sale">{l s='Offer'}</div>{/if}
                 <span id="view_full_size">
@@ -276,7 +318,7 @@
                                          alt="{$product->name|escape:'htmlall':'UTF-8'}"
                                          title="{$product->name|escape:'htmlall':'UTF-8'}">
                                 </a>
-                   
+                               
                             </span>
             {/if}
         </div>
@@ -685,7 +727,6 @@
 
         <div class="content_prices clearfix">
             <div class="short-description">
-				
                 <!--<h2>Quick Overview</h2>-->
                 <div class="std">
                     {if $product->description_short OR $packItems|@count > 0}
@@ -715,8 +756,7 @@
                     {/if}
                 </div>
             </div>
-			<div class="content_prices clearfix">
-            <div class="short-description" style="background-color">
+             <div class="short-description" style="background-color">
 				
                 <!--<h2>Quick Overview</h2>-->
                 <div id="pincodeFill" class="std">
@@ -763,15 +803,13 @@
                 {/if}
                 <div class="add-to-cart">
                     <label for="qty">{l s='Qty:'}</label>
-					
+
                     <div class="product-qty">
                         <input type="button" class="qty-decrease quantity_box_button_down" onclick="qtyDown()">
                         <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12"
                                id="quantity_wanted" name="qty">
                         <input type="button" class="qty-increase quantity_box_button_up" onclick="qtyUp()">
-				        <p id="msg" style="display:none;"></p>
-				    </div>
-                   
+                    </div>
                 </div>
                 {if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
                     <button class="button btn-cart" type="button" name="Submit"
@@ -878,39 +916,6 @@
     <!-- description and features -->
     {if (isset($product) && $product->description) || (isset($features) && $features) || (isset($accessories) && $accessories) || (isset($HOOK_PRODUCT_TAB) && $HOOK_PRODUCT_TAB) || (isset($attachments) && $attachments) || isset($product) && $product->customizable}
         <div id="more_info_block">
-		
-		 <ul id="more_info_tabs" class="idTabs idTabsShort product-tabs  clearfix">
-               
-                  {if $product->description}
-                
-                   <li class="spec"><a href="#idTabFeatures" id="more_info_tab_features_by_category">{l s='Specifications'}</a></li>
-                    <li><a id="more_info_tab_more_info" href="#idTab1">{l s='Features'}</a></li>{/if}
-                   
-                    {$HOOK_PRODUCT_TAB}
-                   
-               
-                {*            {if $features}<li><a id="more_info_tab_data_sheet" href="#idTab2">{l s='Data Sheet'}</a></li>{/if}*}
-                
-               
-                 
-                 
-                
-                
-                {if $attachments}
-                    <li class="hidden-phone hidden-tablet"><a id="more_info_tab_attachments"
-                                                              href="#idTab9">{l s='Product Downloads'}</a></li>{/if}
-                {if isset($accessories) AND $accessories}
-                    <li class="hidden-phone hidden-tablet"><a href="#idTab4">{l s='Also See'}</a></li>{/if}
-                    
-                    
-                   
-                    
-                {if isset($product) && $product->customizable}
-                    <li><a href="#idTab10">{l s='Product customization'}</a></li>{/if}
-                    
-                    
-                {*{$HOOK_PRODUCT_TAB}*}
-            </ul>
             <!--<ul id="more_info_tabs" class="idTabs idTabsShort product-tabs  clearfix">
                 {if $product->description}
                     <li><a id="more_info_tab_more_info" href="#idTab1">{l s='Key Features'}</a></li>{/if}
@@ -933,11 +938,11 @@
                
                  
                  
-                  {*{if $product->description}*}
-                {**}
-                   {*<li class="spec"><a href="#idTabFeatures" id="more_info_tab_features_by_category">{l s='Specifications'}</a></li>*}
-                   {**}
-                    {*<li><a id="more_info_tab_more_info" href="#idTab1">{l s='Features'}</a></li>{/if}*}
+                  {if $product->description}
+                
+                   <li class="spec"><a href="#idTabFeatures" id="more_info_tab_features_by_category">{l s='Specifications'}</a></li>
+                   
+                    <li><a id="more_info_tab_more_info" href="#idTab1">{l s='Features'}</a></li>{/if}
                     
                       {$HOOK_PRODUCT_TAB}
                
@@ -952,7 +957,7 @@
                     <li class="hidden-phone hidden-tablet"><a id="more_info_tab_attachments"
                                                               href="#idTab9">{l s='Downloads'}</a></li>{/if}
                 {if isset($accessories) AND $accessories}
-                    <li class="hidden-phone hidden-tablet"><a href="#idTab4">{l s='Accessories'}</a></li>{/if}
+                    <li class="hidden-phone hidden-tablet"><a href="#idTab4">{l s='Also See'}</a></li>{/if}
                     
                     
                    
