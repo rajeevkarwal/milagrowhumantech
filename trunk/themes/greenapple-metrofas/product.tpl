@@ -774,6 +774,15 @@
 															$('#pincodeFill').hide();
 															
 														}
+														else
+														{
+															$('#pincode_success').hide();
+															$('#common_change').show();
+															$('#pincode_fail').show();
+															document.getElementById('cod_false').innerHTML=' Shipping Available But COD Not Available';
+															$('#pincodeFill').hide();
+															
+														}
 														
                                                     }
 													else
@@ -781,7 +790,7 @@
 														$('#pincode_success').hide();
 														$('#common_change').show();
 														$('#pincode_fail').show();
-														document.getElementById('cod_false').innerHTML=' Shipping Available But COD Not Available';
+														document.getElementById('cod_false').innerHTML=' Check Your Pincode Again';
 														$('#pincodeFill').hide();
 														
 													}
