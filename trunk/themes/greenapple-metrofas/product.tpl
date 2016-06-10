@@ -765,7 +765,7 @@
                                                 {
                                                     $data=jQuery.parseJSON(data);
                                                     if($data){
-														if($data.cod_available)
+														if($data.cod_available=='1')
 														{
 															$('#pincode_success').show();
 															document.getElementById('cod_true').innerHTML='COD & Shipping Available';
