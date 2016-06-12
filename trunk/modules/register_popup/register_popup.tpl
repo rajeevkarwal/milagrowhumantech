@@ -364,7 +364,7 @@ $(document).ready(function() {
 		   $("#CoverPop-cover").hide(1);
 		   $('.window').hide();
 		   $( "#signupBox" ).addClass("aa");
-		   $.cookie('noShowWelcome', true);  
+		   //$.cookie('noShowWelcome', true);  
 		   
 		   $('.cross').on('click', function() {
            $( "#signupBox" ).addClass("pop_close");

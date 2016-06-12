@@ -66,6 +66,7 @@
 {/if}
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/jquery.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/ma.jq.slide.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/ma.flexslider.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/ma.mobilemenu.js"></script>

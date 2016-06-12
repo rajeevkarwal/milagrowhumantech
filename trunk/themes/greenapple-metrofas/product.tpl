@@ -24,7 +24,7 @@
 *}
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.zoom.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.upsellslider.css" media="all"/>
-
+ 
 {include file="$tpl_dir./errors.tpl"}
 {if $errors|@count == 0}
     <script type="text/javascript">
@@ -239,14 +239,9 @@
             {if $have_image}
                 {if $product->condition eq 'refurbished'}
                     <div class="label-pro-refurbished-product">{l s='Refurbished'}</div>
-			     {elseif $product->condition eq 'used'}
-                    <div class="label-pro-refurbished-product">{l s='Used'}</div>
-                {elseif $product->condition eq 'combo'}
-                    <div class="label-pro-refurbished-product">{l s='Combo'}</div>		
                 {elseif $product->new}
                     <div class="label-pro-new">{l s='New'}</div>
                 {/if}
-				
                 {if $product->on_sale}
                     <div class="label-pro-sale">{l s='Offer'}</div>{/if}
                 <span id="view_full_size">
@@ -276,7 +271,7 @@
                                          alt="{$product->name|escape:'htmlall':'UTF-8'}"
                                          title="{$product->name|escape:'htmlall':'UTF-8'}">
                                 </a>
-                   
+                               
                             </span>
             {/if}
         </div>
@@ -714,6 +709,99 @@
                     {/if}
                 </div>
             </div>
+             <div class="short-description" style="background-color">
+				
+                <!--<h2>Quick Overview</h2>-->
+                <div id="pincodeFill" class="std">
+				<center>
+                    <label>Check Availability At</label>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="pincodes" type="text" class="input-text" placeholder="Enter Pincode" pattern="[0-9]{6}" maxlength="6" title="Pincode Should be of 6 Character"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id="check" class="qty-increase quantity_box_button_up cod_check" >CHECK</button>
+				</center>			
+                </div>
+                <div id="pincode_success" class="msg_pincode" style="display:none;">
+                			<span id="cod_true"></span>		
+                </div>
+                <div id="pincode_fail" class="msg_pincode" style="display:none">
+                			<span id="cod_false"></span>
+                			
+                </div>
+                <div id="common_change" style="display:none;">
+                		&nbsp<a href="#"  id='changePincode'>Change Pincode</a>
+                </div>
+            </div>
+			<style>
+				.cod_check{
+				width: 80px;
+    height: 31px;
+    color: white;
+    background-color: #FFA930;
+    border: none;
+				}
+				#pincode_success,#pincode_fail,#common_change
+				{
+					text-align:center;
+				}
+			</style>
+			<script>
+
+                    $('#changePincode').click(function (e)
+                    		{
+						e.preventDefault();	
+                    	$('#pincode_success').hide();
+						$('#common_change').hide();
+						$('#pincode_fail').hide();
+						$('#pincodeFill').show();
+                    		}
+            		)
+                                $('#check').click(function()
+                                {
+                                    var pincode = $('#pincodes').val();
+                                    $.ajax(
+                                            {
+                                                type:'GET',
+                                                url:'/modules/pincodes/ajax.php?pincode='+$('#pincodes').val(),
+                                                success:function(data)
+                                                {
+                                                    $data=jQuery.parseJSON(data);
+                                                    if($data){
+														if($data.cod_available=='1')
+														{
+															$('#pincode_success').show();
+															document.getElementById('cod_true').innerHTML='COD & Shipping Available';
+															$('#common_change').show();
+															$('#pincode_fail').hide();
+															$('#pincodeFill').hide();
+															
+														}
+														else
+														{
+															$('#pincode_success').hide();
+															$('#common_change').show();
+															$('#pincode_fail').show();
+															document.getElementById('cod_false').innerHTML=' Shipping Available But COD Not Available';
+															$('#pincodeFill').hide();
+															
+														}
+														
+                                                    }
+													else
+													{
+														$('#pincode_success').hide();
+														$('#common_change').show();
+														$('#pincode_fail').show();
+														document.getElementById('cod_false').innerHTML=' Check Your Pincode Again';
+														$('#pincodeFill').hide();
+														
+													}
+                                                }
+                                            }
+                                    )
+                                }
+                                )
+                    </script>
+					
             <div class="add-to-box">
                 <p id="minimal_quantity_wanted_p"{if $product->minimal_quantity <= 1 OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
                     {l s='This product is not sold individually. You must select at least'} <b
@@ -731,10 +819,8 @@
                         <input type="button" class="qty-decrease quantity_box_button_down" onclick="qtyDown()">
                         <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12"
                                id="quantity_wanted" name="qty">
-						{*<input type="text" class="input-text" title="Pincode" maxlength="6" pattern="[0-6]" placeholder="Your Pincode">	   *}
                         <input type="button" class="qty-increase quantity_box_button_up" onclick="qtyUp()">
                     </div>
-					{*<div class="pincode"><input type="number" class="input-text" placeholder="Pincode" maxlength="6" pattern="[0-9]" onblur="this.form.submit();"></div>*}
                 </div>
                 {if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
                     <button class="button btn-cart" type="button" name="Submit"
@@ -863,7 +949,7 @@
                
                  
                  
-                  {*{if $product->description}*}
+                   {*{if $product->description}*}
                 {**}
                    {*<li class="spec"><a href="#idTabFeatures" id="more_info_tab_features_by_category">{l s='Specifications'}</a></li>*}
                    {**}
@@ -882,7 +968,7 @@
                     <li class="hidden-phone hidden-tablet"><a id="more_info_tab_attachments"
                                                               href="#idTab9">{l s='Downloads'}</a></li>{/if}
                 {if isset($accessories) AND $accessories}
-                    <li class="hidden-phone hidden-tablet"><a href="#idTab4">{l s='Accessories'}</a></li>{/if}
+                    <li class="hidden-phone hidden-tablet"><a href="#idTab4">{l s='Also See'}</a></li>{/if}
                     
                     
                    

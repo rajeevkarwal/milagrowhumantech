@@ -297,7 +297,7 @@ class DemoRegistrationInitModuleFrontController extends ModuleFrontController
         $productshtml .= '<option value="">Select Product</option>';
         $productdataarr=array();
         foreach($products as $key=>$pr){
-            $productsdataSql = "Select cityname,amount,demoType,demoText from ". _DB_PREFIX_ ."demo_products_cities where demo_id =". $pr['id'];
+            $productsdataSql = "Select cityname,amount,demoType,demoText from ". _DB_PREFIX_ ."demo_products_cities where demo_id =". $pr['id'].' order by cityname';
             $productsdata = Db::getInstance()->executeS($productsdataSql);
 //            echo $productsdataSql;
             $categorywiseProduct[$pr['category']][]=$pr;
