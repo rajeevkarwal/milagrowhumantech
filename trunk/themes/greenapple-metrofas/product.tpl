@@ -746,8 +746,9 @@
 			</style>
 			<script>
 
-                    $('#changePincode').click(function ()
+                    $('#changePincode').click(function (e)
                     		{
+						e.preventDefault();	
                     	$('#pincode_success').hide();
 						$('#common_change').hide();
 						$('#pincode_fail').hide();
@@ -948,11 +949,11 @@
                
                  
                  
-                  {if $product->description}
-                
-                   <li class="spec"><a href="#idTabFeatures" id="more_info_tab_features_by_category">{l s='Specifications'}</a></li>
-                   
-                    <li><a id="more_info_tab_more_info" href="#idTab1">{l s='Features'}</a></li>{/if}
+                   {*{if $product->description}*}
+                {**}
+                   {*<li class="spec"><a href="#idTabFeatures" id="more_info_tab_features_by_category">{l s='Specifications'}</a></li>*}
+                   {**}
+                    {*<li><a id="more_info_tab_more_info" href="#idTab1">{l s='Features'}</a></li>{/if}*}
                     
                       {$HOOK_PRODUCT_TAB}
                
