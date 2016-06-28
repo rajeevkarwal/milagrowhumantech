@@ -99,6 +99,7 @@ class PartnersDefaultModuleFrontController extends ModuleFrontController
                         null
                     );
                     $this->context->smarty->assign('confirmation', 1);
+                    header('location:partners-with-us-thanks');
                 } else
                     $this->errors[] = Tools::displayError('An error occurred while sending the message.');
             }
