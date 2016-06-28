@@ -1,6 +1,6 @@
 <?php 
 
-class SeniorDiscountThanksModuleFrontController extends ModuleFrontController
+class SeniorDiscountthanksModuleFrontController extends ModuleFrontController
 {
 	function initContent()
 	{
