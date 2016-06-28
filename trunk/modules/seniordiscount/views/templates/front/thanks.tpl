@@ -11,11 +11,11 @@
 			<div class="span9">
 				<div style="margin-top:10px;"></div>
 				<div class="page-title">
-					<h1>Special Discount For Senior Citizens And Defence Personnel</h1>
+					<h1>Special Discount For Students</h1>
 				</div>
 				
 				<div class="row-fluid">
-					<img src="/img/cms/cms-banners/senior-citizen.png" alt="Student Discount Image">
+					<img src="http://www.milagrowhumantech.com/img/cms/cms-banners/student-discount.png" alt="Student Discount Image">
 				</div>
 				
 				<div style="margin-top:10px;"></div>
