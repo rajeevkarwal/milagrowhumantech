@@ -8,6 +8,4 @@ class SeniorDiscountThanksModuleFrontController extends ModuleFrontController
 		$this->setTemplate('Thanks.tpl');
 	}
 }
-
-
 ?>
