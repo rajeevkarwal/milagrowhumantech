@@ -108,7 +108,9 @@ class SeniorDiscountDefaultModuleFrontController extends ModuleFrontController
                         false,
                         null
                     );
+                   
                     $this->context->smarty->assign('confirmation', 1);
+                    header('location:senior-citizen-discount-thanks');
                 } else
                     $this->errors[] = Tools::displayError('An error occurred while sending the message.');
             }
