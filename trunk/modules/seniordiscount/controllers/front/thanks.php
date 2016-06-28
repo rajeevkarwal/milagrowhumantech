@@ -1,6 +1,5 @@
 <?php 
 
-
 class SeniorDiscountThanksModuleFrontController extends ModuleFrontController
 {
 	function initContent()
@@ -9,3 +8,4 @@ class SeniorDiscountThanksModuleFrontController extends ModuleFrontController
 		$this->setTemplate('Thanks.tpl');
 	}
 }
+?>
