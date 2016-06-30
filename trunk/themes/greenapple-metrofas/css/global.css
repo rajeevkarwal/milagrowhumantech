@@ -6,7 +6,14 @@
 .headdingtitle{
     margin-bottom: 10px;
 }
-
+.special-headings{
+	color:red !important;
+	font-size:14px !important;
+	font-weight:400;	
+	}
+.special-heading:hover{
+	color:black !important;
+	}
 /*
 #add_to_cart .btn-cart{
     border: 0 none;
