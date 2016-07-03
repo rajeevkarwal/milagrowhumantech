@@ -5,7 +5,8 @@ class StudentDiscountDefaultModuleFrontController extends ModuleFrontController
 
     public function postProcess()
     {
-        if (Tools::isSubmit('submitMessage')) {
+        if (Tools::isSubmit('submitMessage'))
+         {
             $fileAttachment = null;
             if (isset($_FILES['fileUpload']['name']) && !empty($_FILES['fileUpload']['name']) && !empty($_FILES['fileUpload']['tmp_name'])) {
                 $extension = array('.rtf', '.doc', '.docx', '.pdf', '.jpeg', '.png', '.jpg');
@@ -112,10 +113,12 @@ class StudentDiscountDefaultModuleFrontController extends ModuleFrontController
                         null
                     );
                     $this->context->smarty->assign('confirmation', 1);
+                      header('location:student-discount-thank-you');
                 } else
                     $this->errors[] = Tools::displayError('An error occurred while sending the message.');
             }
         }
+      
     }
 
     public function initContent()

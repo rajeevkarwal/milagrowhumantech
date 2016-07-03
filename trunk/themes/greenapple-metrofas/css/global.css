@@ -1457,23 +1457,48 @@ li#menu-item-55 ul.sub li.mega-hdr a.mega-hdr-a{ height:30px; }
 
 li#menu-item-4 ul li:first-child ul li:last-child a, li#menu-item-33 ul li:first-child ul li:last-child a, li#menu-item-46 ul li:first-child ul li:last-child a, li#menu-item-55 ul li:first-child ul li:last-child a{
     color: #ec5d5d !important;
-    font-size: 15px !important;
+    font-size: 18px !important;
 }
 
 li#menu-item-4 ul li:first-child ul li:last-child a:hover, li#menu-item-33 ul li:first-child ul li:last-child a:hover, li#menu-item-46 ul li:first-child ul li:last-child a:hover, li#menu-item-55 ul li:first-child ul li:last-child a:hover{
     color: #000 !important;
-    font-size: 15px !important;
-}
-
-li#menu-item-4 ul li:first-child ul li:nth-last-child(2) a{
-    color: #ec5d5d !important;
-    font-size: 13px !important;
+    font-size: 18px !important;
 }
 
 li#menu-item-4 ul li:first-child ul li:nth-last-child(2) a:hover{
     color: #000 !important;
     font-size: 13px !important;
 }
+
+li#menu-item-4 ul li:first-child ul li:nth-last-child(2) a{
+    color: #ec5d5d !important;
+    font-size: 13px !important;
+}
+li#menu-item-33 ul li:first-child ul li:nth-last-child(2) a{
+    color: #ec5d5d !important;
+    font-size: 13px !important;
+}
+li#menu-item-33 ul li:first-child ul li:nth-last-child(2) a:hover{
+    color: #000 !important;
+    font-size: 13px !important;
+}
+li#menu-item-46 ul li:first-child ul li:nth-last-child(2) a{
+    color: #ec5d5d !important;
+    font-size: 13px !important;
+}
+li#menu-item-46 ul li:first-child ul li:nth-last-child(2) a:hover{
+    color: #000 !important;
+    font-size: 13px !important;
+}
+li#menu-item-55 ul li:first-child ul li:nth-last-child(2) a{
+    color: #ec5d5d !important;
+    font-size: 13px !important;
+}
+li#menu-item-55 ul li:first-child ul li:nth-last-child(2) a:hover{
+    color: #000 !important;
+    font-size: 13px !important;
+}
+
 
 /*css for hide loading icon in flexslider on home page, and display firt image as static*/
 .ma-banner7-container .flexslider .slides > li:first-child {display: block !important; -webkit-backface-visibility: visible;} 
@@ -1516,7 +1541,7 @@ body#cms .main-inner .show-grid .span3{ position: absolute; top: 100%; }
 @media screen and (min-width: 360px) and (max-width: 360px) and (orientation : portrait) {
 	
 body#index .main-inner .show-grid, body#init .main-inner .show-grid,  body#cms .main-inner .show-grid{ position:relative;}
-body#index .main-inner .show-grid .span3{ position: absolute; top: 104.1%; }
+body#index .main-inner .show-grid .span3{ position: relative; top: 104.1%;display:none; }
 body#index .main-inner .show-grid .span9 .content-sample-block{ display:none;}
 body#index .col1-layout{ position:relative;}
 body#index .col1-layout .banner-static{ position:absolute; top:100%; z-index:9999;}
@@ -1543,7 +1568,7 @@ body#cms .main-inner .show-grid .span3{ position: absolute; top: 100%; }
 @media screen and (min-width: 361px) and (max-width: 480px) {
 	
 body#index .main-inner .show-grid, body#init .main-inner .show-grid,  body#cms .main-inner .show-grid{ position:relative;}	
-body#index .main-inner .show-grid .span3{ position: absolute; top: 100%; }
+body#index .main-inner .show-grid .span3{ position: absolute; top: 100%;display:none; }
 body#index .main-inner .show-grid .span9 .content-sample-block{ display:none;}
 body#index .col1-layout{ position:relative;}
 body#index .col1-layout .banner-static{ position:absolute; top:100%; z-index:9999;}
@@ -1567,7 +1592,7 @@ body#cms .main-inner .show-grid .span3{ position: absolute; top: 100%; }
 @media screen and (min-width: 481px) and (max-width: 568px) {
 	
 body#index .main-inner .show-grid{ position:relative;}	
-body#index .main-inner .show-grid .span3{ position: absolute; top: 107%; }
+body#index .main-inner .show-grid .span3{ position: absolute; top: 107%;display:none;}
 body#index .main-inner .show-grid .span9 .content-sample-block{ display:none;}
 body#index .col1-layout{ position:relative;}
 body#index .col1-layout .banner-static{ position:absolute; top:100%; z-index:9999;}
