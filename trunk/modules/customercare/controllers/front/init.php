@@ -167,6 +167,7 @@ class CustomerCareInitModuleFrontController extends ModuleFrontController
 //                    );
 
                     $this->context->smarty->assign(array('confirmation' => 1, 'alertMessage' => $alertMessage));
+                    header('location:customer-care-thanks');
                 } else {
 
                     $this->errors[] = Tools::displayError('An error occurred while sending the message.');
