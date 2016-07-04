@@ -25,6 +25,10 @@
 				document.getElementById('installment_amount').focus();
 			else if(document.getElementById('agreement').value=='')
 				document.getElementById('agreement').focus();
+			else if(document.getElementById('file1').value=='')
+				document.getElementById('file1').focus();
+			else if(document.getElementById('file2').value=='')
+				document.getElementById('file2').focus();
 			else
 				
 				document.getElementById('d23').submit();
@@ -38,18 +42,21 @@
 		 
 		if(parseInt(duration)>=9 && parseInt(duration)<15)
 		{		
+			getPrice();
 				var amountSet=parseInt(amount)-(parseInt(amount)*10/100);
 				 document.getElementById('installment_amount').value=amountSet;
 				 document.getElementById('initial_msg').innerHTML='Duration Between 9 To 14 Month,You Got Discount 10%';
 		}
 		else if(parseInt(duration)>=15 && parseInt(duration)<=24)
 		{
+			getPrice();
 			 var amountSet=parseInt(amount)-(parseInt(amount)*15/100);
 			 document.getElementById('installment_amount').value=amountSet;
 			 document.getElementById('initial_msg').innerHTML='Duration More Than 15 Month,You Got Discount 15%';
 		}
 		else
 		{
+			getPrice();
 			 document.getElementById('installment_amount').value=amount;
 			 document.getElementById('initial_msg').innerHTML='';	 
 		}
@@ -285,7 +292,7 @@
 					position:relative !important
 					}
 				</style>
-			<form id="d23" method="post" enctype="multipart/form-data" >
+			<form id="d23" method="post"  enctype="multipart/form-data" onsubmit="return autheticate();">
 						<div class="row-fluid">
 								<div class="span3"><label for="name" class="required"><em>*</em>Your Occupation</label></div>
 									<div class="span9">
@@ -335,7 +342,7 @@
 							<div class="span3"><label for="name" class="required"><em>*</em>Contact Number</label></div>
 							<div class="span9">
 								<div class="input-box">
-									<input type="text" maxlen="12" pattern="[0-9]" id="contact_number" name="contact_number" value="" placeholder="10 Digit Number" title="Your Name" required="required"/>
+									<input type="text" maxlen="12"  id="contact_number" name="contact_number" value="" placeholder="10 Digit Number" required="required"/>
 								</div>
 							</div>
 						</div>
@@ -380,7 +387,7 @@
 							<div class="span3"><label for="name" class="required"><em>*</em>Product Name</label></div>
 							<div class="span9">
 								<div class="input-box">
-									<select name="product" id="product" onchange="getPrice();">
+									<select name="product" id="product" >
 										<option>--Select Product Name--</option>
 
 									</select>
@@ -460,7 +467,7 @@
 							<div class="span9">
 								<div class="input-box">
 								 <input type="hidden" name="MAX_FILE_SIZE" value="2000000"/>
-									<input type="file" name="file3" id="file3"/>
+									<input type="file" name="file3" id="file3" required/>
 									<button type="button" value="?" onclick="openDocuments1();">?</button>
 								</div>
 							</div>
@@ -489,7 +496,7 @@
 							
 										<div style="margin-top:10px;">
 									<center>
-										<button onclick="return authenticate();" class="button" type="button" style="width:100px;background-color: #ffa930 !important;height: 30px;color: white;">Save &amp; Next</button>
+										<button  class="button" type="submit" style="width:100px;background-color: #ffa930 !important;height: 30px;color: white;">Save &amp; Next</button>
 
 									</center>
 										</div>
