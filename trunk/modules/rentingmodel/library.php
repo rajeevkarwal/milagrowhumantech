@@ -15,8 +15,27 @@ $customerrowid=Tools::getValue('customerrowid');
 $statusvalue=Tools::getValue('status');
 $product_rental=Tools::getValue('pro_id');
 $zipcode=Tools::getValue('zipcode');
+$city_id=Tools::getValue('city_id');
+
+//
+$zip1=Tools::getValue('a_zipcode');
+$pid1=Tools::getValue('pid1');
+
 
 $pincode_back=Tools::getValue('back_pincode');
+
+$singleCheck=Tools::getValue('single_zip');
+if(!empty($singleCheck))
+{
+	$data=$library->getCounters($singleCheck);
+	echo json_encode($data);
+}
+if(!empty($zip1))
+{
+
+	$data=$library->getCityAuthetication($pid1 ,$zip1);
+	echo json_encode($data);
+}
 if(!empty($zipcode))
 {
 	$data=$library->getPincodeStatus($zipcode);
@@ -24,7 +43,11 @@ if(!empty($zipcode))
 	echo json_encode($data);
 	$cityName=array('name'=>$data1);
 	echo json_encode($cityName);
-
+}
+if(!empty($city_id))
+{
+	$data=$library->getPincodeByCityId($city_id);
+	echo json_encode($data);
 }
 if(!empty($pincode_back))
 {

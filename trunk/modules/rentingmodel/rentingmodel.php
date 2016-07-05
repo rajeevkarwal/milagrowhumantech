@@ -150,11 +150,15 @@ class RentingModel extends Module
            }
 			if($form_name==='saveCity')
 			{
-				$data['product_id']=Tools::getValue('product');
-				$data['pincode']=Tools::getValue('pincode');
-				$data['status']=1;
-				 $this->saveCity($data);
-				//echo "<script>alert('ishor');</script>";
+				$product_id=Tools::getValue('product');
+				$cityName=Tools::getValue('cityName');
+				$default_status=1;
+				$result=$this->saveCity($product_id,$cityName,$default_status);
+				if($result>0)
+				$ShowMsg='Total'.$result.'Inserted';
+				else 
+					$ShowMsg=$result;
+				$html.=$ShowMsg;
 			}
            if($form_name=="arp")
            {
@@ -282,14 +286,26 @@ class RentingModel extends Module
         }
 		else if($page_name==='product_cities')
 		{
-                    //this function is used to map product cities which is used to available the cities of the function avalaible .
+
+		//this function is used to map product cities which is used to available the cities of the function avalaible .
+			
+			
+		$this->context->smarty->assign(array(
+			'category'=>$this->newCategory(),
+			'product'=>json_encode($this->getNewProducts()),
+			'state'=>$this->stateName(),
+			'city'=>json_encode($this->cityName())
+			));
 			$html .= $this->context->smarty->fetch($this->local_path.'views/templates/admin/product_cities.tpl');
 		}
 		else if($page_name==='viewCity')
 		{
                     //function is used to view city.this option is avalaible with product option
 			$this->context->smarty->assign(array(
-			'productName'=>$this->getProductName($productId),'CityList'=>$this->getCities($productId)));
+			'productName'=>$this->getProductName($productId),
+			'available_city'=>$this->getAvailableCity($productId)
+			));
+			
 			$html.= $this->context->smarty->fetch($this->local_path.'views/templates/admin/viewCities.tpl');
 		}
 		else if($page_name=='downloadSecurityReceipt')
@@ -573,18 +589,24 @@ class RentingModel extends Module
     	}
     	
     }
-	private function saveCity($data)
+	private function saveCity($product_id,$pincode,$d_status)
 	{
 			
-		Db::getInstance()->insert('rental_product_cities',$data);
-		if(Db::getInstance()->Affected_Rows>0)
+		$data['status']=$d_status;
+		$data['product_id']=$product_id;
+		$sql="select distinct(pincode) from ps_pincode_cod where city='$pincode'";
+		$result=Db::getInstance()->ExecuteS($sql);
+		if($result)
 		{
-			return true;
+			foreach ($result as $city)
+			{
+				$data['pincode']=$city['pincode'];
+				Db::getInstance()->insert('rental_product_cities',$data);
+			}
+			return Db::getInstance()->Affected_Row;
 		}
-		else
-		{
-			return false;
-		}
+		else 
+		return $sql;
 	}
 	private function getCities($productId)
 	{
@@ -1030,5 +1052,115 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
 		else
 			return false;
 	}
-   
+	private function stateName()
+	{
+		$sql="Select id_state,name from ps_state where id_country=110";
+		$html='<select id="stateName" name="stateName" onchange="getCity();">';
+		$html.='<option value="">Select State</option>';
+		$result=Db::getInstance()->ExecuteS($sql);
+		if($result)
+		{
+			foreach ($result as $state)
+			{
+				$html.='<option value="'.$state['id_state'].'">'.$state['name'].'</option>';
+			}
+//			return $html;
+			$html.='</select>';
+		 return $html;
+		}
+		else 
+		{
+			return Db::getInstnace()->getMsgError();
+		}
+		
+	}
+	private function cityName()
+	{
+		$sql="Select distinct(id_state),id,LOWER(city) as city from ps_pincode_cod group by LOWER(city)";
+		$cityRes=Db::getInstance()->ExecuteS($sql);
+		$stateWiseCityKeyMap=array();
+        $cityNameKeyMap=array();
+        foreach($cityRes as $cityRow)
+        {
+            $cityNameKeyMap[$cityRow['id']]=$cityRow['city'];
+            $stateWiseCityKeyMap[$cityRow['id_state']][]=$cityRow;
+        }
+		return $stateWiseCityKeyMap;
+	}
+	public function getPincodeByCityId($city_id)
+	{
+		$sql="select pincode from ps_pincode_cod where id=".$city_id;
+		$row=Db::getInstance()->getRow($sql);
+		if($row)
+			return $row;
+		else
+			return false;	
+	}
+	private function newCategory()
+	{
+			$sql="select distinct(category_id),name from ps_category_lang as p1,ps_product_rental as p2 where p1.id_category=p2.category_id";
+		$html='<select id="newCategory" name="newCategory" onchange="getid();">';
+		$html.='<option value="">Select Category</option>';
+		$result=Db::getInstance()->ExecuteS($sql);
+		if($result)
+		{
+			foreach ($result as $state)
+			{
+				$html.='<option value="'.$state['category_id'].'">'.$state['name'].'</option>';
+			}
+//			return $html;
+			$html.='</select>';
+		 return $html;
+		}
+	}
+	private function getNewProducts()
+	{
+		$catid=$this->getCategoryId();
+        if(!empty($catid))
+        {
+            $sqlprod = 'SELECT p.name, pc.id_category AS categoryid,p.id_product,price FROM ps_product_lang as p  join 
+			ps_category_product as pc on p.id_product = pc.id_product join ps_product pr on pr.id_product=pc.id_product 
+				where pr.active=1 and pc.id_category in ('.implode(",", $catid).') and p.id_product in (select product_id from ps_product_rental)';
+
+            if ($res = Db::getInstance()->Executes($sqlprod))
+            {
+                foreach($res as $product)
+                {
+                    $catwiseproduct[$product['categoryid']][]=array('product_name'=>$product['name'],'id_product'=>$product['id_product'],'price'=>$product['price']);
+                }
+            }
+        }
+        return $catwiseproduct;
+	}
+   private function getAvailableCity($product_id)
+   {
+   	$sql="SELECT distinct(p1.pincode),city,p3.name FROM ps_rental_product_cities as p1,ps_pincode_cod as p2,ps_state as p3 WHERE p1.pincode=p2.pincode and p2.id_state=p3.id_state and p1.product_id=".$product_id;
+   	$result=Db::getInstance()->executeS($sql);
+   	if($result)
+   		return $result;
+   	else 	
+   		return false;
+   }
+   public function getCityAuthetication($product_id ,$zipcode)
+   {
+  	 $sql="select count(*) as counter from ps_rental_product_cities where pincode='".$zipcode."'and product_id=".$product_id;
+  	 $result=Db::getInstance()->getRow($sql);
+  	 if($result)
+  	 {
+  	 	return $result;
+  	 }
+  	 else
+  	 	return false;
+   }
+   public function getCounters($singleCheck)
+   {
+   	$sql="select count(*) as counter from ps_rental_product_cities where pincode=".$singleCheck;
+  	 $result=Db::getInstance()->getRow($sql);
+  	 if($result)
+  	 {
+  	 	return $result;
+  	 }
+  	 else
+  	 	return $sql;
+   }
 }

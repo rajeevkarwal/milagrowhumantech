@@ -22,7 +22,7 @@
         $.ajax(
                 {
                     type:'GET',
-                    url:'http://localhost/practice/modules/rentingmodel/library.php?product_id='+cate,
+                    url:'/modules/rentingmodel/library.php?product_id='+cate,
                     success:function(data)
                     {
                         $data=jQuery.parseJSON(data);
@@ -34,12 +34,29 @@
                 }
         )
     }
+    function getPincode()
+    {
+    	 var e = document.getElementById('cityName');
+         var cate = e.options[e.selectedIndex].value;
+         $.ajax(
+                 {
+                     type:'GET',
+                     url:'/modules/rentingmodel/library.php?city_id='+cate,
+                     success:function(data)
+                     {
+                         $data=jQuery.parseJSON(data);
+                         if($data)
+
+                             $('#pincode').val($data.pincode);
+                     },
+
+                 }
+         )
+    }
     function getid()
     {
-        var productList ={$name}
-
-
-        var e = document.getElementById('category');
+        var productList ={$product}
+        var e = document.getElementById('newCategory');
 
         var cate = e.options[e.selectedIndex].value;
 
@@ -60,26 +77,32 @@
 
         }
         elm.appendChild(df);
-
     }
-    function getCityName()
+    function getCity()
     {
-    	
-         var pincode=document.getElementById('pincode').value;
-         $.ajax(
-                 {
-                     type:'GET',
-                     url:'/modules/rentingmodel/library.php?back_pincode='+pincode,
-                     success:function(data)
-                     {
-                         $data=jQuery.parseJSON(data);
-                         if($data)
-                            document.getElementById('cityName').innerHTML=$data.name;
-                     },
+        var cityList ={$city}
+      var e = document.getElementById('stateName');
+        var cate = e.options[e.selectedIndex].value;
+        $('#cityName')
+                .find('option')
+                .remove()
+                .end();
+        var check = cityList[cate];
+        var opt = $('<option value="">--select City--</option>');
+        $('#cityName').append(opt);
+        var elm = document.getElementById('cityName'),
+                df = document.createDocumentFragment();
+        for (var i = 0; i < check.length; i++) {
+            var option = document.createElement('option');
+            option.value = check[i]['city'];
+            option.appendChild(document.createTextNode(" " + check[i]['city']));
+            df.appendChild(option)
 
-                 }
-         )
+        }
+        elm.appendChild(df);
+
     }
+   
 </script>
     {if !empty($ShowMsg)}
         <script>
@@ -103,14 +126,23 @@
                 </select>
             </td>
          </tr>
-		
-		   <tr id="others" >
-				<td>Enter Pincode</td>
-				<td>
-					<input type="number" maxlen="6" id="pincode" name="pincode" onkeyup="getCityName();"><br>
-					<span id="cityName" style="color:red;text-transform: capitalize;"></span>
-				</td>
-		  </tr>
+		<tr>
+			<td>Select State</td>
+			<td>
+				{$state}
+			
+			</td>
+		</tr>
+		<tr>
+			<td>Select City</td>
+			<td>
+				<select name="cityName" id="cityName" onchange="getPincode();">
+					<option>Select City Name</option>
+				</select>
+			
+			</td>
+		</tr>
+		  
 		 
 		  <tr>
             <td colspan="2" align="center">
