@@ -14,26 +14,7 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script>
-    function getPrice()
-    {
-      
-        var e = document.getElementById('product');
-        var cate = e.options[e.selectedIndex].value;
-        $.ajax(
-                {
-                    type:'GET',
-                    url:'/modules/rentingmodel/library.php?product_id='+cate,
-                    success:function(data)
-                    {
-                        $data=jQuery.parseJSON(data);
-                        if($data)
-
-                            $('#initial_price').val($data.price);
-                    },
-
-                }
-        )
-    }
+  
     function getPincode()
     {
     	 var e = document.getElementById('cityName');
@@ -104,13 +85,10 @@
     }
    
 </script>
-    {if !empty($ShowMsg)}
-        <script>
-            alert({$ShowMsg});
-        </script>
-        {/if}
+   <center><b style="color:red;text-align:center">{$showMsg}</b></center>
 <form name="addCity" id="addCity" method="post">
 <table style="width: 50%;border:1px solid black;" align="center" class="mytable">
+		
         <input type="hidden" value="saveCity" name="form_code">
         <tr>
             <td>Select Category</td>
@@ -141,6 +119,13 @@
 				</select>
 			
 			</td>
+		</tr>
+		<tr>
+		<td>Enter Pincode</td>
+			<td>
+				<input type="text" name="pincode" id="pincode" maxlength="6" required>			
+			</td>
+		
 		</tr>
 		  
 		 
