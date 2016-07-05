@@ -65,15 +65,18 @@
                 <td>{if $data['payment_mode']==0}By Cheque{/if}
                 {if $data['payment_mode']==1}By Credit Card{/if}
                 </td>
-                <td>{if $data['status']==0}{l s='Awaiting Approval'}{/if}
-                    {if $data['status']==1}{l s='Document Verified'}{/if}
-                    {if $data['status']==2}{l s='Product Sent'}{/if}
-                    {if $data['status']==3}{l s='Product Delivered'}{/if}
-                    {if $data['status']==4}{l s='Loan Active'}{/if}
-                    {if $data['status']==5}{l s='Loan Completed'}{/if}
-                    {if $data['status']==6}{l s='Loan Settelled'}{/if}
-                    {if $data['status']==7}{l s='Application Cancelled'}{/if}
-                     {if $data['status']==8}Rejected{/if}
+                <td>
+                	{if $data['status']==0}{l s='Peyment Pending'}{/if}
+                    {if $data['status']==1}{l s='Payment Awaited/By Cheque'}{/if}
+                	{if $data['status']==2}{l s='Awaiting Approval'}{/if}
+                    {if $data['status']==3}{l s='Document Verified'}{/if}
+                    {if $data['status']==4}{l s='Product Sent'}{/if}
+                    {if $data['status']==5}{l s='Product Delivered'}{/if}
+                    {if $data['status']==6}{l s='Loan Active'}{/if}
+                    {if $data['status']==7}{l s='Loan Completed'}{/if}
+                    {if $data['status']==8}{l s='Loan Settelled'}{/if}
+                    {if $data['status']==9}{l s='Application Cancelled'}{/if}
+                     {if $data['status']==10}Rejected{/if}
                 </td>
                 <td>{$data['applied_on']}</td>
                 <td>

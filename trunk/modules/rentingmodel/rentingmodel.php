@@ -539,7 +539,7 @@ class RentingModel extends Module
 	}
     private function getStatus($customerId,$request)
     {
-    	 $statusList=array('Awaiting Approval','Document Verified','Product Sent','Delivered','Active','Completed','Settelled','Cancelled','Rejected');
+    	 $statusList=array('Payment Pending','Payment Awaited/By Cheque','Awaiting Approval','Document Verified','Product Sent','Delivered','Active','Completed','Settelled','Cancelled','Rejected');
     	if($request)
     	{
     
@@ -925,7 +925,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
 		$currentDate=new DateTime();
 		$cTimeStamp=$currentDate->format('Y-m-d');
 		$customerDetail=$this->getCustomerDetailById($row_id);
-		if($data['status']==4)
+		if($data['status']==6)
 		{
 			$timestamp=new DateTime();
 			$stamp=$timestamp->format('Y-m-d H:i:s');
@@ -996,7 +996,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
                 null,
                 '',
                 null,
-                 getcwd() . _MODULE_DIR_ . 'rentingmodel/',
+                getcwd().'/../'. RentingModel::MODULE_NAME . "/",
                 false,
                 null
             );
@@ -1015,7 +1015,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
                 null,
                 '',
                 null,
-                 getcwd() . _MODULE_DIR_ . 'rentingmodel/',
+                getcwd().'/../'. RentingModel::MODULE_NAME . "/",
                 false,
                 null
             );
@@ -1149,21 +1149,13 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
 	}
    private function getAvailableCity($product_id)
    {
-   	/*$sql="SELECT distinct(p1.pincode),p1.id,city,p3.name FROM ps_rental_product_cities as p1,ps_pincode_cod as p2,ps_state as p3 WHERE p1.pincode=p2.pincode and p2.id_state=p3.id_state and p1.product_id=".$product_id;
+   	$sql="SELECT distinct(p1.pincode),p1.id,p3.name FROM ps_rental_product_cities as p1,ps_pincode_cod as p2,ps_state as p3 WHERE p1.pincode=p2.pincode and p2.id_state=p3.id_state and p1.product_id=".$product_id;
    	$result=Db::getInstance()->executeS($sql);
    	if($result)
    		return $result;
    	else 	
-   		return false;*/
-   $sql="select pincode from ps_rental_product_cities where product_id=".$product_id;
-   	$result=Db::getInstance()->executeS($sql);
-   	if($result)
-   	{
-   		foreach ($result as $pincodes)
-   		{
-   			$sql="select ";
-   		}
-   	}
+   		return false;
+   
    
    }
    public function getCityAuthetication($product_id ,$zipcode)

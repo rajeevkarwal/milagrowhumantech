@@ -248,7 +248,7 @@
 				</td>
 				<td rowspan="2"></td>
 				<td rowspan="2"><a href="{$img2}" target="_blank">
-						<img src="{$img2}' height="120px" width="120px" title="Customer Id Proof/Company Lease" alt="company lease">
+						<img src="{$img2}" height="120px" width="120px" title="Customer Id Proof/Company Lease" alt="company lease">
 					</a></td>
 				<td rowspan="2"><a href="{$img3}" target="_blank">
 						<img src='{$img3}' height="120px" width="120px" title="Customer Address proof/Proof of Properitership" alt="company pro">

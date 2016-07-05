@@ -13,8 +13,8 @@ class RentingModelCustomerViewModuleFrontController extends ModuleFrontControlle
 		$customerId=Tools::getValue('key');
 		//$customerKey=$customer_id;
 		//$CustomerId=$this->findDecryptedId($customerKey);
-		 $statusList=array('Awaiting Approval','Document Verified','Product Sent','Delivered','Active','Completed','Settelled','Cancelled','Rejected');
-		$customerInfo=$this->customerDetails($customerId);
+		$statusList=array('Payment Pending','Payment Awaited/By Cheque','Awaiting Approval','Document Verified','Product Sent','Delivered','Active','Completed','Settelled','Cancelled','Rejected');
+    	$customerInfo=$this->customerDetails($customerId);
 		$customerPaymentDetails=$this->getLoanDetails($customerInfo['rent_id']);
 		$productName=$this->getProductInfo($customerInfo['product_id']);
 		$this->context->smarty->assign(array(
@@ -27,6 +27,7 @@ class RentingModelCustomerViewModuleFrontController extends ModuleFrontControlle
 		'securityDeposit'=>$customerInfo['security_deposited'],
 		'monthlyInstallment'=>$customerInfo['monthly_rental'],
 		'rentalDuration'=>$customerInfo['payment_duration'],
+		'monthly_expiration'=>$customerInfo['monthly_rental_expire'],
 		'expirationDate'=>$customerInfo['tenure_expiration_date'],
 		'activationDate'=>$customerInfo['applied_on'],
 		'productAmount'=>$customerInfo['product_price'],

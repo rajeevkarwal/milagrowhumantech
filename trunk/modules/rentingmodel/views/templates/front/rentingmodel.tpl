@@ -11,6 +11,8 @@
 				document.getElementById('contact_number').focus();	
 			else if(document.getElementById('address').value=='')
 				document.getElementById('address').focus();	
+			else if(document.getElementById('pincode').value=='')
+				document.getElementById('pincode').focus();	
 			else if(document.getElementById('category').value=='')
 				document.getElementById('category').focus();
 			else if(document.getElementById('product').value=='')
@@ -140,15 +142,11 @@
 						$data=jQuery.parseJSON(data);
 						if($data.counter==0)
 						{
-							alert('Currently We Provide this Facility To Delhi NCR Region Only ! Its our request to change your pincode as well');
+							alert('Currently the Rental Facility is not available in your area.');
 							document.getElementById('zipcode').value='';
 							document.getElementById('zipcode').focus();
 						}
-						else
-						{
-							
-							
-						}
+						
 						
 
 					},
@@ -173,10 +171,16 @@
 						if($data.counter==0)
 						{
 							document.getElementById('pincodeError').innerHTML='Currently Service Available in Delhi NCR Only';
+							document.getElementById('category').selectedIndex=0;
+							document.getElementById('product').selectedIndex=0;
+							document.getElementById('loan_duration').selectedIndex=0;
 						}
 						else
 						{
 							document.getElementById('pincodeError').innerHTML='';
+							document.getElementById('category').selectedIndex=0;
+							document.getElementById('product').selectedIndex=0;
+							document.getElementById('loan_duration').selectedIndex=0;
 						}
 					},
 					error: function(xhr, status, error)
@@ -300,7 +304,7 @@
 							else
 							{
 								document.getElementById('cityName').innerHTML='Invalid Pincode';
-								document.getElementById('zipcode').focus();
+								location.reload(1);
 							}
 								
 							
@@ -467,7 +471,7 @@
 							<div class="span3"><label for="name" class="required"><em>*</em>Pincode</label></div>
 							<div class="span9">
 								<div class="input-box">
-									<input type="text" value="" name="zipcode" id="zipcode" maxlength="6" onkeyup="getCityName();" onblur="return getAuthentication1();" required="required">
+									<input type="text" value="" placeholder="Enter 6 Digit Pincode" name="zipcode" id="zipcode" maxlength="6" onkeyup="getCityName();" onblur="return getAuthentication1();" required="required">
 									<span id="pincodeError" style="color:red"></span>
 								</div>
 							</div>
