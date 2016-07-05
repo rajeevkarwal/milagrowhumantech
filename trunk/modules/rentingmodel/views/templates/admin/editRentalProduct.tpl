@@ -15,7 +15,7 @@
         $.ajax(
                 {
                     type:'GET',
-                    url:'http://localhost/practice/modules/rentingmodel/library.php?productCode='+value,
+                    url:'/modules/rentingmodel/library.php?productCode='+value,
                     success:function(data)
                     {
                         $data=jQuery.parseJSON(data);
