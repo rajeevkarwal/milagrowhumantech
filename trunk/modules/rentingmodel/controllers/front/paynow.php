@@ -28,7 +28,7 @@ class RentingmodelPaynowModuleFrontController extends ModuleFrontController
                     $Merchant_Id = _MERCHANT_ID; //This id(also User_Id)  available at "Generate Working Key" of "Settings & Options"
 
                     $Amount = floatval($result['security_deposited']+$result['monthly_rental']); //your script should substitute the amount here in the quotes provided here
-					$orderId='MILAGROW_RENTAL_'.$_SESSION['customerId'];
+					$orderId='MILAGROW1_'.$_SESSION['customerId'];
                     $WorkingKey = "f6srdljv9krmyof389tjdixf86bgmc55"; //put in the 32 bit alphanumeric key in the quotes provided here.Please note that get this key login to your
                     $Checksum = getChecksum($Merchant_Id, $orderId, $Amount, $paymentNotificationUrl, $WorkingKey);
 					
