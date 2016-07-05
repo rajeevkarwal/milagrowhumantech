@@ -13,6 +13,7 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
     public $display_column_left=true;
     public function postProcess()
     {
+    	 $data['product_id']='';
     	global $cookie;
 
 		$fileAttachment=null;
@@ -24,12 +25,28 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
 		$data['address']=Tools::getValue('address');
 		$data['date_of_birth']=Tools::getValue('date_of_birth');
 		$data['product_id']=Tools::getValue('product');
+		
+		$productInfo=$this->getProductSchema($data['product_id']);   
+		
 		$data['category_id']=Tools::getValue('category');
 		$data['payment_mode']=0;
 		$data['payment_duration']=Tools::getValue('payment_duration');
-		$data['monthly_rental']=Tools::getValue('monthly_rental');
+		
+		
+		if($data['payment_duration']>9 && $data['payment_duration']<15)
+		{
+		$data['monthly_rental']=$productInfo['installment_amount']-$productInfo['installment_amount']*.10;
+		}
+		else if($data['payment_duration']>=15 && $data['payment_duration']<=24)
+		{
+		$data['monthly_rental']=$productInfo['installment_amount']-$productInfo['installment_amount']*.15;
+		}
+		else
+		{
+			$data['monthly_rental']=$productInfo['installment_amount'];
+		}
 		$data['product_price']=Tools::getValue('product_price');
-		$data['security_deposited']=Tools::getValue('security_deposited');
+		$data['security_deposited']=$productInfo['security_value'];
 		$data['status']=0;
 		$data['year_of_establishment']=Tools::getValue('establishment_year');
 		//$data['state']=$this->getStateName(Tools::getValue('state'));
@@ -141,12 +158,13 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
 			$data['sent_monthly_mail']=0;
 			$data['sent_tenure_mail']=0;
          	$data['customer_id']=$customerId;
-         	
+         	//echo var_dump($data);
+         	//$result=0;
 			$result=$this->saveCustomer($data);
          	
 			if($result)
 			{
-				echo '<script>alert("Succesfully Applied For This Request")</script>';
+				//echo '<script>alert("Succesfully Applied For This Request")</script>';
 				$_SESSION['data']=$data;
 				$_SESSION['server_name']=$_SERVER['SERVER_NAME'];
 				$_SESSION['customerId']=$result;
@@ -161,6 +179,15 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
 				
          	
 		}
+    }
+    private function getProductSchema($product_id)
+    {
+    		$sql="select security_value,installment_amount from ps_product_rental where product_id=".$product_id;
+    		$result=Db::getInstance()->getRow($sql);
+    		if($result)
+    			return $result;
+    		else 
+    			return false;
     }
 	private function getCityName($pincode)
 	{

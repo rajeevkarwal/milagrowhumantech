@@ -10,7 +10,19 @@
 * http://opensource.org/licenses/afl-3.0.php
 * If you did not receive a copy of the license and are unable to
 * obtain it through the world-wide-web, please send an email
-
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author    PrestaShop SA <contact@prestashop.com>
+*  @copyright 2007-2015 PrestaShop SA
+*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -139,14 +151,11 @@ class RentingModel extends Module
 			if($form_name==='saveCity')
 			{
 				$product_id=Tools::getValue('product');
-				$cityName=Tools::getValue('cityName');
+				$cityName=Tools::getValue('pincode');
 				$default_status=1;
 				$result=$this->saveCity($product_id,$cityName,$default_status);
-				if($result>0)
-				$ShowMsg='Total'.$result.'Inserted';
-				else 
-					$ShowMsg=$result;
-				$html.=$ShowMsg;
+				$ShowMsg=$result;
+				
 			}
            if($form_name=="arp")
            {
@@ -279,6 +288,7 @@ class RentingModel extends Module
 			
 			
 		$this->context->smarty->assign(array(
+			'showMsg'=>$ShowMsg,
 			'category'=>$this->newCategory(),
 			'product'=>json_encode($this->getNewProducts()),
 			'state'=>$this->stateName(),
@@ -322,7 +332,6 @@ class RentingModel extends Module
     {
     	$customer=$this->getCustomerDetailById($data['rent_id']);
     	$duration=(int)$customer['payment_duration']+(int)$data['extend_duration'];
-    	
     	if($data['extend_duration']==0)
     	{
     		return 'Duration is Mendatory';
@@ -582,6 +591,8 @@ class RentingModel extends Module
 			
 		$data['status']=$d_status;
 		$data['product_id']=$product_id;
+		$data['pincode']=$pincode;
+		/*
 		$sql="select distinct(pincode) from ps_pincode_cod where city='$pincode'";
 		$result=Db::getInstance()->ExecuteS($sql);
 		if($result)
@@ -594,7 +605,23 @@ class RentingModel extends Module
 			return Db::getInstance()->Affected_Row;
 		}
 		else 
-		return $sql;
+		return $sql;*/
+		$resultnew=0;
+		$sql="select count(*) as rs from ps_rental_product_cities where pincode='$pincode' and product_id='$product_id'";
+		//return $sql;
+		$result=Db::getInstance()->getRow($sql);
+		if($result)
+		{
+			foreach ($result as $p)
+					$resultnew=$p['rs'];
+		}
+		if($resultnew) return 'Pincode Already Exist for This Combination';
+		else{
+		Db::getInstance()->insert('rental_product_cities',$data);
+						if(Db::getInstance()->Affected_Rows()>0)
+							return 'Pincode Inserted Successfully';
+						else 
+							return Db::getInstance()->getMsgError();}
 	}
 	private function getCities($productId)
 	{
@@ -1122,12 +1149,22 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
 	}
    private function getAvailableCity($product_id)
    {
-   	$sql="SELECT distinct(p1.pincode),city,p3.name FROM ps_rental_product_cities as p1,ps_pincode_cod as p2,ps_state as p3 WHERE p1.pincode=p2.pincode and p2.id_state=p3.id_state and p1.product_id=".$product_id;
+   	/*$sql="SELECT distinct(p1.pincode),p1.id,city,p3.name FROM ps_rental_product_cities as p1,ps_pincode_cod as p2,ps_state as p3 WHERE p1.pincode=p2.pincode and p2.id_state=p3.id_state and p1.product_id=".$product_id;
    	$result=Db::getInstance()->executeS($sql);
    	if($result)
    		return $result;
    	else 	
-   		return false;
+   		return false;*/
+   $sql="select pincode from ps_rental_product_cities where product_id=".$product_id;
+   	$result=Db::getInstance()->executeS($sql);
+   	if($result)
+   	{
+   		foreach ($result as $pincodes)
+   		{
+   			$sql="select ";
+   		}
+   	}
+   
    }
    public function getCityAuthetication($product_id ,$zipcode)
    {
@@ -1150,5 +1187,10 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
   	 }
   	 else
   	 	return $sql;
+   }
+   public function deleteCity($id)
+   {
+   	Db::getInstance()->delete('rental_product_cities','id='.$id);
+   	return Db::getInstance()->Affected_Rows();
    }
 }

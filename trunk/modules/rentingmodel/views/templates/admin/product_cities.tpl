@@ -104,14 +104,14 @@
                 </select>
             </td>
          </tr>
-		<tr>
+		<tr style="display:none">
 			<td>Select State</td>
 			<td>
 				{$state}
 			
 			</td>
 		</tr>
-		<tr>
+		<tr style="display:none;">
 			<td>Select City</td>
 			<td>
 				<select name="cityName" id="cityName" onchange="getPincode();">

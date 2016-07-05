@@ -38,6 +38,27 @@
 	{
 		
 		var duration=document.getElementById('loan_duration').value;
+		var product_id=document.getElementById('product').value;
+		var category_id=document.getElementById('category').value;
+		
+		if(duration=='')
+		{
+			document.getElementById('security_deposit').value='';	
+			document.getElementById('installment_amount').value='';
+			document.getElementById('hidden_installment').value='';
+			document.getElementById('initial_msg').innerHTML='';	 
+			//document.getElementById('product').selectedIndex=0;
+		}
+		else if(category_id=='')
+		{
+			document.getElementById('category').focus();
+		}
+		else if(product_id==''){
+			document.getElementById('product').focus();
+			}
+		
+		else
+		{
 		var amount=document.getElementById('hidden_installment').value
 		 
 		if(parseInt(duration)>=9 && parseInt(duration)<15)
@@ -57,8 +78,9 @@
 		else
 		{
 			getPrice();
-			 document.getElementById('installment_amount').value=amount;
+			 document.getElementById('installment_amount').value='';
 			 document.getElementById('initial_msg').innerHTML='';	 
+		}
 		}
 	}
 	function hideRow()
@@ -101,6 +123,13 @@
 		var e = document.getElementById('product');
 		var cate = e.options[e.selectedIndex].value;
 		var zipcode=document.getElementById('zipcode').value;
+		if(cate=='')
+		{
+			document.getElementById('security_deposit').value='';	
+			document.getElementById('installment_amount').value='';
+			document.getElementById('loan_duration').selectedIndex=0;
+			
+		}
 		$.ajax(
 				{
 					type:'GET',
@@ -109,15 +138,15 @@
 					{
 
 						$data=jQuery.parseJSON(data);
-						if($data.counter==1)
+						if($data.counter==0)
 						{
-							alert('Service Available');
+							alert('Currently We Provide this Facility To Delhi NCR Region Only ! Its our request to change your pincode as well');
+							document.getElementById('zipcode').value='';
+							document.getElementById('zipcode').focus();
 						}
 						else
 						{
-							alert('Service Not Available');
-							document.getElementById('zipcode').value='';
-							document.getElementById('zipcode').focus();
+							
 							
 						}
 						
@@ -140,7 +169,6 @@
 					url:'/modules/rentingmodel/library.php?single_zip='+zipcode,
 					success:function(data)
 					{
-
 						$data=jQuery.parseJSON(data);
 						if($data.counter==0)
 						{
@@ -164,6 +192,12 @@
 		var productList ={$name}
 		var e = document.getElementById('category');
 		var cate = e.options[e.selectedIndex].value;
+		if(cate=='')
+		{
+			document.getElementById('loan_duration').selectedIndex=0;
+				document.getElementById('security_deposit').value='';
+				document.getElementById('installment_amount').value='';
+		}
 		$('#product')
 				.find('option')
 				.remove()
@@ -186,14 +220,17 @@
 	{
 		var e = document.getElementById('product');
 		var cate = e.options[e.selectedIndex].value;
-
+		if(cate=='')
+		{
+			document.getElementById('installment_amount').value='';
+			document.getElementById('initial_msg').value='';
+		}
 		$.ajax(
 				{
 					type:'GET',
 					url:'/modules/rentingmodel/library.php?productCode='+cate,
 					success:function(data)
 					{
-
 						$data=jQuery.parseJSON(data);
 						if($data)
 						{
@@ -204,7 +241,6 @@
 							document.getElementById('duration').attribute('min',$data.min_period);
 							document.getElementById('duration').attribute('min',$data.max_period);
 						}
-
 					},
 					error: function(xhr, status, error) {
 						alert(status+error);
@@ -214,7 +250,6 @@
 	}
 	function checkPincode()
 	{
-			
 		var pincode=document.getElementById('zipcode').value;
 		$.ajax(
 				{
@@ -222,7 +257,6 @@
 					url:'/modules/rentingmodel/library.php?zipcode='+pincode,
 					success:function(data)
 					{
-
 						$data=jQuery.parseJSON(data);
 						if($data.counter=='1')
 						{
@@ -242,36 +276,49 @@
 						alert(status+error);
 					}
 				}
-		)
-		
+		)	
 	}
-	
 	function getCityName()
 	{
 			
 		var pincode=document.getElementById('zipcode').value;
-		$.ajax(
-				{
-					type:'GET',
-					url:'/modules/rentingmodel/library.php?back_pincode='+pincode,
-					success:function(data)
+		if(pincode.length==6)
+		{
+			$.ajax(
 					{
-
-						$data=jQuery.parseJSON(data);
-						if($data.name)
+						type:'GET',
+						url:'/modules/rentingmodel/library.php?back_pincode='+pincode,
+						success:function(data)
 						{
-							
-							document.getElementById('cityName').innerHTML=$data.name;
-							return true;
-						}
-						
 
-					},
-					error: function(xhr, status, error) {
-						alert(status+error);
+							$data=jQuery.parseJSON(data);
+							if($data.name)
+							{
+								document.getElementById('cityName').innerHTML=$data.name;
+								return true;
+							}
+							else
+							{
+								document.getElementById('cityName').innerHTML='Invalid Pincode';
+								document.getElementById('zipcode').focus();
+							}
+								
+							
+							
+
+						},
+						error: function(xhr, status, error) {
+							alert(status+error);
+						}
 					}
-				}
-		)
+			)
+		}
+		else
+		{
+			document.getElementById('cityName').innerHTML='Please Enter Six Digit Pincode';
+			document.getElementById('zipcode').focus();
+		}
+		
 		
 	}
 	function checkAge()

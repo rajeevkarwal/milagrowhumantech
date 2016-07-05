@@ -25,6 +25,14 @@ $pid1=Tools::getValue('pid1');
 $pincode_back=Tools::getValue('back_pincode');
 
 $singleCheck=Tools::getValue('single_zip');
+
+$city_row_id=Tools::getValue('city_row_id');
+
+if(!empty($city_row_id))
+{
+	$data=$library->deleteCity($city_row_id);
+	echo json_encode(array('output'=>$data));
+}
 if(!empty($singleCheck))
 {
 	$data=$library->getCounters($singleCheck);
