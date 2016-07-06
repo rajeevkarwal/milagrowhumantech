@@ -996,7 +996,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
                 null,
                 '',
                 null,
-                 _MODULE_DIR_.'',
+                 getcwd()._MODULE_DIR_,
                 false,
                 null
             );
@@ -1015,7 +1015,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
                 null,
                 '',
                 null,
-                _MODULE_DIR_.'',
+                getcwd()._MODULE_DIR_,
                 false,
                 null
             );
