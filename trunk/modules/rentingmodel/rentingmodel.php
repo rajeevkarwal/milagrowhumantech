@@ -985,6 +985,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
 		'{monthlyinstallment}'=>$customerData['monthly_rental'],
 		
 		);
+//	send mail to customer
 		 $res =Mail::Send(
                 (int)1,
                 $template,
