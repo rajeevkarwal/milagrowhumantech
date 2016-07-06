@@ -996,7 +996,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
                 null,
                 '',
                 null,
-                getcwd().'/../'. RentingModel::MODULE_NAME . "/",
+                '/modules/rentingmodel/img/idProofs/',
                 false,
                 null
             );
