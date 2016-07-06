@@ -985,7 +985,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
 		'{monthlyinstallment}'=>$customerData['monthly_rental'],
 		
 		);
-		$res =Mail::Send(
+		 $res =Mail::Send(
                 (int)1,
                 $template,
                 $subject,
@@ -996,7 +996,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
                 null,
                 '',
                 null,
-                '/modules/rentingmodel/img/idProofs/',
+                getcwd(). _MODULE_DIR_ .'rentingmodel/',
                 false,
                 null
             );
@@ -1015,7 +1015,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
                 null,
                 '',
                 null,
-                getcwd().'/../'. RentingModel::MODULE_NAME . "/",
+               getcwd(). _MODULE_DIR_ .'rentingmodel/',
                 false,
                 null
             );
