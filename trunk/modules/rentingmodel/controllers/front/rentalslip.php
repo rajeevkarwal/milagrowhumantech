@@ -151,6 +151,7 @@ class RentingmodelRentalSlipModuleFrontController extends ModuleFrontController
     private function updatePaymentMode($rentId)
     {
     					$data['payment_mode']=0;
+    					$data['status']=1;//setting status to 1 because customer select payment mode as Cheque for online payment it will be 2
     					//$customer_id=$this->getCustomerId($email);
     					Db::getInstance()->update('rental_customer',$data,'rent_id='.$rentId);
     					if(Db::getInstance()->Affected_Rows()>=0)
