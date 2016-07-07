@@ -93,7 +93,7 @@
             <td>Available For</td>
             <td>
                 <select id="available_for" name="available_for">
-                    <option value="0">Indivisual</option>
+                    <option value="0">Individual</option>
                     <option value="1">Company</option>
                     <option value="2">Both</option>
                 </select>

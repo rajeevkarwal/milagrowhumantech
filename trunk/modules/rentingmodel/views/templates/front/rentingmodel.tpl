@@ -11,6 +11,8 @@
 				document.getElementById('contact_number').focus();	
 			else if(document.getElementById('address').value=='')
 				document.getElementById('address').focus();	
+			else if(document.getElementById('pincode').value=='')
+				document.getElementById('pincode').focus();	
 			else if(document.getElementById('category').value=='')
 				document.getElementById('category').focus();
 			else if(document.getElementById('product').value=='')
@@ -25,6 +27,10 @@
 				document.getElementById('installment_amount').focus();
 			else if(document.getElementById('agreement').value=='')
 				document.getElementById('agreement').focus();
+			else if(document.getElementById('file1').value=='')
+				document.getElementById('file1').focus();
+			else if(document.getElementById('file2').value=='')
+				document.getElementById('file2').focus();
 			else
 				
 				document.getElementById('d23').submit();
@@ -34,24 +40,49 @@
 	{
 		
 		var duration=document.getElementById('loan_duration').value;
+		var product_id=document.getElementById('product').value;
+		var category_id=document.getElementById('category').value;
+		
+		if(duration=='')
+		{
+			document.getElementById('security_deposit').value='';	
+			document.getElementById('installment_amount').value='';
+			document.getElementById('hidden_installment').value='';
+			document.getElementById('initial_msg').innerHTML='';	 
+			//document.getElementById('product').selectedIndex=0;
+		}
+		else if(category_id=='')
+		{
+			document.getElementById('category').focus();
+		}
+		else if(product_id==''){
+			document.getElementById('product').focus();
+			}
+		
+		else
+		{
 		var amount=document.getElementById('hidden_installment').value
 		 
 		if(parseInt(duration)>=9 && parseInt(duration)<15)
 		{		
+			getPrice();
 				var amountSet=parseInt(amount)-(parseInt(amount)*10/100);
 				 document.getElementById('installment_amount').value=amountSet;
 				 document.getElementById('initial_msg').innerHTML='Duration Between 9 To 14 Month,You Got Discount 10%';
 		}
 		else if(parseInt(duration)>=15 && parseInt(duration)<=24)
 		{
+			getPrice();
 			 var amountSet=parseInt(amount)-(parseInt(amount)*15/100);
 			 document.getElementById('installment_amount').value=amountSet;
 			 document.getElementById('initial_msg').innerHTML='Duration More Than 15 Month,You Got Discount 15%';
 		}
 		else
 		{
-			 document.getElementById('installment_amount').value=amount;
+			getPrice();
+			 document.getElementById('installment_amount').value='';
 			 document.getElementById('initial_msg').innerHTML='';	 
+		}
 		}
 	}
 	function hideRow()
@@ -89,12 +120,88 @@
 			document.getElementById("product_tab").style.display="block";
 		}
 	}
+	function getAuthentication()
+	{
+		var e = document.getElementById('product');
+		var cate = e.options[e.selectedIndex].value;
+		var zipcode=document.getElementById('zipcode').value;
+		if(cate=='')
+		{
+			document.getElementById('security_deposit').value='';	
+			document.getElementById('installment_amount').value='';
+			document.getElementById('loan_duration').selectedIndex=0;
+			
+		}
+		$.ajax(
+				{
+					type:'GET',
+					url:'/modules/rentingmodel/library.php?a_zipcode='+zipcode+'&pid1='+cate,
+					success:function(data)
+					{
 
+						$data=jQuery.parseJSON(data);
+						if($data.counter==0)
+						{
+							alert('Currently the Rental Facility is not available in your area.');
+							document.getElementById('zipcode').value='';
+							document.getElementById('zipcode').focus();
+						}
+						
+						
+
+					},
+					error: function(xhr, status, error) {
+						alert(status+error);
+					}
+				}
+		)
+		
+	}
+	function getAuthentication1()
+	{
+	
+		var zipcode=document.getElementById('zipcode').value;
+		$.ajax(
+				{
+					type:'GET',
+					url:'/modules/rentingmodel/library.php?single_zip='+zipcode,
+					success:function(data)
+					{
+						$data=jQuery.parseJSON(data);
+						if($data.counter==0)
+						{
+							document.getElementById('pincodeError').innerHTML='Currently Service Available in Delhi NCR Only';
+							document.getElementById('category').selectedIndex=0;
+							document.getElementById('product').selectedIndex=0;
+							document.getElementById('loan_duration').selectedIndex=0;
+						}
+						else
+						{
+							document.getElementById('pincodeError').innerHTML='';
+							document.getElementById('category').selectedIndex=0;
+							document.getElementById('product').selectedIndex=0;
+							document.getElementById('loan_duration').selectedIndex=0;
+						}
+					},
+					error: function(xhr, status, error)
+					 {
+						alert(status+error);
+					}
+				}
+		)
+	}
+	
 	function getid()
 	{
 		var productList ={$name}
 		var e = document.getElementById('category');
 		var cate = e.options[e.selectedIndex].value;
+		if(cate=='')
+		{
+			document.getElementById('loan_duration').selectedIndex=0;
+				document.getElementById('security_deposit').value='';
+				document.getElementById('installment_amount').value='';
+		}
 		$('#product')
 				.find('option')
 				.remove()
@@ -112,20 +219,22 @@
 
 		}
 		elm.appendChild(df);
-
 	}
 	function getPrice()
 	{
 		var e = document.getElementById('product');
 		var cate = e.options[e.selectedIndex].value;
-
+		if(cate=='')
+		{
+			document.getElementById('installment_amount').value='';
+			document.getElementById('initial_msg').value='';
+		}
 		$.ajax(
 				{
 					type:'GET',
 					url:'/modules/rentingmodel/library.php?productCode='+cate,
 					success:function(data)
 					{
-
 						$data=jQuery.parseJSON(data);
 						if($data)
 						{
@@ -136,7 +245,6 @@
 							document.getElementById('duration').attribute('min',$data.min_period);
 							document.getElementById('duration').attribute('min',$data.max_period);
 						}
-
 					},
 					error: function(xhr, status, error) {
 						alert(status+error);
@@ -146,7 +254,6 @@
 	}
 	function checkPincode()
 	{
-			
 		var pincode=document.getElementById('zipcode').value;
 		$.ajax(
 				{
@@ -154,7 +261,6 @@
 					url:'/modules/rentingmodel/library.php?zipcode='+pincode,
 					success:function(data)
 					{
-
 						$data=jQuery.parseJSON(data);
 						if($data.counter=='1')
 						{
@@ -174,35 +280,49 @@
 						alert(status+error);
 					}
 				}
-		)
-		
+		)	
 	}
 	function getCityName()
 	{
 			
 		var pincode=document.getElementById('zipcode').value;
-		$.ajax(
-				{
-					type:'GET',
-					url:'/modules/rentingmodel/library.php?back_pincode='+pincode,
-					success:function(data)
+		if(pincode.length==6)
+		{
+			$.ajax(
 					{
-
-						$data=jQuery.parseJSON(data);
-						if($data.name)
+						type:'GET',
+						url:'/modules/rentingmodel/library.php?back_pincode='+pincode,
+						success:function(data)
 						{
-							
-							document.getElementById('cityName').innerHTML=$data.name;
-							return true;
-						}
-						
 
-					},
-					error: function(xhr, status, error) {
-						alert(status+error);
+							$data=jQuery.parseJSON(data);
+							if($data.name)
+							{
+								document.getElementById('cityName').innerHTML=$data.name;
+								return true;
+							}
+							else
+							{
+								document.getElementById('cityName').innerHTML='Invalid Pincode';
+								location.reload(1);
+							}
+								
+							
+							
+
+						},
+						error: function(xhr, status, error) {
+							alert(status+error);
+						}
 					}
-				}
-		)
+			)
+		}
+		else
+		{
+			document.getElementById('cityName').innerHTML='Please Enter Six Digit Pincode';
+			document.getElementById('zipcode').focus();
+		}
+		
 		
 	}
 	function checkAge()
@@ -285,7 +405,7 @@
 					position:relative !important
 					}
 				</style>
-			<form id="d23" method="post" enctype="multipart/form-data" >
+			<form id="d23" method="post"  enctype="multipart/form-data" onsubmit="return autheticate();">
 						<div class="row-fluid">
 								<div class="span3"><label for="name" class="required"><em>*</em>Your Occupation</label></div>
 									<div class="span9">
@@ -335,7 +455,7 @@
 							<div class="span3"><label for="name" class="required"><em>*</em>Contact Number</label></div>
 							<div class="span9">
 								<div class="input-box">
-									<input type="text" maxlen="12" pattern="[0-9]" id="contact_number" name="contact_number" value="" placeholder="10 Digit Number" title="Your Name" required="required"/>
+									<input type="text" maxlen="12"  id="contact_number" name="contact_number" value="" placeholder="10 Digit Number" required="required"/>
 								</div>
 							</div>
 						</div>
@@ -351,7 +471,7 @@
 							<div class="span3"><label for="name" class="required"><em>*</em>Pincode</label></div>
 							<div class="span9">
 								<div class="input-box">
-									<input type="text" value="" name="zipcode" id="zipcode" maxlength="6" onkeyup="getCityName();" onblur="return checkPincode();" required="required">
+									<input type="text" value="" placeholder="Enter 6 Digit Pincode" name="zipcode" id="zipcode" maxlength="6" onkeyup="getCityName();" onblur="return getAuthentication1();" required="required">
 									<span id="pincodeError" style="color:red"></span>
 								</div>
 							</div>
@@ -380,7 +500,7 @@
 							<div class="span3"><label for="name" class="required"><em>*</em>Product Name</label></div>
 							<div class="span9">
 								<div class="input-box">
-									<select name="product" id="product" onchange="getPrice();">
+									<select name="product" id="product" onchange="getAuthentication();">
 										<option>--Select Product Name--</option>
 
 									</select>
@@ -460,7 +580,7 @@
 							<div class="span9">
 								<div class="input-box">
 								 <input type="hidden" name="MAX_FILE_SIZE" value="2000000"/>
-									<input type="file" name="file3" id="file3"/>
+									<input type="file" name="file3" id="file3" required/>
 									<button type="button" value="?" onclick="openDocuments1();">?</button>
 								</div>
 							</div>
@@ -489,7 +609,7 @@
 							
 										<div style="margin-top:10px;">
 									<center>
-										<button onclick="return authenticate();" class="button" type="button" style="width:100px;background-color: #ffa930 !important;height: 30px;color: white;">Save &amp; Next</button>
+										<button  class="button" type="submit" style="width:100px;background-color: #ffa930 !important;height: 30px;color: white;">Save &amp; Next</button>
 
 									</center>
 										</div>

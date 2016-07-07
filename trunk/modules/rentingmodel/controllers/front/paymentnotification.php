@@ -103,7 +103,8 @@ class RentingModelPaymentNotificationModuleFrontController extends ModuleFrontCo
    			$sql="select count(rent_id) as counter from ps_customer_rent_received where rent_id=".$loan_id;
    			//echo $sql;
    			$extended_date=$this->generateNewDate($customer['monthly_rental_expire'],1);
-   			$extendsdate=array('monthly_rental_expire'=>$extended_date);
+   			$extendsdate=array('monthly_rental_expire'=>$extended_date,'status'=>2);
+   			//setting status is 2 for awaiting approval because customer payed the amount by online.
    			$row=Db::getInstance()->getRow($sql);
    			if($row)
    			{

@@ -1,10 +1,6 @@
 <?php
-require(getcwd() . _MODULE_DIR_ . "rentingmodel/libFunctions.php");
-define('_SMS_URL', 'https://control.msg91.com/sendhttp.php');
-define('_WORKING_KEY', 'f6srdljv9krmyof389tjdixf86bgmc55');
-define('_SMS_USERNAME', '56096');
-define('_SMS_PASSWORD', 'milagrowHelpdesk');
-define('_SMS_SENDERID', 'MLGROW');
+//require(getcwd() . _MODULE_DIR_ . "rentingmodel/libFunctions.php");
+
 session_start();
 define('ADMIN_EMAIL','cs@milagrow.in');
 define('ADMIN_NAME','MilagrowAdmin');
@@ -18,18 +14,16 @@ class RentingmodelRentalSlipModuleFrontController extends ModuleFrontController
     public  function initContent()
     {
         parent::initContent();
-        
-       $key="f6srdljv9krmyof389tjdixf86bgmc55";
+      
        	$customer_info=$_SESSION;
-       	$Merchant_Id=_MERCHANT_ID;
+       	//$Merchant_Id=_MERCHANT_ID;
        	$total=$_SESSION['security_deposited']+$_SESSION['monthly_rental'];
-       	$paymentNotificationUrl='renting-payment-notification';
-       	$WorkingKey=$key;
-       	 $Checksum = getChecksum($Merchant_Id, $_SESSION['customerId'], $total, $paymentNotificationUrl, $WorkingKey);
-       $data1=$customer_info['data'];
+       	//$paymentNotificationUrl='renting-payment-notification';
+       //	$WorkingKey=$key;
+       //	 $Checksum = getChecksum($Merchant_Id, $_SESSION['customerId'], $total, $paymentNotificationUrl, $WorkingKey);
+      	 $data1=$customer_info['data'];
         $this->context->smarty->assign(array(
         'customer'=>$data1,
-        'loanId'=>session_id(),
         'productName'=>$this->getProductName($data1['product_id']),
         'categoryName'=>$this->getCategoryName($data1['category_id']),
         'total'=>$this->getTotal($data1['security_deposited'],$data1['monthly_rental']),
@@ -38,21 +32,14 @@ class RentingmodelRentalSlipModuleFrontController extends ModuleFrontController
         'billing_cust_name'=>$_SESSION['name'],
         'billing_cust_address'=>$_SESSION['address'],
         'billing_cust_country'=>'India',
-        'billing_city'=>$customer_info['state'],
+        'billing_city'=>$data1['state'],
         'billing_zip'=>$_SESSION['pincode'],
         'billing_cust_tel'=>$_SESSION['contact_number'],
         'billing_cust_email'=>$_SESSION['email'],
         'billingPageHeading'=>'Loan Initial Payment',
         'amount'=>$_SESSION['security_deposited']+$_SESSION['monthly_rental'],
-        'working_key'=>$key,
-        'checksum' => $Checksum,
-        'request_url' => _PS_BASE_URL_ . __PS_BASE_URI__,
-        'HOOK_PAYMENT' => Hook::exec('displayPayment'),
-       
-        
         ));
-        echo 
-			$this->setTemplate('slip.tpl');
+        $this->setTemplate('slip.tpl');
     }
     public function getTotal($val1,$val2)
     {
@@ -60,12 +47,9 @@ class RentingmodelRentalSlipModuleFrontController extends ModuleFrontController
     }
     public function postProcess()
     {
-    	//$customer=$_SESSION['data'];
     	$chequeValue=Tools::getValue('cheque');
-    	
     	if($chequeValue)
     	{			
-    					
     		    		$result=$this->updatePaymentMode($_SESSION['customerId']);
     		    		
     					if($result)
@@ -167,6 +151,7 @@ class RentingmodelRentalSlipModuleFrontController extends ModuleFrontController
     private function updatePaymentMode($rentId)
     {
     					$data['payment_mode']=0;
+    					$data['status']=1;//setting status to 1 because customer select payment mode as Cheque for online payment it will be 2
     					//$customer_id=$this->getCustomerId($email);
     					Db::getInstance()->update('rental_customer',$data,'rent_id='.$rentId);
     					if(Db::getInstance()->Affected_Rows()>=0)

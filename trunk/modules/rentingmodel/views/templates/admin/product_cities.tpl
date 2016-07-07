@@ -14,32 +14,30 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script>
-    function getPrice()
+  
+    function getPincode()
     {
-      
-        var e = document.getElementById('product');
-        var cate = e.options[e.selectedIndex].value;
-        $.ajax(
-                {
-                    type:'GET',
-                    url:'http://localhost/practice/modules/rentingmodel/library.php?product_id='+cate,
-                    success:function(data)
-                    {
-                        $data=jQuery.parseJSON(data);
-                        if($data)
+    	 var e = document.getElementById('cityName');
+         var cate = e.options[e.selectedIndex].value;
+         $.ajax(
+                 {
+                     type:'GET',
+                     url:'/modules/rentingmodel/library.php?city_id='+cate,
+                     success:function(data)
+                     {
+                         $data=jQuery.parseJSON(data);
+                         if($data)
 
-                            $('#initial_price').val($data.price);
-                    },
+                             $('#pincode').val($data.pincode);
+                     },
 
-                }
-        )
+                 }
+         )
     }
     function getid()
     {
-        var productList ={$name}
-
-
-        var e = document.getElementById('category');
+        var productList ={$product}
+        var e = document.getElementById('newCategory');
 
         var cate = e.options[e.selectedIndex].value;
 
@@ -60,34 +58,37 @@
 
         }
         elm.appendChild(df);
-
     }
-    function getCityName()
+    function getCity()
     {
-    	
-         var pincode=document.getElementById('pincode').value;
-         $.ajax(
-                 {
-                     type:'GET',
-                     url:'/modules/rentingmodel/library.php?back_pincode='+pincode,
-                     success:function(data)
-                     {
-                         $data=jQuery.parseJSON(data);
-                         if($data)
-                            document.getElementById('cityName').innerHTML=$data.name;
-                     },
+        var cityList ={$city}
+      var e = document.getElementById('stateName');
+        var cate = e.options[e.selectedIndex].value;
+        $('#cityName')
+                .find('option')
+                .remove()
+                .end();
+        var check = cityList[cate];
+        var opt = $('<option value="">--select City--</option>');
+        $('#cityName').append(opt);
+        var elm = document.getElementById('cityName'),
+                df = document.createDocumentFragment();
+        for (var i = 0; i < check.length; i++) {
+            var option = document.createElement('option');
+            option.value = check[i]['city'];
+            option.appendChild(document.createTextNode(" " + check[i]['city']));
+            df.appendChild(option)
 
-                 }
-         )
+        }
+        elm.appendChild(df);
+
     }
+   
 </script>
-    {if !empty($ShowMsg)}
-        <script>
-            alert({$ShowMsg});
-        </script>
-        {/if}
+   <center><b style="color:red;text-align:center">{$showMsg}</b></center>
 <form name="addCity" id="addCity" method="post">
 <table style="width: 50%;border:1px solid black;" align="center" class="mytable">
+		
         <input type="hidden" value="saveCity" name="form_code">
         <tr>
             <td>Select Category</td>
@@ -103,14 +104,30 @@
                 </select>
             </td>
          </tr>
+		<tr style="display:none">
+			<td>Select State</td>
+			<td>
+				{$state}
+			
+			</td>
+		</tr>
+		<tr style="display:none;">
+			<td>Select City</td>
+			<td>
+				<select name="cityName" id="cityName" onchange="getPincode();">
+					<option>Select City Name</option>
+				</select>
+			
+			</td>
+		</tr>
+		<tr>
+		<td>Enter Pincode</td>
+			<td>
+				<input type="text" name="pincode" id="pincode" maxlength="6" required>			
+			</td>
 		
-		   <tr id="others" >
-				<td>Enter Pincode</td>
-				<td>
-					<input type="number" maxlen="6" id="pincode" name="pincode" onkeyup="getCityName();"><br>
-					<span id="cityName" style="color:red;text-transform: capitalize;"></span>
-				</td>
-		  </tr>
+		</tr>
+		  
 		 
 		  <tr>
             <td colspan="2" align="center">

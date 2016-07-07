@@ -23,7 +23,7 @@
 						<span class="heading">Customer Name</span>
 					</div>
 					<div class="span3">
-						{$customerName}{$extension}{$payments}
+						{$customerName}
 					</div>
 					<div class="span3">
 						<span class="heading">Customer Email</span>
@@ -118,6 +118,23 @@
 					</div>
 					
 				</div>
+				<div class="row-fluid" {if $status lt 7} style='display:none;' {/if}>
+					<div class="span3">
+						<span class="heading">Activation Date</span>
+					</div>
+					<div class="span3">
+						{$activationDate}
+					</div>
+					<div class="span3">
+						<span class="heading">Monthly Expiration</span>
+					</div>
+					<div class="span3">
+						{$monthly_expiration}&nbsp;
+						
+					</div>
+					
+				</div>
+				
 				<div class="row-fluid" {if $extension==0}style="display:none;"{/if}>
 				<div class="row-fluid">
 					<label><h3>Period Extended</h3></label>

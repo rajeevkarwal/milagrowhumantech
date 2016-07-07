@@ -13,6 +13,7 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
     public $display_column_left=true;
     public function postProcess()
     {
+    	 $data['product_id']='';
     	global $cookie;
 
 		$fileAttachment=null;
@@ -24,18 +25,38 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
 		$data['address']=Tools::getValue('address');
 		$data['date_of_birth']=Tools::getValue('date_of_birth');
 		$data['product_id']=Tools::getValue('product');
+		
+		$productInfo=$this->getProductSchema($data['product_id']);   
+		
 		$data['category_id']=Tools::getValue('category');
 		$data['payment_mode']=0;
 		$data['payment_duration']=Tools::getValue('payment_duration');
-		$data['monthly_rental']=Tools::getValue('monthly_rental');
+		
+		
+		if($data['payment_duration']>9 && $data['payment_duration']<15)
+		{
+		$data['monthly_rental']=$productInfo['installment_amount']-$productInfo['installment_amount']*.10;
+		}
+		else if($data['payment_duration']>=15 && $data['payment_duration']<=24)
+		{
+		$data['monthly_rental']=$productInfo['installment_amount']-$productInfo['installment_amount']*.15;
+		}
+		else
+		{
+			$data['monthly_rental']=$productInfo['installment_amount'];
+		}
 		$data['product_price']=Tools::getValue('product_price');
-		$data['security_deposited']=Tools::getValue('security_deposited');
+		$data['security_deposited']=$productInfo['security_value'];
 		$data['status']=0;
 		$data['year_of_establishment']=Tools::getValue('establishment_year');
 		//$data['state']=$this->getStateName(Tools::getValue('state'));
 		$zipcode=Tools::getValue('zipcode');
+		
 		$data['city']=$this->getCityName($zipcode);
 		$data['state']=$this->getStateName($zipcode);
+		
+		$combination=$this->checkCombination($data['product_id'],$zipcode);
+		if($combination){
 		 if (isset($_FILES['file1']['name']) && !empty($_FILES['file1']['name']) && !empty($_FILES['file1']['tmp_name']))
 			 {
 				
@@ -72,95 +93,115 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
 		! empty($data['category_id']) || !empty($data['payment_mode']) || !empty($data['payment_duration']) ||!empty($data['monthly_rental']) ||
 		!empty($data['monthly_price']) ||!empty($data['security_deposited']))
 		{
-		
-		
-		if($cookie->isLogged())
-		{
-			$customerId=$cookie->id_customer;
-		}else
-		{
-			
-			//here we have to insert the data to the customer table
-			$customerData=Customer::getByEmail($data['email']);
-		   if(!empty($customerData->id))
+			if($cookie->isLogged())
 			{
-				$customerId=$customerData->id;
-			}
-			else
+				$customerId=$cookie->id_customer;
+			}else
 			{
-				$gender='1';
-				$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-				$actualPassword=substr(str_shuffle($chars),0,8);
-				$pwd=Tools::encrypt($actualPassword);
-				$date_added = date("Y-m-d H:i:s", time());
-				$date_updated = $date_added;
-				$last_pass_gen = $date_added;
-				$newsletter = '1';
-				$ip = pSQL(Tools::getRemoteAddr());
-				$optin = '1';
-				$maxpay = '0';
-				$s_key = md5(uniqid(rand(), true));
-            //$insert_id=(int)Db::getInstance()->Insert_ID();
-				$id_land = Language::getIdByIso('en');
-				$sql2 = "INSERT INTO  " . _DB_PREFIX_ . "customer (`id_gender`, `id_default_group`, `id_lang`, `id_risk`, `firstname`, `lastname`, `email`, `passwd`, `last_passwd_gen`, `newsletter`, `ip_registration_newsletter`, `optin`, `active`, `date_add`, `date_upd`, `max_payment_days`, `secure_key`) VALUES ('" . $gender . "', '3', '1', '0', '" . mysql_real_escape_string($data['name']) . "', '" . 'lastname'."', '" . $data['email'] . "', '" . $pwd . "', '" . $last_pass_gen . "', '" . $newsletter . "', '" . $ip . "', '" . $optin . "', '1', '" . $date_added . "', '" . $date_updated . "', '" . $maxpay . "', '" . mysql_real_escape_string($s_key) . "')";
-					$result2 = Db::getInstance()->execute($sql2);
-					$customerId = (int)Db::getInstance()->Insert_ID();
-                $tbl = pSQL(_DB_PREFIX_ . 'customer_group');
-                $query = "INSERT into $tbl (`id_customer`,`id_group`) values ('" . $insert_id . "','3') ";
-                Db::getInstance()->Execute($query);
-
-                //sending email to customer
-                    $url = 'http://milagrowhumantech.com';
-                    $sub = "Thank You For Registration at MilagrowHumantech";
-                    $vars = array(
-                        '{firstname}' => $data['name'],
-                        '{lastname}' => '',
+				//here we have to insert the data to the customer table
+				$customerData=Customer::getByEmail($data['email']);
+			   	if(!empty($customerData->id))
+				{
+					$customerId=$customerData->id;
+				}
+				else
+				{
+					$gender='1';
+					$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+					$actualPassword=substr(str_shuffle($chars),0,8);
+					$pwd=Tools::encrypt($actualPassword);
+					$date_added = date("Y-m-d H:i:s", time());
+					$date_updated = $date_added;
+					$last_pass_gen = $date_added;
+					$newsletter = '1';
+					$ip = pSQL(Tools::getRemoteAddr());
+					$optin = '1';
+					$maxpay = '0';
+					$s_key = md5(uniqid(rand(), true));
+	            //$insert_id=(int)Db::getInstance()->Insert_ID();
+					$id_land = Language::getIdByIso('en');
+					$sql2 = "INSERT INTO  " . _DB_PREFIX_ . "customer (`id_gender`, `id_default_group`, `id_lang`, `id_risk`, `firstname`, `lastname`, `email`, `passwd`, `last_passwd_gen`, `newsletter`, `ip_registration_newsletter`, `optin`, `active`, `date_add`, `date_upd`, `max_payment_days`, `secure_key`) VALUES ('" . $gender . "', '3', '1', '0', '" . mysql_real_escape_string($data['name']) . "', '" . 'lastname'."', '" . $data['email'] . "', '" . $pwd . "', '" . $last_pass_gen . "', '" . $newsletter . "', '" . $ip . "', '" . $optin . "', '1', '" . $date_added . "', '" . $date_updated . "', '" . $maxpay . "', '" . mysql_real_escape_string($s_key) . "')";
+						$result2 = Db::getInstance()->execute($sql2);
+						$customerId = (int)Db::getInstance()->Insert_ID();
+	                $tbl = pSQL(_DB_PREFIX_ . 'customer_group');
+	                $query = "INSERT into $tbl (`id_customer`,`id_group`) values ('" . $insert_id . "','3') ";
+	                Db::getInstance()->Execute($query);
+	
+	                //sending email to customer
+	                    $url = 'http://milagrowhumantech.com';
+	                    $sub = "Thank You For Registration at MilagrowHumantech";
+	                    $vars = array(
+	                        '{firstname}' => $data['name'],
+	                        '{lastname}' => '',
                         '{email}' => $data['email'],
                         '{passwd}' => $actualPassword,
                         '{page_url}' => $url
                     );
                     $id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
                     $send = Mail::Send($id_lang, 'account', $sub, $vars, $data['email']); 
+				}
 			}
+				$base_dir= _PS_MODULE_DIR_.'rentingmodel/img/';		
+				 if (rename($_FILES['file1']['tmp_name'],$base_dir.'images/'.$data['image_url'])){
+							$data['image_url']=$data['image_url'];					
+		                }
+				 if (rename($_FILES['file2']['tmp_name'],$base_dir.'idProofs/'.$data['id_url'])){
+							$data['id_url']=$data['id_url'];
+		                }
+				 if (rename($_FILES['file3']['tmp_name'],$base_dir.'addressProofs/'.$data['address_url']))
+							$data['address_url']=$data['address_url'];
+							
+					$date=new DateTime();
+					$nowDate=$date->format('Y-m-d');
+					$data['monthly_rental_expire']=$this->generateNewDate($nowDate,1);
+					$data['tenure_expiration_date']=$this->generateNewDate($nowDate,$data['payment_duration']);
+					$data['payment_status']=3;
+					$data['sent_monthly_mail']=0;
+					$data['sent_tenure_mail']=0;
+		         	$data['customer_id']=$customerId;
+		         	//echo var_dump($data);
+		         	//$result=0;
+					$result=$this->saveCustomer($data);
+		         	
+					if($result)
+					{
+						//echo '<script>alert("Succesfully Applied For This Request")</script>';
+						$_SESSION['data']=$data;
+						$_SESSION['server_name']=$_SERVER['SERVER_NAME'];
+						$_SESSION['customerId']=$result;
+						$_SESSION['pincode']=$zipcode;
+						$this->mailToCustomer($result,$type);
+						
+						//Tools::redirect('myrentslip');
+						header('location:myrentslip');
+					}
+					else
+						echo $result;
+						
 		}
-			$base_dir= _PS_MODULE_DIR_.'rentingmodel/img/';		
-			 if (rename($_FILES['file1']['tmp_name'],$base_dir.'images/'.$data['image_url'])){
-					$data['image_url']=$data['image_url'];					
-                }
-		 if (rename($_FILES['file2']['tmp_name'],$base_dir.'idProofs/'.$data['id_url'])){
-					$data['id_url']=$data['id_url'];
-                }
-		 if (rename($_FILES['file3']['tmp_name'],$base_dir.'addressProofs/'.$data['address_url']))
-					$data['address_url']=$data['address_url'];
-					
-			$date=new DateTime();
-			$nowDate=$date->format('Y-m-d');
-			$data['monthly_rental_expire']=$this->generateNewDate($nowDate,1);
-			$data['tenure_expiration_date']=$this->generateNewDate($nowDate,$data['payment_duration']);
-			$data['payment_status']=3;
-			$data['sent_monthly_mail']=0;
-			$data['sent_tenure_mail']=0;
-         	$data['customer_id']=$customerId;
-         	
-			$result=$this->saveCustomer($data);
-         	
-			if($result)
-			{
-				echo '<script>alert("Succesfully Applied For This Request")</script>';
-				$_SESSION['data']=$data;
-				$_SESSION['server_name']=$_SERVER['SERVER_NAME'];
-				$_SESSION['customerId']=$result;
-				$_SESSION['pincode']=$zipcode;
-				$this->mailToCustomer($result,$type);
-				
-				//Tools::redirect('myrentslip');
-				header('location:myrentslip');
-			}
-			else
-				echo $result;
-				
-         	
 		}
+		else 
+		{
+			
+		}
+    }
+    private function checkCombination($product_id,$pincode)
+    {
+    	$sql="select count(*) as counter from ps_rental_product_cities where pincode='$pincode' and product_id='$product_id'";
+    	$result=Db::getInstance()->getRow($sql);
+    	if($result)
+    		return $result['counter'];
+    	else
+    		return false;
+    }
+    private function getProductSchema($product_id)
+    {
+    		$sql="select security_value,installment_amount from ps_product_rental where product_id=".$product_id;
+    		$result=Db::getInstance()->getRow($sql);
+    		if($result)
+    			return $result;
+    		else 
+    			return false;
     }
 	private function getCityName($pincode)
 	{

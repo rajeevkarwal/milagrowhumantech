@@ -100,14 +100,20 @@
 									document.getElementById('paymentMode').innerHTML='By Credit Card';
 									else
 										document.getElementById('paymentMode').innerHTML='By Cheque';	
-									if($data.status==0)msg='awaiting approval';
-									else if($data.status==1)msg='Document Verified';
-									else if($data.status==2)msg='Product Sent';
-									else if($data.status==3)msg='Product Delivered';
-									else if($data.status==4)msg='Loan Active';
-									else if($data.status==5)msg='Loan Completed';
-									else if($data.status==6)msg='Loan Settelled';
-									else if($data.status==7)msg='Loan Cancelled';
+									if($data.status==0)
+										$msg='Payment Pending';
+									else if($data.status==0)
+										$msg='Payment Awaited/By Cheque';
+	
+									else if($data.status==2)
+										msg='awaiting approval';
+									else if($data.status==3)msg='Document Verified';
+									else if($data.status==4)msg='Product Sent';
+									else if($data.status==5)msg='Product Delivered';
+									else if($data.status==6)msg='Loan Active';
+									else if($data.status==7)msg='Loan Completed';
+									else if($data.status==8)msg='Loan Settelled';
+									else if($data.status==9)msg='Loan Cancelled';
 									else msg='Rejected';
 									document.getElementById('currentStatus').innerHTML=msg;
 										
@@ -162,9 +168,9 @@
 		</tr>
 		<tr>
 			<th><span class="heading">Category Name</span></th>
-			<td><span id="categoryName">LAPTOPS</span></td>
+			<td><span id="categoryName"></span></td>
 			<th><span class="heading">Product Name</span></th>
-			<td><span id="productName">macbook Air</span></td>
+			<td><span id="productName"></span></td>
 		</tr>
 		<tr>
 			<th><span class="heading">Product Amount</span></th>
@@ -248,7 +254,7 @@
 				</td>
 				<td rowspan="2"></td>
 				<td rowspan="2"><a href="{$img2}" target="_blank">
-						<img src="{$img2}' height="120px" width="120px" title="Customer Id Proof/Company Lease" alt="company lease">
+						<img src="{$img2}" height="120px" width="120px" title="Customer Id Proof/Company Lease" alt="company lease">
 					</a></td>
 				<td rowspan="2"><a href="{$img3}" target="_blank">
 						<img src='{$img3}' height="120px" width="120px" title="Customer Address proof/Proof of Properitership" alt="company pro">

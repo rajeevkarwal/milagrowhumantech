@@ -201,7 +201,7 @@ class RentingmodelThanksModuleFrontController extends ModuleFrontController
                 null,
                 $attachments,
                 null,
-                getcwd() . _MODULE_DIR_ . 'rentingmodel/',
+               getcwd() . _MODULE_DIR_ . 'rentingmodel/',
                 false,
                 null
             );
@@ -221,7 +221,7 @@ class RentingmodelThanksModuleFrontController extends ModuleFrontController
                 null,
                 $attachments,
                 null,
-                getcwd() . _MODULE_DIR_ . 'rentingmodel/',
+                 getcwd() . _MODULE_DIR_ . 'rentingmodel/',
                 false,
                 null
             );
