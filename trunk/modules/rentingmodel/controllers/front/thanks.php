@@ -97,7 +97,7 @@ class RentingmodelThanksModuleFrontController extends ModuleFrontController
            	 
             $actualPrice=$productMeta['product_value'];//actual price of product
             $discount=0;
-            if($orderInfo['payment_duration']>9 && $customer['payment_duration']<15)$discount=10;
+            if($customer['payment_duration']>=9 && $customer['payment_duration']<15)$discount=10;
             else  if($customer['payment_duration']>14 && $customer['payment_duration']<=24)$discount=15;
             
             $discountInRent=($productMeta['installment_amount']*$discount/100);//discount In Rent
@@ -187,7 +187,7 @@ class RentingmodelThanksModuleFrontController extends ModuleFrontController
             	$customerCare='cs@milagrow.in';
             	//$subject="Loan Application Received #-".$id.'-'.$customer['name'].'-'.$paymentMode;
             	$templateName='company_mail_before_payment';
-            	$title="Administrator-Payment Received";
+            	$title="Admin";
             	if (!empty($customerCare))
             	 {
                 	 $res =Mail::Send(

@@ -40,9 +40,9 @@ if(!empty($singleCheck))
 }
 if(!empty($zip1))
 {
-
 	$data=$library->getCityAuthetication($pid1 ,$zip1);
-	echo json_encode($data);
+	echo json_encode($data,true);
+        die;
 }
 if(!empty($zipcode))
 {
@@ -57,6 +57,11 @@ if(!empty($city_id))
 	$data=$library->getPincodeByCityId($city_id);
 	echo json_encode($data);
 }
+
+
+/*
+ * case for fetching the name of the city and 
+ */
 if(!empty($pincode_back))
 {
 	$data=$library->getCityName($pincode_back);

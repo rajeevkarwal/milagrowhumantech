@@ -33,7 +33,7 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
 		$data['payment_duration']=Tools::getValue('payment_duration');
 		
 		
-		if($data['payment_duration']>9 && $data['payment_duration']<15)
+		if($data['payment_duration']>=9 && $data['payment_duration']<15)
 		{
 		$data['monthly_rental']=$productInfo['installment_amount']-$productInfo['installment_amount']*.10;
 		}
@@ -124,7 +124,7 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
 						$result2 = Db::getInstance()->execute($sql2);
 						$customerId = (int)Db::getInstance()->Insert_ID();
 	                $tbl = pSQL(_DB_PREFIX_ . 'customer_group');
-	                $query = "INSERT into $tbl (`id_customer`,`id_group`) values ('" . $insert_id . "','3') ";
+	                $query = "INSERT into $tbl (`id_customer`,`id_group`) values ('" . $customerId . "','3') ";
 	                Db::getInstance()->Execute($query);
 	
 	                //sending email to customer
@@ -175,8 +175,6 @@ class RentingModelInitModuleFrontController extends ModuleFrontController
 						//Tools::redirect('myrentslip');
 						header('location:myrentslip');
 					}
-					else
-						echo $result;
 						
 		}
 		}
@@ -459,7 +457,7 @@ and p1.id_category=p2.id_category and p3.category_id=p1.id_category and p2.level
 		$msg='';
 		$duration=1;
 		Db::getInstance()->insert('rental_customer',$customer);
-		echo Db::getInstance()->getMsgError();
+		//echo Db::getInstance()->getMsgError();
 		$id=Db::getInstance()->Insert_ID();
 		if($id)
 		{	
@@ -469,6 +467,10 @@ and p1.id_category=p2.id_category and p3.category_id=p1.id_category and p2.level
 			return false;
 		
 	}
+        
+        /*
+         * remove this function
+         */
 	private function getDateByCustomerId($id)
 	{
 		$sql='select date(applied_on)as date from ps_rental_customer where customer_id='.$id;
@@ -477,6 +479,7 @@ and p1.id_category=p2.id_category and p3.category_id=p1.id_category and p2.level
 			return $row['date'];
 		else return false;
 	}
+        
 	private function generateNewDate($date,$duration)
 	{
 			//echo 'original date'.$date;

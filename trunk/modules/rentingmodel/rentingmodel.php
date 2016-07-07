@@ -1024,7 +1024,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
 	}
 	public function getCityName($pincode)
 	{
-		$sql="select city from ps_pincode_cod where pincode=".$pincode;
+		$sql="select city from ps_renting_pincodes where pincode=".$pincode;
 		$row=Db::getInstance()->getRow($sql);
 		if($row)
 			return $row['city'];
@@ -1161,14 +1161,10 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
    }
    public function getCityAuthetication($product_id ,$zipcode)
    {
-  	 $sql="select count(*) as counter from ps_rental_product_cities where pincode='".$zipcode."'and product_id=".$product_id;
-  	 $result=Db::getInstance()->getRow($sql);
-  	 if($result)
-  	 {
-  	 	return $result;
-  	 }
-  	 else
-  	 	return false;
+  	 $sql="select prp.city from ps_rental_product_cities prpc join ps_renting_pincodes prp on prpc.pincode=prp.pincode where prpc.pincode='".$zipcode."'and product_id=".$product_id.' and status=1';
+  	 //echo $sql;
+         $result=Db::getInstance()->getRow($sql);
+  	 return !empty($result['city'])?$result:array();
    }
    public function getCounters($singleCheck)
    {
