@@ -294,7 +294,7 @@ class Register_Popup extends Module
                     $id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 //                    $smarty->assign('gosf_coupon_code', '');
                     //$send = Mail::Send($id_lang, 'gosf',$sub, $vars, $email);
-                    if ($host == 'milagrow.localhost.com' || $host == 'milagrow.localhost.com/') {
+                    if ($host == 'milagrowhumantech.com' || $host == 'milagrowhumantech.com/') {
                         $send = Mail::Send($id_lang, 'gosf', $sub, $vars, $email);
                     } elseif ($host == 'milagrowhumantech.com/87-body-robots' || $host == 'milagrowhumantech.com/137-body-robot-models' || $host == 'milagrowhumantech.com/body-robots/23-robotic-body-massager.html' || $host == 'milagrowhumantech.com/body-robots/90-robotic-body-massager-blue.html') {
                         $send = Mail::Send($id_lang, 'gosf_br', $sub, $vars, $email);
@@ -326,7 +326,9 @@ class Register_Popup extends Module
                         $send = Mail::Send($id_lang, 'gosf_pr_25', $sub, $vars, $email);
                     } elseif ($host == 'milagrowhumantech.com/pool-robots/421-milagrow-robophelps30.html') {
                         $send = Mail::Send($id_lang, 'gosf_pr_30', $sub, $vars, $email);
-                    } elseif ($host == 'milagrowhumantech.com/6-tabtop-pcs' || $host == 'milagrowhumantech.com/11-android-models' || $host == 'milagrowhumantech.com/27-tabtop-accessories') {
+                    } 
+                 	
+                    elseif ($host == 'milagrowhumantech.com/6-tabtop-pcs' || $host == 'milagrowhumantech.com/11-android-models' || $host == 'milagrowhumantech.com/27-tabtop-accessories') {
                         $send = Mail::Send($id_lang, 'gosf_tab_pc', $sub, $vars, $email);
                     } elseif ($host == 'milagrowhumantech.com/quad-core/75-104-pro-3g-sim-quad-core-16gb.html') {
                         $send = Mail::Send($id_lang, 'gosf_tab_m8_16', $sub, $vars, $email);
@@ -343,28 +345,34 @@ class Register_Popup extends Module
                     } elseif ($host == 'milagrowhumantech.com/content/27-offers-zone-') {
                         $send = Mail::Send($id_lang, 'gosf_ofr', $sub, $vars, $email);
                     }
-                    else if($host == 'http://milagrowhumantech.com/floor-robots/505-milagrow-blackcat3-0-india-s-longest-battery-life-floor-cleaner-8908002152678.html')
+                    else if($host == 'milagrowhumantech.com/floor-robots/505-milagrow-blackcat3-0-india-s-longest-battery-life-floor-cleaner-8908002152678.html')
                     {
                     	 $send = Mail::Send($id_lang, 'gosf_blck_cat', $sub, $vars, $email);
                     }
                     //send mailer while registering through aguabot 5.0 product page
-                    else if($host== 'http://milagrowhumantech.com/floor-robots/575-milagrow-aguabot-5-0-indias-1st-full-wetmopping-and-drycleaning-floor-robovac-8908002152081.html')
+                    else if($host== 'milagrowhumantech.com/floor-robots/575-milagrow-aguabot-5-0-indias-1st-full-wetmopping-and-drycleaning-floor-robovac-8908002152081.html')
                     {
                     	 $send = Mail::Send($id_lang, 'gosf_ag5', $sub, $vars, $email);
                     }
-                     //send mailer while registering through aguabot 5.0 product page
-                     else if($host== 'http://milagrowhumantech.com/floor-robots/504-milagrow-aguabot-4-0-robotic-floor-cleaner-with-water-tank-8908002152081.html')
+                     //send mailer while registering through aguabot 4.0 product page
+                     else if($host== 'milagrowhumantech.com/floor-robots/504-milagrow-aguabot-4-0-robotic-floor-cleaner-with-water-tank-8908002152081.html')
                      {
                      	 $send = Mail::Send($id_lang, 'gosf_ag4', $sub, $vars, $email);
                      }
-                     else if($host=='http://milagrowhumantech.com/floor-robots/503-milagrow-redhawk3-0-india-s-number-1-floor-robots-8908002152012.html')
+                     //new mailer added for redhawk 3.0
+                     else if($host=='milagrowhumantech.com/floor-robots/503-milagrow-redhawk3-0-india-s-number-1-floor-robots-8908002152012.html')
                      {
-                     	$send = Mail::Send($id_lang, 'gosf_red_hawk_3', $sub, $vars, $email);
+                     	$send = Mail::Send($id_lang, 'gosf_fr_redhawk3', $sub, $vars, $email);
                      }
-               		  else if($host=='http://milagrowhumantech.com/floor-robots/505-milagrow-blackcat3-0-india-s-longest-battery-life-floor-cleaner-8908002152678.html')
+                     //new mailer added for black cat 3.0
+               		  else if($host=='milagrowhumantech.com/floor-robots/505-milagrow-blackcat3-0-india-s-longest-battery-life-floor-cleaner-8908002152678.html')
                      {
-                     	$send = Mail::Send($id_lang, 'gosf_black_cat_3', $sub, $vars, $email);
+                     	$send = Mail::Send($id_lang, 'gosf_fr_blackcat3', $sub, $vars, $email);
                      }
+                     //new mailer added robo phelps 40 Turbo
+                	elseif ($host == 'milagrowhumantech.com/pool-robots/502-milagrow-robophelps40turbo.html') {
+                        $send = Mail::Send($id_lang, 'gosf_pr_rp40', $sub, $vars, $email);
+                    }
                     else {
                         $send = Mail::Send($id_lang, 'gosf_fr', $sub, $vars, $email);
                     }
