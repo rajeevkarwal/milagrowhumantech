@@ -415,7 +415,7 @@ class RentingModel extends Module
    		{
    			$counter=$row['counter'];
    		}
-   		if($status==4)
+   		if($status==6)
    		{
    			if($duration!=$counter)
    			{
