@@ -316,7 +316,7 @@ class Register_Popup extends Module
                 		 $send = Mail::Send($id_lang, 'gosf_robotiger2', $sub, $vars, $email);
                 	}
                     elseif ($host == 'milagrow.net/lawn-robots/229-robonicklaus-20.html' || $host=='milagrow.net/lawn-robots/229-robonicklaus-20-8908002152708.html'){
-                        $send = Mail::Send($id_lang, 'gosf_ln_rb_nick', $sub, $vars, $email);
+                        $send = Mail::Send($id_lang, 'gosf_ln', $sub, $vars, $email);
                     } elseif ($host == 'milagrow.net/113-pool-robots' || $host=='milagrow.net/content/category/12-buying-guide-for-pool-robots' || $host=='milagrow.net/content/62-pool-robots' || $host == 'milagrow.net/114-pool-robot-models' || $host == 'milagrow.net/122-pool-robot-accessories' || $host == 'milagrow.net/pool-robot-accessories/299-caddy.html' || $host == 'milagrow.net/pool-robot-accessories/300-dustbin.html' || $host == 'milagrow.net/pool-robot-accessories/298-charger-cable.html' || $host == 'milagrow.net/pool-robot-accessories/322-remote.html' || $host == 'milagrow.net/pool-robot-accessories/323-charger-.html' || $host == 'milagrow.net/pool-robot-accessories/298-charger-cable.html' || $host == 'milagrow.net/pool-robot-accessories/323-charger-.html' || $host == 'milagrow.net/pool-robot-accessories/299-caddy.html' || $host == 'milagrow.net/pool-robot-accessories/300-dustbin.html' || $host == 'milagrow.net/pool-robot-accessories/322-remote.html') {
                         $send = Mail::Send($id_lang, 'gosf_pr', $sub, $vars, $email);
                    // } elseif ($host == 'milagrow.net/114-pool-robot-models'){
