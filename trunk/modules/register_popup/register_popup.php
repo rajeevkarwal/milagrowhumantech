@@ -311,11 +311,11 @@ class Register_Popup extends Module
                     } elseif ($host == 'milagrow.net/105-lawn-robots' || $host=='milagrowhumantech.com/content/category/2-buying-guides' || $host == 'milagrow.net/115-lawn-robot-models'  || $host == 'milagrow.net/123-lawn-robot-accessories' || $host === 'milagrow.net/lawn-robot-accessories/302-virtual-wire.html' || $host == 'milagrow.net/lawn-robot-accessories/303-peges.html' || $host =='milagrow.net/lawn-robot-accessories/305-docking-station.html' || $host == 'milagrow.net/remote/344-robo-nicklaus-20.html' || $host =='milagrow.net/batteries/392-nicklaus-20-battery.html' || $host == 'milagrow.net/blades/412-lawn-robots-blades-for-nicklaus20.html' || $host == 'milagrow.net/charger/416-lawn-robots-charger-for-robo-nicklaus20-tiger-20.html' || $host == 'milagrow.net/batteries/413-robo-nicklaus-20-battery.html' || $host == 'milagrow.net/docking-station/415-robo-tiger-20-tiger-10-docking-station.html' || $host == 'milagrow.net/batteries/392-nicklaus-20-battery.html' || $host == 'milagrow.net/batteries/413-robo-nicklaus-20-battery.html' || $host == 'milagrow.net/141-batteries' || $host == 'milagrow.net/146-remote' || $host == 'milagrow.net/145-docking-station' || $host == 'milagrow.net/144-blades' || $host == 'milagrow.net/143-pegs' || $host == 'milagrow.net/142-virtual-wire' || $host == 'milagrow.net/151-charger') {
                         $send = Mail::Send($id_lang, 'gosf_ln', $sub, $vars, $email);
                     } 
-                	else if($host == 'milagrow.net/lawn-robots/231-robotiger-20.html'||$host=='http://milagrow.net/lawn-robots/231-robotiger-20-8908002152692.html'||$host=='http://milagrow.net/lawn-robots/232-robotiger-10-8908002152715.html' || $host == 'milagrow.net/lawn-robots/232-robotiger-10.html' )
+                	else if($host=='http://milagrow.net/lawn-robots/232-robotiger-10-8908002152715.html'||$host == 'milagrow.net/lawn-robots/231-robotiger-20.html'||$host=='milagrow.net/lawn-robots/231-robotiger-20-8908002152692.html'||$host=='http://milagrow.net/lawn-robots/232-robotiger-10-8908002152715.html' || $host == 'milagrow.net/lawn-robots/232-robotiger-10.html' )
                 	{
                 		 $send = Mail::Send($id_lang, 'gosf_robotiger2', $sub, $vars, $email);
                 	}
-                    elseif ($host == 'milagrow.net/lawn-robots/229-robonicklaus-20.html' || $host=='http://milagrow.net/lawn-robots/229-robonicklaus-20-8908002152708.html'){
+                    elseif ($host == 'milagrow.net/lawn-robots/229-robonicklaus-20.html' || $host=='milagrow.net/lawn-robots/229-robonicklaus-20-8908002152708.html'){
                         $send = Mail::Send($id_lang, 'gosf_ln_rb_nick', $sub, $vars, $email);
                     } elseif ($host == 'milagrow.net/113-pool-robots' || $host=='milagrow.net/content/category/12-buying-guide-for-pool-robots' || $host=='milagrow.net/content/62-pool-robots' || $host == 'milagrow.net/114-pool-robot-models' || $host == 'milagrow.net/122-pool-robot-accessories' || $host == 'milagrow.net/pool-robot-accessories/299-caddy.html' || $host == 'milagrow.net/pool-robot-accessories/300-dustbin.html' || $host == 'milagrow.net/pool-robot-accessories/298-charger-cable.html' || $host == 'milagrow.net/pool-robot-accessories/322-remote.html' || $host == 'milagrow.net/pool-robot-accessories/323-charger-.html' || $host == 'milagrow.net/pool-robot-accessories/298-charger-cable.html' || $host == 'milagrow.net/pool-robot-accessories/323-charger-.html' || $host == 'milagrow.net/pool-robot-accessories/299-caddy.html' || $host == 'milagrow.net/pool-robot-accessories/300-dustbin.html' || $host == 'milagrow.net/pool-robot-accessories/322-remote.html') {
                         $send = Mail::Send($id_lang, 'gosf_pr', $sub, $vars, $email);
@@ -323,13 +323,13 @@ class Register_Popup extends Module
                        // $send = Mail::Send($id_lang, 'gosf_pr_model', $sub, $vars, $email);
                    // } elseif ($host == 'milagrow.net/122-pool-robot-accessories'){
                      //   $send = Mail::Send($id_lang, 'gosf_pr_access', $sub, $vars, $email);
-                    } elseif ($host=='http://milagrow.net/pool-robots/233-robophelps-true-blue-8908002152753.html' || $host == 'milagrow.net/pool-robots/233-robophelps-true-blue.html' || $host == 'milagrow.net/138-charger-cable' || $host == 'milagrow.net/139-caddy' || $host == 'milagrow.net/140-dustbin' || $host == 'milagrow.net/152-remote') {
+                    } elseif ($host=='milagrow.net/pool-robots/233-robophelps-true-blue-8908002152753.html' || $host == 'milagrow.net/pool-robots/233-robophelps-true-blue.html' || $host == 'milagrow.net/138-charger-cable' || $host == 'milagrow.net/139-caddy' || $host == 'milagrow.net/140-dustbin' || $host == 'milagrow.net/152-remote') {
                         $send = Mail::Send($id_lang, 'gosf_pr_15', $sub, $vars, $email);
-                    } elseif ($host == 'milagrow.net/pool-robots/419-milagrow-robophelps20.html'|| $host=='') {
+                    } elseif ($host == 'milagrow.net/pool-robots/419-milagrow-robophelps20.html'|| $host=='milagrow.net/pool-robots/419-milagrow-robophelps20-8908002152111.html') {
                         $send = Mail::Send($id_lang, 'gosf_pr_20', $sub, $vars, $email);
-                    } elseif ($host == 'milagrow.net/pool-robots/420-milagrow-robophelps25.html') {
+                    } elseif ($host == 'milagrow.net/pool-robots/420-milagrow-robophelps25.html' || $host=='milagrow.net/pool-robots/420-milagrow-robophelps25-8908002152135.html') {
                         $send = Mail::Send($id_lang, 'gosf_pr_25', $sub, $vars, $email);
-                    } elseif ($host == 'milagrow.net/pool-robots/421-milagrow-robophelps30.html') {
+                    } elseif ($host == 'milagrow.net/pool-robots/421-milagrow-robophelps30.html' || $host=='milagrow.net/pool-robots/421-milagrow-robophelps30-8908002152142.html') {
                         $send = Mail::Send($id_lang, 'gosf_pr_30', $sub, $vars, $email);
                     } 
                     elseif ($host == 'milagrow.net/6-tabtop-pcs' || $host == 'milagrow.net/11-android-models' || $host == 'milagrow.net/27-tabtop-accessories') {
