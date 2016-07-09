@@ -6,15 +6,30 @@ require(getcwd() . _MODULE_DIR_ . "rentingmodel/libFunctions.php");
 class RentingModelPaymentNotificationModuleFrontController extends ModuleFrontController
 {
 		
-    public $display_column_left=true;
+    public $display_column_left=false;
 		public function initContent()
 		{
-		
+		parent::initContent();
 		}
 		 public function postProcess()
    		 {
    		 try{
         //$WorkingKey = _WORKING_KEY; //put in the 32 bit working key in the quotes provided here
+                     $response = $_REQUEST;
+        
+        /* start code for storing the response */
+        if ( isset($_SERVER['HTTP_CLIENT_IP']) && ! empty($_SERVER['HTTP_CLIENT_IP'])) {
+    	$ip = $_SERVER['HTTP_CLIENT_IP'];
+		} elseif ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ! empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    	$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+    	$ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
+		}
+
+        $responseData=array('response'=>json_encode($response),'created_at'=>date('Y-m-d H:i:s'),
+        	'ip'=>$ip);
+        Db::getInstance()->insert('rental_response',$responseData);
+        
         $card_number = '';
         $card_expiration = '';
         $card_holder = '';
@@ -24,8 +39,15 @@ class RentingModelPaymentNotificationModuleFrontController extends ModuleFrontCo
         $AuthDesc = isset($_REQUEST["AuthDesc"]) ? $_REQUEST["AuthDesc"] : '';
         $avnChecksum = isset($_REQUEST["Checksum"]) ? $_REQUEST["Checksum"] : '';
         $nb_order_no = isset($_REQUEST["nb_order_no"]) ? $_REQUEST['nb_order_no'] : '';
+        //echo '<pre>';
+        //print_r($_REQUEST);
+        //die;
         if (empty($MerchantId) || empty($OrderId) || empty($Amount) || empty($AuthDesc) || empty($avnChecksum) || empty($nb_order_no))
+        {
+            //$this->context->smarty->assign(array('message'=>'illegal access'));
             $this->setTemplate('illegal_access.tpl');
+        }
+            
         else {
             $Checksum = verifyChecksum($MerchantId, $OrderId, $Amount, $AuthDesc, $WorkingKey, $avnChecksum);
             $billing_cust_name = isset($_REQUEST["billing_cust_name"]) ? $_REQUEST["billing_cust_name"] : '';
@@ -44,18 +66,18 @@ class RentingModelPaymentNotificationModuleFrontController extends ModuleFrontCo
             if (true && $AuthDesc === "Y") {
                 $message = "<br>Thank you for shopping with us. Your card has been charged and your transaction is successful. We will be shipping your order to you soon.";
                 // Getting payment row already exist from order reference number
-                $OrderId=split('_',$OrderId);
-                $ids=split('_',$OrderId);
-                
-                $data['rent_id']=(int)$ids[1];
+                //$OrderId=split('_',$OrderId);
+                //$ids=split('_',$OrderId);
+                $explodeDetails=explode('_',$OrderId);
+                $data['rent_id']=(int)$explodeDetails[1];
                 $data['payment_pending']=$Amount;
                 $data['payment_received']=$Amount;
                 $data['payment_mode']=1;
                 $data['bank_name']='CCAVENUE';
                 $data['document_number']=$nb_order_no;
                 $data['status']=1;
-             		$status=$this->updatePayment((int)$OrderId[1],$data);
-             		echo $status;
+             		$status=$this->updatePayment((int)$explodeDetails[1],$data);
+             		//echo $status;
              		if($status)
              		{	
              			header('location:thanks');
@@ -66,7 +88,7 @@ class RentingModelPaymentNotificationModuleFrontController extends ModuleFrontCo
              		}
               
             } else if ($Checksum && $AuthDesc === "B") {
-//                echo "<br>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
+                echo "<br>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
 //				 echo "<br>Testing-2";
                 $this->setTemplate('');
                 //Here you need to put in the routines/e-mail for a  "Batch Processing" order
