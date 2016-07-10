@@ -286,13 +286,28 @@ class RentingModel extends Module
 
 		//this function is used to map product cities which is used to available the cities of the function avalaible .
 			
-			
+		$enabledPincodes=$this->fetchEnabledPincodes();
+                $pincodehtml='<select id="newCategory" name="pincode">';
+		$pincodehtml.='<option value="">Select pincode</option>';
+		
+		if(!empty($enabledPincodes))
+		{
+			foreach ($enabledPincodes as $pincodeRow)
+			{
+				$pincodehtml.='<option value="'.$pincodeRow['pincode'].'">'.$pincodeRow['pincode'].'</option>';
+			}
+//			return $html;
+			$pincodehtml.='</select>';
+		// return $html;
+                }
+                
 		$this->context->smarty->assign(array(
 			'showMsg'=>$ShowMsg,
 			'category'=>$this->newCategory(),
+                        'pincodes'=>$pincodehtml,
 			'product'=>json_encode($this->getNewProducts()),
-			'state'=>$this->stateName(),
-			'city'=>json_encode($this->cityName())
+			//'state'=>$this->stateName(),
+			//'city'=>json_encode($this->cityName())
 			));
 			$html .= $this->context->smarty->fetch($this->local_path.'views/templates/admin/product_cities.tpl');
 		}
@@ -1181,5 +1196,11 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
    {
    	Db::getInstance()->delete('rental_product_cities','id='.$id);
    	return Db::getInstance()->Affected_Rows();
+   }
+   
+   private function fetchEnabledPincodes()
+   {
+       $sql="Select pincode from ps_renting_pincodes";
+       return Db::getInstance()->ExecuteS($sql);
    }
 }
