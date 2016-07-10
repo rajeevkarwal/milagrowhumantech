@@ -59,7 +59,7 @@
         }
         elm.appendChild(df);
     }
-    function getCity()
+    {*function getCity()
     {
         var cityList ={$city}
       var e = document.getElementById('stateName');
@@ -82,7 +82,7 @@
         }
         elm.appendChild(df);
 
-    }
+    }*}
    
 </script>
    <center><b style="color:red;text-align:center">{$showMsg}</b></center>
@@ -99,7 +99,7 @@
         <tr>
              <td>Select Product</td>
             <td>
-                <select name="product" id="product" onchange="getPrice();">
+                <select name="product" id="product">
                         <option value="">select Products</option>
                 </select>
             </td>
@@ -122,9 +122,13 @@
 		</tr>
 		<tr>
 		<td>Enter Pincode</td>
-			<td>
+			{*<td>
 				<input type="text" name="pincode" id="pincode" maxlength="6" required>			
-			</td>
+			</td>*}
+                        <td>
+                        {$pincodes}
+                        </td>
+                        
 		
 		</tr>
 		  
