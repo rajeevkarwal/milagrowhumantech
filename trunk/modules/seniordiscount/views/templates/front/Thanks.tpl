@@ -11,11 +11,11 @@
 			<div class="span9">
 				<div style="margin-top:10px;"></div>
 				<div class="page-title">
-					<h1>{l s='Partner With Us'}</h1>
+					<h1>{l s='Special Discount For Senior Citizens And Defence Personnel'}</h1>
 				</div>
 				
 				<div class="row-fluid">
-					<img src="/img/cms/cms-banners/partners-with-us.png" alt="partners-with-us-section">
+					<img src="/img/cms/cms-banners/senior-citizen.png" alt="partners-with-us-section">
 				</div>
 				
 				<div style="margin-top:10px;"></div>
