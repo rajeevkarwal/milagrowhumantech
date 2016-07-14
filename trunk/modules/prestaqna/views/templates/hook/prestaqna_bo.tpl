@@ -1,3 +1,33 @@
+<<script type="text/javascript">
+function removeQuestion(id)
+{
+  
+   
+    $.ajax(
+            {
+                type:'GET',
+                url:'/modules/prestaqna/ajaxProcess.php?question_id='+id,
+                success:function(data)
+                {
+                    $data=jQuery.parseJSON(data);
+                    if($data)
+                    {
+                        	alert('Question Deleted');
+                        	location.reload();
+                        	
+                    }
+                    else
+                    {
+                        alert('Question Not Deleted');
+                        
+                    }
+                },
+
+            }
+    )
+}
+</script>
+
 <div id="product-seobooster" class="panel product-tab">
 	<input type="hidden" name="submitted_tabs[]" value="ModulePrestaqna" />
 
@@ -26,16 +56,16 @@
 					{else}
 						{assign var="p_name" value={l s='Guest' mod='prestaqna'}}
 					{/if}
+					
 					<tr>
-						<td><textarea type="text" name="qnaquestion[{$qna.id_qna}][question]" rows="5" cols="70">{$qna.question|escape:'htmlall'}</textarea></td>
+						<td><textarea type="text" name="qnaquestion[{$qna.id_qna}][question]" rows="5" cols="55">{$qna.question|escape:'htmlall'}</textarea></td>
 						<td>{$p_name}</td>
 						<td><input type="hidden" name="qnaquestion[{$qna.id_qna}][email]" value="{$qna.email}">{$qna.email}</td>
-						<td><textarea name="qnaquestion[{$qna.id_qna}][answer]" rows="5" cols="70">{$qna.answer|escape:'htmlall'}</textarea></td>
-						<td>
-							<input type="checkbox" name="deleteqna[]" value="{$qna.id_qna}">
-						</td>
+						<td><textarea name="qnaquestion[{$qna.id_qna}][answer]" rows="5" cols="55">{$qna.answer|escape:'htmlall'}</textarea></td>
+						
+						<td><input type="button" value="Delete Now" onclick="removeQuestion({$qna.id_qna});"></td>
 					</tr>
-
+					
 				{/foreach}
 
 			</tbody>

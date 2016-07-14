@@ -533,6 +533,14 @@ class PrestaQnA extends Module
 		
 		
 	}
-
+	//function added to remove question from ps_qna database on the basis of question id
+	public function removeQuestion($id)
+	{
+		Db::getInstance()->delete('qna','id_qna='.$id);
+		if(Db::getInstance()->Affected_Rows()>0)
+			return true;
+		else
+			return false;		
+	}
 	
 }
