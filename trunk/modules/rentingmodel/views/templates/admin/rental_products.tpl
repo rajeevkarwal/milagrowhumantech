@@ -34,7 +34,7 @@
         $.ajax(
                 {
                     type:'GET',
-                    url:'http://localhost/practice/modules/rentingmodel/library.php?row_id='+num,
+                    url:'/modules/rentingmodel/library.php?row_id='+num,
                     success:function(data)
                     {
                         $data=jQuery.parseJSON(data);
