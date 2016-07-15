@@ -940,10 +940,13 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
     //function is use to delete product from admin view
     public function deleteProductFromId($rowId)
     {
+    		$sql="select product_id from ps_product_rental where id=".$rowId;
+    		$row=Db::getInstance()->getRow($sql);
         Db::getInstance()->delete('product_rental','id='.$rowId);
         if(Db::getInstance()->Affected_Rows()>0)
         {
-            return true;
+            Db::getInstance()->delete('rental_product_cities','product_id='.$row['product_id']);   
+            return true;      	
         }
         else
         {
