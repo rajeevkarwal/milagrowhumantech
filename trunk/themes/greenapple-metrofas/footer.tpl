@@ -329,7 +329,12 @@
 <div class="ftr_link">TABLETS: <a href="http://milagrowhumantech.com/89-dual-core">Milagrow Dual Core Tablet PCs</a> | <a href="http://milagrowhumantech.com/90-quad-core">Milagrow Quad Core Tablet PCs</a> | <a href="http://milagrowhumantech.com/89-dual-core">Milagrow Calling Tablet PCs</a> | <a href="http://milagrowhumantech.com/6-tabtop-pcs">Milagrow TabTops</a> | <a href="http://milagrowhumantech.com/11-android-models">Milagrow Android Tablets</a></div></br>
 <div class="ftr_link">TV MOUNTS :<a href="http://milagrowhumantech.com/17-wall-mount-models">Milagrow LED TV  Mounts</a> | <a href="http://milagrowhumantech.com/17-wall-mount-models">Milagrow LCD TV Mounts </a>| <a href="http://milagrowhumantech.com/10-mounts">Milagrow TV Racks & Mounts </a>| <a href="http://milagrowhumantech.com/15-ceiling-mount-models">Milagrow Ceiling Mounts</a> | <a href="http://milagrowhumantech.com/17-wall-mount-models">Milagrow Articulating Mounts</a></div></br>
 <div class="ftr_link">ACCESSORIES : <a href="http://milagrowhumantech.com/27-tabtop-accessories">Milagrow TABLET PC  Accessories </a> | <a href="http://milagrowhumantech.com/67-floor-robot-accessories">Robotic Vacuum Cleaner Accessories</a> | <a href="http://milagrowhumantech.com/122-pool-robot-accessories">Automatic Pool Cleaner Accessories</a> | <a href="http://milagrowhumantech.com/123-lawn-robot-accessories">Robotic Lawn Mower Accessories</a> | <a href="http://milagrowhumantech.com/77-window-robot-accessories">Windoro & WinBot Accessories</a></div></br>
-<div class="ftr_link">SPECIFIC MODELS :<a href="http://milagrowhumantech.com/floor-robots/575-milagrow-aguabot-5-0-indias-1st-full-wetmopping-and-drycleaning-floor-robovac-8908002152081.html">AguaBot 5.0</a> | <a href="http://milagrowhumantech.com/floor-robots/109-milagrow-redhawk-india-s-number-1-floor-robots.html">RedHawk</a> | <a href="http://milagrowhumantech.com/floor-robots/217-blackcat20.html">BlackCat</a> | <a href="http://milagrowhumantech.com/floor-robots/224-milagrow-robocop-20-india-s-number-1-floor-robot.html">RoboCop</a> | <a href="http://milagrowhumantech.com/floor-robots/223-ecovacs-3d-deebot-77.html">DeeBot</a> |<a href="http://milagrowhumantech.com/floor-robots/98-milagrow-superbot-india-s-number-1-floor-robot.html"> SuperBot</a> |<a href="http://milagrowhumantech.com/floor-robots/219-cloud-sniper.html"> CloudSniper</a> | <a href="http://milagrowhumantech.com/floor-robots/218-milagrow-curebot.html">CureBot</a> | <a href="http://milagrowhumantech.com/body-robots/23-robotic-body-massager.html">Wheeme</a> | <a href="http://milagrowhumantech.com/113-pool-robots">RoboPhelps</a> | <a href="http://milagrowhumantech.com/86-window-robots">WinBot </a>| <a href="http://milagrowhumantech.com/lawn-robots/229-robonicklaus-20.html">RoboNicklaus</a> | <a href="http://milagrowhumantech.com/lawn-robots/231-robotiger-20.html">RoboTiger</a> | <a href="http://milagrowhumantech.com/quad-core/75-104-pro-3g-sim-quad-core-16gb.html">M8PRO</a> | <a href="http://milagrowhumantech.com/quad-core/226-m2-pro-3g-32gb-84-quad-core.html">M2PRO</a> | <a href="http://milagrowhumantech.com/tabtop-pcs/293-m8pro-3gdata-16gb-104-quad-core-with-designer-flip-cover.html">M8</a> | <a href="http://milagrowhumantech.com/tabtop-pcs/295-m2pro-3gcall-16gb-84-quad-core-with-designer-slim-cover-.html">M2</a></div><br /><br />
+<div class="ftr_link">SPECIFIC MODELS : <a href="http://milagrowhumantech.com/floor-robots/503-milagrow-redhawk3-0-india-s-number-1-floor-robots-8908002152012.html">RedHawk 3.0</a> | <a href="http://milagrowhumantech.com/floor-robots/504-milagrow-aguabot-4-0-robotic-floor-cleaner-with-water-tank-8908002152081.html">Aguabot 4.0</a> | <a href="http://milagrowhumantech.com/floor-robots/505-milagrow-blackcat3-0-india-s-longest-battery-life-floor-cleaner-8908002152678.html">BlackCat 3.0</a> | <a href="http://milagrowhumantech.com/floor-robots/224-milagrow-robocop-20-india-s-number-1-floor-robot.html">RoboCop</a> | <a href="http://milagrowhumantech.com/floor-robots/223-ecovacs-3d-deebot-77.html">DeeBot</a>|<a href="http://milagrowhumantech.com/floor-robots/219-cloud-sniper.html"> CloudSniper</a> |<a href="http://milagrowhumantech.com/body-robots/23-robotic-body-massager.html">Wheeme</a> | <a href="http://milagrowhumantech.com/pool-robots/233-robophelps-true-blue-8908002152753.html">RoboPhelps 15</a> | <a href="http://milagrowhumantech.com/pool-robots/419-milagrow-robophelps20-8908002152111.html">RoboPhelps 20</a> | <a href="http://milagrowhumantech.com/pool-robots/420-milagrow-robophelps25-8908002152135.html">RoboPhelps 25</a> | <a href="http://milagrowhumantech.com/pool-robots/421-milagrow-robophelps30-8908002152142.html">RoboPhelps 30</a> | <a href="http://milagrowhumantech.com/pool-robots/502-milagrow-robophelps40turbo.html">RoboPhelps 40 Turbo</a> </div>
+<div class="ftr_link" style="margin-top:0px;">
+    <a href="http://milagrowhumantech.com/86-window-robots">WinBot </a>| <a href="http://milagrowhumantech.com/lawn-robots/229-robonicklaus-20.html">RoboNicklaus</a> | <a href="http://milagrowhumantech.com/lawn-robots/232-robotiger-10-8908002152715.html">RoboTiger 1.0</a> | <a href="http://milagrowhumantech.com/lawn-robots/231-robotiger-20-8908002152692.html">RoboTiger 2.0</a> | <a href="http://milagrowhumantech.com/window-robots/556-milagrow-robosnail10.html">RoboSnail 10</a> |
+     <a href="http://milagrowhumantech.com/window-robots/557-milagrow-robosnail12.html">RoboSnail 12</a> | <a href="http://milagrowhumantech.com/window-robots/555-milagrow-hobot188.html">Hobot 188</a> | <a href="http://milagrowhumantech.com/quad-core/75-104-pro-3g-sim-quad-core-16gb-8908002152630.html">M8PRO</a> | <a href="http://milagrowhumantech.com/quad-core/226-m2-pro-3g-32gb-84-quad-core.html">M2PRO</a> | <a href="http://milagrowhumantech.com/quad-core/75-104-pro-3g-sim-quad-core-16gb-8908002152630.html">M8</a> | <a href="http://milagrowhumantech.com/tabtop-pcs/295-m2pro-3gcall-16gb-84-quad-core-with-designer-slim-cover-.html">M2</a> | <a href="http://milagrowhumantech.com/floor-robots/506-milagrow-ecovacs-deebot-dm-85.html">DeeBot M85</a> | <a href="http://milagrowhumantech.com/floor-robots/507-milagrow-ecovacs-3d-deebot-79.html">DeeBot D79</a> | <a href="http://milagrowhumantech.com/frameless-windows/509-milagrow-ecovacs-winbot-930.html">WinBot 930</a>
+</div>    
+<br /><br />
                      <br/>
 
                     {foreach from=$catHtml key=k item=htmlVal}
@@ -857,8 +862,26 @@
 h1.ftr_title{ float:left; font-size:13px;}
 
 </style>
+<!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968875551;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/968875551/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
 </body>
-ketki
+
 </html>        
 
 
