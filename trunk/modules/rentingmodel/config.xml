@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>rentingmodel</name>
+            <displayName><![CDATA[Rent You Product]]></displayName>
+            <version><![CDATA[1.0.0]]></version>
+            <description><![CDATA[FOR PRODUCT RENTING .]]></description>
+            <author><![CDATA[MilagrowHumantech]]></author>
+            <tab><![CDATA[administration]]></tab>
+	<confirmUninstall>Are You Sure Want To Confirm Uninstall</confirmUninstall>
+            <is_configurable>1</is_configurable>
+            <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+        </module>

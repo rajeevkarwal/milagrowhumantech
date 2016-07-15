@@ -126,6 +126,35 @@ class RentingModel extends Module
       		 $datetime=new DateTime();
       		 $datetime=$datetime->format();
            $form_name=Tools::getValue('form_code');
+           if($form_name==='csvimport')
+           {
+           	$counter==1;
+           	$filename=basename($_FILES['pincodeImport']['name']);
+           	//$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+          		$handle = fopen($_FILES['pincodeImport']['tmp_name'], "r");
+           		 while (($data = fgetcsv($handle, 1000, ",")) !== TRUE)
+           		 {
+           		 	if($counter!=1)
+           		 	{
+           		 		print_r($data);
+           		 		$counter++;
+           		 	}
+           		 }           		
+           }	
+           if($form_name==='bulkPincodeInsert')
+           {
+           		$pincode=Tools::getValue('pincode');
+           		$productId=Tools::getValue('productId');
+           		$counter=1;
+           		for($i=0;$i<count($pincode);$i++)
+           		{
+           			$data=array('product_id'=>$productId,'pincode'=>$pincode[$i],'status'=>1);
+           			Db::getInstance()->insert('rental_product_cities',$data);
+           			if(Db::getInstance()->Affected_Rows()>0)
+						$counter++;
+           		}
+           		$ShowMsg=$counter.'Pincode Inserted For This Product';
+           }
           if($form_name==='delete')
           {
           		$customerCode=Tools::getValue('customerCode');
@@ -316,6 +345,7 @@ class RentingModel extends Module
                     //function is used to view city.this option is avalaible with product option
 			$this->context->smarty->assign(array(
 			'productName'=>$this->getProductName($productId),
+			'productId'=>$productId,
 			'available_city'=>$this->getAvailableCity($productId)
 			));
 			
@@ -331,7 +361,20 @@ class RentingModel extends Module
                     //functioin download loan receipt.
 			$html.=$this->downloadLoanReceipt($customerNumber);
 		}	
-        else
+		else if($page_name==='addbulkpincode')
+		{	
+		
+		$this->context->smarty->assign(array(
+		'productName'=>Tools::getValue('productName'),
+		'productId'=>Tools::getValue('productId'),
+		'pincode'=>$this->getAvailablePincode(),
+		'ShowMsg'=>$ShowMsg
+		));
+		$html.= $this->context->smarty->fetch($this->local_path.'views/templates/admin/addBulkPincode.tpl');
+		
+		}	
+
+		else
         {
         	$this->context->smarty->assign(array(
         	'customer'=>$this->getCustomerDetailById($customerNumber),
@@ -341,6 +384,11 @@ class RentingModel extends Module
             $html.= $this->context->smarty->fetch($this->local_path.'views/templates/admin/default.tpl');
         }
         return $html;
+    }
+    private function getAvailablePincode()
+    {
+    	$sql="select id,pincode,city from ps_renting_pincodes";
+    	return Db::getInstance()->ExecuteS($sql);
     }
     //save customer cheque detail  based on customer duration and cheque number
     private function saveExtendedPeriod($data)
@@ -1165,7 +1213,7 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
 	}
    private function getAvailableCity($product_id)
    {
-   	$sql="SELECT distinct(p1.pincode),p1.id,p3.name FROM ps_rental_product_cities as p1,ps_pincode_cod as p2,ps_state as p3 WHERE p1.pincode=p2.pincode and p2.id_state=p3.id_state and p1.product_id=".$product_id;
+   	$sql="select p1.id,p1.pincode,p2.city,p1.status from ps_rental_product_cities as p1,ps_renting_pincodes as p2 where p1.pincode=p2.pincode and p1.product_id=".$product_id;
    	$result=Db::getInstance()->executeS($sql);
    	if($result)
    		return $result;
@@ -1202,5 +1250,15 @@ and p1.id_category=p2.id_category and p2.level_depth=2';
    {
        $sql="Select pincode from ps_renting_pincodes";
        return Db::getInstance()->ExecuteS($sql);
+   }
+   public function savePincodeAndCity($pincode,$cityName)
+   {
+   	$data=array('pincode'=>$pincode,'city'=>$cityName);
+   	Db::getInstance()->insert('renting_pincodes',$data);
+   	return Db::getInstance()->Affected_Rows();
+   }
+   private function importFromCSV($data)
+   {
+   
    }
 }

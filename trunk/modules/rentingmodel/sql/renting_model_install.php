@@ -12,6 +12,15 @@ if (!defined('_PS_VERSION_')) {
 class renting_model_install
 {
     //table for rental products
+    function install_city()
+    {
+    	$sql="CREATE TABLE IF NOT EXISTS `ps_renting_pincodes`
+		(`id` int(11) NOT NULL AUTO_INCREMENT,
+			'city' varchar(100) NOT NULL,
+			'pincode' varchar(20) NOT NULL,
+			PRIMARY KEY(`id`)
+		)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
+    }
     function install_product()
     {
         $sql = "CREATE TABLE IF NOT EXISTS `ps_product_rental` (

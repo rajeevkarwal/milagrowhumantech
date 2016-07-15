@@ -15,25 +15,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script>
   
-    function getPincode()
+    function savePincode()
     {
-    	 var e = document.getElementById('cityName');
-         var cate = e.options[e.selectedIndex].value;
+        	
+    	 var cityName = document.getElementById('cityValue').value;
+    	 var pincodeName=document.getElementById('pincodeValue').value;
+    	
+//         var cate = e.options[e.selectedIndex].value;
          $.ajax(
                  {
                      type:'GET',
-                     url:'/modules/rentingmodel/library.php?city_id='+cate,
+                     url:'/modules/rentingmodel/backCode.php?cityName='+cityName+'&pincodeName='+pincodeName,
                      success:function(data)
                      {
                          $data=jQuery.parseJSON(data);
                          if($data)
-
-                             $('#pincode').val($data.pincode);
+                         {
+                        	 alert('New Pincode Added');
+                        	 location.reload();
+                         }
+							
                      },
 
                  }
          )
     }
+    
     function getid()
     {
         var productList ={$product}
@@ -146,9 +153,64 @@
 </table>
 </form>
 <hr>
-<table>
+<style>
+.row{
+width:100%;
+margin-top:20px;
+color:black;
+font-size:14px;
+}
+.row input[type="text"]
+{
+	width:80%;
+}
+.row .col-md-6{
+float:left;
+width:48%;
+border:2px solid #f2f2f2;
+}
+.row .col-md-6 input[type='button']
+{
+	height:25px;
+	width:80px;
+	padding:3px;
+	
+}
+</style>
+<div class="row">
+	<div class="col-md-6">
+		<center><h2>ADD NEW PINCODE</h2></center>
+<table align="center">
 	<tr>
-		<td></td>
+		<td>Pincode</td><td align="right"><input type="text" value="" id="pincodeValue" name="pincodeValue" maxlength="6" required></td>
+	</tr>
+	<tr>
+		<td>City Name</td><td align="right"><input type="text" value="" id="cityValue" name="cityValue" required></td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2"><input type="button" onclick="savePincode();" value="Save" class='btn btn-success btn-xs'></td>
 	</tr>
 	
 </table>
+	</div>
+	<div class="col-md-6">
+	<form method="post" enctype="multipart/form-data" action="#">
+		<center><h2>IMPORT FROM CSV</h2></center>
+		<table>
+			<tr>
+				<input type="hidden" name="form_code" value="csvimport">
+				<td><label>Import From</label></td>
+				<td><input type="file" name="pincodeImport" required><br></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" value="Upload" name="submit"></td>
+				
+			</tr>
+		</table>
+	
+	
+	</form>
+		
+	</div>
+</div>
+

@@ -1,8 +1,33 @@
-<h2>{$productName} Service Cities</h2>
+<h2>{$productName} Service Cities- <a href="{$url}&tab_name=addbulkpincode&productName={$productName}&productId={$productId}" style="color:red;font-size:18px;">Add Bulk Pincode</a></h2>
 <style>
 tr td,th{
 text-transform: uppercase;
 text-align:Center;
+}
+</style>
+<style>
+.row{
+width:100%;
+margin-top:20px;
+color:black;
+font-size:14px;
+}
+.row input[type="text"]
+{
+	width:80%;
+}
+.row .col-md-6{
+float:left;
+width:48%;
+text-align:center;
+border:2px solid #f2f2f2;
+}
+.row .col-md-6 input[type='button']
+{
+	height:25px;
+	width:80px;
+	padding:3px;
+	
 }
 </style>
 <script>
@@ -28,9 +53,10 @@ function deleteCity(id)
 }
 
 </script>
-<center>
-	<h4><span id="msg"></span></h4>
-</center>
+<div class="row">
+	<div class="col-md-6"></div>
+	<div class="col-md-6" style="float:right;"> </div>
+</div>
 <table align="center" width="100%">
 	<tr style="background-color:#a5a5a5;padding:5px;">
 		<th>Country</th>
