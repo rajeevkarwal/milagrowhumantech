@@ -114,7 +114,7 @@ class DemoRegistration extends Module
         if($_POST['submit'])
         {
            	$filename=basename($_FILES['uploadCSV']['name']);
-			if(empty($filename))
+			if(!empty($filename))
 			{
 				$handle = fopen($_FILES['uploadCSV']['tmp_name'], "r");
           	   $counter=1;
