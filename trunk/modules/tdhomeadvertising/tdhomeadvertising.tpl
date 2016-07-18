@@ -5,7 +5,7 @@
                                 <div class="row-fluid">
                                         {$i=1}
                           {foreach from=$sliderdata item=slider}
-                               <div class="banner-box {if ($i==1)} banner-box1 {elseif ($i==2)}banner-box2{else}banner-box2{/if} span4">
+                               <div class="banner-box {if ($i==1)} banner-box1 {elseif ($i==2)}banner-box2{else}banner-box2{/if} span4 hidden-phone">
                              <div class="banner-box-inner">
                                {if $slider.image_link!=''}
                                    <a href="{$slider.image_link}" {if ($slider.new_page==1)} target="_blank" {/if} >
