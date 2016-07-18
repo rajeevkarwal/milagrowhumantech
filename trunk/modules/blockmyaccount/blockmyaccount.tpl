@@ -22,7 +22,24 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-
+<!-- Google Code for MilagrowHumantech Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968875551;
+var google_conversion_language = "en";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "VZV0CJnS7xEQn7z_zQM";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/968875551/?label=VZV0CJnS7xEQn7z_zQM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
 <!-- Block myaccount module -->
 <div class="block myaccount">
 	<h4 class="title_block"><a href="{$link->getPageLink('my-account', true)}" title="{l s='My Account' mod='blockmyaccount'}">{l s='My account' mod='blockmyaccount'}</a></h4>
