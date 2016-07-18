@@ -7,7 +7,7 @@ require_once(dirname(__FILE__) . '/mydatetime.php');
 class DemoRegistration extends Module
 {
     const MODULE_NAME = "demoregistration";
-
+    
     public function __construct()
     {
 
@@ -111,6 +111,27 @@ class DemoRegistration extends Module
 
     public function getContent()
     {
+        if($_POST['submit'])
+        {
+           	$filename=basename($_FILES['uploadCSV']['name']);
+			if(empty($filename))
+			{
+				$handle = fopen($_FILES['uploadCSV']['tmp_name'], "r");
+          	   $counter=1;
+                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
+           		 {
+           		 	if($counter>1)
+           		 		var_dump($data);
+           		 	
+           		 	$counter++;
+           		 }   
+			}
+			else
+			{
+				
+			}
+           	                
+         }
         $this->html = '<h2>' . $this->displayName . '</h2>';
         $this->html .= '<link media="all" type="text/css" rel="stylesheet" href="' . $this->_path . 'views/css/back.css"/>';
         if (Tools::getValue('generateReceipts') != NULL) {
@@ -148,7 +169,8 @@ class DemoRegistration extends Module
          else if (Tools::getValue('sl_tab') == 'download_demo_receipt') {
             $demos_id = Tools::getValue('demos_id');
             $this->downloadDemoReceipt($demos_id);
-        } else
+        }
+        else
             $this->html .= $this->displayDemosList($url);
         return $this->html;
     }

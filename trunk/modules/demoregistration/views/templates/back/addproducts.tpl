@@ -59,6 +59,7 @@
 
 </script>
 <fieldset style="margin-top:80px;"><legend>Add DAMC Products</legend>
+    
     <form action="#" method="post" id="demoProductForm">
 
         <ul>
@@ -85,5 +86,20 @@
         </div>
 
     </form>
+        <form method="post" enctype='multipart/form-data' action=''>
+            <h3>Upload Via Sheet&nbsp;&nbsp;&nbsp;<span style="color:Red">(only csv format acceped)</span></h3>
+              <div class="margin-form">
+            <label>&nbsp;&nbsp;</label>
+              <input type="file" name="uploadCSV" size='100'>
+        </div>
+
+            
+        
+              <div class="margin-form">
+            <label>&nbsp;&nbsp;</label>
+              <input type="submit" name="submit" value="Import Now">
+        </div>
+        </form>
+      
 </fieldset>
 
