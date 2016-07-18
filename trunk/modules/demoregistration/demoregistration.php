@@ -121,7 +121,26 @@ class DemoRegistration extends Module
                  while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
            		 {
            		 	if($counter>1)
-           		 		var_dump($data);
+           		 	{
+           		 		$insertProductData['productId']=$data[0];
+           		 		$insertProductData['categoryId']=getCategoryId($data[0]);
+           		 		$insertProductData['is_active']=1;
+           		 		$insertProductData['create_at']=strtotime(new Time());
+           		 		Db::getInstance()->insert('demo_products',$insertProductData);
+           		 		$id=Db::getInstance()->Insert_Id();
+           		 		if($id>0){
+           		 		$insertCitiesData['demo_id']=$id;
+           		 		$insertCitiesData['statename']=$data[1];
+           		 		$insertCitiesData['cityname']=$data[2];
+           		 		$insertCitiesData['amount']=$data[3];
+           		 		$insertCitiesData['state_id']='';
+           		 		$insertCitiesData['city_id']='';
+           		 		$insertCitiesData['demoType']=$data[4];
+           		 		$insertCitiesData['demoText']=$data[5];
+           		 		Db::getInstance()->insert('demo_product_cities',$insertCitiesData);
+           		 		if(Db::getInstance()->Affected_Rows()>0)
+           		 			return true;}
+           		 	}
            		 	
            		 	$counter++;
            		 }   
@@ -182,7 +201,12 @@ class DemoRegistration extends Module
         ));
         return $this->fetchTemplate('/views/templates/back/errors.tpl');
     }
-
+	private function getCategoryId($productId)
+	{
+		$sql="select id_category_default from ps_product where id_product=".$productId;
+		$row=Db::getInstance()->getRow($sql);
+		return $row['id_category_default'];
+	}
     private function displayDemosList($url)
     {
         $page = Tools::getValue('page');
@@ -440,7 +464,12 @@ class DemoRegistration extends Module
         $pdf = new DemoPdf($this->context->smarty, $this->context->language->id);
         $pdf->renderBulkDemoReceipt(true, $contents);
     }
-
+	private function getProductNameById($productId)
+	{
+		$sql="select name from ps_product_lang where id_product=".$productName;
+		$data=Db::getInstance()->getRow($sql);
+		return $data['name'];
+	}
     private function displayBulkDownloadQueries($url)
     {
         $this->context->smarty->assign(array(
