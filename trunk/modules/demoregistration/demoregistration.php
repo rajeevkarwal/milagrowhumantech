@@ -114,6 +114,7 @@ class DemoRegistration extends Module
         if($_POST['submit'])
         {
            	$filename=basename($_FILES['uploadCSV']['name']);
+           
 			if(!empty($filename))
 			{
 				$handle = fopen($_FILES['uploadCSV']['tmp_name'], "r");
@@ -122,28 +123,39 @@ class DemoRegistration extends Module
            		 {
            		 	if($counter>1)
            		 	{
-           		 		$insertProductData['productId']=$data[0];
-           		 		$insertProductData['categoryId']=getCategoryId($data[0]);
-           		 		$insertProductData['is_active']=1;
-           		 		$insertProductData['create_at']=strtotime(new Time());
-           		 		Db::getInstance()->insert('demo_products',$insertProductData);
-           		 		$id=Db::getInstance()->Insert_Id();
-           		 		if($id>0){
+           		 			$id='';
+           		 			$sql="select id from ps_demo_products where productId=".$data[0];
+           		 			$result=Db::getInstance()->getRow($sql);
+           		 			echo $result['id'];
+           		 			$id=$result['id'];
+           		 			if($result['id']==0)
+           		 			{
+		           		 		$insertProductData['productId']=$data[0];
+        		   		 		$insertProductData['categoryId']=$this->getCategoryId($data[0]);
+           				 		$insertProductData['is_active']=1;
+           		 				$insertProductData['created_at']='123456789';
+           		 				Db::getInstance()->insert('demo_products',$insertProductData);
+           		 				$id=Db::getInstance()->Insert_Id();
+           		 			}
+           		 		
+           		 		if($id>0)
+           		 		{
            		 		$insertCitiesData['demo_id']=$id;
-           		 		$insertCitiesData['statename']=$data[1];
-           		 		$insertCitiesData['cityname']=$data[2];
+           		 		$insertCitiesData['statename']=$data[2];
+           		 		$insertCitiesData['cityname']=$data[1];
            		 		$insertCitiesData['amount']=$data[3];
-           		 		$insertCitiesData['state_id']='';
-           		 		$insertCitiesData['city_id']='';
+           		 		$insertCitiesData['stateid']='';
+           		 		$insertCitiesData['cityid']='';
            		 		$insertCitiesData['demoType']=$data[4];
            		 		$insertCitiesData['demoText']=$data[5];
-           		 		Db::getInstance()->insert('demo_product_cities',$insertCitiesData);
-           		 		if(Db::getInstance()->Affected_Rows()>0)
-           		 			return true;}
+           		 		Db::getInstance()->insert('demo_products_cities',$insertCitiesData);
+           		 		$counterRow=Db::getInstance()->Affected_Rows()>0;
+           		 		}
            		 	}
            		 	
            		 	$counter++;
            		 }   
+           		 echo $counterRow.'Affected';
 			}
 			else
 			{
@@ -463,6 +475,12 @@ class DemoRegistration extends Module
 
         $pdf = new DemoPdf($this->context->smarty, $this->context->language->id);
         $pdf->renderBulkDemoReceipt(true, $contents);
+    }
+    private function categoryIdByProductId($product_id)
+    {
+    	$sql="select id_default_categort from ps_product where id_product=".$product_id;
+    	$row=Db::getInstance()->getRow($sql);
+    	return $row['id_default'];
     }
 	private function getProductNameById($productId)
 	{
