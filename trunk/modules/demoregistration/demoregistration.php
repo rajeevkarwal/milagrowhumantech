@@ -114,7 +114,7 @@ class DemoRegistration extends Module
         if($_POST['submit'])
         {
            	$filename=basename($_FILES['uploadCSV']['name']);
-           
+           $counterRow=0;
 			if(!empty($filename))
 			{
 				$handle = fopen($_FILES['uploadCSV']['tmp_name'], "r");
@@ -126,7 +126,7 @@ class DemoRegistration extends Module
            		 			$id='';
            		 			$sql="select id from ps_demo_products where productId=".$data[0];
            		 			$result=Db::getInstance()->getRow($sql);
-           		 			echo $result['id'];
+           		 			
            		 			$id=$result['id'];
            		 			if($result['id']==0)
            		 			{
@@ -155,13 +155,13 @@ class DemoRegistration extends Module
            		 	
            		 	$counter++;
            		 }   
-           		 echo $counterRow.'Affected';
+           		
 			}
 			else
 			{
 				
 			}
-           	                
+           	         echo $counterRow.'Affected';        
          }
         $this->html = '<h2>' . $this->displayName . '</h2>';
         $this->html .= '<link media="all" type="text/css" rel="stylesheet" href="' . $this->_path . 'views/css/back.css"/>';
