@@ -26,7 +26,7 @@
 </div>	
 
 <div class="ma-nav-container visible-desktop">
-    <div class="container">
+    <div class="container-fluid">
          <div class="contain-size">
         <div id="megamenu_wrapper" class="default ma-nav-inner">
            {if $tdMENU != ''} 
