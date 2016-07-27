@@ -47,7 +47,7 @@ legend        { display:none; }
 
 /* Table */
 table         { border:0; /*border-collapse:collapse;*/ border-spacing:0; empty-cells:show; font-size:100%; }
-caption,th,td { vertical-align:top; text-align:left; font-weight:normal; }
+caption,th,td { vertical-align:center; text-align:left; font-weight:normal; }
 
 /* Content */
 p             { margin:0 0 5px; }
@@ -1188,7 +1188,7 @@ tr.summary-details-excluded { font-style:italic; }
 .products-grid.last { border-bottom:0; }
 .products-grid .item {  margin-bottom: 22px; text-align:center; }
 .products-grid .item:hover {  }
-.products-grid .item-inner {  float:left;  position: relative; }
+.products-grid .item-inner {  position: relative; }
 .products-grid .item-inner,
 .ma-newproductslider-container .item-inner {
     background: #fff;
