@@ -103,17 +103,14 @@
 <!--<script type="text/javascript" src="{$js_dir}theme/jquery.selectbox.js"></script>-->
 <link rel="stylesheet" type="text/css" href="{$css_dir}theme/ma.newslider.css" media="all"/>
 <script type="text/javascript" src="{$js_dir}theme/ma.zoom.js"></script>
-{*<script type="text/javascript" src="{$js_dir}theme/superfish.js"></script>*}
-{*<script type="text/javascript" src="{$js_dir}theme/superfish.js"></script>*}
 <script type="text/javascript" src="{$js_dir}theme/menu/jquery.hoverIntent.minified.js"></script>
 <script type="text/javascript" src="{$js_dir}theme/menu/jquery.dcmegamenu.1.3.3.js"></script>
 <script type="text/javascript" src="/js/jquery/plugins/fancybox/jquery.fancybox.js"></script>
-<link href="//fonts.googleapis.com/css?family={$themesdev.td_shop_heading_font_face}" rel="stylesheet" type="text/css"
-      media="all"/>
+<link href="//fonts.googleapis.com/css?family={$themesdev.td_shop_heading_font_face}" rel="stylesheet" type="text/css" media="all"/>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 
 {*<link rel="stylesheet" type="text/css" href="{$css_dir}theme/fish_menu.css" media="screen"/>*}
-<link id="test"  href="{$css_dir}/theme/menu/default.css" rel="stylesheet" type="text/css" />
+<link  href="{$css_dir}/theme/menu/default.css" rel="stylesheet" type="text/css" />
 <link  href="{$css_dir}/theme/wide_menu.css" rel="stylesheet" type="text/css" />
 
 <style type="text/css">
