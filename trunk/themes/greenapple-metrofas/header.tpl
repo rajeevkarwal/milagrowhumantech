@@ -113,8 +113,8 @@
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 
 {*<link rel="stylesheet" type="text/css" href="{$css_dir}theme/fish_menu.css" media="screen"/>*}
-<link id="test" href="{$css_dir}/theme/menu/default.css" rel="stylesheet" type="text/css" />
-<link id="test" href="{$css_dir}/theme/wide_menu.css" rel="stylesheet" type="text/css" />
+<link  href="{$css_dir}/theme/menu/default.css" rel="stylesheet" type="text/css" />
+<link  href="{$css_dir}/theme/wide_menu.css" rel="stylesheet" type="text/css" />
 
 <style type="text/css">
     body {
